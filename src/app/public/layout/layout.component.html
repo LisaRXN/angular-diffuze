@@ -1,0 +1,31 @@
+
+
+<div class="drawer">
+    <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
+    <div class="drawer-content flex flex-col bg-gray-100">
+      <div class="container mx-auto">
+        <!-- Navbar -->
+        <app-navbar></app-navbar>
+        <!-- Page content here -->
+        <main class="min-h-screen bg-gray-200">
+          <router-outlet></router-outlet>
+       
+        </main>
+  
+        <app-footer></app-footer>
+      </div>
+    </div>
+    <div class="drawer-side">
+      <label
+        for="my-drawer-3"
+        aria-label="close sidebar"
+        class="drawer-overlay"
+      ></label>
+      <ul class="menu bg-base-200 min-h-full w-80 p-4">
+        <!-- Sidebar content here -->
+        <li><a>Sidebar Item 1</a></li>
+        <li><a>Sidebar Item 2</a></li>
+      </ul>
+    </div>
+  </div>
+  
