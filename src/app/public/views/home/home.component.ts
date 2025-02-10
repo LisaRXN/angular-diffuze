@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
+import { HomeCardComponent } from '../../shared/components/home-card/home-card.component';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [HomeCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
