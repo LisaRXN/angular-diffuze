@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { HomeCardComponent } from '../../shared/components/home-card/home-card.component';
+import { ButtonComponent } from "../../shared/components/button/button.component";
+import { HowCardComponent } from "../../shared/components/how-card/how-card.component";
+import { PropertyCardComponent } from "../../shared/components/property-card/property-card.component";
+import { ReviewCardComponent } from "../../shared/components/review-card/review-card.component";
 
 @Component({
   selector: 'app-home',
-  imports: [HomeCardComponent],
+  imports: [HomeCardComponent, ButtonComponent, HowCardComponent, PropertyCardComponent, ReviewCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

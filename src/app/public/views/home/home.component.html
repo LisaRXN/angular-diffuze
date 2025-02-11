@@ -1,9 +1,9 @@
 <div class="min-h-screen bg-gray-100 flex flex-col items-center">
   <!-- Hero Section -->
   <div
-    class="hero relative bg-[url(assets/img/photo/banniere.jpg)] text-white text-center h-[700px]"
+    class="hero relative bg-[url(assets/img/photo/banniere.jpg)] text-white text-center h-[700px] z-10"
   >
-    <div class="bg-black opacity-60 absolute inset-0 w-full h-full"></div>
+    <div class="bg-black opacity-60 absolute inset-0 w-full h-full "></div>
     <div class="hero-content flex flex-col items-center">
       <img
         src="assets/img/logo/figaro.png"
@@ -11,7 +11,7 @@
         top-[10%] left-[10%] 
         md:top-[10%] md:left-[10%] 
         "
-        alt="Figaro"
+        alt="Figaro Immobilier"
       />
       <img
         src="assets/img/logo/logic.png"
@@ -19,7 +19,7 @@
         top-[5%] left-[30%] 
         md:top-[10%] md:left-[30%] 
         "
-        alt="Logic"
+        alt="Logic Immo"
       />
       <img
         src="assets/img/logo/jinka.png"
@@ -37,7 +37,7 @@
         md:top-[40%] md:left-[5%] 
         lg:top-[40%] lg:left-[10%] 
         "
-        alt="Belles"
+        alt="Belles Demeures"
       />
       <img
         src="assets/img/logo/lux.png"
@@ -46,7 +46,7 @@
         md:bottom-[15%] md:left-[10%] 
         lg:bottom-[15%] lg:left-[10%] 
         "
-        alt="Lux"
+        alt="Lux Immobilier"
       />
       <img
         src="assets/img/logo/gens.png"
@@ -55,7 +55,7 @@
         md:bottom-[10%] md:left-[30%] 
         lg:bottom-[10%] lg:left-[30%] 
         "
-        alt="Gens"
+        alt="Gens de Confiance"
       />
       <img
         src="assets/img/logo/seloger.png"
@@ -73,7 +73,7 @@
         md:top-[15%] md:right-[10%] 
         lg:top-[30%] lg:right-[10%] 
         "
-        alt="SeLoger"
+        alt="Green Acres Immobilier"
       />
       <p
         class="absolute rounded-full w-28 h-28 md:w-32 md:h-32 p-4 py-5 md:p-5 text-black text-sm bg-white shadow-diffuze
@@ -100,7 +100,7 @@
   </div>
 
   <!-- Features Section -->
-  <div class="py-16 bg-myyellow1 font-open text-mygrey1 overflow-hidden">
+  <div class="w-full py-16 bg-myyellow1 font-open text-mygrey1 overflow-hidden">
     
     <!-- Pack Visibilité -->
     <div class="px-16 container flex flex-col md:flex-row justify-between text-justify mb-12 ">
@@ -114,7 +114,11 @@
         <p class="max-w-96 leading-relaxed text-xl">
           Professionnels de l'immobilier, boostez votre visibilité en ligne tout en maîtrisant vos coûts, sans engagement !</p>  
         <div class="w-full m-auto text-center py-14">
-              <button class="bg-white rounded-full px-10 py-4 font-bold shadow-md m-auto text-lg">Voir notre offre</button>
+               <app-button
+               text="Voir notre offre"
+               backgroundColor="mygrey5"
+               page="service"
+               ></app-button>
         </div>
       </div>
       <div class="flex-1">
@@ -125,27 +129,27 @@
     <!-- Numbers -->
     <div class="relative grid  lg:grid-cols-3 gap-8 p-10 mb-20">
       
-      <div class="absolute top-0 -left-10 w-[110%] h-full bg-mygrey2 transform -rotate-3"></div>
+      <div class="absolute top-0 -left-10 w-[140%] h-full bg-mygrey2 transform -rotate-3"></div>
 
       <div class="flex flex-col items-center justify-center gap-4 p-10 z-10">
         <p class="text-8xl font-semibold text-white">+20</p>
         <div class="flex items-center justify-center gap-5">
           <img src="assets/img/icon/volume-yellow.png" class="w-10 h-10" alt="">
-          <p class=" text-mygrey4 font-light lg:max-w-32">Plateformes de diffusion</p>
+          <p class=" text-mygrey5 font-light lg:max-w-32">Plateformes de diffusion</p>
         </div>
       </div>
       <div class="flex flex-col items-center justify-center gap-4 p-10 z-10">
         <p class="text-8xl font-semibold text-white">60</p>
         <div class="flex items-center justify-center gap-5">
           <img src="assets/img/icon/clock-yellow.png" class="w-10 h-10" alt="">
-          <p class=" text-mygrey4 font-light lg:max-w-32">Jours de visibilité</p>
+          <p class=" text-mygrey5 font-light lg:max-w-32">Jours de visibilité</p>
         </div>
       </div>
       <div class="flex flex-col items-center justify-center gap-4 p-10 z-10">
         <p class="text-8xl font-semibold text-white">+75%</p>
         <div class="flex items-center justify-center gap-5 lg:max-w-44">
           <img src="assets/img/icon/trending-yellow.png" class="w-10 h-10" alt="">
-          <p class="text-mygrey4 font-light lg:max-w-32">D'augmentation des ventes</p>
+          <p class="text-mygrey5 font-light lg:max-w-32">D'augmentation des ventes</p>
         </div>
       </div>
 
@@ -179,17 +183,90 @@
   </div>
 
     <!-- Comment ça marche ? -->
-  <div class="py-16 bg-mygray4 text-mygrey1">
+  <div class="py-16 bg-mygray4 text-mygrey1 w-full flex flex-col items-center justify-center">
     <h2 class="text-3xl font-bold font-raleway text-center mb-12">
       Comment ça marche ?
     </h2>
-    <p class="text-xl">Professionnels de l'immobilier, optimisez et<span class="text-2xl font-bold"> réduisez vos coûts </span>de diffusion !
+    <p class="text-xl mb-12 w-3/4 text-center">Professionnels de l'immobilier, optimisez et<span class="text-2xl font-bold"> réduisez vos coûts </span>de diffusion !
     </p>
+
+    <app-how-card
+    number="1"
+    title="Déposez vos annonces"
+    [checks]="['J\'enregistre les caractéristiques de mon annonce', 'Je télécharge mes photos', 'Je procède au paiement']"
+    text="Ensuite, un conseiller prendra contact avec vous dans les 24 heures maximum pour vérifier les informations communiquées avant la diffusion de votre annonce."
+    image="assets/img/illustration/completed.png"
+    ></app-how-card>
+
+    <app-how-card
+    number="2"
+    title="Gestion et optimisation de vos annonces"
+    [checks]="['Un prestataire unique qui diffuse sur l’ensemble des portails', 'Pilotage depuis votre espace DiffuZe ou votre CRM', 'Jusqu’à 10 photos incluses','Modification illimitée de vos annonces','Boost hebdomadaire','Suppression ou renouvellement possible à tout moment']"
+    image="assets/img/illustration/chart.png"
+    [left]="true"
+    ></app-how-card>
+
+    <app-how-card
+    number="3"
+    title="Assistance technique et juridique"
+    [checks]="['Un interlocuteur dédié disponible 6j/7 pour répondre à toutes vos questions techniques, légales...']"
+    image="assets/img/illustration/support.png"
+    ></app-how-card>
     </div>
 
+    <!-- Découvrez les biens à vendre-->
+    <div class="bg-mygray4 pb-32 mb-16 text-mygrey1 px-8 flex flex-col items-center justify-center overflow-x-hidden">
+      <h2 class="text-3xl font-bold font-raleway text-center mb-12 z-10">
+          Découvrez les biens à vendre
+        </h2>
+  
+        <div class="grid md:grid-cols-3 gap-8 text-center font-open z-10">
+          <app-property-card></app-property-card>
+          <app-property-card></app-property-card>
+          <app-property-card></app-property-card>
+        </div>
 
+        <div class="relative w-full h-[300px flex flex-col items-center justify-center">
+        <p class="text-lg font-open text-center py-10 z-10">+ de <span class="text-2xl font-bold">120 biens</span> à vendre</p>
+         <app-button
+          class="z-10"
+            page=""
+            text="Voir toutes les annonces"
+            backgroundColor="mygrey5"
+          ></app-button>
+          <div class="absolute -bottom-20 left-1/2 w-[140%] h-[500px] bg-myyellow1 transform -translate-x-1/2 -rotate-3"></div>
+        </div>
 
+    </div>
 
+    <!-- Ils nous font confiance -->
+    <div class="bg-mygray4 text-mygrey1 px-8 w- mb-16 flex flex-col items-center justify-center ">
+      <h2 class="text-3xl font-bold font-raleway text-center mb-12 z-10">
+        Ils nous font confiance
+      </h2>
+
+      <div class="grid grid-cols-3 md:grid-cols-6 gap-10 mb-16">
+        <img src="assets/img/logo/seloger.png" class="w-[100px]" alt="">
+        <img src="assets/img/logo/seloger.png" class="w-[100px]" alt="">
+        <img src="assets/img/logo/seloger.png" class="w-[100px]" alt="">
+        <img src="assets/img/logo/seloger.png" class="w-[100px]" alt="">
+        <img src="assets/img/logo/seloger.png" class="w-[100px]" alt="">
+        <img src="assets/img/logo/seloger.png" class="w-[100px]" alt="">
+        <img src="assets/img/logo/seloger.png" class="w-[100px]" alt="">
+        <img src="assets/img/logo/seloger.png" class="w-[100px]" alt="">
+        <img src="assets/img/logo/seloger.png" class="w-[100px]" alt="">
+      </div>
+
+      <div class="lg:px-8 grid md:grid-cols-3 gap-8 lg:gap-10 text-center font-open mb-12">
+        <app-review-card></app-review-card>
+        <app-review-card></app-review-card>
+        <app-review-card></app-review-card>
+    </div>
+    <app-button
+    backgroundColor="myyellow1"
+    text="Voir tous les avis"
+    ></app-button>
+    </div>
 
 
 
@@ -197,9 +274,9 @@
   <!-- Louis -->
 
   <!-- Testimonials Section -->
-  <div class="py-16 bg-gray-50">
-    <div class="container mx-auto px-8">
-      <h2 class="text-3xl font-bold text-center mb-12">
+  <!-- <div class="py-16 bg-gray-50">
+    <div class="container  mx-auto px-8">
+      <h2 class="text-3xl font-bold text-center">
         Ce que nos clients disent
       </h2>
       <div class="carousel w-full">
@@ -236,10 +313,10 @@
         <a href="#testimonial3" class="btn btn-sm btn-outline mx-2">3</a>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Statistics Section -->
-  <div class="py-16 bg-white">
+  <!-- <div class="py-16 bg-white">
     <div class="container mx-auto px-8">
       <h2 class="text-3xl font-bold text-center mb-12">
         Nos statistiques parlent d'elles-mêmes
@@ -283,10 +360,10 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- CTA Section -->
-  <div
+  <!-- <div
     class="bg-gradient-to-r from-green-500 to-teal-500 py-16 text-white text-center"
   >
     <h2 class="text-4xl font-bold mb-6">Prêt à démarrer ?</h2>
@@ -294,5 +371,6 @@
       Rejoignez-nous dès aujourd'hui et boostez votre productivité.
     </p>
     <button class="btn btn-secondary btn-lg">Essayez maintenant</button>
-  </div>
+  </div> -->
+  
 </div>

@@ -3,29 +3,34 @@
 <div class="drawer">
     <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
     <div class="drawer-content flex flex-col bg-gray-100">
-      <div class="container mx-auto">
+      <!-- <div class="container mx-auto"> -->
+      <div class="w-full mx-auto">
         <!-- Navbar -->
         <app-navbar></app-navbar>
         <!-- Page content here -->
-        <main class="min-h-screen bg-gray-200">
+        <main class="min-h-screen bg-gray-200 lg:pt-[68px]">
           <router-outlet></router-outlet>
-       
         </main>
   
         <app-footer></app-footer>
       </div>
     </div>
-    <div class="drawer-side">
+    <div class="drawer-side z-50">
       <label
         for="my-drawer-3"
         aria-label="close sidebar"
         class="drawer-overlay"
       ></label>
-      <ul class="menu bg-base-200 min-h-full w-80 p-4">
+      <ul class="menu bg-mygrey1 min-h-full w-80 p-4 text-lg text-mygrey4">
         <!-- Sidebar content here -->
-        <li><a>Sidebar Item 1</a></li>
-        <li><a>Sidebar Item 2</a></li>
+        <li><a routerLink="/" >Notre Offre</a></li>
+        <li><a routerLink="/profil">Les Avis</a></li>
+        <li><a routerLink="/blog">Le Blog</a></li>
+        <li><a routerLink="/blog">Dashboard</a></li>
+        <button class=" mt-4 my-2 bg-myyellow2 text-mygrey1 rounded-full px-4 py-4 text-md">Déposer une annonce</button>
+        <button  class="my-2 bg-myyellow1 text-mygrey1 rounded-full px-4 py-4 text-md">Prendre rendez-vous</button>
       </ul>
+      
     </div>
   </div>
   

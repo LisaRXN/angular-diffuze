@@ -1,0 +1,56 @@
+<div [ngClass]="{
+    'relative w-4/5 p-5 rounded-2xl flex flex-col md:flex-row items-stretch justify-between h-full m-auto mb-16 shadow-md':true,
+    'bg-white' : left === false,
+    'bg-mygrey4' : left === true,
+}"
+>
+
+  <div [ngClass]="{
+    'absolute right-0 top-0 transform translate-y-[-50%] rounded-full h-[60px] w-[60px]  md:h-[85px] md:w-[85px] bg-myyellow1 flex items-center justify-center':true,
+    'right-0 translate-x-[50%]': left === false,
+    'left-0 translate-x-[-50%]': left === true,
+    }">
+    <p class="font-paytone font-bold text-2xl md:text-5xl text-white">{{ number }}</p>
+  </div>
+
+  <div
+    [ngClass]="{
+        'flex-1 rounded-2xl py-5 w-full md:w-1/3 flex items-center justify-center':true,
+        'bg-myyellow2' : left === false,
+        'order-2 bg-white': left === true
+    }"
+  > 
+    <img [src]="image" class="w-2/3 h-auto" alt="" />
+  </div>
+  <div class="flex-1 w-full md:w-2/3 py-8 md:p-14">
+    <p class="text-lg md:text-2xl font-bold font-raleway text-mygrey1 mb-6 text-center md:text-start">{{ title }}</p>
+
+    @for(check of checks; track check){
+    <div class="flex items-center justify-start gap-2 md:gap-4 py-2">
+      <img
+        [src]="left ? 'assets/img/icon/check-circle.png' : 'assets/img/icon/check-circle-yellow.png'"
+        class="h-[20px] md:h-[25px] w-auto"
+        alt=""
+      />
+      <p>{{ check }}</p>
+    </div>
+    } 
+    
+    @if(text !== ""){
+    <p class="mt-8">{{text}}</p>
+    }
+
+    <div class="text-center mt-10 ">
+      <button
+        (click)="navigateTo(page)"
+        [ngClass]="{
+       ' text-mygrey1 rounded-full px-10 py-4 font-bold m-auto text-md transform transition hover:translate-y-[-2px] hover:shadow-sm hover:bg-myyellow2 hover:text-mygrey2':true,
+       'bg-myyellow1' : left === false,
+       'bg-white' : left === true,
+        }"
+      >
+        Déposer mon annonce
+      </button>
+    </div>
+  </div>
+</div>
