@@ -40,6 +40,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'service',
+        loadComponent: () =>
+          import('./public/views/service/service.component').then(
+            (m) => m.ServiceComponent
+          ),
+      },
+      {
         path: 'blog',
         loadChildren: () =>
           import('./public/views/blog/blog.routes').then((m) => m.BLOG_ROUTES),

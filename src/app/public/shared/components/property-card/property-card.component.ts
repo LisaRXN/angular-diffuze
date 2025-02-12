@@ -11,8 +11,6 @@ export class PropertyCardComponent {
 
   router = inject(Router)
 
-  // lastProperties: Property[] = []
-
   id:number = 0
   image:string = "assets/img/photo/property.png"
   property_type: string ="Appartement"
@@ -29,7 +27,4 @@ export class PropertyCardComponent {
   navigateTo(){
     this.router.navigate([`property/${this.id}`])
   }
-
-  //Logic pour fetcher les derniers bien mis en vente
-
 }
