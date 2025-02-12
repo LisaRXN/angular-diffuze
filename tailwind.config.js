@@ -18,7 +18,8 @@ module.exports = {
         mygrey1: "#282828",
         mygrey2: "#494949",
         mygrey3: "#717171",
-        mygrey4: "#F9F9F9",
+        mygrey4: "#DEDEDE",
+        mygrey5: "#F9F9F9",
       },
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],

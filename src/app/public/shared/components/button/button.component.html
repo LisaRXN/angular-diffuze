@@ -1,0 +1,12 @@
+<button 
+(click)="navigateTo(page)"
+[ngClass]="{
+'bg-mygrey5': backgroundColor === 'mygrey5',
+'bg-myyellow1': backgroundColor === 'myyellow1',
+'text-mygrey1': color === 'mygrey1',
+'text-white': color === 'white',
+'rounded-full px-10 py-4 font-bold shadow-md m-auto text-lg transform transition hover:translate-y-[-2px] hover:shadow-lg':true
+}"
+>
+  {{ text }}
+</button>
