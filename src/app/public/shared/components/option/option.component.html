@@ -1,0 +1,32 @@
+    <div class="z-10 w-full p-5 mb-16 md:p-10 grid md:grid-cols-[1fr_1.5fr] xl:grid-cols-[1fr_2fr] gap-8 bg-white rounded-b-2xl rounded-tr-2xl shadow-lg"
+    >
+      <div class="w-full h-full">
+        <img class="object-cover rounded-2xl" [src]="option.image" alt="" />
+      </div>
+    
+      <div class="flex flex-col gap-4">
+    
+        @for( feature of option.features; track feature){
+        <div class="flex items-center gap-4 mt-4">
+          <span class="p-3 bg-myyellow2 rounded-lg">{{ feature.icon }}</span>
+          <p class="font-bold">{{ feature.title }}</p>
+        </div>
+        
+        <p>{{feature.text}}</p>
+    
+        <ul class="list-disc pl-4 space-y-4">
+          @for( item of feature.list; track item){
+          <li>
+            <span class="font-semibold">{{ item.bold }}</span
+            >{{ item.text }}
+          </li>
+          }
+        </ul>
+        }
+        <p>{{option.endText}}</p>
+      </div>
+    </div>
+
+
+
+    

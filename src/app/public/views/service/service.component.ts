@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { ButtonComponent } from '../../shared/components/button/button.component';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import optionsDetails from '../../../../assets/data/options.json'
+import { OptionComponent } from '../../shared/components/option/option.component';
+import { CommonModule } from '@angular/common';
 
 interface SurfacePrice {
   maxSurface: number;
@@ -17,11 +19,15 @@ interface DiffusionOption {
 
 @Component({
   selector: 'app-service',
-  imports: [ButtonComponent, ReactiveFormsModule],
+  imports: [CommonModule, ButtonComponent, OptionComponent],
   templateUrl: './service.component.html',
   styleUrl: './service.component.scss',
 })
 export class ServiceComponent {
+
+  options = optionsDetails;
+  optionView = this.options[0]
+
   price: number = 99;
   surface: number = 0;
   isInputDisabled: boolean = false;
@@ -112,5 +118,10 @@ export class ServiceComponent {
     const input = event.target as HTMLInputElement;
     this.surface = Number(input.value);
     this.updatePrice();
+  }
+
+  activeOption(id:string){
+    const selectedOption = this.options.filter((opt)=>opt.id === id )
+    this.optionView = selectedOption[0]
   }
 }

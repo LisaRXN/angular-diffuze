@@ -221,9 +221,18 @@
         </h2>
   
         <div class="grid md:grid-cols-3 gap-8 text-center font-open z-10">
-          <app-property-card></app-property-card>
-          <app-property-card></app-property-card>
-          <app-property-card></app-property-card>
+          @for( property of properties; track property){
+            <app-property-card
+            (click)="navigateToProperty(property)"
+            [id]="property.id"
+            [image] = "property.image"
+            [property_type] = "property.property_type"
+            [city] = "property.city"
+            [street] = "property.street"
+            [living_space] = "property.living_space"
+            [selling_price] = "property.selling_price"
+            ></app-property-card>
+          }
         </div>
 
         <div class="relative w-full h-[300px flex flex-col items-center justify-center">
