@@ -2,8 +2,18 @@ import { Component, inject } from '@angular/core';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
-type Option = { name:string, value: boolean; price: number };
-type Checkboxes = Record<string, Option>
+interface SurfacePrice {
+  maxSurface: number;
+  price: number;
+}
+
+interface DiffusionOption {
+  id: string;
+  label: string;
+  value: boolean;
+  price: number | SurfacePrice[];
+  isReportage?: boolean;
+}
 
 @Component({
   selector: 'app-service',
@@ -12,87 +22,95 @@ type Checkboxes = Record<string, Option>
   styleUrl: './service.component.scss',
 })
 export class ServiceComponent {
-
-  price:number = 99
+  price: number = 99;
   surface: number = 0;
-  isBoxDisabled:boolean = true
-  isInputDisabled:boolean = false
+  isInputDisabled: boolean = false;
 
-  checkboxes: Checkboxes = {
-    option1: { 'name':'option1','value': false, 'price': 200 },
-    option2: { 'name':'option2','value': false, 'price': 90 },
-    option3: { 'name':'option3','value': false, 'price': 60 },
-    option4: {'name':'option4', 'value': false, 'price': 60 },
-  };
+  diffusionOptions: DiffusionOption[] = [
+    {
+      id: 'option1',
+      label: 'Diffusion sur Belles Demeures et Lux-Résidence',
+      value: false,
+      price: 200,
+    },
+    {
+      id: 'option2',
+      label: 'Diffusion sur Green-Acres',
+      value: false,
+      price: 90,
+    },
+    {
+      id: 'option3',
+      label: 'Diffusion sur Gens de Confiance',
+      value: false,
+      price: 60,
+    },
+    {
+      id: 'option4',
+      label: 'Diffusion sur Jinka',
+      value: false,
+      price: 60,
+    },
+    {
+      id: 'reportage',
+      label: 'Reportage photo professionnel + visite 3D',
+      value: false,
+      price: [
+        { maxSurface: 200, price: 300 },
+        { maxSurface: 500, price: 340 },
+        { maxSurface: Infinity, price: 380 },
+      ],
+      isReportage: true,
+    },
+  ];
 
-  checkboxReportage: Checkboxes = {
-    option5: { 'name':'option5', 'value': false, 'price': 300 }
-  }
-
-  addOption(event:Event, option:string){
+  addOption(event: Event) {
     const checkbox = event.target as HTMLInputElement;
-    this.checkboxes[option].value = checkbox.checked;
-    let updatedPrice = 99
-
-    if(this.checkboxReportage['option5'].value){
-      updatedPrice += this.checkboxReportage['option5'].price
-    }
-    
-    for( let option in this.checkboxes){
-      if(this.checkboxes[option].value){
-        updatedPrice += this.checkboxes[option].price
+    const option = this.diffusionOptions.find((opt) => opt.id === checkbox.id);
+    if (option) {
+      option.value = checkbox.checked;
+      if (option.isReportage) {
+        this.isInputDisabled = checkbox.checked;
       }
     }
-    if(this.allOptions()){
-      updatedPrice -= 50
-    }
-
-    this.price = updatedPrice
+    this.updatePrice();
+  }
+  private getReportagePrice(surface: number, prices: SurfacePrice[]): number {
+    return (
+      prices.find((p) => surface <= p.maxSurface)?.price || prices[0].price
+    );
   }
 
- addReportage(event:Event, option:string){  
-    const checkbox = event.target as HTMLInputElement;
-    this.checkboxReportage[option].value = checkbox.checked;
-    this.isInputDisabled = checkbox.checked
-    
-    let updatedPrice:number = 99
-    let optionPrice = this.checkboxReportage[option].price
+  private updatePrice() {
+    let updatedPrice = 99;
 
-    for( let option in this.checkboxes){
-      if(this.checkboxes[option].value){
-        updatedPrice += this.checkboxes[option].price
+    this.diffusionOptions.forEach((option) => {
+      if (option.value) {
+        if (option.isReportage) {
+          const surfacePrices = option.price as SurfacePrice[];
+          updatedPrice += this.getReportagePrice(this.surface, surfacePrices);
+        } else {
+          updatedPrice += option.price as number;
+        }
       }
+    });
+
+    if (this.allOptionsExceptReportage()) {
+      updatedPrice -= 50;
     }
 
-    if(this.allOptions()){
-      updatedPrice -= 50
-    }
-
-    for( let option in this.checkboxReportage){
-      if(this.surface > 200 && this.surface < 500){
-        optionPrice = 340
-      }
-      if (this.surface >= 500 ){
-        optionPrice = 380
-      }
-      if(this.checkboxReportage[option].value){
-        updatedPrice += optionPrice
-      }
-    }
-
-    this.price = updatedPrice
-}
-
-
-  allOptions(){
-    return Object.values(this.checkboxes).every( (option:Option) => option.value)
+    this.price = updatedPrice;
   }
 
-  addSurface(event:Event){
-    this.isBoxDisabled = false
-    const input = event.target as HTMLInputElement
-    const surface = input.value
-    this.surface = parseInt(surface)
+  allOptionsExceptReportage(): boolean {
+    return this.diffusionOptions
+      .filter((opt) => !opt.isReportage)
+      .every((opt) => opt.value);
   }
 
+  addSurface(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.surface = Number(input.value);
+    this.updatePrice();
+  }
 }

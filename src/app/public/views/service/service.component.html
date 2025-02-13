@@ -75,7 +75,7 @@
           class="h-full text-mygrey1 p-8 mt-10 flex flex-col items-start justify-start text-start gap-4"
         >
           <p>60 jours de diffusion</p>
-          <p>Pas d’abonnement, pas d’engagement.</p>
+          <p>Pas d'abonnement, pas d'engagement.</p>
           <p>Renouvelable</p>
           <p>Une assistance juridique 6j/7</p>
         </div>
@@ -153,97 +153,36 @@
             Annonce en paiement immédiat et unique
           </p>
         </div>
-        <div class="flex items-center justify-center gap-4">
-        <input
-            (change)="addOption($event, 'option1')"
-            type="checkbox"
-            id="option1"
-            name="option1"
-            class="rounded-md h-[25px] w-[25px]"
-          />
-          <label for="option1">
-            <p class="leading-8">
-              <span class="bg-myyellow2 p-2 rounded-lg">En option :</span
-              >Diffusion sur Belles Demeures et Lux-Résidence
-            </p>
-          </label>
-        </div>
-        <div class="flex items-center justify-center gap-4">
+        @for (option of diffusionOptions; track option.id) {
+        <div  class="flex items-center gap-4">
           <input
-          (change)="addOption($event, 'option2')"
+            [id]="option.id"
             type="checkbox"
-            id="option2"
-            name="option2"
+            (change)="addOption($event)"
             class="rounded-md h-[25px] w-[25px]"
           />
-          <label for="option2">
+          <label [for]="option.id">
             <p class="leading-8">
-              <span class="bg-myyellow2 p-2 rounded-lg">En option :</span
-              >Diffusion sur Green-Acres
+              <span class="bg-myyellow2 p-2 rounded-lg">En option :</span>
+              {{option.label}}
             </p>
           </label>
         </div>
-        <div class="flex items-center justify-center gap-4">
+        }
+        @if (diffusionOptions[4].value) {
+        <div class="pl-12">
+          <label for="surface">Indiquez la surface pour estimer le prix :</label>
           <input
-            (change)="addOption($event, 'option3')"
-            type="checkbox"
-            id="option3"
-            name="option3"
-            class="rounded-md h-[25px] w-[25px]"
+            id="surface"
+            type="number"
+            min="0"
+            (input)="addSurface($event)"
+            [disabled]="!diffusionOptions[4].value"
+            class="rounded-md p-1 mx-1 bg-mygrey5 w-[80px] border-mygrey4"
           />
-          <label for="option3">
-            <p class="leading-8">
-              <span class="bg-myyellow2 p-2 rounded-lg">En option :</span
-              >Diffusion sur Gens de Confiance
-            </p>
-          </label>
+          <span>m²</span>
         </div>
-        <div class="flex items-center justify-center gap-4">
-          <input
-            (change)="addOption($event, 'option4')"
-            type="checkbox"
-            id="option3"
-            name="option3"
-            class="rounded-md h-[25px] w-[25px]"
-          />
-          <label for="option3">
-            <p class="leading-8">
-              <span class="bg-myyellow2 p-2 rounded-lg">En option :</span
-              >Diffusion sur Jinka
-            </p>
-          </label>
-        </div>
-        <div class="flex flex-col w-full items-start gap-3">
-          <div class="flex items-center justify-center gap-4">
-            <input
-            (change)="addReportage($event, 'option5')"
-            [disabled]="isBoxDisabled"
-              type="checkbox"
-              id="option4"
-              name="option4"
-              class="rounded-md h-[25px] w-[25px]"
-            />
-            <label for="option4">
-              <p class="leading-8">
-                <span class="bg-myyellow2 p-2 rounded-lg">En option :</span
-                >Reportage photo profesionnel + visite 3D
-              </p>
-            </label>
-          </div>
-            <p class="pl-12">
-              Indiquez la surface pour estimer le prix :
-              <span
-                ><input
-                  (input)="addSurface($event)"
-                  [disabled]="isInputDisabled"
-                  type="number"
-                  name="surface"
-                  class="rounded-md p-1 mx-1 bg-mygrey5 w-[80px] border-mygrey4"
-              /></span>
-              m²
-            </p>
-        </div>
-
+        }
         <app-button class="self-center mt-8" [shadow]="false"></app-button>
       </div>
       <div
