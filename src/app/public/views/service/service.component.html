@@ -6,11 +6,26 @@
     <h1 class="z-10 text-4xl font-paytone text-center mb-12">
       Découvrez nos offres et options
     </h1>
-    <p class="z-10 text-xl mb-12 w-3/4 text-center">
+    <p class="z-10 text-xl leading-relaxed mb-12 w-3/4 text-center">
       Plus de visibilité, plus de contacts,
       <span class="font-semibold text-2xl">zéro engagement !</span> <br />
       Créez vos annonces dès maintenant.
     </p>
+    <div class="p-2 z-10 bg-white rounded-full">
+      <div (click)="toggleOption()" class="relative bg-mygrey5 w-full flex items-center justify-between rounded-full text-center">
+        <span 
+          id="toggle-option" 
+          [ngClass]="{
+            'absolute w-1/2 h-full bg-myyellow1 rounded-full transition-all ease-in-out':true,
+            'translate-x-0': service1(),
+            'translate-x-full': !service1(),
+            }"
+          >
+        </span>
+        <p class="z-10 whitespace-nowrap w-1/2 text-center py-4 px-10 rounded-full ">Annonce à l'unité</p>
+        <p class="z-10 whitespace-nowrap w-1/2 text-center py-4 px-10 rounded-full">Annonce en co-mandat</p>
+      </div>
+    </div>
 
     <div
       class="absolute -top-20 left-1/2 w-[140%] h-[550px] bg-myyellow2 transform -translate-x-1/2 -rotate-3"
@@ -29,175 +44,47 @@
     <div
       class="grid md:grid-cols-2 xl:grid-cols-4 px-5 sm:px-12 gap-20 md:gap-14 xl:gap-12 text-center font-open mb-16"
     >
-      <div
-        class="relative h-[400px] sm:h-[300px] md:h-[350px] xl:h-[400px] bg-mygrey2 text-lg rounded-2xl"
-      >
-        <img
-          src="assets/img/icon/megaphone-yellow.png"
-          class="absolute top-0 left-1/2 transform translate-x-[-50%] translate-y-[-50%] h-[70px]"
-          alt=""
-        />
-        <div
-          class="absolute right-0 left-0 transform translate-x-[-50%] translate-y-[-50%] rounded-full h-[50px] w-[50px] md:h-[60px] md:w-[60px] bg-myyellow1 flex items-center justify-center"
-        >
-          <p class="font-paytone font-bold text-2xl md:text-4xl text-white">
-            1
-          </p>
-        </div>
-        <div
-          class="h-full text-white p-8 mt-10 flex flex-col items-start justify-start text-start gap-4"
-        >
-          <p>
-            Diffusion de votre annonce sur plus de 20 plateformes de
-            référence (SeLoger, Logic-immo, Le Figaro immo...)
-          </p>
-          <p>
-            Boost hebdomadaire pour maximiser la visibilité sur les portails
-          </p>
-        </div>
-      </div>
-      <div
-        class="relative h-[400px] sm:h-[300px] md:h-[350px] xl:h-[400px] bg-myyellow1 text-lg rounded-2xl"
-      >
-        <img
-          src="assets/img/icon/calendar_60.png"
-          class="absolute top-0 left-1/2 transform translate-x-[-50%] translate-y-[-50%] h-[70px]"
-          alt=""
-        />
-        <div
-          class="absolute right-0 left-0 transform translate-x-[-50%] translate-y-[-50%] rounded-full h-[50px] w-[50px] md:h-[60px] md:w-[60px] bg-myyellow1 flex items-center justify-center"
-        >
-          <p class="font-paytone font-bold text-2xl md:text-4xl text-white">
-            2
-          </p>
-        </div>
-        <div
-          class="h-full text-mygrey1 p-8 mt-10 flex flex-col items-start justify-start text-start gap-4"
-        >
-          <p>60 jours de diffusion</p>
-          <p>Pas d'abonnement, pas d'engagement.</p>
-          <p>Renouvelable</p>
-          <p>Une assistance juridique 6j/7</p>
-        </div>
-      </div>
-      <div
-        class="relative h-[400px] sm:h-[300px] md:h-[350px] xl:h-[400px] bg-myyellow2 text-lg rounded-2xl"
-      >
-        <img
-          src="assets/img/icon/house.png"
-          class="absolute top-0 left-1/2 transform translate-x-[-50%] translate-y-[-50%] h-[70px]"
-          alt=""
-        />
-        <div
-          class="absolute right-0 left-0 transform translate-x-[-50%] translate-y-[-50%] rounded-full h-[50px] w-[50px] md:h-[60px] md:w-[60px] bg-myyellow1 flex items-center justify-center"
-        >
-          <p class="font-paytone font-bold text-2xl md:text-4xl text-white">
-            3
-          </p>
-        </div>
-        <div
-          class="h-full text-mygrey1 p-8 mt-10 flex flex-col items-start justify-start text-start gap-4"
-        >
-          <p>Une annonce valable pour vente, location et viage</p>
-          <p>10 photos incluses et 1 lien vidéo / visite 3D</p>
-          <p>
-            Modifications illimitées et gestion simplifiée depuis votre espace
-            DiffuZe
-          </p>
-        </div>
-      </div>
-      <div
-        class="relative h-[400px] sm:h-[300px] md:h-[350px] xl:h-[400px] bg-white text-lg rounded-2xl"
-      >
-        <img
-          src="assets/img/icon/credit-card.png"
-          class="absolute top-0 left-1/2 transform translate-x-[-50%] translate-y-[-50%] h-[70px]"
-          alt=""
-        />
-        <div
-          class="absolute right-0 left-0 transform translate-x-[-50%] translate-y-[-50%] rounded-full h-[50px] w-[50px] md:h-[60px] md:w-[60px] bg-myyellow1 flex items-center justify-center"
-        >
-          <p class="font-paytone font-bold text-2xl md:text-4xl text-white">
-            4
-          </p>
-        </div>
-        <div
-          class="h-full text-mygrey1 p-8 mt-10 flex flex-col items-start justify-start text-start gap-4"
-        >
-          <p>Paiement immédiat et unique, sans abonnement.</p>
-          <p>
-            <span
-              ><img
-                src="assets/img/icon/klarna.png"
-                class="h-[35px] inline mr-2"
-                alt="" /></span
-            >Paiement en 3x avec Klarna sans frais supplémentaire.
-          </p>
-        </div>
-      </div>
+    
+    @for(service of services; track service){
+      <app-service-card [service]="service"></app-service-card>
+    }
+    </div>
+
+   <!-- Comment ça marche ? -->
+  <div class="py-16 bg-mygray4 text-mygrey1 w-full flex flex-col items-center justify-center">
+    <h2 class="text-3xl font-bold font-raleway text-center mb-12">
+      Comment ça marche ?
+    </h2>
+    <p class="text-xl mb-12 w-3/4 text-center">Professionnels de l'immobilier, optimisez et<span class="text-2xl font-bold"> réduisez vos coûts </span>de diffusion !
+    </p>
+
+    <app-how-card
+    number="1"
+    title="Déposez vos annonces"
+    [checks]="['J\'enregistre les caractéristiques de mon annonce', 'Je télécharge mes photos', 'Je procède au paiement']"
+    text="Ensuite, un conseiller prendra contact avec vous dans les 24 heures maximum pour vérifier les informations communiquées avant la diffusion de votre annonce."
+    image="assets/img/illustration/completed.png"
+    ></app-how-card>
+
+    <!-- <app-how-card
+    number="2"
+    title="Gestion et optimisation de vos annonces"
+    [checks]="['Un prestataire unique qui diffuse sur l’ensemble des portails', 'Pilotage depuis votre espace DiffuZe ou votre CRM', 'Jusqu’à 10 photos incluses','Modification illimitée de vos annonces','Boost hebdomadaire','Suppression ou renouvellement possible à tout moment']"
+    image="assets/img/illustration/chart.png"
+    [left]="true"
+    ></app-how-card>
+
+    <app-how-card
+    number="3"
+    title="Assistance technique et juridique"
+    [checks]="['Un interlocuteur dédié disponible 6j/7 pour répondre à toutes vos questions techniques, légales...']"
+    image="assets/img/illustration/support.png"
+    ></app-how-card> -->
     </div>
 
     <!-- Simulator -->
-    <div
-      class="p-5 mb-16 md:p-10 lg:w-4/5 xl:w-2/3 flex flex-col lg:flex-row gap-10 md:gap-0 items-stretch bg-white rounded-2xl"
-    >
-      <div class="md:p-10 w-full lg:w-2/3 flex flex-col gap-8 items-start">
-        <h2 class="text-3xl font-bold font-raleway">
-          Personnalisez votre offre
-        </h2>
-        <p class="text-6xl font-bold font-paytone self-center">{{ price }} €</p>
+    <app-option-simulator [service1]="service1()"></app-option-simulator>
 
-        <div class="flex items-center justify-center gap-4">
-          <img
-            src="assets/img/icon/check-box.png"
-            class="h-[27px] w-[27px]"
-            alt=""
-          />
-          <p class="leading-8">Annonce en paiement immédiat et unique</p>
-        </div>
-        @for (option of diffusionOptions; track option.id) {
-        <div class="flex items-center gap-4">
-          <input
-            [id]="option.id"
-            type="checkbox"
-            (change)="addOption($event)"
-            class="rounded-md h-[25px] w-[25px]"
-          />
-          <label [for]="option.id">
-            <p class="leading-8">
-              <span class="bg-myyellow2 p-2 rounded-lg">En option :</span>
-              {{ option.label }}
-            </p>
-          </label>
-        </div>
-        } @if (diffusionOptions[4].value) {
-        <div class="pl-12">
-          <label for="surface"
-            >Indiquez la surface pour estimer le prix :</label
-          >
-          <input
-            id="surface"
-            type="number"
-            min="0"
-            (input)="addSurface($event)"
-            [disabled]="!diffusionOptions[4].value"
-            class="rounded-md p-1 mx-1 bg-mygrey5 w-[80px] border-mygrey4"
-          />
-          <span>m²</span>
-        </div>
-        }
-        <app-button class="self-center mt-8" [shadow]="false"></app-button>
-      </div>
-      <div
-        class="flex-1 bg-myyellow2 rounded-2xl w-full lg:w-1/3 flex items-center justify-center"
-      >
-        <img
-          src="assets/img/illustration/checklist.png"
-          class="w-2/3 lg:w-full h-auto"
-          alt=""
-        />
-      </div>
-    </div>
 
     <!-- Le détail des options -->
     <div
@@ -256,159 +143,6 @@
       </div>
     </div>
 
-    <!-- Comparez les offres -->
-    <div
-      class="bg-mygray4 text-mygrey1 mb-16 flex flex-col items-center justify-center"
-    >
-      <h2 class="text-3xl font-bold font-raleway text-center mb-24">
-        Comparez les offres
-      </h2>
 
-      <div
-        class="relative p-5 md:p-10 lg:w-4/5 2xl:w-2/3 mb-16  bg-white rounded-2xl shadow-lg"
-      >
-        <div class="grid grid-cols-[1.5fr_1fr_1fr] gap-x-12 gap-y-4 p-4">
-          <div class="absolute inset-0 -left-4 grid grid-cols-[1.5fr_1fr_1fr] gap-x-8 gap-y-4 p-4">
-            <div></div>
-            <div class="bg-mygrey5 rounded-2xl border border-mygrey4 border-opacity-30"></div>
-            <div></div>
-          </div>
-
-          <div class="z-10 font-raleway font-bold text-lg pb-2">
-            Ce qui est inclus
-          </div>
-          <div class="z-10 font-raleway font-bold text-lg text-center pb-2">
-            Annonce en immédiat
-          </div>
-          <div class="z-10 font-raleway font-bold text-lg text-center pb-2">
-            Annonce en co-mandat
-          </div>
-          <div class="z-10 pt-4">
-            Diffusion de votre annonce sur plus de 20 plateformes de référence
-          </div>
-          <div class="z-10 pt-4 flex items-center justify-center">
-            <img class="h-[35px]" src="assets/img/icon/check.png" alt="" />
-          </div>
-          <div class="z-10 pt-4 flex items-center justify-center">
-            <img class="h-[35px]" src="assets/img/icon/check.png" alt="" />
-          </div>
-          <div class="z-10 border-t-2 pt-4 border-mygrey4">
-            Pas d’abonnement, pas d’engagement
-          </div>
-          <div
-            class="z-10 border-t-2 pt-4 border-mygrey4 flex items-center justify-center"
-          >
-            <img class="h-[35px]" src="assets/img/icon/check.png" alt="" />
-          </div>
-          <div
-            class="z-10 border-t-2 pt-4 border-mygrey4 flex items-center justify-center"
-          >
-            <img class="h-[35px]" src="assets/img/icon/check.png" alt="" />
-          </div>
-          <div class="z-10 border-t-2 pt-4 border-mygrey4">
-            Boost alerte mail hebdomadaire
-          </div>
-          <div
-            class="z-10 border-t-2 pt-4 border-mygrey4 flex items-center justify-center"
-          >
-            <img class="h-[35px]" src="assets/img/icon/check.png" alt="" />
-          </div>
-          <div
-            class="z-10 border-t-2 pt-4 border-mygrey4 flex items-center justify-center"
-          >
-            <img class="h-[35px]" src="assets/img/icon/check.png" alt="" />
-          </div>
-          <div class="z-10 border-t-2 pt-4 border-mygrey4">
-            Une assistance juridique 6j/7
-          </div>
-          <div
-            class="z-10 border-t-2 pt-4 border-mygrey4 flex items-center justify-center"
-          >
-            <img class="h-[35px]" src="assets/img/icon/check.png" alt="" />
-          </div>
-          <div
-            class="z-10 border-t-2 pt-4 border-mygrey4 flex items-center justify-center"
-          >
-            <img class="h-[35px]" src="assets/img/icon/check.png" alt="" />
-          </div>
-          <div class="z-10 border-t-2 pt-4 border-mygrey4">
-            10 photos incluses et 1 lien vidéo / 3D
-          </div>
-          <div
-            class="z-10 border-t-2 pt-4 border-mygrey4 flex items-center justify-center"
-          >
-            <img class="h-[35px]" src="assets/img/icon/check.png" alt="" />
-          </div>
-          <div
-            class="z-10 border-t-2 pt-4 border-mygrey4 flex items-center justify-center"
-          >
-            <img class="h-[35px]" src="assets/img/icon/check.png" alt="" />
-          </div>
-          <div class="z-10 border-t-2 pt-4 border-mygrey4">
-            Modifications illimitées
-          </div>
-          <div
-            class="z-10 border-t-2 pt-4 border-mygrey4 flex items-center justify-center"
-          >
-            <img class="h-[35px]" src="assets/img/icon/check.png" alt="" />
-          </div>
-          <div
-            class="z-10 border-t-2 pt-4 border-mygrey4 flex items-center justify-center"
-          >
-            <img class="h-[35px]" src="assets/img/icon/check.png" alt="" />
-          </div>
-          <div class="z-10 border-t-2 pt-4 border-mygrey4">
-            Gestion depuis votre espace DiffuZe ou CRM
-          </div>
-          <div
-            class="z-10 border-t-2 pt-4 border-mygrey4 flex items-center justify-center"
-          >
-            <img class="h-[35px]" src="assets/img/icon/check.png" alt="" />
-          </div>
-          <div
-            class="z-10 border-t-2 pt-4 border-mygrey4 flex items-center justify-center"
-          >
-            <img class="h-[35px]" src="assets/img/icon/check.png" alt="" />
-          </div>
-          <div class="z-10 border-t-2 pt-4 border-mygrey4">
-            Durée de diffusion
-          </div>
-          <div class="z-10 border-t-2 pt-4 border-mygrey4 text-center">
-            60 jours
-          </div>
-          <div class="z-10 border-t-2 pt-4 border-mygrey4 text-center">
-            illimité
-          </div>
-          <div class="z-10 border-t-2 pt-4 border-mygrey4">Types d’annonce</div>
-          <div class="z-10 border-t-2 pt-4 border-mygrey4 text-center">
-            60 jours
-          </div>
-          <div class="z-10 border-t-2 pt-4 border-mygrey4 text-center">
-            illimité
-          </div>
-          <div class="z-10 border-t-2 pt-4 border-mygrey4">Options</div>
-          <div class="z-10 border-t-2 pt-4 border-mygrey4 text-center">
-            non incluses
-          </div>
-          <div class="z-10 border-t-2 pt-4 border-mygrey4 text-center">
-            incluses
-          </div>
-          <div class="z-10 border-t-2 pt-4 border-mygrey4">Paiement</div>
-          <div class="z-10 border-t-2 pt-4 border-mygrey4 flex justify-center">
-            <div class="z-10 w-4/5">
-              <span class="font-bold">Unique et immédiat par annonce </span>ou
-              en 3 fois avec Klarna, sans frais.
-            </div>
-          </div>
-          <div class="z-10 border-t-2 pt-4 border-mygrey4 flex justify-center">
-            <p class="w-4/5">
-              <span class="font-bold">Dépôt gratuit </span>de l'Annonce,
-              paiement basé sur un partage de commission, si la vente se fait
-              via un site partenaire
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
