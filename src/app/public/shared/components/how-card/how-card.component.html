@@ -1,5 +1,5 @@
 <div [ngClass]="{
-    'relative w-4/5 p-5 rounded-2xl flex flex-col md:flex-row items-stretch justify-between h-full m-auto mb-16 shadow-md':true,
+    'relative xl:w-4/5 p-5 rounded-2xl flex flex-col lg:flex-row items-stretch justify-between h-full m-auto shadow-md mb-16':true,
     'bg-white' : left === false,
     'bg-mygrey4' : left === true,
 }"
@@ -15,24 +15,35 @@
 
   <div
     [ngClass]="{
-        'flex-1 rounded-2xl py-5 w-full md:w-1/3 flex items-center justify-center':true,
+        'flex-1 rounded-2xl py-5 w-full lg:w-1/3 flex items-center justify-center':true,
         'bg-myyellow2' : left === false,
         'order-2 bg-white': left === true
     }"
   > 
-    <img [src]="image" class="w-2/3 h-auto" alt="" />
+    <img [src]="image" class="w-[250px] lg:w-2/3 h-auto" alt="" />
   </div>
-  <div class="flex-1 w-full md:w-2/3 py-8 md:p-14">
+  <div class="flex-1 w-full lg:w-2/3 py-8 md:p-14">
     <p class="text-lg md:text-2xl font-bold font-raleway text-mygrey1 mb-6 text-center md:text-start">{{ title }}</p>
 
-    @for(check of checks; track check){
+    @for(item of checks; track item){
     <div class="flex items-center justify-start gap-2 md:gap-4 py-2">
       <img
         [src]="left ? 'assets/img/icon/check-circle.png' : 'assets/img/icon/check-circle-yellow.png'"
         class="h-[20px] md:h-[25px] w-auto"
         alt=""
       />
-      <p>{{ check }}</p>
+        <p>{{ item.check }}
+          <span *ngIf="item.information" class="relative group ml-1">
+            <img src="assets/img/icon/information.png" class="h-[25px] w-[25px] transition inline"/>
+            <span class="absolute bottom-full left-1/2 -translate-x-1/2 transform mb-2 hidden group-hover:block
+            bg-gray-800 text-white text-sm px-3 py-1 rounded-md shadow-lg w-[250px]">
+            {{item.information}}
+          </span> 
+          </span>
+        </p>
+
+
+      
     </div>
     } 
     

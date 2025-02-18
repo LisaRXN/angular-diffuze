@@ -1,5 +1,5 @@
     <div
-      class="m-auto relative p-5 mb-16 md:p-10 w-4/5 flex flex-col lg:flex-row gap-10 md:gap-0 items-stretch bg-white rounded-2xl"
+      class="m-auto xl:w-4/5 relative p-5 mb-16 md:p-10 flex flex-col lg:flex-row gap-10 md:gap-0 items-stretch bg-white rounded-2xl shadow-md"
     >
     <div [ngClass]="{
       'absolute right-0 top-0 transform translate-y-[-50%] translate-x-[50%] rounded-full h-[60px] w-[60px]  md:h-[85px] md:w-[85px] bg-myyellow1 flex items-center justify-center':true,
@@ -12,6 +12,7 @@
         </h2>
         <p *ngIf="service1" class="text-6xl font-bold font-paytone self-center">{{ price }} €</p>
         <p *ngIf="!service1" class="text-6xl font-bold font-paytone self-center">{{ price2 }} €</p>
+        <p *ngIf="!service1" class="text-mygrey2 self-center">Vous économisez 410 euros !</p>
 
         <div class="flex items-center justify-center gap-4">
           <img
@@ -19,12 +20,13 @@
             class="h-[27px] w-[27px]"
             alt=""
           />
-          <p class="leading-8">Annonce en paiement immédiat et unique</p>
+          <p *ngIf="service1" class="leading-8">Annonce en paiement immédiat et unique</p>
+          <p *ngIf="!service1" class="leading-8">Annonce en co-mandat</p>
         </div>
         @for (option of diffusionOptions; track option.id) {
         <div class="flex items-center gap-4">
           <input
-            [disabled]="service1 && option.id !=='reportage'"
+            [disabled]="!service1 && option.id !=='reportage'"
             [id]="option.id"
             type="checkbox"
             (change)="addOption($event)"
@@ -40,6 +42,17 @@
             <p class="leading-8">
               <span class="bg-myyellow2 p-2 rounded-lg">En option :</span>
               {{ option.label }}
+              <span  class="relative group ml-1">
+                <img src="assets/img/icon/information.png" class="h-[25px] w-[25px] transition inline"/>
+                <span *ngIf="option.id != 'reportage'" class="absolute bottom-full left-1/2 -translate-x-1/2 transform mb-2 hidden group-hover:block
+                bg-gray-800 text-white text-sm px-3 py-1 rounded-md shadow-lg whitespace-nowrap">
+                {{option.price}} euros
+              </span> 
+                <span *ngIf="option.id === 'reportage'" class="absolute bottom-full left-1/2 -translate-x-1/2 transform mb-2 hidden group-hover:block
+                bg-gray-800 text-white text-sm px-3 py-1 rounded-md shadow-lg whitespace-nowrap">
+                A partir de 300 euros
+              </span> 
+              </span>
             </p>
           </label>
         </div>
@@ -66,7 +79,7 @@
       >
         <img
           src="assets/img/illustration/checklist.png"
-          class="w-2/3 lg:w-full h-auto"
+          class="w-[250px] lg:w-2/3 lg:w-full h-auto"
           alt=""
         />
       </div>

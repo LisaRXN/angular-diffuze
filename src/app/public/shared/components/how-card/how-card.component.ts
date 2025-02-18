@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-how-card',
   imports: [CommonModule],
@@ -15,8 +16,9 @@ export class HowCardComponent {
 
   @Input() number: string = ""
   @Input() title: string = ""
-  @Input() checks: string[] = []
+  @Input() checks:{ check: string; information?: string }[] = []
   @Input() text: string = ""
+  @Input() information: string = ""
   @Input() image: string = ""
   @Input() left: boolean = false
 
