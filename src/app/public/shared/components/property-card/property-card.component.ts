@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,23 +7,30 @@ import { Router } from '@angular/router';
   templateUrl: './property-card.component.html',
   styleUrl: './property-card.component.scss'
 })
-export class PropertyCardComponent {
+export class PropertyCardComponent implements OnInit {
 
   router = inject(Router)
 
   id:number = 0
-  image:string = "assets/img/photo/property.png"
-  property_type: string ="Appartement"
-  city: string = "Paris"
-  street: string = "Rue Martel"
-  living_space: number = 40
-  room: number = 2
-  floor: number = 2
-  selling_price: number = 465000
-  formatted_price:string = this.selling_price.toLocaleString('fr-FR')
-  surface_price: number = Math.round(this.selling_price / this.living_space)
-  formatted_surface_price: string = this.surface_price.toLocaleString('fr-FR')
+  @Input() image:string = ""
+  @Input() property_type: string = ""
+  @Input() city: string = ""
+  @Input() street: string = ""
+  @Input() living_space: number = 0
+  @Input() room: number = 0
+  floor: number = 0
+  @Input() selling_price: number = 0
+
+  formatted_price:string = ""
+  surface_price: number = 0
+  formatted_surface_price:string = ""
   
+  ngOnInit(): void {
+    this.formatted_price = this.selling_price.toLocaleString('fr-FR')
+    this.surface_price = Math.round(this.selling_price / this.living_space)
+    this.formatted_surface_price = this.surface_price.toLocaleString('fr-FR')
+  }
+
   navigateTo(){
     this.router.navigate([`property/${this.id}`])
   }

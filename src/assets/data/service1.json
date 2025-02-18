@@ -1,0 +1,48 @@
+[
+    {
+      "id": "1",
+      "image": "assets/img/icon/megaphone-yellow.png",
+      "backGroundColor": "mygrey2",
+      "textColor": "white",
+      "text" : [
+        "Diffusion de votre annonce sur plus de 20 plateformes de référence (SeLoger, Logic-immo, Le Figaro immo...)",
+        "Boost hebdomadaire pour maximiser la visibilité sur les portails"
+      ]
+    },
+    {
+      "id": "2",
+      "image": "assets/img/icon/calendar_60.png",
+      "backGroundColor": "myyellow1",
+      "textColor": "mygrey1",
+      "text" : [
+        "60 jours de diffusion",
+        "Pas d'abonnement, pas d'engagement.",
+        "Suppression ou renouvellement  à tout moment",
+        "Un interlocuteur dédié 6j/7 pour vous accompagner sur les aspects techniques et juridiques."
+      ]
+        },
+    {
+      "id": "3",
+      "image": "assets/img/icon/house.png",
+      "backGroundColor": "myyellow2",
+      "textColor": "mygrey1",
+      "text" : [
+        "Une annonce valable pour vente, location et viage",
+        "10 photos incluses et 1 lien vidéo / visite 3D",
+        "Modification illimitée et gestion simplifiée depuis votre espace DiffuZe ou votre propre CRM"
+      ]
+        },
+    {
+      "id": "4",
+      "image": "assets/img/icon/credit-card.png",
+      "backGroundColor": "white",
+      "textColor": "mygrey1",
+      "text" : [
+        "Paiement immédiat et unique, sans abonnement."
+      ],
+    "list": {
+        "img": "assets/img/icon/klarna.png",
+        "text": "Paiement en 3x avec Klarna sans frais supplémentaire."
+    }           
+    }
+]
