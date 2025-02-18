@@ -1,0 +1,148 @@
+<div class="min-h-screen bg-gray-100 flex flex-col items-center font-open">
+  <!-- Hero -->
+  <div
+    class="relative h-[550px] w-full mb-16 pb-20 text-mygrey1 px-8 flex flex-col items-center justify-center overflow-x-hidden"
+  >
+    <h1 class="z-10 text-4xl font-paytone text-center mb-12">
+      Découvrez nos offres et options
+    </h1>
+    <p class="z-10 text-xl leading-relaxed mb-12 w-3/4 text-center">
+      Plus de visibilité, plus de contacts,
+      <span class="font-semibold text-2xl">zéro engagement !</span> <br />
+      Créez vos annonces dès maintenant.
+    </p>
+    <div class="p-2 z-10 bg-white rounded-full">
+      <div (click)="toggleOption()" class="relative bg-mygrey5 w-full flex items-center justify-between rounded-full text-center">
+        <span 
+          id="toggle-option" 
+          [ngClass]="{
+            'absolute w-1/2 h-full bg-myyellow1 rounded-full transition-all ease-in-out':true,
+            'translate-x-0': service1(),
+            'translate-x-full': !service1(),
+            }"
+          >
+        </span>
+        <p class="z-10 whitespace-nowrap w-1/2 text-center py-4 px-10 rounded-full ">Annonce à l'unité</p>
+        <p class="z-10 whitespace-nowrap w-1/2 text-center py-4 px-10 rounded-full">Annonce en co-mandat</p>
+      </div>
+    </div>
+
+    <div
+      class="absolute -top-20 left-1/2 w-[140%] h-[550px] bg-myyellow2 transform -translate-x-1/2 -rotate-3"
+    ></div>
+  </div>
+
+  <!-- Ce qui est inclus -->
+  <div
+    class="bg-mygray4 text-mygrey1 px-8 w-full mb-16 flex flex-col items-center justify-center"
+  >
+    <h2 class="text-3xl font-bold font-raleway text-center mb-24">
+      Ce qui est inclus
+    </h2>
+
+    <!-- Service Cards -->
+    <div
+      class="grid md:grid-cols-2 xl:grid-cols-4 px-5 sm:px-12 gap-20 md:gap-14 xl:gap-12 text-center font-open mb-16"
+    >
+    
+    @for(service of services; track service){
+      <app-service-card [service]="service"></app-service-card>
+    }
+    </div>
+
+   <!-- Comment ça marche ? -->
+  <div class="py-16 bg-mygray4 text-mygrey1 w-full flex flex-col items-center justify-center">
+    <h2 class="text-3xl font-bold font-raleway text-center mb-12">
+      Comment ça marche ?
+    </h2>
+    <p class="text-xl mb-12 w-3/4 text-center">Professionnels de l'immobilier, optimisez et<span class="text-2xl font-bold"> réduisez vos coûts </span>de diffusion !
+    </p>
+
+    <app-how-card
+    number="1"
+    title="Déposez vos annonces"
+    [checks]="['J\'enregistre les caractéristiques de mon annonce', 'Je télécharge mes photos', 'Je procède au paiement']"
+    text="Ensuite, un conseiller prendra contact avec vous dans les 24 heures maximum pour vérifier les informations communiquées avant la diffusion de votre annonce."
+    image="assets/img/illustration/completed.png"
+    ></app-how-card>
+
+    <!-- <app-how-card
+    number="2"
+    title="Gestion et optimisation de vos annonces"
+    [checks]="['Un prestataire unique qui diffuse sur l’ensemble des portails', 'Pilotage depuis votre espace DiffuZe ou votre CRM', 'Jusqu’à 10 photos incluses','Modification illimitée de vos annonces','Boost hebdomadaire','Suppression ou renouvellement possible à tout moment']"
+    image="assets/img/illustration/chart.png"
+    [left]="true"
+    ></app-how-card>
+
+    <app-how-card
+    number="3"
+    title="Assistance technique et juridique"
+    [checks]="['Un interlocuteur dédié disponible 6j/7 pour répondre à toutes vos questions techniques, légales...']"
+    image="assets/img/illustration/support.png"
+    ></app-how-card> -->
+    </div>
+
+    <!-- Simulator -->
+    <app-option-simulator [service1]="service1()"></app-option-simulator>
+
+
+    <!-- Le détail des options -->
+    <div
+      class="bg-mygray4 text-mygrey1 mb-16 flex flex-col items-center justify-center"
+    >
+      <h2 class="text-3xl font-bold font-raleway text-center mb-16">
+        Le détail des options
+      </h2>
+
+      <div class="lg:w-4/5 2xl:w-2/3 flex flex-col m-auto">
+        <div class="flex flex-col md:flex-row w-full">
+          <div
+            (click)="activeOption('lux')"
+            id="lux"
+            [ngClass]="{
+              'bg-mygrey5 border border-white lg:min-w-[200px] p-4 rounded-t-lg -mb-2 pb-4 text-center': true,
+              'bg-myyellow1': optionView.id === 'lux'
+            }"
+          >
+            Belles Demeures & Lux
+          </div>
+          <div
+          (click)="activeOption('jinka')"
+          id="jinka"
+          [ngClass]="{
+            'bg-mygrey5 border border-white lg:min-w-[200px] p-4 rounded-t-lg -mb-2 pb-4 text-center': true,
+            'bg-myyellow1': optionView.id === 'jinka'
+          }"
+        >
+          Jinka
+        </div>
+          <div
+            (click)="activeOption('gens-de-confiance')"
+            id="gens-de-confiance"
+            [ngClass]="{
+              'bg-mygrey5 border border-white lg:min-w-[200px] p-4 rounded-t-lg -mb-2 pb-4 text-center': true,
+              'bg-myyellow1': optionView.id === 'gens-de-confiance'
+            }"
+          >
+            Gens de Confiance
+          </div>
+          <div
+            (click)="activeOption('green-acres')"
+            id="green-acres"
+            [ngClass]="{
+              'bg-mygrey5 border border-white lg:min-w-[200px] p-4 rounded-t-lg -mb-2 pb-4 text-center': true,
+              'bg-myyellow1': optionView.id === 'green-acres'
+            }"
+          >
+            Green-Acres
+          </div>
+        </div>
+
+        <app-option [option]="optionView"></app-option>
+        
+      </div>
+    </div>
+
+
+  </div>
+</div>

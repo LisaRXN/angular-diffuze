@@ -7,8 +7,8 @@
 
   <div [ngClass]="{
     'absolute right-0 top-0 transform translate-y-[-50%] rounded-full h-[60px] w-[60px]  md:h-[85px] md:w-[85px] bg-myyellow1 flex items-center justify-center':true,
-    'right-0 translate-x-[50%]': left === false,
-    'left-0 translate-x-[-50%]': left === true,
+    'right-0 translate-x-[50%]': left === true,
+    'left-0 translate-x-[-50%]': left === false,
     }">
     <p class="font-paytone font-bold text-2xl md:text-5xl text-white">{{ number }}</p>
   </div>

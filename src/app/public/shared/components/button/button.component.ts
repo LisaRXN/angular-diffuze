@@ -14,8 +14,10 @@ export class ButtonComponent {
   
   @Input() page:string = ""
   @Input() text:string = "Déposer une annonce"
-  @Input() backgroundColor:string = ""
+  @Input() backgroundColor:string = "myyellow1"
   @Input() color:string = "mygrey1"
+  @Input() shadow:boolean = true
+
 
   navigateTo(page:string){
     this.router.navigate([page])
