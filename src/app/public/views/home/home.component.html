@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gray-100 flex flex-col items-center">
+<div class="min-h-screen bg-gray-100 flex flex-col items-center overflow-x-hidden">
   <!-- Hero Section -->
   <div
     class="hero min-h-screen relative bg-[url(assets/img/photo/banniere.jpg)] text-white text-center h-[700px] z-10"
@@ -128,7 +128,7 @@
           </p>
         </div>
       </div>
-      <div class="bg-mygrey5 m-auto h-[300px] w-[300px] rounded-4xl flex flex-col items-center justify-center gap-5 p-10 z-10">
+      <div class="bg-mygrey5 m-auto h-[300px] w-[300px] rounded-4xl flex flex-col items-center justify-center gap-8 p-10 z-10">
         <div class="relative">
           <p
             class="absolute -top-2 right-2 transform text-8xl font-paytone text-mygrey1"
@@ -453,7 +453,7 @@
     </div>
 
     <div
-      class="relative w-full bg-pink-200 h-[300px] flex flex-col items-center justify-start"
+      class="relative w-full h-[300px] flex flex-col items-center justify-start"
     >
       <p class="text-lg font-open text-center py-10 z-10">
         + de <span class="text-2xl font-bold">120 biens</span> à vendre
@@ -479,30 +479,50 @@
     </h2>
 
     <div
-      class="grid grid-cols-3 md:grid-cols-6 gap-8 xl:gap-10 2xl:gap-20 mb-16"
+      class="z-10 grid grid-cols-3 md:grid-cols-6 gap-8 xl:gap-10 2xl:gap-20 mb-16"
     >
-      <img src="assets/img/logo/seloger.png" class="w-[100px]" alt="" />
-      <img src="assets/img/logo/seloger.png" class="w-[100px]" alt="" />
-      <img src="assets/img/logo/seloger.png" class="w-[100px]" alt="" />
-      <img src="assets/img/logo/seloger.png" class="w-[100px]" alt="" />
-      <img src="assets/img/logo/seloger.png" class="w-[100px]" alt="" />
-      <img src="assets/img/logo/seloger.png" class="w-[100px]" alt="" />
-      <img src="assets/img/logo/seloger.png" class="w-[100px]" alt="" />
-      <img src="assets/img/logo/seloger.png" class="w-[100px]" alt="" />
-      <img src="assets/img/logo/seloger.png" class="w-[100px]" alt="" />
+      <img src="assets/img/logo/seloger.png" class="z-10 w-[100px]" alt="" />
+      <img src="assets/img/logo/seloger.png" class="z-10 w-[100px]" alt="" />
+      <img src="assets/img/logo/seloger.png" class="z-10 w-[100px]" alt="" />
+      <img src="assets/img/logo/seloger.png" class="z-10 w-[100px]" alt="" />
+      <img src="assets/img/logo/seloger.png" class="z-10 w-[100px]" alt="" />
+      <img src="assets/img/logo/seloger.png" class="z-10 w-[100px]" alt="" />
+      <img src="assets/img/logo/seloger.png" class="z-10 w-[100px]" alt="" />
+      <img src="assets/img/logo/seloger.png" class="z-10 w-[100px]" alt="" />
+      <img src="assets/img/logo/seloger.png" class="z-10 w-[100px]" alt="" />
     </div>
 
     <div
-      class="lg:px-8 grid md:grid-cols-3 gap-8 xl:gap-10 2xl:gap-20 text-center font-open mb-12"
+      class="relative lg:px-8 grid md:grid-cols-3 gap-8 xl:gap-10 2xl:gap-20 text-center font-open mb-12"
     >
-      <app-review-card></app-review-card>
-      <app-review-card></app-review-card>
-      <app-review-card></app-review-card>
+      <app-review-card class="z-10"></app-review-card>
+      <app-review-card class="z-10"></app-review-card>
+      <app-review-card class="z-10"></app-review-card>
+
+      <!-- <div
+      class="absolute -bottom-1/2 left-1/2 w-[140%] h-[500px] bg-myyellow1 transform -translate-x-1/2 -rotate-3"
+    ></div> -->
     </div>
     <app-button
-      backgroundColor="myyellow1"
+      class="z-10"
+      backgroundColor="white"
       text="Voir tous les avis"
     ></app-button>
+
+
+  <div
+    class="lg:w-4/5 p-10 rounded-2xl my-24 font-open text-mygrey1 px-8"
+  >
+  <h2 class="text-3xl font-bold font-raleway text-center mb-12 z-10">
+    Besoin de plus d'information ?
+  </h2>
+  <p class="text-xl leading-relaxed text-justify">
+    Besoin de conseils personnalisés ? Réservez un rendez-vous avec l’un de nos experts : nous répondrons à toutes vos questions !    
+  </p>
+    <div class="grid md:grid-cols-[2fr_1fr] gap-14 md:gap-0 place-items-center p-10">
+      <app-button text="Prendre rendez-vous"></app-button>
+      <img src="assets/img/illustration/calling.png" class="w-[250px] md:w-full object-contain m-auto" alt="">
+    </div>
   </div>
 
   <!-- Louis -->

@@ -3,8 +3,14 @@ import {
   importProvidersFrom,
   provideZoneChangeDetection,
   isDevMode,
+  LOCALE_ID,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {
+  provideRouter,
+  withViewTransitions,
+  withRouterConfig,
+  withInMemoryScrolling,
+} from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
 import {
@@ -23,8 +29,16 @@ registerLocaleData(localeFr, 'fr-FR');
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(
+      routes,
+      withViewTransitions(),
+      withInMemoryScrolling({
+        anchorScrolling: 'enabled',
+        scrollPositionRestoration: 'enabled',
+      })
+    ),
     provideClientHydration(withEventReplay()),
     provideHttpClient(),
     importProvidersFrom(

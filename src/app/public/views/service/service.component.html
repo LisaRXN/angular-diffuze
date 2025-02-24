@@ -1,29 +1,40 @@
 <div class="min-h-screen bg-gray-100 flex flex-col items-center font-open">
   <!-- Hero -->
   <div
-    class="relative h-[550px] w-full mb-16 pb-20 text-mygrey1 px-8 flex flex-col items-center justify-center overflow-x-hidden"
+    class="relative h-[550px] w-full mb:10 md:mb-16 pb-20 text-mygrey1 px-8 flex flex-col items-center justify-center overflow-x-hidden"
   >
     <h1 class="z-10 text-4xl font-paytone text-center mb-12">
       Découvrez nos offres et options
     </h1>
-    <p class="z-10 text-xl leading-relaxed mb-12 w-3/4 text-center">
+    <p class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center">
       Plus de visibilité, plus de contacts,
       <span class="font-semibold text-2xl">zéro engagement !</span> <br />
       Créez vos annonces dès maintenant.
     </p>
     <div class="p-2 z-10 bg-white rounded-full">
-      <div (click)="toggleOption()" class="relative bg-mygrey5 w-full flex items-center justify-between rounded-full text-center">
-        <span 
-          id="toggle-option" 
+      <div
+        (click)="toggleService()"
+        class="relative bg-mygrey5 w-full flex items-center justify-between rounded-full text-center"
+      >
+        <span
+          id="toggle-option"
           [ngClass]="{
             'absolute w-1/2 h-full bg-myyellow1 rounded-full transition-all ease-in-out':true,
             'translate-x-0': service1(),
             'translate-x-full': !service1(),
             }"
-          >
+        >
         </span>
-        <p class="z-10 whitespace-nowrap w-1/2 text-center py-4 px-10 rounded-full ">Annonce à l'unité</p>
-        <p class="z-10 whitespace-nowrap w-1/2 text-center py-4 px-10 rounded-full">Annonce en co-mandat</p>
+        <p
+          class="z-10 md:whitespace-nowrap w-1/2 text-center py-4 px-1.5 md:px-10 rounded-full"
+        >
+          Annonce à l'unité
+        </p>
+        <p
+          class="z-10 md:whitespace-nowrap w-1/2 text-center py-4 px-5 md:px-10 rounded-full"
+        >
+          Annonce en co-mandat
+        </p>
       </div>
     </div>
 
@@ -32,41 +43,171 @@
     ></div>
   </div>
 
+  <!-- Comprendre le co-mandat -->
+  <div
+    *ngIf="!service1()"
+    class="bg-mygray4 text-mygrey1 px-4 md:px-8 w-full mb-10 md:mb-16 flex flex-col items-center justify-center font-open"
+  >
+    <h2 class="text-3xl font-bold font-raleway text-center mb-10 md:mb-16">
+      Comprendre le co-mandat
+    </h2>
+
+    <div
+      class="xl:w-4/5 2xl:w-2/3 grid md:grid-cols-[1fr_4fr] gap-x-6 md:gap-y-4 bg-white m-auto p-5 rounded-2xl mb-10 md:mb-16"
+    >
+      <div class="md:order-2 p-5">
+        <p class="font-raleway font-bold text-xl py-5">
+          Maximisez la visibilité de vos biens sans frais initiaux
+        </p>
+        <p class="">
+          Avec DiffuZe, vous profitez d’une diffusion optimale sur les plus
+          grands portails immobiliers, sans aucun coût anticipé. Nous prenons en
+          charge la mise en avant de vos biens, vous offrant une visibilité
+          maximale sans frais publicitaires.
+        </p>
+      </div>
+      <div
+        class="md:order-1 bg-gray-200 flex items-center justify-center h-[200px] md:h-full md:w-full p-5 rounded-2xl"
+      >
+        <img
+          src="assets/img/illustration/home.png"
+          class="h-full w-auto object-contain"
+          alt=""
+        />
+      </div>
+
+      <div class="md:order-4 p-5">
+        <p class="font-raleway font-bold text-xl py-5">
+          Une tarification transparente et un modèle au succès
+        </p>
+        <p>
+          Contrairement aux services traditionnels, vous ne payez qu’en cas de
+          vente. Une simple signature d’avenant au mandat permet d’intégrer
+          Diffuze comme diffuseur, assurant une gestion fluide et efficace.
+        </p>
+        <p>
+          <span class="font-semibold">Aucune dépense cachée : </span>Vous
+          connaissez exactement les conditions dès le départ.
+        </p>
+        <p>
+          <span class="font-semibold">Paiement uniquement à la vente : </span>Un
+          modèle sécurisé, sans risque financier.
+        </p>
+        <p>
+          <span class="font-semibold"
+            >Rémunération sur partage de commission,</span
+          >
+          avec un barème dégressif :
+        </p>
+        <div class="flex flex-col md:flex-row md:gap-6">
+          <div class="">
+            <p class="text-sm font-light text-mygrey3 mt-4 mb-2">
+              mandats simples
+            </p>
+            <ul class="bg-myyellow2 list-disc pl-5 rounded-xl p-2">
+              <li>8 % sur les 10 000 premiers €</li>
+              <li>6 % de 10 001 à 20 000 €</li>
+              <li>4 % de 20 001 à 50 000 €</li>
+              <li>2 % au-delà de 50 001 €</li>
+            </ul>
+          </div>
+          <div class="">
+            <p class="text-sm font-light text-mygrey3 mt-4 mb-2">
+              mandats exclusifs
+            </p>
+            <ul class="bg-myyellow2 list-disc pl-5 rounded-xl p-2">
+              <li>6 % sur les 10 000 premiers €</li>
+              <li>4 % de 10 001 à 20 000 €</li>
+              <li>2 % de 20 001 à 50 000 €</li>
+              <li>1 % au-delà de 50 001 €</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div
+        class="md:order-3 bg-gray-200 flex items-center justify-center h-[200px] md:h-full md:w-full p-5 rounded-2xl"
+      >
+        <img
+          src="assets/img/illustration/target.png"
+          class="h-full w-auto object-contain"
+          alt=""
+        />
+      </div>
+      <div class="md:order-6 p-5">
+        <p class="font-raleway font-bold text-xl py-5">
+          Un partenariat gagnant-gagnant
+        </p>
+        <p class="">
+          Ce modèle vous permet de vendre en toute sérénité. Grâce à une
+          approche basée sur la performance et une rémunération transparente,
+          vous bénéficiez d’un service efficace et professionnel, sans compromis
+          sur la qualité ni sur la diffusion.
+        </p>
+      </div>
+      <div
+        class="md:order-5 bg-gray-200 flex items-center justify-center h-[200px] md:h-full md:w-full p-5 rounded-2xl"
+      >
+        <img
+          src="assets/img/illustration/handshake.png"
+          class="h-full w-auto object-contain"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+
   <!-- Ce qui est inclus -->
   <div
-    class="bg-mygray4 text-mygrey1 px-8 w-full mb-16 flex flex-col items-center justify-center"
+    class="bg-mygray4 text-mygrey1 md:px-8 w-full mb:10 md:mb-16 flex flex-col items-center justify-center font-open"
   >
-    <h2 class="text-3xl font-bold font-raleway text-center mb-24">
+    <h2 class="text-3xl font-bold font-raleway text-center mb-16 md:mb-24">
       Ce qui est inclus
     </h2>
-
     <!-- Service Cards -->
     <div
-      class="grid md:grid-cols-2 xl:grid-cols-4 px-5 sm:px-12 gap-20 md:gap-14 xl:gap-12 text-center font-open mb-16"
+      class="grid md:grid-cols-2 xl:grid-cols-4 sm:px-12 px-5 gap-20 md:gap-14 xl:gap-8 text-center mb-10 md:mb-16"
     >
-    
-    @for(service of services; track service){
+      @for(service of services; track service){
       <app-service-card [service]="service"></app-service-card>
-    }
+      }
     </div>
 
-   <!-- Comment ça marche ? -->
-  <div class="py-16 bg-mygray4 text-mygrey1 w-full flex flex-col items-center justify-center">
-    <h2 class="text-3xl font-bold font-raleway text-center mb-12">
-      Comment ça marche ?
-    </h2>
-    <p class="text-xl mb-12 w-3/4 text-center">Professionnels de l'immobilier, optimisez et<span class="text-2xl font-bold"> réduisez vos coûts </span>de diffusion !
-    </p>
+  </div>
 
-    <app-how-card
-    number="1"
-    title="Déposez vos annonces"
-    [checks]="['J\'enregistre les caractéristiques de mon annonce', 'Je télécharge mes photos', 'Je procède au paiement']"
-    text="Ensuite, un conseiller prendra contact avec vous dans les 24 heures maximum pour vérifier les informations communiquées avant la diffusion de votre annonce."
-    image="assets/img/illustration/completed.png"
-    ></app-how-card>
+    <!-- Comment ça marche ? -->
+    <div
+      class="py-16 px-8 md:px-14 bg-mygray4 text-mygrey1 w-full flex flex-col items-center justify-center"
+    >
+      <h2 class="text-3xl font-bold font-raleway text-center mb-12">
+        Comment ça marche ?
+      </h2>
+      <p class="text-xl mb-12 md:w-3/4 text-center">
+        Professionnels de l'immobilier, optimisez et<span
+          class="text-2xl font-bold"
+        >
+          réduisez vos coûts </span
+        >de diffusion !
+      </p>
 
-    <!-- <app-how-card
+      <app-how-card
+        number="1"
+        title="Déposez vos annonces"
+        [checks]="[
+          {
+            check:
+              'J\'enregistre les caractéristiques de mon annonce via mon espace DiffuZe ou mon propre CRM',
+            information:
+              'Compatible avec tous les CRM (HubSpot, Salesforce, Zoho... )'
+          },
+          { check: 'Je télécharge mes photos' },
+          { check: 'Je procède au paiement' }
+        ]"
+        text="Ensuite, un conseiller prendra contact avec vous dans les 24 heures maximum pour vérifier les informations communiquées avant la diffusion de votre annonce."
+        information="Compatibles avec tous les CRM (HubSpot, Salesforce, Zoho... )"
+        image="assets/img/illustration/completed.png"
+      ></app-how-card>
+
+      <!-- <app-how-card
     number="2"
     title="Gestion et optimisation de vos annonces"
     [checks]="['Un prestataire unique qui diffuse sur l’ensemble des portails', 'Pilotage depuis votre espace DiffuZe ou votre CRM', 'Jusqu’à 10 photos incluses','Modification illimitée de vos annonces','Boost hebdomadaire','Suppression ou renouvellement possible à tout moment']"
@@ -80,22 +221,22 @@
     [checks]="['Un interlocuteur dédié disponible 6j/7 pour répondre à toutes vos questions techniques, légales...']"
     image="assets/img/illustration/support.png"
     ></app-how-card> -->
-    </div>
 
     <!-- Simulator -->
     <app-option-simulator [service1]="service1()"></app-option-simulator>
 
+    </div>
 
     <!-- Le détail des options -->
     <div
-      class="bg-mygray4 text-mygrey1 mb-16 flex flex-col items-center justify-center"
+      class="px-4 md:px-8 bg-mygray4 text-mygrey1 mb-10 md:mb-16 flex flex-col items-center justify-center"
     >
-      <h2 class="text-3xl font-bold font-raleway text-center mb-16">
+      <h2 class="text-3xl font-bold font-raleway text-center mb-10 md:mb-16">
         Le détail des options
       </h2>
 
       <div class="lg:w-4/5 2xl:w-2/3 flex flex-col m-auto">
-        <div class="flex flex-col md:flex-row w-full">
+        <div class="flex flex-col md:flex-row w-full cursor-pointer">
           <div
             (click)="activeOption('lux')"
             id="lux"
@@ -107,15 +248,15 @@
             Belles Demeures & Lux
           </div>
           <div
-          (click)="activeOption('jinka')"
-          id="jinka"
-          [ngClass]="{
-            'bg-mygrey5 border border-white lg:min-w-[200px] p-4 rounded-t-lg -mb-2 pb-4 text-center': true,
-            'bg-myyellow1': optionView.id === 'jinka'
-          }"
-        >
-          Jinka
-        </div>
+            (click)="activeOption('jinka')"
+            id="jinka"
+            [ngClass]="{
+              'bg-mygrey5 border border-white lg:min-w-[200px] p-4 rounded-t-lg -mb-2 pb-4 text-center': true,
+              'bg-myyellow1': optionView.id === 'jinka'
+            }"
+          >
+            Jinka
+          </div>
           <div
             (click)="activeOption('gens-de-confiance')"
             id="gens-de-confiance"
@@ -139,10 +280,49 @@
         </div>
 
         <app-option [option]="optionView"></app-option>
-        
       </div>
     </div>
+  <!-- </div> -->
 
 
-  </div>
+  <!-- FAQ -->
+  <div
+    class="w-full px-4 md:px-8 lg:w-4/5 text-mygrey1 mb-24 flex flex-col items-center justify-center font-open"
+  >
+    <h2 class="text-3xl font-bold font-raleway text-center mb-10 md:mb-16">
+      Questions fréquentes
+    </h2>
+    <p class="text-xl leading-relaxed mb-12 text-justify">
+      Vous ne trouvez pas ce que vous cherchez ?
+    </p>
+    <app-button class=mb-10 text="Prendre rendez-vous"></app-button>
+
+    <div class="w-full">
+      @for(question of questions; track question){
+        <div [ngClass]="{
+          'p-5 rounded-2xl':true,
+          'bg-gray-200 ':question.open
+        }">
+          <div 
+           (click)="openQuestion(question.id)" 
+           class="relative flex items-center justify-between gap-4 w-full cursor-pointer">
+            <p class="font-bold text-lg border-b pb-4 border-mygrey4 w-full">{{question.text}}</p>
+            <img
+              class="h-[10px]"
+              [src]="question.open ? 'assets/img/icon/btn-up.png' : 'assets/img/icon/btn-down.png'"
+            />
+          </div>
+          <div [ngClass]="{
+            'p-5':true,
+            'hidden':!question.open,
+            'block':question.open
+          }">
+          {{question.response}}
+          </div>
+        </div>
+
+      }
+    </div>
+</div>
+
 </div>
