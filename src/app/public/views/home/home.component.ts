@@ -6,18 +6,9 @@ import { HowCardComponent } from "../../shared/components/how-card/how-card.comp
 import { PropertyCardComponent } from "../../shared/components/property-card/property-card.component";
 import { ReviewCardComponent } from "../../shared/components/review-card/review-card.component";
 import { Router } from '@angular/router';
+import { PropertyGateway } from '../../../core/ports/property.gateway';
+import { Property } from '../../../core/models/property.model';
 
-interface Property {
-  id:number
-  image:string
-  property_type: string
-  city: string
-  street: string
-  living_space: number 
-  room: number
-  floor: number
-  selling_price: number
-}
 
 @Component({
   selector: 'app-home',
@@ -26,6 +17,11 @@ interface Property {
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
+  router = inject(Router)
+  propertyGateway = inject(PropertyGateway)
+  properties: Property[]= []
+
+
   constructor(private meta: Meta, private title: Title) {
     this.title.setTitle('Accueil - FrontPro');
     this.meta.addTags([
@@ -36,45 +32,10 @@ export class HomeComponent {
         content: 'Découvrez nos services professionnels',
       },
     ]);
+
+    this.propertyGateway.fetchProperties().subscribe((properties) => {this.properties = properties})
   }
 
-  router = inject(Router)
-
-  properties: Property[] = [
-    {
-      id: 1,
-      image: "assets/img/photo/property.png",
-      property_type: "Appartement",
-      city: "Paris",
-      street: "Rue Martel",
-      living_space: 40,
-      room: 2,
-      floor: 2,
-      selling_price: 465000
-    },
-    {
-      id: 2,
-      image: "assets/img/photo/property.png",
-      property_type: "Appartement",
-      city: "Paris",
-      street: "Rue Martel",
-      living_space: 40,
-      room: 2,
-      floor: 2,
-      selling_price: 465000
-    },
-    {
-      id: 3,
-      image: "assets/img/photo/property.png",
-      property_type: "Appartement",
-      city: "Paris",
-      street: "Rue Martel",
-      living_space: 40,
-      room: 2,
-      floor: 2,
-      selling_price: 465000
-    }
-  ]
 
   navigateToProperty(property:Property){
     this.router.navigate(['property', property.id])

@@ -24,6 +24,9 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { PropertyGateway } from './core/ports/property.gateway';
+import { InMemoryPropertyGateway } from './core/adapters/in-memory/in-memory-property.gateway';
+
 
 registerLocaleData(localeFr, 'fr-FR');
 
@@ -51,5 +54,6 @@ export const appConfig: ApplicationConfig = {
         keys: [],
       })
     ),
+    {provide: PropertyGateway, useFactory: () => new InMemoryPropertyGateway()},
   ],
 };
