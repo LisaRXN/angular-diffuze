@@ -10,9 +10,9 @@
         <h2 class="text-3xl font-bold font-raleway">
           Personnalisez votre offre
         </h2>
-        <p *ngIf="service1" class="text-6xl font-bold font-paytone self-center">{{ price }} €</p>
-        <p *ngIf="!service1" class="text-6xl font-bold font-paytone self-center">{{ price2 }} €</p>
-        <p *ngIf="!service1" class="text-mygrey2 self-center">Vous économisez 410 euros !</p>
+        <p *ngIf="isUnitService" class="text-6xl font-bold font-paytone self-center">{{ price }} €</p>
+        <p *ngIf="!isUnitService" class="text-6xl font-bold font-paytone self-center">{{ price2 }} €</p>
+        <p *ngIf="!isUnitService" class="text-mygrey2 self-center">Vous économisez 410 euros !</p>
 
         <div class="flex items-center justify-center gap-4">
           <img
@@ -20,20 +20,20 @@
             class="h-[27px] w-[27px]"
             alt=""
           />
-          <p *ngIf="service1" class="leading-8">Annonce en paiement immédiat et unique</p>
-          <p *ngIf="!service1" class="leading-8">Annonce en co-mandat</p>
+          <p *ngIf="isUnitService" class="leading-8">Annonce en paiement immédiat et unique</p>
+          <p *ngIf="!isUnitService" class="leading-8">Annonce en co-mandat</p>
         </div>
         @for (option of diffusionOptions; track option.id) {
         <div class="flex items-center gap-4">
           <input
-            [disabled]="!service1 && option.id !=='reportage'"
+            [disabled]="!isUnitService && option.id !=='reportage'"
             [id]="option.id"
             type="checkbox"
             (change)="addOption($event)"
             class="relative rounded-md h-[25px] w-[25px]"
           />
           <img
-          *ngIf="!service1 && option.id !=='reportage'"
+          *ngIf="!isUnitService && option.id !=='reportage'"
           src="assets/img/icon/check-box.png"
           class="absolute h-[27px] w-[27px]"
           alt=""

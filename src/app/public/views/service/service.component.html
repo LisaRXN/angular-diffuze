@@ -20,8 +20,8 @@
           id="toggle-option"
           [ngClass]="{
             'absolute w-1/2 h-full bg-myyellow1 rounded-full transition-all ease-in-out':true,
-            'translate-x-0': service1(),
-            'translate-x-full': !service1(),
+            'translate-x-0': isUnitService,
+            'translate-x-full': !isUnitService,
             }"
         >
         </span>
@@ -45,7 +45,7 @@
 
   <!-- Comprendre le co-mandat -->
   <div
-    *ngIf="!service1()"
+    *ngIf="!isUnitService"
     class="bg-mygray4 text-mygrey1 px-4 md:px-8 w-full mb-10 md:mb-16 flex flex-col items-center justify-center font-open"
   >
     <h2 class="text-3xl font-bold font-raleway text-center mb-10 md:mb-16">
@@ -60,7 +60,7 @@
           Maximisez la visibilité de vos biens sans frais initiaux
         </p>
         <p class="">
-          Avec DiffuZe, vous profitez d’une diffusion optimale sur les plus
+          Avec DiffuZe, vous profitez d'une diffusion optimale sur les plus
           grands portails immobiliers, sans aucun coût anticipé. Nous prenons en
           charge la mise en avant de vos biens, vous offrant une visibilité
           maximale sans frais publicitaires.
@@ -81,8 +81,8 @@
           Une tarification transparente et un modèle au succès
         </p>
         <p>
-          Contrairement aux services traditionnels, vous ne payez qu’en cas de
-          vente. Une simple signature d’avenant au mandat permet d’intégrer
+          Contrairement aux services traditionnels, vous ne payez qu'en cas de
+          vente. Une simple signature d'avenant au mandat permet d'intégrer
           Diffuze comme diffuseur, assurant une gestion fluide et efficace.
         </p>
         <p>
@@ -140,7 +140,7 @@
         <p class="">
           Ce modèle vous permet de vendre en toute sérénité. Grâce à une
           approche basée sur la performance et une rémunération transparente,
-          vous bénéficiez d’un service efficace et professionnel, sans compromis
+          vous bénéficiez d'un service efficace et professionnel, sans compromis
           sur la qualité ni sur la diffusion.
         </p>
       </div>
@@ -167,7 +167,7 @@
     <div
       class="grid md:grid-cols-2 xl:grid-cols-4 sm:px-12 px-5 gap-20 md:gap-14 xl:gap-8 text-center mb-10 md:mb-16"
     >
-      @for(service of services; track service){
+      @for(service of currentServices; track service){
       <app-service-card [service]="service"></app-service-card>
       }
     </div>
@@ -210,7 +210,7 @@
       <!-- <app-how-card
     number="2"
     title="Gestion et optimisation de vos annonces"
-    [checks]="['Un prestataire unique qui diffuse sur l’ensemble des portails', 'Pilotage depuis votre espace DiffuZe ou votre CRM', 'Jusqu’à 10 photos incluses','Modification illimitée de vos annonces','Boost hebdomadaire','Suppression ou renouvellement possible à tout moment']"
+    [checks]="['Un prestataire unique qui diffuse sur l'ensemble des portails', 'Pilotage depuis votre espace DiffuZe ou votre CRM', 'Jusqu'à 10 photos incluses','Modification illimitée de vos annonces','Boost hebdomadaire','Suppression ou renouvellement possible à tout moment']"
     image="assets/img/illustration/chart.png"
     [left]="true"
     ></app-how-card>
@@ -223,7 +223,7 @@
     ></app-how-card> -->
 
     <!-- Simulator -->
-    <app-option-simulator [service1]="service1()"></app-option-simulator>
+    <app-option-simulator [isUnitService]="isUnitService"></app-option-simulator>
 
     </div>
 
@@ -286,43 +286,38 @@
 
 
   <!-- FAQ -->
-  <div
-    class="w-full px-4 md:px-8 lg:w-4/5 text-mygrey1 mb-24 flex flex-col items-center justify-center font-open"
-  >
+  <div class="w-full px-4 md:px-8 lg:w-4/5 text-mygrey1 mb-24 flex flex-col items-center justify-center font-open">
     <h2 class="text-3xl font-bold font-raleway text-center mb-10 md:mb-16">
       Questions fréquentes
     </h2>
     <p class="text-xl leading-relaxed mb-12 text-justify">
       Vous ne trouvez pas ce que vous cherchez ?
     </p>
-    <app-button class=mb-10 text="Prendre rendez-vous"></app-button>
+    <app-button class="mb-10" text="Prendre rendez-vous"></app-button>
 
-    <div class="w-full">
-      @for(question of questions; track question){
-        <div [ngClass]="{
-          'p-5 rounded-2xl':true,
-          'bg-gray-200 ':question.open
-        }">
-          <div 
-           (click)="openQuestion(question.id)" 
-           class="relative flex items-center justify-between gap-4 w-full cursor-pointer">
-            <p class="font-bold text-lg border-b pb-4 border-mygrey4 w-full">{{question.text}}</p>
+    <div class="w-full space-y-4">
+      @for(question of questions; track question.id) {
+        <div class="group rounded-2xl hover:bg-gray-200 transition-colors">
+          <button 
+            class="flex items-center justify-between w-full p-5 cursor-pointer peer"
+            type="button"
+            aria-expanded="false">
+            <p class="font-bold text-lg">{{question.text}}</p>
             <img
-              class="h-[10px]"
-              [src]="question.open ? 'assets/img/icon/btn-up.png' : 'assets/img/icon/btn-down.png'"
+              class="h-[10px] transition-transform duration-300 group-hover:rotate-180"
+              src="assets/img/icon/btn-down.png"
+              alt="Toggle"
             />
-          </div>
-          <div [ngClass]="{
-            'p-5':true,
-            'hidden':!question.open,
-            'block':question.open
-          }">
-          {{question.response}}
+          </button>
+          <div 
+            class="grid grid-rows-[0fr] transition-all duration-300 group-hover:grid-rows-[1fr]">
+            <div class="overflow-hidden">
+              <p class="p-5">{{question.response}}</p>
+            </div>
           </div>
         </div>
-
       }
     </div>
-</div>
+  </div>
 
 </div>
