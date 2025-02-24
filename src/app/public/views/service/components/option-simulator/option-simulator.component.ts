@@ -19,11 +19,10 @@ interface DiffusionOption {
   selector: 'app-option-simulator',
   imports: [CommonModule, ButtonComponent],
   templateUrl: './option-simulator.component.html',
-  styleUrl: './option-simulator.component.scss'
+  styleUrl: './option-simulator.component.scss',
 })
 export class OptionSimulatorComponent {
-
-  @Input() service1:boolean = false
+  @Input() isUnitService: boolean = false;
 
   price: number = 99;
   price2: number = 0;
@@ -106,7 +105,7 @@ export class OptionSimulatorComponent {
     }
 
     this.price = updatedPrice;
-    this.price2 = updatedPrice2
+    this.price2 = updatedPrice2;
   }
 
   allOptionsExceptReportage(): boolean {
@@ -120,6 +119,4 @@ export class OptionSimulatorComponent {
     this.surface = Number(input.value);
     this.updatePrice();
   }
-
-
 }
