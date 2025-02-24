@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
+import optionsDetails from '../../../../../../assets/data/options.json'
+import { OptionComponent } from '../../../../shared/components/option/option.component';
+
 
 interface SurfacePrice {
   maxSurface: number;
@@ -17,12 +20,27 @@ interface DiffusionOption {
 
 @Component({
   selector: 'app-option-simulator',
-  imports: [CommonModule, ButtonComponent],
+  imports: [CommonModule, ButtonComponent, OptionComponent],
   templateUrl: './option-simulator.component.html',
   styleUrl: './option-simulator.component.scss',
 })
 export class OptionSimulatorComponent {
+  
   @Input() isUnitService: boolean = false;
+
+  options = optionsDetails;
+  isOpenOption = false
+  optionView = this.options[0];
+
+  activeOption(id: string) {
+    const selectedOption = this.options.filter((opt) => opt.id === id);
+    this.optionView = selectedOption[0];
+  }
+
+  openOption(){
+    this.isOpenOption = !this.isOpenOption
+    this.optionView = this.isOpenOption ? this.optionView : this.options[0];
+  }
 
   price: number = 99;
   price2: number = 0;

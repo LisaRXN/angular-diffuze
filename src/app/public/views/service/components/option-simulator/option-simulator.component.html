@@ -1,86 +1,180 @@
-    <div
-      class="m-auto xl:w-4/5 relative p-5 mb-16 md:p-10 flex flex-col lg:flex-row gap-10 md:gap-0 items-stretch bg-white rounded-2xl shadow-md"
-    >
-    <div [ngClass]="{
-      'absolute right-0 top-0 transform translate-y-[-50%] translate-x-[50%] rounded-full h-[60px] w-[60px]  md:h-[85px] md:w-[85px] bg-myyellow1 flex items-center justify-center':true,
-      }">
-      <p class="font-paytone font-bold text-2xl md:text-5xl text-white">2</p>
-    </div>
-      <div class="md:p-10 w-full lg:w-2/3 flex flex-col gap-8 items-start">
-        <h2 class="text-3xl font-bold font-raleway">
-          Personnalisez votre offre
-        </h2>
-        <p *ngIf="isUnitService" class="text-6xl font-bold font-paytone self-center">{{ price }} €</p>
-        <p *ngIf="!isUnitService" class="text-6xl font-bold font-paytone self-center">{{ price2 }} €</p>
-        <p *ngIf="!isUnitService" class="text-mygrey2 self-center">Vous économisez 410 euros !</p>
+<div class="m-auto xl:w-4/5 relative mb-16 bg-white rounded-2xl shadow-md">
+  <!-- Simulateur -->
+  <div
+    class="p-8 md:p-10 flex flex-col lg:flex-row gap-10 md:gap-0 items-stretch"
+  >
+    <div class="md:p-10 w-full lg:w-2/3 flex flex-col gap-8 items-start">
+      <h2 class="text-2xl font-bold font-raleway">Choisissez vos options</h2>
+      <p
+        *ngIf="isUnitService"
+        class="text-6xl font-bold font-paytone self-center"
+      >
+        {{ price }} €
+      </p>
+      <p
+        *ngIf="!isUnitService"
+        class="text-6xl font-bold font-paytone self-center"
+      >
+        {{ price2 }} €
+      </p>
+      <p *ngIf="!isUnitService" class="text-mygrey2 self-center">
+        Vous économisez 410 euros !
+      </p>
 
-        <div class="flex items-center justify-center gap-4">
-          <img
-            src="assets/img/icon/check-box.png"
-            class="h-[27px] w-[27px]"
-            alt=""
-          />
-          <p *ngIf="isUnitService" class="leading-8">Annonce en paiement immédiat et unique</p>
-          <p *ngIf="!isUnitService" class="leading-8">Annonce en co-mandat</p>
-        </div>
-        @for (option of diffusionOptions; track option.id) {
-        <div class="flex items-center gap-4">
-          <input
-            [disabled]="!isUnitService && option.id !=='reportage'"
-            [id]="option.id"
-            type="checkbox"
-            (change)="addOption($event)"
-            class="relative rounded-md h-[25px] w-[25px]"
-          />
-          <img
-          *ngIf="!isUnitService && option.id !=='reportage'"
+      <div class="flex items-center justify-center gap-4">
+        <img
+          src="assets/img/icon/check-box.png"
+          class="h-[27px] w-[27px]"
+          alt=""
+        />
+        <p *ngIf="isUnitService" class="leading-8">
+          Annonce en paiement immédiat et unique
+        </p>
+        <p *ngIf="!isUnitService" class="leading-8">Annonce en co-mandat</p>
+      </div>
+      @for (option of diffusionOptions; track option.id) {
+      <div class="flex items-center gap-4">
+        <input
+          [disabled]="!isUnitService && option.id !== 'reportage'"
+          [id]="option.id"
+          type="checkbox"
+          (change)="addOption($event)"
+          class="relative rounded-md h-[25px] w-[25px]"
+        />
+        <img
+          *ngIf="!isUnitService && option.id !== 'reportage'"
           src="assets/img/icon/check-box.png"
           class="absolute h-[27px] w-[27px]"
           alt=""
         />
-          <label [for]="option.id">
-            <p class="leading-8">
-              <span class="bg-myyellow2 p-2 rounded-lg">En option :</span>
-              {{ option.label }}
-              <span  class="relative group ml-1">
-                <img src="assets/img/icon/information.png" class="h-[25px] w-[25px] transition inline"/>
-                <span *ngIf="option.id != 'reportage'" class="absolute bottom-full left-1/2 -translate-x-1/2 transform mb-2 hidden group-hover:block
-                bg-gray-800 text-white text-sm px-3 py-1 rounded-md shadow-lg whitespace-nowrap">
-                {{option.price}} euros
-              </span> 
-                <span *ngIf="option.id === 'reportage'" class="absolute bottom-full left-1/2 -translate-x-1/2 transform mb-2 hidden group-hover:block
-                bg-gray-800 text-white text-sm px-3 py-1 rounded-md shadow-lg whitespace-nowrap">
-                A partir de 300 euros
-              </span> 
+        <label [for]="option.id">
+          <p class="leading-8">
+            <span class="bg-myyellow2 p-2 rounded-lg">En option :</span>
+            {{ option.label }}
+            <span class="relative group ml-1">
+              <img
+                src="assets/img/icon/information.png"
+                class="h-[25px] w-[25px] transition inline"
+              />
+              <span
+                *ngIf="option.id != 'reportage'"
+                class="absolute bottom-full left-1/2 -translate-x-1/2 transform mb-2 hidden group-hover:block bg-gray-800 text-white text-sm px-3 py-1 rounded-md shadow-lg whitespace-nowrap"
+              >
+                {{ option.price }} euros
               </span>
-            </p>
-          </label>
-        </div>
-        } @if (diffusionOptions[4].value) {
-        <div class="pl-12">
-          <label for="surface"
-            >Indiquez la surface pour estimer le prix :</label
-          >
-          <input
-            id="surface"
-            type="number"
-            min="0"
-            (input)="addSurface($event)"
-            [disabled]="!diffusionOptions[4].value"
-            class="rounded-md p-1 mx-1 bg-mygrey5 w-[80px] border-mygrey4"
-          />
-          <span>m²</span>
-        </div>
-        }
-        <app-button class="self-center mt-8" [shadow]="false"></app-button>
+              <span
+                *ngIf="option.id === 'reportage'"
+                class="absolute bottom-full left-1/2 -translate-x-1/2 transform mb-2 hidden group-hover:block bg-gray-800 text-white text-sm px-3 py-1 rounded-md shadow-lg whitespace-nowrap"
+              >
+                A partir de 300 euros
+              </span>
+            </span>
+          </p>
+        </label>
+      </div>
+      } @if (diffusionOptions[4].value) {
+      <div class="pl-12">
+        <label for="surface">Indiquez la surface pour estimer le prix :</label>
+        <input
+          id="surface"
+          type="number"
+          min="0"
+          (input)="addSurface($event)"
+          [disabled]="!diffusionOptions[4].value"
+          class="rounded-md p-1 mx-1 bg-mygrey5 w-[80px] border-mygrey4"
+        />
+        <span>m²</span>
+      </div>
+      }
+    </div>
+    <div
+      class="flex-1 bg-myyellow2 rounded-2xl w-full lg:w-1/3 flex items-center justify-center"
+    >
+      <img
+        src="assets/img/illustration/checklist.png"
+        class="w-[250px] lg:w-2/3 h-auto"
+        alt=""
+      />
+    </div>
+  </div>
+
+  <!-- Toggle Button -->
+  <div
+    (click)="openOption()"
+    class="px-5 group w-full flex items-center justify-center gap-2 mb-12 cursor-pointer"
+  >
+    <p class="text-xl font-bold">Voir le détail des options</p>
+    <button
+      class="flex items-center justify-between p-5 cursor-pointer peer"
+      type="button"
+      aria-expanded="false"
+    >
+      <img
+        [ngClass]="{
+          'h-[10px] transition-transform duration-300':true,
+          'rotate-180': isOpenOption 
+          }"
+        src="assets/img/icon/btn-down.png"
+        alt="Toggle"
+      />
+    </button>
+  </div>
+
+  <!-- Otions -->
+  <div class="flex flex-col m-auto w-full">
+    <div class="flex flex-col md:flex-row w-full cursor-pointer">
+      <div
+        (click)="activeOption('lux')"
+        id="lux"
+        [ngClass]="{
+          'bg-mygrey5 border border-white flex-1 whitespace-nowrap p-4 rounded-t-lg pb-4 text-center': true,
+          'rounded-bl-2xl': optionView.id != 'lux',
+          'bg-myyellow1': optionView.id === 'lux' && isOpenOption
+        }"
+      >
+        Belles Demeures & Lux
       </div>
       <div
-        class="flex-1 bg-myyellow2 rounded-2xl w-full lg:w-1/3 flex items-center justify-center"
+        (click)="activeOption('jinka')"
+        id="jinka"
+        [ngClass]="{
+          'bg-mygrey5 border border-white flex-1 p-4 rounded-t-lg pb-4 text-center': true,
+          'bg-myyellow1': optionView.id === 'jinka'
+        }"
       >
-        <img
-          src="assets/img/illustration/checklist.png"
-          class="w-[250px] lg:w-2/3 lg:w-full h-auto"
-          alt=""
-        />
+        Jinka
+      </div>
+      <div
+        (click)="activeOption('gens-de-confiance')"
+        id="gens-de-confiance"
+        [ngClass]="{
+          'bg-mygrey5 border border-white flex-1  p-4 rounded-t-lg pb-4 text-center': true,
+          'bg-myyellow1': optionView.id === 'gens-de-confiance'
+        }"
+      >
+        Gens de Confiance
+      </div>
+      <div
+        (click)="activeOption('green-acres')"
+        id="green-acres"
+        [ngClass]="{
+          'bg-mygrey5 border border-white flex-1  p-4 rounded-t-lg pb-4 text-center': true,
+          'bg-myyellow1': optionView.id === 'green-acres'
+        }"
+      >
+        Green-Acres
+      </div>
+      <div
+        id="reportage"
+        [ngClass]="{
+          'bg-mygrey5 border border-white  flex-1 p-4 rounded-t-lg pb-4 text-center': true,
+          'bg-myyellow1': optionView.id === 'reportage'
+        }"
+      >
+        Reportage
       </div>
     </div>
+  </div>
+
+  <app-option *ngIf="isOpenOption" [option]="optionView"></app-option>
+</div>

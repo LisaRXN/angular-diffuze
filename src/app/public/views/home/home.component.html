@@ -102,55 +102,55 @@
       <div class="flex-1 h-[400px]">
         <img
           src="assets/img/illustration/advertising.png"
-          class="h-full w-auto object-contain m-auto"
+          class="h-full w-auto max-h-[400px] object-contain m-auto"
           alt=""
         />
       </div>
     </div>
 
     <!-- Numbers -->
-    <div class="relative 2xl:w-3/4 m-auto grid lg:grid-cols-3 gap-8 mb-16">
-      <div class="bg-mygrey5 m-auto h-[300px] w-[300px] rounded-4xl flex flex-col items-center justify-center gap-8 p-10 z-10">
+    <div class="relative 2xl:w-3/4 m-auto grid md:grid-cols-3 gap-8 mb-16">
+      <div class="bg-mygrey5 m-auto h-[250px] w-[250px] lg:h-[300px] lg:w-[300px] rounded-4xl flex flex-col items-center justify-center gap-8 p-10 z-10">
         <div class="relative">
           <p
-            class="absolute -top-2 right-2 transform text-8xl font-paytone text-mygrey1"
+            class="absolute -top-2 right-2 transform text-6xl lg:text-8xl font-paytone text-mygrey1"
           >
             +20
           </p>
-          <p class="text-8xl font-paytone text-myyellow1">+20</p>
+          <p class="text-6xl lg:text-8xl font-paytone text-myyellow1">+20</p>
         </div>
 
         <div class="flex w-3/4 items-center justify-center gap-5">
-          <img src="assets/img/icon/volume.png" class="w-10 h-10" alt="" />
+          <img src="assets/img/icon/volume.png" class="w-8 h-8" alt="" />
           <p class="text-mygrey1 font-semibold lg:max-w-32 text-xl">
             Plateformes de diffusion
           </p>
         </div>
       </div>
-      <div class="bg-mygrey5 m-auto h-[300px] w-[300px] rounded-4xl flex flex-col items-center justify-center gap-8 p-10 z-10">
+      <div class="bg-myyellow2 m-auto h-[250px] w-[250px] lg:h-[300px] lg:w-[300px] rounded-4xl flex flex-col items-center justify-center gap-8 p-10 z-10">
         <div class="relative">
           <p
-            class="absolute -top-2 right-2 transform text-8xl font-paytone text-mygrey1"
+            class="absolute -top-2 right-2 transform text-6xl lg:text-8xl font-paytone text-mygrey1"
           >
             60
           </p>
-          <p class="text-8xl font-paytone text-myyellow1">60</p>
+          <p class="text-6xl lg:text-8xl font-paytone text-myyellow1">60</p>
         </div>
         <div class="flex w-3/4 items-center justify-center gap-5">
-          <img src="assets/img/icon/clock.png" class="w-10 h-10" alt="" />
+          <img src="assets/img/icon/clock.png" class="w-8 h-8" alt="" />
           <p class="text-mygrey1 font-semibold text-xl">
             Jours de visibilité
           </p>
         </div>
       </div>
-      <div class="bg-mygrey2 m-auto h-[300px] w-[300px] rounded-4xl flex flex-col items-center justify-center gap-8 p-10 z-10">
+      <div class="bg-mygrey2 m-auto h-[250px] w-[250px] lg:h-[300px] lg:w-[300px] rounded-4xl flex flex-col items-center justify-center gap-8 p-10 z-10">
         <div class="relative">
           <p
-            class="absolute -top-2 right-2 transform text-8xl font-paytone text-white"
+            class="absolute -top-2 right-2 transform text-6xl lg:text-8xl font-paytone text-white"
           >
             +75%
           </p>
-          <p class="text-8xl font-paytone text-mygrey1">+75%</p>
+          <p class="text-6xl lg:text-8xl font-paytone text-mygrey1">+75%</p>
         </div>
         <div class="flex w-3/4 items-center justify-center gap-5 lg:max-w-44">
           <img src="assets/img/icon/trending-yellow.png" class="w-10 h-10" alt="" />
@@ -415,7 +415,7 @@
     <div
       class="grid md:grid-cols-3 gap-8 xl:gap-10 2xl:gap-20 text-center font-open z-10"
     >
-      @for( property of properties; track property){
+      @for( property of properties$ | async; track property){
       <app-property-card
         (click)="navigateToProperty(property)"
         [property]="property"
@@ -443,14 +443,14 @@
 
   <!-- Ils nous font confiance -->
   <div
-    class="bg-mygray4 text-mygrey1 px-8 w-full mb-16 flex flex-col items-center justify-center"
+    class="bg-mygray4 text-mygrey1 w-full mb-16 flex flex-col items-center justify-center"
   >
     <h2 class="text-3xl font-bold font-raleway text-center mb-12 z-10">
       Ils nous font confiance
     </h2>
 
     <div
-      class="z-10 grid grid-cols-2 md:grid-cols-4 gap-10 lg:gap-20 place-items-center mb-36"
+      class="z-10 px-8 grid grid-cols-2 md:grid-cols-4 gap-10 lg:gap-20 place-items-center mb-36"
     >
       <img src="assets/img/logo/century21.png" class="z-10 w-[140px]" alt="" />
       <img src="assets/img/logo/laforet.png" class="z-10 w-[140px]" alt="" />
@@ -465,8 +465,8 @@
       <img src="assets/img/logo/alrok.png" class="z-10 w-[140px]" alt="" />
     </div>
 
-    <div class="lg:h-[500px] h-auto md:w-[110%] md:px-[5%] pb-10 lg:pb-10 bg-mygrey2 grid lg:grid-cols-[1fr_1.5fr]">
-      <div class="relative p-24 flex flex-col items-start justify-center gap-10">
+    <div class="lg:h-[500px] h-auto pb-10 lg:pb-10 bg-mygrey2 grid w-full lg:grid-cols-[1fr_1fr]">
+      <div class="relative p-20 lg:p-10 xl:p-24 flex flex-col items-start justify-center gap-10">
         <div class="absolute p-10 h-[100px] w-[100px] top-0 left-0 translate-y-[-50%] translate-x-[50%] rounded-full bg-myyellow1 flex items-center justify-center"><p class='mt-4 font-paytone text-8xl text-mygrey2'>“</p></div>
         <p class="font-raleway font-semibold text-4xl text-white w-[300px] leading-relaxed">L'avis de nos clients</p>
         <p class="text-white font-light leading-relaxed">Parce qu’une relation de confiance se construit avec vous, découvrez leurs avis</p>
@@ -496,19 +496,6 @@
       </div>
     </div>
     </div>
-
-          <!-- <div
-      class="absolute -bottom-1/2 left-1/2 w-[140%] h-[500px] bg-myyellow1 transform -translate-x-1/2 -rotate-3"
-    ></div> -->
-
-    <!-- <div
-      class="relative lg:px-8 grid md:grid-cols-3 gap-8 xl:gap-10 2xl:gap-20 text-center font-open mb-12"
-    >
-      <app-review-card class="z-10"></app-review-card>
-      <app-review-card class="z-10"></app-review-card>
-      <app-review-card class="z-10"></app-review-card>
-    </div> -->
-
 
   <div
     class="lg:w-4/5 p-5 md:p-10 rounded-2xl mb-12 font-open text-mygrey1"

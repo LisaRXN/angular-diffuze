@@ -1,23 +1,17 @@
-<div [ngClass]="{
-    'relative xl:w-4/5 p-5 rounded-2xl flex flex-col lg:flex-row items-stretch justify-between h-full m-auto shadow-md mb-16':true,
-    'bg-white' : left === false,
-    'bg-mygrey4' : left === true,
-}"
+<div class='bg-white relative xl:w-4/5 p-5 rounded-2xl flex flex-col lg:flex-row items-stretch justify-between h-full m-auto shadow-md mb-16'
 >
-
   <div [ngClass]="{
-    'absolute right-0 top-0 transform translate-y-[-50%] rounded-full h-[60px] w-[60px]  md:h-[85px] md:w-[85px] bg-myyellow1 flex items-center justify-center':true,
+    'absolute right-0 top-0 transform translate-y-[-50%] rounded-full h-[60px] w-[60px]  md:h-[85px] md:w-[85px] bg-mygrey2 flex items-center justify-center':true,
     'right-0 translate-x-[50%]': left === true,
     'left-0 translate-x-[-50%]': left === false,
     }">
-    <p class="font-paytone font-bold text-2xl md:text-5xl text-white">{{ number }}</p>
+    <p class="font-paytone font-bold text-2xl md:text-5xl text-myyellow1">{{ number }}</p>
   </div>
 
   <div
     [ngClass]="{
-        'flex-1 rounded-2xl py-5 w-full lg:w-1/3 flex items-center justify-center':true,
-        'bg-myyellow2' : left === false,
-        'order-2 bg-white': left === true
+        'flex-1 rounded-2xl py-5 w-full lg:w-1/3 flex items-center justify-center bg-gray-100':true,
+        'order-2': left === true
     }"
   > 
     <img [src]="image" class="w-[250px] lg:w-2/3 h-auto" alt="" />
@@ -26,13 +20,8 @@
     <p class="text-lg md:text-2xl font-bold font-raleway text-mygrey1 mb-6 text-center md:text-start">{{ title }}</p>
 
     @for(item of checks; track item){
-    <div class="flex items-center justify-start gap-2 md:gap-4 py-2">
-      <img
-        [src]="left ? 'assets/img/icon/check-circle.png' : 'assets/img/icon/check-circle-yellow.png'"
-        class="h-[20px] md:h-[25px] w-auto"
-        alt=""
-      />
-        <p>{{ item.check }}
+    <ul class="flex items-center justify-start gap-2 md:gap-4 p-2">
+        <li class="font-bold list-disc">{{ item.check }}
           <span *ngIf="item.information" class="relative group ml-1">
             <img src="assets/img/icon/information.png" class="h-[25px] w-[25px] transition inline"/>
             <span class="absolute bottom-full left-1/2 -translate-x-1/2 transform mb-2 hidden group-hover:block
@@ -40,28 +29,16 @@
             {{item.information}}
           </span> 
           </span>
-        </p>
-
-
-      
-    </div>
+        </li>
+    
+    </ul>
     } 
     
     @if(text !== ""){
-    <p class="mt-8">{{text}}</p>
+    <p class="mt-8 font-bold">{{text}}</p>
     }
 
     <div class="text-center mt-10 ">
-      <button
-        (click)="navigateTo(page)"
-        [ngClass]="{
-       ' text-mygrey1 rounded-full px-10 py-4 font-bold m-auto text-md transform transition hover:translate-y-[-2px] hover:shadow-sm hover:bg-myyellow2 hover:text-mygrey2':true,
-       'bg-myyellow1' : left === false,
-       'bg-white' : left === true,
-        }"
-      >
-        Déposer mon annonce
-      </button>
     </div>
   </div>
 </div>

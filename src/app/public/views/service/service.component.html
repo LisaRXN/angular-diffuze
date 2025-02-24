@@ -3,15 +3,31 @@
   <div
     class="relative h-[550px] w-full mb:10 md:mb-16 pb-20 text-mygrey1 px-8 flex flex-col items-center justify-center overflow-x-hidden"
   >
-    <h1 class="z-10 text-4xl font-paytone text-center mb-12">
-      Découvrez nos offres et options
+    <h1
+      *ngIf="isUnitService"
+      class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-12"
+    >
+      Paiement immédiat, unique et sans abonnement
     </h1>
-    <p class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center">
-      Plus de visibilité, plus de contacts,
-      <span class="font-semibold text-2xl">zéro engagement !</span> <br />
-      Créez vos annonces dès maintenant.
+    <h1
+      *ngIf="!isUnitService"
+      class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-12"
+    >
+      Paiement au succès, en co-mandat et sans abonnement
+    </h1>
+    <p
+      *ngIf="isUnitService"
+      class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
+    >
+      La solution simple, efficace et sans contrainte !
     </p>
-    <div class="p-2 z-10 bg-white rounded-full">
+    <p
+      *ngIf="!isUnitService"
+      class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
+    >
+      Une solution flexible, sans risque et 100 % axée sur votre succès !
+    </p>
+    <div class="p-2 z-10 bg-white rounded-full cursor-pointer">
       <div
         (click)="toggleService()"
         class="relative bg-mygrey5 w-full flex items-center justify-between rounded-full text-center"
@@ -41,6 +57,26 @@
     <div
       class="absolute -top-20 left-1/2 w-[140%] h-[550px] bg-myyellow2 transform -translate-x-1/2 -rotate-3"
     ></div>
+  </div>
+
+    <!-- Ce qui est inclus -->
+    <div
+    class="bg-mygray4 text-mygrey1 md:px-8 w-full mb-10 md:mb-16 flex flex-col items-center justify-center font-open"
+  >
+    <h2 class="text-3xl font-bold font-raleway text-center mb-16 md:mb-24">
+      Ce qui est inclus dans l'offre
+    </h2>
+
+    <p class="text-xl mb-24 md:w-3/4 text-center">
+      Un préstataire unique pour prendre en charge la diffusion de votre annonce
+    </p>
+
+    <!-- Service Cards -->
+    <div class="grid md:grid-cols-3 sm:px-12 px-5 gap-14">
+      @for(service of currentServices; track service){
+      <app-service-card [service]="service"></app-service-card>
+      }
+    </div>
   </div>
 
   <!-- Comprendre le co-mandat -->
@@ -156,168 +192,126 @@
     </div>
   </div>
 
-  <!-- Ce qui est inclus -->
+
+
+  <!-- Simulator -->
   <div
-    class="bg-mygray4 text-mygrey1 md:px-8 w-full mb:10 md:mb-16 flex flex-col items-center justify-center font-open"
+    class="py-16 px-8 md:px-14 bg-mygray4 text-mygrey1 w-full flex flex-col items-center justify-center"
   >
-    <h2 class="text-3xl font-bold font-raleway text-center mb-16 md:mb-24">
-      Ce qui est inclus
+    <h2 class="text-3xl font-bold font-raleway text-center mb-10 md:mb-24">
+      Personnalisez votre offre
     </h2>
-    <!-- Service Cards -->
-    <div
-      class="grid md:grid-cols-2 xl:grid-cols-4 sm:px-12 px-5 gap-20 md:gap-14 xl:gap-8 text-center mb-10 md:mb-16"
-    >
-      @for(service of currentServices; track service){
-      <app-service-card [service]="service"></app-service-card>
-      }
-    </div>
+    <app-option-simulator
+      [isUnitService]="isUnitService"
+    ></app-option-simulator>
+
+    <app-button text="Déposer une annonce"></app-button>
 
   </div>
 
-    <!-- Comment ça marche ? -->
-    <div
-      class="py-16 px-8 md:px-14 bg-mygray4 text-mygrey1 w-full flex flex-col items-center justify-center"
-    >
-      <h2 class="text-3xl font-bold font-raleway text-center mb-12">
-        Comment ça marche ?
-      </h2>
-      <p class="text-xl mb-12 md:w-3/4 text-center">
-        Professionnels de l'immobilier, optimisez et<span
-          class="text-2xl font-bold"
-        >
-          réduisez vos coûts </span
-        >de diffusion !
-      </p>
-
-      <app-how-card
-        number="1"
-        title="Déposez vos annonces"
-        [checks]="[
-          {
-            check:
-              'J\'enregistre les caractéristiques de mon annonce via mon espace DiffuZe ou mon propre CRM',
-            information:
-              'Compatible avec tous les CRM (HubSpot, Salesforce, Zoho... )'
-          },
-          { check: 'Je télécharge mes photos' },
-          { check: 'Je procède au paiement' }
-        ]"
-        text="Ensuite, un conseiller prendra contact avec vous dans les 24 heures maximum pour vérifier les informations communiquées avant la diffusion de votre annonce."
-        information="Compatibles avec tous les CRM (HubSpot, Salesforce, Zoho... )"
-        image="assets/img/illustration/completed.png"
-      ></app-how-card>
-
-      <!-- <app-how-card
-    number="2"
-    title="Gestion et optimisation de vos annonces"
-    [checks]="['Un prestataire unique qui diffuse sur l'ensemble des portails', 'Pilotage depuis votre espace DiffuZe ou votre CRM', 'Jusqu'à 10 photos incluses','Modification illimitée de vos annonces','Boost hebdomadaire','Suppression ou renouvellement possible à tout moment']"
-    image="assets/img/illustration/chart.png"
-    [left]="true"
+  <!-- Comment ça marche ? -->
+  <div
+    class="py-16 px-8 md:px-14 bg-mygray4 text-mygrey1 w-full flex flex-col items-center justify-center"
+  >
+    <h2 class="text-3xl font-bold font-raleway text-center mb-24">
+      Comment ça marche ?
+    </h2>
+    <app-how-card
+      number="1"
+      title="Déposez vos annonces"
+      [checks]="[
+        {
+          check:
+            'Je me connecte à DiffuZe ou directement à mon logiciel métier',
+          information:
+            'Compatible avec tous les CRM (HubSpot, Salesforce, Zoho... )'
+        },
+        {
+          check:
+            'J’enregistre les caractéristiques de mon annonce (vente ou location)'
+        },
+        { check: 'Je télécharge mes photos' },
+        { check: 'Je choisis mes options et procède au paiement' }
+      ]"
+      information="Compatibles avec tous les CRM (HubSpot, Salesforce, Zoho... )"
+      image="assets/img/illustration/completed.png"
     ></app-how-card>
 
     <app-how-card
-    number="3"
-    title="Assistance technique et juridique"
-    [checks]="['Un interlocuteur dédié disponible 6j/7 pour répondre à toutes vos questions techniques, légales...']"
-    image="assets/img/illustration/support.png"
-    ></app-how-card> -->
+      number="2"
+      [left]="true"
+      title="Gestion et optimisation de vos annnonces "
+      [checks]="[
+        {
+          check: 'Un prestataire unique qui diffuse sur l’ensemble des portails'
+        },
+        {
+          check:
+            'Modification illimitée de vos annonces  depuis votre espace DiffuZe ou votre CRM',
+          information:
+            'Compatible avec tous les CRM (HubSpot, Salesforce, Zoho... )'
+        },
+        { check: 'Jusqu’à 10 photos incluses et un lien vidéo / visite 3D' },
+        { check: 'Boost hebdomadaire' },
+        { check: 'Pause, suppression ou renouvellement possible à tout moment' }
+      ]"
+      information="Compatibles avec tous les CRM (HubSpot, Salesforce, Zoho... )"
+      image="assets/img/illustration/chart.png"
+    ></app-how-card>
 
-    <!-- Simulator -->
-    <app-option-simulator [isUnitService]="isUnitService"></app-option-simulator>
+    <app-how-card
+      number="3"
+      title="Déposez vos annonces"
+      text="Un interlocuteur dédié disponible 6j/7 pour répondre à toutes vos questions techniques, légales..."
+      image="assets/img/illustration/support.png"
+    ></app-how-card>
 
-    </div>
+    <app-button text="Déposer une annonce"></app-button>
+  </div>
 
-    <!-- Le détail des options -->
-    <div
-      class="px-4 md:px-8 bg-mygray4 text-mygrey1 mb-10 md:mb-16 flex flex-col items-center justify-center"
-    >
-      <h2 class="text-3xl font-bold font-raleway text-center mb-10 md:mb-16">
-        Le détail des options
-      </h2>
-
-      <div class="lg:w-4/5 2xl:w-2/3 flex flex-col m-auto">
-        <div class="flex flex-col md:flex-row w-full cursor-pointer">
-          <div
-            (click)="activeOption('lux')"
-            id="lux"
-            [ngClass]="{
-              'bg-mygrey5 border border-white lg:min-w-[200px] p-4 rounded-t-lg -mb-2 pb-4 text-center': true,
-              'bg-myyellow1': optionView.id === 'lux'
-            }"
-          >
-            Belles Demeures & Lux
-          </div>
-          <div
-            (click)="activeOption('jinka')"
-            id="jinka"
-            [ngClass]="{
-              'bg-mygrey5 border border-white lg:min-w-[200px] p-4 rounded-t-lg -mb-2 pb-4 text-center': true,
-              'bg-myyellow1': optionView.id === 'jinka'
-            }"
-          >
-            Jinka
-          </div>
-          <div
-            (click)="activeOption('gens-de-confiance')"
-            id="gens-de-confiance"
-            [ngClass]="{
-              'bg-mygrey5 border border-white lg:min-w-[200px] p-4 rounded-t-lg -mb-2 pb-4 text-center': true,
-              'bg-myyellow1': optionView.id === 'gens-de-confiance'
-            }"
-          >
-            Gens de Confiance
-          </div>
-          <div
-            (click)="activeOption('green-acres')"
-            id="green-acres"
-            [ngClass]="{
-              'bg-mygrey5 border border-white lg:min-w-[200px] p-4 rounded-t-lg -mb-2 pb-4 text-center': true,
-              'bg-myyellow1': optionView.id === 'green-acres'
-            }"
-          >
-            Green-Acres
-          </div>
-        </div>
-
-        <app-option [option]="optionView"></app-option>
-      </div>
-    </div>
-  <!-- </div> -->
-
+  <hr class="w-3/4 m-auto mb-12" />
 
   <!-- FAQ -->
-  <div class="w-full px-4 md:px-8 lg:w-4/5 text-mygrey1 mb-24 flex flex-col items-center justify-center font-open">
+  <div
+    class="w-full px-4 md:px-8 lg:w-4/5 text-mygrey1 mb-24 flex flex-col items-center justify-center font-open"
+  >
     <h2 class="text-3xl font-bold font-raleway text-center mb-10 md:mb-16">
       Questions fréquentes
     </h2>
     <p class="text-xl leading-relaxed mb-12 text-justify">
       Vous ne trouvez pas ce que vous cherchez ?
     </p>
-    <app-button class="mb-10" text="Prendre rendez-vous"></app-button>
+    <app-button
+      class="mb-10"
+      text="Prendre rendez-vous"
+      backgroundColor="mygrey2"
+      color="white"
+    ></app-button>
 
     <div class="w-full space-y-4">
       @for(question of questions; track question.id) {
-        <div class="group rounded-2xl hover:bg-gray-200 transition-colors">
-          <button 
-            class="flex items-center justify-between w-full p-5 cursor-pointer peer"
-            type="button"
-            aria-expanded="false">
-            <p class="font-bold text-lg">{{question.text}}</p>
-            <img
-              class="h-[10px] transition-transform duration-300 group-hover:rotate-180"
-              src="assets/img/icon/btn-down.png"
-              alt="Toggle"
-            />
-          </button>
-          <div 
-            class="grid grid-rows-[0fr] transition-all duration-300 group-hover:grid-rows-[1fr]">
-            <div class="overflow-hidden">
-              <p class="p-5">{{question.response}}</p>
-            </div>
+      <div class="group rounded-2xl hover:bg-gray-200 transition-colors">
+        <button
+          class="flex items-center justify-between w-full p-5 cursor-pointer peer"
+          type="button"
+          aria-expanded="false"
+        >
+          <p class="font-bold text-lg">{{ question.text }}</p>
+          <img
+            class="h-[10px] transition-transform duration-300 group-hover:rotate-180"
+            src="assets/img/icon/btn-down.png"
+            alt="Toggle"
+          />
+        </button>
+        <div
+          class="grid grid-rows-[0fr] transition-all duration-300 group-hover:grid-rows-[1fr]"
+        >
+          <div class="overflow-hidden">
+            <p class="p-5">{{ question.response }}</p>
           </div>
         </div>
+      </div>
       }
     </div>
   </div>
-
 </div>

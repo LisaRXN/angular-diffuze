@@ -8,20 +8,17 @@ import { ReviewCardComponent } from "../../shared/components/review-card/review-
 import { Router } from '@angular/router';
 import { PropertyGateway } from '../../../core/ports/property.gateway';
 import { Property } from '../../../core/models/property.model';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-home',
-  imports: [HomeCardComponent, ButtonComponent, HowCardComponent, PropertyCardComponent, ReviewCardComponent],
+  imports: [CommonModule, ButtonComponent, PropertyCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  router = inject(Router)
-  propertyGateway = inject(PropertyGateway)
-  properties: Property[]= []
-
-
   constructor(private meta: Meta, private title: Title) {
     this.title.setTitle('Accueil - FrontPro');
     this.meta.addTags([
@@ -32,10 +29,11 @@ export class HomeComponent {
         content: 'Découvrez nos services professionnels',
       },
     ]);
-
-    this.propertyGateway.fetchProperties().subscribe((properties) => {this.properties = properties})
   }
 
+  router = inject(Router)
+  propertyGateway = inject(PropertyGateway)
+  properties$: Observable<Property[]> = this.propertyGateway.fetchProperties()
 
   navigateToProperty(property:Property){
     this.router.navigate(['property', property.id])

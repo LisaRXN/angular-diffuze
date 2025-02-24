@@ -1,46 +1,38 @@
 [
-    {
-      "id": "1",
-      "image": "assets/img/icon/megaphone-yellow.png",
-      "backGroundColor": "mygrey2",
-      "textColor": "white",
-      "text" : [
-        "Diffusion de votre annonce sur plus de 20 plateformes de référence (SeLoger, Logic-immo, Le Figaro immo...)",
-        "Boost hebdomadaire pour maximiser la visibilité sur les portails"
-      ]
-    },
-    {
-      "id": "2",
-      "image": "assets/img/icon/calendar.png",
-      "backGroundColor": "myyellow1",
-      "textColor": "mygrey1",
-      "text" : [
-        "Diffusion illimitée",
-        "Pas d'abonnement, pas d'engagement.",
-        "Suppression ou renouvellement  à tout moment",
-        "Un interlocuteur dédié 6j/7 pour vous accompagner sur les aspects techniques et juridiques."
-      ]
-        },
-    {
-      "id": "3",
-      "image": "assets/img/icon/house.png",
-      "backGroundColor": "myyellow2",
-      "textColor": "mygrey1",
-      "text" : [
-        "Une annonce valable pour vente et viage",
-        "10 photos incluses et 1 lien vidéo / visite 3D",
-        "Modification illimitée et gestion simplifiée depuis votre espace DiffuZe ou votre propre CRM"
-      ]
-        },
-    {
-      "id": "4",
-      "image": "assets/img/icon/credit-card.png",
-      "backGroundColor": "white",
-      "textColor": "mygrey1",
-      "text" : [
-        "Dépôt gratuit de l’annonce",
-        "Paiement au succès, si la vente se fait via un site partenaire.",
-        "Paiement basé sur un partage de commission, selon le barème dégressif du co-mandat"
-      ]        
-    }
+  {
+    "id": "1",
+    "image": "assets/img/icon/megaphone-yellow.png",
+    "backGroundColor": "mygrey2",
+    "textColor": "white",
+    "text" : {"text1": "Sur plus de", "number":"20", "text2":"plateformes de référence"},
+    "description" : [
+    {"text":"Diffusion de vos annonces de vente et viager."}, 
+    {"text":"Que ce soit un appartement, une maison, un local commercial, un bureau, un immeuble et bien d’autres.."}      
+  ]
+  },
+  {
+    "id": "2",
+    "image": "assets/img/icon/calendar_60.png",
+    "backGroundColor": "myyellow1",
+    "textColor": "mygrey1",
+    "text" :  
+    {"text1": "Durée", "number":"illimité", "text2":"diffusion de l’annonce jusqu’à la vente"}
+    ,
+    "description" : [
+    {"text":"Mise en pause ou suppression  à tout moment."},
+    {"text":"Boost hebdomadaire pour maximiser la visibilité sur les portails"}
+  ]
+  },
+  {
+    "id": "3",
+    "image": "assets/img/icon/credit-card.png",
+    "backGroundColor": "myyellow2",
+    "textColor": "mygrey1",
+    "text" : 
+      {"text1": "Dépôt de l’annonce", "number":"0 €", "text2":"sans abonnement, sans engagement !"}
+    ,
+    "description" : [
+    {"text":"Paiement au succès, si la vente se fait via un site partenaire."},    
+    {"text": "Paiement basé sur un partage de commission, selon le barème dégressif du co-mandat"}    ]
+  }
 ]

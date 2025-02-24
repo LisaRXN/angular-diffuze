@@ -7,8 +7,9 @@ interface Service {
   image:string;
   backGroundColor:string;
   textColor:string;
-  text:string[];
-  list?: { img: string; text: string }
+  text:{ text1: string; number: string, text2:string };
+  klarna?:string;
+  description:{text:string, img?:string}[];
 }
 
 @Component({
