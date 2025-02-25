@@ -16,7 +16,7 @@
     "backGroundColor": "myyellow1",
     "textColor": "mygrey1",
     "text" :  
-    {"text1": "Durée", "number":"illimité", "text2":"diffusion de l’annonce jusqu’à la vente"}
+    {"text1": "Durée", "number":"illimité", "text2":"diffusion de l’annonce jusqu’à la transaction"}
     ,
     "description" : [
     {"text":"Mise en pause ou suppression  à tout moment."},

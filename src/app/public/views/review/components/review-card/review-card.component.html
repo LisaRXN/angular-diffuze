@@ -1,0 +1,13 @@
+<div class="h-[400px] w-[300px] flex flex-col gap-10">
+  <div class="">
+    <img [src]="review.image" class="max-w-[150px] max-h-[60px]" alt="" />
+  </div>
+  <p class="text-justify leading-relaxed">{{review.text}}</p>
+  <div class="flex items-center justify-between">
+    <div class="">
+      <p class="text-sm font-bold">{{review.agency}}</p>
+      <p class="text-sm font-light text-mygrey3">{{review.date}}</p>
+    </div>
+    <img class="w-[120px]" src="assets/img/icon/etoiles.png" alt="" />
+  </div>
+</div>

@@ -13,3 +13,5 @@
 // see all https://fontsource.org/
 // then add @import '@fontsource/roboto/300.css';
 // @import '@fontsource/roboto/400.css';
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

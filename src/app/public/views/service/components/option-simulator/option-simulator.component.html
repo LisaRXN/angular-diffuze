@@ -128,7 +128,7 @@
         id="lux"
         [ngClass]="{
           'bg-mygrey5 border border-white flex-1 whitespace-nowrap p-4 rounded-t-lg pb-4 text-center': true,
-          'rounded-bl-2xl': optionView.id != 'lux',
+          'rounded-bl-2xl': !isOpenOption,
           'bg-myyellow1': optionView.id === 'lux' && isOpenOption
         }"
       >
@@ -168,6 +168,7 @@
         id="reportage"
         [ngClass]="{
           'bg-mygrey5 border border-white  flex-1 p-4 rounded-t-lg pb-4 text-center': true,
+          'rounded-br-2xl': !isOpenOption,
           'bg-myyellow1': optionView.id === 'reportage'
         }"
       >

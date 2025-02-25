@@ -1,7 +1,7 @@
 <div class="min-h-screen bg-gray-100 flex flex-col items-center font-open">
   <!-- Hero -->
   <div
-    class="relative h-[550px] w-full mb:10 md:mb-16 pb-20 text-mygrey1 px-8 flex flex-col items-center justify-center overflow-x-hidden"
+    class="relative h-[550px] w-full mb:10 pb-16 text-mygrey1 px-8 flex flex-col items-center justify-center overflow-x-hidden"
   >
     <h1
       *ngIf="isUnitService"
@@ -59,11 +59,11 @@
     ></div>
   </div>
 
-    <!-- Ce qui est inclus -->
-    <div
-    class="bg-mygray4 text-mygrey1 md:px-8 w-full mb-10 md:mb-16 flex flex-col items-center justify-center font-open"
+  <!-- Ce qui est inclus -->
+  <div
+    class="bg-mygray4 text-mygrey1 md:px-8 w-full mb-10 md:mb-24 flex flex-col items-center justify-center font-open"
   >
-    <h2 class="text-3xl font-bold font-raleway text-center mb-16 md:mb-24">
+    <h2 class="text-3xl font-bold font-raleway text-center mb-16">
       Ce qui est inclus dans l'offre
     </h2>
 
@@ -89,7 +89,7 @@
     </h2>
 
     <div
-      class="xl:w-4/5 2xl:w-2/3 grid md:grid-cols-[1fr_4fr] gap-x-6 md:gap-y-4 bg-white m-auto p-5 rounded-2xl mb-10 md:mb-16"
+      class="xl:w-4/5 2xl:w-2/3 grid md:grid-cols-[1fr_4fr] gap-x-6 md:gap-y-4 bg-white m-auto p-5 rounded-2xl"
     >
       <div class="md:order-2 p-5">
         <p class="font-raleway font-bold text-xl py-5">
@@ -192,26 +192,27 @@
     </div>
   </div>
 
-
-
   <!-- Simulator -->
   <div
-    class="py-16 px-8 md:px-14 bg-mygray4 text-mygrey1 w-full flex flex-col items-center justify-center"
+    class="mb-24 px-8 md:px-14 bg-mygray4 text-mygrey1 w-full flex flex-col items-center justify-center"
   >
-    <h2 class="text-3xl font-bold font-raleway text-center mb-10 md:mb-24">
+    <h2 class="text-3xl font-bold font-raleway text-center mb-10 md:mb-16">
       Personnalisez votre offre
     </h2>
     <app-option-simulator
       [isUnitService]="isUnitService"
     ></app-option-simulator>
 
-    <app-button text="Déposer une annonce"></app-button>
-
+    <a
+      routerLink=""
+      class="bg-myyellow1 text-mygrey1 rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-myyellow2 transition-all transition-300 cursor-pointer"
+      >Déposer une annonce</a
+    >
   </div>
 
   <!-- Comment ça marche ? -->
   <div
-    class="py-16 px-8 md:px-14 bg-mygray4 text-mygrey1 w-full flex flex-col items-center justify-center"
+    class="mb-24 px-8 md:px-14 bg-mygray4 text-mygrey1 w-full flex flex-col items-center justify-center"
   >
     <h2 class="text-3xl font-bold font-raleway text-center mb-24">
       Comment ça marche ?
@@ -266,10 +267,14 @@
       image="assets/img/illustration/support.png"
     ></app-how-card>
 
-    <app-button text="Déposer une annonce"></app-button>
+    <a
+      routerLink=""
+      class="bg-myyellow1 text-mygrey1 rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-myyellow2 transition-all transition-300 cursor-pointer"
+      >Déposer une annonce</a
+    >
   </div>
 
-  <hr class="w-3/4 m-auto mb-12" />
+  <hr class="w-3/4 m-auto mb-24" />
 
   <!-- FAQ -->
   <div
@@ -281,12 +286,11 @@
     <p class="text-xl leading-relaxed mb-12 text-justify">
       Vous ne trouvez pas ce que vous cherchez ?
     </p>
-    <app-button
-      class="mb-10"
-      text="Prendre rendez-vous"
-      backgroundColor="mygrey2"
-      color="white"
-    ></app-button>
+    <a
+      routerLink=""
+      class="mb-10 bg-mygrey2 text-white rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-mygrey3 transition-all transition-300 cursor-pointer"
+      >Prendre rendez-vous</a
+    >
 
     <div class="w-full space-y-4">
       @for(question of questions; track question.id) {

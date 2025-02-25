@@ -1,20 +1,19 @@
 import { Component, inject } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { HomeCardComponent } from '../../shared/components/home-card/home-card.component';
 import { ButtonComponent } from "../../shared/components/button/button.component";
-import { HowCardComponent } from "../../shared/components/how-card/how-card.component";
 import { PropertyCardComponent } from "../../shared/components/property-card/property-card.component";
-import { ReviewCardComponent } from "../../shared/components/review-card/review-card.component";
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { PropertyGateway } from '../../../core/ports/property.gateway';
 import { Property } from '../../../core/models/property.model';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { PartnersDialogComponent } from '../../shared/components/partners-dialog/partners-dialog.component';
 
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, ButtonComponent, PropertyCardComponent],
+  imports: [CommonModule, PropertyCardComponent, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -32,11 +31,20 @@ export class HomeComponent {
   }
 
   router = inject(Router)
+  private readonly dialog = inject(MatDialog)
   propertyGateway = inject(PropertyGateway)
-  properties$: Observable<Property[]> = this.propertyGateway.fetchProperties()
+  properties$: Observable<Property[]> = this.propertyGateway.fetchLastProperties()
 
   navigateToProperty(property:Property){
     this.router.navigate(['property', property.id])
+  }
+
+  openDialog(){
+    const dialogRef = this.dialog.open(PartnersDialogComponent, {
+      width: '80%',      
+      height: '70%',     
+      maxWidth: '800px', 
+    })
   }
 
 }

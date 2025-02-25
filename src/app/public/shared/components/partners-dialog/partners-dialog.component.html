@@ -1,0 +1,28 @@
+
+    <h2 mat-dialog-title>Tous nos partenaires de diffusion</h2>
+    <button
+      mat-icon-button
+      [mat-dialog-close]="true"
+      style="position: absolute; right: 10px; top: 10px"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-dialog-content>
+      <div
+        class="p-10 m-auto grid grid-cols-2 md:grid-cols-4 gap-20 place-items-center"
+      >
+       @for( partner of partners; track partner){
+        <div class="flex flex-col gap-5 items-center justify-center">
+        <a [href]="partner.web" target="_blank">
+            <img
+            [src]="partner.image"
+            class="max-w-[120px] max-h-[80px] cursor-pointer"
+            [alt]="partner.alt"
+          />
+        </a>
+        <p class="font-bold text-sm text-mygrey2 text-center">{{partner.name}}</p>
+      </div>
+       }
+      </div>
+    </mat-dialog-content>
+
