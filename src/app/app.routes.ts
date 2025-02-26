@@ -47,6 +47,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'review',
+        loadComponent: () =>
+          import('./public/views/review/review.component').then(
+            (m) => m.ReviewComponent
+          ),
+      },
+      {
         path: 'blog',
         loadChildren: () =>
           import('./public/views/blog/blog.routes').then((m) => m.BLOG_ROUTES),

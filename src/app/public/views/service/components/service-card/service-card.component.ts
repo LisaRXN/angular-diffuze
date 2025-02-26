@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { PartnersDialogComponent } from '../../../../shared/components/partners-dialog/partners-dialog.component';
 
 
 interface Service {
@@ -7,8 +9,9 @@ interface Service {
   image:string;
   backGroundColor:string;
   textColor:string;
-  text:string[];
-  list?: { img: string; text: string }
+  text:{ text1: string; number: string, text2:string };
+  klarna?:string;
+  description:{text:string, img?:string}[];
 }
 
 @Component({
@@ -19,6 +22,15 @@ interface Service {
 })
 export class ServiceCardComponent {
 
+  private readonly dialog = inject(MatDialog)
   @Input() service!: Service;
+  
+    openDialog(){
+      const dialogRef = this.dialog.open(PartnersDialogComponent, {
+        width: '80%',      
+        height: '70%',     
+        maxWidth: '800px', 
+      })
+    }
 
 }

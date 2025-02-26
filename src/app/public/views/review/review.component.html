@@ -1,0 +1,131 @@
+<div class="min-h-screen bg-gray-50 flex flex-col items-center font-open">
+  <!-- Hero -->
+  <div
+    class="relative h-[550px] w-full mb-16 pb-16 text-white px-8 flex flex-col items-center justify-center overflow-x-hidden"
+  >
+    <h1 class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-12">
+      DiffuZe : adopté et approuvé par nos clients
+    </h1>
+    <p
+      class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
+    >
+      Votre satisfaction est notre meilleure réussite
+    </p>
+
+    <div
+      class="absolute -top-20 left-1/2 w-[140%] h-[550px] bg-mygrey2 transform -translate-x-1/2 -rotate-3"
+    ></div>
+  </div>
+
+  <!-- First Review -->
+  <div
+    class="px-8 lg:w-3/4 mb-16 md:mb-24 text-mygrey1 flex flex-col lg:flex-row items-center justify-center gap-10 xl:gap-20"
+  >
+    <div class="relative flex flex-col gap-10">
+      <p class="z-0 absolute -top-28 -left-6 md:-left-12 font-paytone text-[160px] text-myyellow1">“</p>
+      <p class="z-10 text-2xl italic leading-relaxed text-justify max-w-[500px]">
+        “Service client <span class="font-bold">réactif</span> et interface
+        <span class="font-bold">facile</span> à utiliser. La passerelle avec
+        notre logiciel est un plus. Je suis client depuis 1 ans maintenant.
+        <span class="font-bold">Je recommande vivement !</span>”
+      </p>
+      <div class="flex items-center justify-between">
+        <div class="">
+          <p class="text-sm font-bold">Agence Century 21</p>
+          <p class="text-sm font-light text-mygrey3">25 juin 2024</p>
+        </div>
+        <img class="w-[120px]" src="assets/img/icon/etoiles.png" alt="" />
+      </div>
+    </div>
+    <div class="p-10 flex items-center justify-center">
+      <img class="max-w-[200px]" src="assets/img/logo/century21.png" alt="" />
+    </div>
+  </div>
+
+  <hr class="w-3/4 m-auto mb-24" />
+
+  <!-- Ils nous font confiance -->
+  <div class="bg-mygray4 w-full mb-16 font-open text-mygrey1 px-8">
+    <h2 class="text-3xl font-bold font-raleway text-center mb-12">
+      Ils nous font confiance
+    </h2>
+
+    <div
+      class="w-3/4 m-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-y-10 gap-x-28 md:gap-x-20 place-items-center"
+    >
+      <img
+        src="assets/img/logo/century21.png"
+        class="w-[120px] md:w-[140px]"
+        alt=""
+      />
+      <img
+        src="assets/img/logo/laforet.png"
+        class="w-[120px] md:w-[140px]"
+        alt=""
+      />
+      <img
+        src="assets/img/logo/toc.png"
+        class="w-[120px] md:w-[140px]"
+        alt=""
+      />
+      <img
+        src="assets/img/logo/setImmo.png"
+        class="w-[120px] md:w-[140px]"
+        alt=""
+      />
+      <img
+        src="assets/img/logo/effiducia.png"
+        class="w-[120px] md:w-[140px]"
+        alt=""
+      />
+      <img
+        src="assets/img/logo/maitrecarre.png"
+        class="w-[120px] md:w-[140px]"
+        alt=""
+      />
+      <img
+        src="assets/img/logo/bercail.png"
+        class="w-[120px] md:w-[140px]"
+        alt=""
+      />
+      <img
+        src="assets/img/logo/monkey.png"
+        class="w-[120px] md:w-[140px]"
+        alt=""
+      />
+      <img
+        src="assets/img/logo/hotels.png"
+        class="w-[120px] md:w-[140px]"
+        alt=""
+      />
+      <img
+        src="assets/img/logo/ventoux.png"
+        class="w-[120px] md:w-[140px]"
+        alt=""
+      />
+      <img
+        src="assets/img/logo/alrok.png"
+        class="w-[120px] md:w-[140px]"
+        alt=""
+      />
+    </div>
+  </div>
+
+  <hr class="w-3/4 m-auto mb-16" />
+
+  <!-- Nos clients témoignent -->
+  <div
+    class="bg-mygray4 w-full mb-16 font-open text-mygrey1 px-8 flex flex-col items-center justify-center overflow-x-hidden"
+  >
+    <h2 class="text-3xl font-bold font-raleway text-center mb-24">
+      Nos clients témoignent
+    </h2>
+
+    <div class="grid md:grid-cols-2 2xl:grid-cols-3 gap-8 md:gap-y-16 md:gap-x-32 xl:gap-x-40">
+
+        @for(review of reviews; track review){
+            <app-review-card [review]="review"></app-review-card>
+        }
+    </div>
+  </div>
+</div>

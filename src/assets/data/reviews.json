@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "agency":"Century 21",
+        "text": "Super service d’annonce à l’unité qui nous permet de maitriser nos couts de diffusion tout en gardant une visibilité optimale sur les plus grands portails de diffusion. ",
+        "image":"assets/img/logo/century21.png",
+        "date":"25 juin 2024"
+    },
+    {
+        "id": 2,
+        "agency":"Laforêt",
+        "text": "Super service d’annonce à l’unité qui nous permet de maitriser nos couts de diffusion tout en gardant une visibilité optimale sur les plus grands portails de diffusion. ",
+        "image":"assets/img/logo/laforet.png",
+        "date":"25 juin 2024"
+    },
+    {
+        "id": 3,
+        "agency":"TOC Immobilier",
+        "text": "Super service d’annonce à l’unité qui nous permet de maitriser nos couts de diffusion tout en gardant une visibilité optimale sur les plus grands portails de diffusion. ",
+        "image":"assets/img/logo/toc.png",
+        "date":"25 juin 2024"
+    },
+    {
+        "id": 4,
+        "agency":"Maître Carré",
+        "text": "Super service d’annonce à l’unité qui nous permet de maitriser nos couts de diffusion tout en gardant une visibilité optimale sur les plus grands portails de diffusion. ",
+        "image":"assets/img/logo/maitrecarre.png",
+        "date":"25 juin 2024"
+    },
+    {
+        "id": 5,
+        "agency":"Effiducia Immobilier",
+        "text": "Super service d’annonce à l’unité qui nous permet de maitriser nos couts de diffusion tout en gardant une visibilité optimale sur les plus grands portails de diffusion. ",
+        "image":"assets/img/logo/century21.png",
+        "date":"25 juin 2024"
+    }
+]
