@@ -9,45 +9,53 @@ export class InMemoryPropertyGateway extends PropertyGateway {
           id: 1,
           image: "assets/img/photo/property.png",
           property_type: "Appartement",
-          city: "Paris",
-          street: "Rue Martel",
+          addressForm:{
+            city:"Paris",
+            street_adress: "Rue Martel",
+          } ,
           living_space: 40,
           room: 2,
           floor: 2,
-          selling_price: 465000
+          selling_price: "465000"
         },
         {
           id: 2,
           image: "assets/img/photo/property.png",
           property_type: "Appartement",
-          city: "Paris",
-          street: "Rue Martel",
+          addressForm:{
+            city:"Paris",
+            street_adress: "Rue Martel",
+          } ,
           living_space: 40,
           room: 2,
           floor: 2,
-          selling_price: 465000
+          selling_price: "465000"
         },
         {
           id: 3,
           image: "assets/img/photo/property.png",
           property_type: "Appartement",
-          city: "Paris",
-          street: "Rue Martel",
+          addressForm:{
+            city:"Paris",
+            street_adress: "Rue Martel",
+          } ,
           living_space: 40,
           room: 2,
           floor: 2,
-          selling_price: 465000
+          selling_price: "465000"
         },
         {
           id: 4,
           image: "assets/img/photo/property.png",
           property_type: "Appartement",
-          city: "Paris",
-          street: "Rue Martel",
+          addressForm:{
+            city:"Paris",
+            street_adress: "Rue Martel",
+          } ,
           living_space: 40,
           room: 2,
           floor: 2,
-          selling_price: 465000
+          selling_price: "465000"
         }
       ]
 

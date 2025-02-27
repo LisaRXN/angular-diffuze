@@ -27,6 +27,7 @@ import localeFr from '@angular/common/locales/fr';
 import { PropertyGateway } from './core/ports/property.gateway';
 import { InMemoryPropertyGateway } from './core/adapters/in-memory/in-memory-property.gateway';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { HttpPropertyGateway } from './core/adapters/http/http-property.gateway';
 
 
 registerLocaleData(localeFr, 'fr-FR');
@@ -55,6 +56,6 @@ export const appConfig: ApplicationConfig = {
         keys: [],
       })
     ),
-    {provide: PropertyGateway, useFactory: () => new InMemoryPropertyGateway()}, provideAnimationsAsync(),
+    {provide: PropertyGateway, useFactory: () => new HttpPropertyGateway()}, provideAnimationsAsync(),
   ],
 };

@@ -12,12 +12,14 @@ import { Property } from '../../../../core/models/property.model';
 export class PropertyCardComponent {
 
   router = inject(Router)
-
   @Input() property!: Property
 
+  get selling_price_number(){
+    return this.property.selling_price ? parseFloat(this.property.selling_price.replace(/\s/g, '')) : 0;
+  }
 
   get surface_price(): number {
-    return this.property.living_space ? this.property.selling_price! / this.property.living_space : 0;
+    return this.property.living_space ? this.selling_price_number / this.property.living_space : 0;
   }
   
   navigateTo(){

@@ -1,0 +1,158 @@
+<div
+  class="min-h-screen bg-gray-50 flex flex-col items-center font-open text-mygrey1"
+>
+  <!-- Hero -->
+  <div
+    class="relative h-auto md:h-[380px] pt-32 w-full px-8 flex flex-col items-center justify-center"
+  >
+    <div
+      class="z-10 absolute left-5 top-14 md:left-14 flex items-center justify-center gap-2 border border-mygrey2 text-mygrey1 text-sm px-4 py-2 rounded-full"
+    >
+      <img src="assets/img/icon/arrow-black.png" class="w-5" alt="" />
+      <a [routerLink]="['/blog/type', articleType.id]" class="whitespace-nowrap"
+        >Retour aux articles</a
+      >
+    </div>
+    <div class="flex mb-12 items-center text-mygrey2 text-sm gap-2">
+      <p>
+        Publié le {{ article.creation_date | date : "longDate" : "" : "fr-FR" }}
+      </p>
+      <p>•</p>
+      <p>Par {{ article.author }}</p>
+    </div>
+    <h1
+      class="z-10 text-2xl md:text-3xl leading-relaxed font-bold font-raleway text-center max-w-[700px] mb-12"
+    >
+      {{ article.article_title }}
+    </h1>
+
+    <span class="bg-myyellow2 px-5 py-3 font-bold text-yellow-500 rounded-xl">{{
+      articleType.type
+    }}</span>
+  </div>
+
+  <div class="w-4/5 h-[400px] my-16">
+    <img
+      [src]="article.article_preview"
+      class="w-full m-auto h-full rounded-4xl object-cover"
+      alt=""
+    />
+  </div>
+
+  <!-- Article -->
+  <div
+    class="mb-24 px-8 text-mygrey1 w-full grid md:grid-cols-[1fr_4fr_1fr] space-y-10 md:space-x-12 justify-start"
+  >
+    <!-- sidebar left -->
+    <div class="text-[12px] flex flex-col gap-2">
+      <p class="font-light">Rédacteur</p>
+      <div class="flex items-center justify-start gap-3">
+        <div
+          class="h-10 w-10 p-1 flex-shrink-0 flex items-center justify-center rounded-full bg-myyellow1"
+        >
+          <img src="assets/img/icon/victor.png" class="object-contain" alt="" />
+        </div>
+        <div
+          class="font-light flex-col items-center justify-start text-mygrey2"
+        >
+          <p class="text-[11px] font-semibold">{{ article.author }}</p>
+        </div>
+      </div>
+      <hr class="text-mygrey5 w-3/4 justify-start" />
+      <div class="flex flex-col items-start gap-2">
+        <p class="font-light">Temps de lecture</p>
+        <div class="flex items-center gap-2">
+          <img class="h-5 w-5" src="assets/img/icon/clock.png" alt="" />
+          <p>{{ article.reading_time }} minutes</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Article Body -->
+    <div class="">
+      <h2 class="text-2xl font-semibold font-raleway mb-5">Introduction</h2>
+      <div
+        class="text-justify font-open mb-10"
+        [innerHTML]="article.article_description"
+      ></div>
+      <h2 class="text-2xl font-semibold font-raleway mb-5">Article</h2>
+      <div class="text-justify font-open" [innerHTML]="article.html_code"></div>
+    </div>
+
+    <!-- sidebar right -->
+    <div class="text-sm flex flex-col gap-2 mb-12 text-[12px]">
+      <p class="font-light">Autres catégories</p>
+      <a
+        [routerLink]="['/blog/type/', type.id]"
+        *ngFor="let type of otherTypes"
+        class="semibold"
+      >
+        {{ type.type }}</a
+      >
+      <hr class="text-mygrey5 w-3/4 justify-start" />
+      <p class="font-light">En lien</p>
+      <div class="flex flex-col items-start gap-2">
+        <a
+          [routerLink]="['']"
+          class="p-2 bg-gray-100 w-[150px] rounded-lg cursor-pointer"
+        >
+          <div class="flex items-center gap-2 mb-1">
+            <img class="h-5 w-5" src="assets/img/icon/outil.png" alt="" />
+            <p class="font-semibold">Outil : Rédaction</p>
+          </div>
+          <p class="font-light">
+            Rédaction automatique et gratuite de votre annonce 
+          </p>
+        </a>
+        <a
+          [routerLink]="['']"
+          class="p-2 bg-gray-100 w-[150px] rounded-lg cursor-pointer"
+        >
+          <div class="flex items-center gap-2 mb-1">
+            <img class="h-5 w-5" src="assets/img/icon/estimation.png" alt="" />
+            <p class="font-semibold">Outil : Estimation</p>
+          </div>
+          <p class="font-light">
+            Obtenez une estimation gratuite de votre bien
+          </p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <hr class="w-3/4 m-auto mb-16" />
+
+  <!-- Ces articles pourraient vous intéresser -->
+  <div class="lg:w-4/5 p-5 md:p-10 rounded-2xl font-open text-mygrey1">
+    <h2 class="text-2xl font-bold font-raleway text-center mb-24">
+      Ces articles pourraient vous intéresser
+    </h2>
+  </div>
+
+  <hr class="w-3/4 m-auto mb-16" />
+
+
+  <!-- Cesoin de plus d'information ? -->
+  <div class="lg:w-4/5 p-5 md:p-10 rounded-2xl mb-12 font-open text-mygrey1">
+    <h2 class="text-2xl font-bold font-raleway text-center mb-12 z-10">
+      Besoin de plus d'information ?
+    </h2>
+    <p class="text-xl leading-relaxed text-justify">
+      Besoin de conseils personnalisés ? Réservez un rendez-vous avec Victor
+      Plessis, expert en transaction immobilière : il répondra à toutes vos
+      questions !
+    </p>
+    <div class="grid md:grid-cols-2 place-items-center p-10 gap-8 lg:gap-0">
+      <a
+        href="https://app.lemcal.com/@diffuze/15min" target="_blank" rel='external'
+        class="ml-10 bg-myyellow1 text-mygrey1 rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-myyellow2 transition-all transition-300 cursor-pointer"
+        >Prendre rendez-vous
+      </a>
+      <img
+        src="assets/img/icon/victor.png"
+        class="w-[150px] object-contain m-auto"
+        alt=""
+      />
+    </div>
+  </div>
+</div>

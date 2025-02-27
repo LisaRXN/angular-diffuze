@@ -1,21 +1,15 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Component, Inject, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PrerenderService } from '../../../../core/services/prerender.service';
+import { combineLatest, fromEvent, map, Subscription, switchMap } from 'rxjs';
+import { ArticleCardComponent } from '../components/article-card/article-card.component';
 
 @Component({
   selector: 'app-blog-list',
   standalone: true,
-  imports: [CommonModule, RouterLink],
-  template: `
-    <div class="blog-list-container">
-      <h1>Blog Articles</h1>
-      <div *ngFor="let article of articles">
-        <h2>{{ article.title }}</h2>
-        <a [routerLink]="['/blog', article.id]">Lire la suite</a>
-      </div>
-    </div>
-  `,
+  imports: [CommonModule, RouterLink, ArticleCardComponent],
+  templateUrl: './blog-list.component.html',
   styles: [
     `
       .blog-list-container {
@@ -24,19 +18,34 @@ import { PrerenderService } from '../../../../core/services/prerender.service';
     `,
   ],
 })
-export class BlogListComponent {
+export class BlogListComponent implements OnInit {
   articles: any[] = [];
+  type: any = {};
 
-  constructor(private prerenderService: PrerenderService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private prerenderService: PrerenderService
+  ) {}
 
   ngOnInit() {
-    this.prerenderService.getArticles().subscribe(
-      (articles) => {
-        this.articles = articles;
-      },
-      (error) => {
-        console.error('Erreur lors de la récupération des articles:', error);
-      }
-    );
+    this.route.params
+      .pipe(
+        switchMap((params) => {
+          const id = +params['id'];
+          return combineLatest([
+            this.prerenderService.getArticlesByType(id),
+            this.prerenderService
+              .getArticleTypes()
+              .pipe(map((types) => types.filter((type) => type.id === id))),
+          ]);
+        })
+      )
+      .subscribe({
+        next: ([articles, type]) => {
+          this.articles = articles;
+          this.type = type[0];
+        },
+        error: (error) => console.error('Erreur:', error),
+      });
   }
 }
