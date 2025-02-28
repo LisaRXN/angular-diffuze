@@ -16,7 +16,7 @@ export const BLOG_ROUTES: Routes = [
       ),
   },
   {
-    path: ':id',
+    path: ':slug',
     loadComponent: () =>
       import('./blog-detail/blog-detail.component').then(
         (m) => m.BlogDetailComponent

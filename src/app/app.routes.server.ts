@@ -1,6 +1,7 @@
 import { PrerenderFallback, RenderMode, ServerRoute } from '@angular/ssr';
 import { inject } from '@angular/core';
 import { PrerenderService } from './core/services/prerender.service';
+import { ArticleGateway } from './core/ports/article.gateway';
 
 export const serverRoutes: ServerRoute[] = [
   {
@@ -12,12 +13,17 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Server, // SSR - Rendu côté serveur
   },
   {
-    path: 'blog/:id', // Articles de blog en SSG avec paramètres
+    path: 'blog/:url', // Articles de blog en SSG avec paramètres
     renderMode: RenderMode.Prerender, // SSG avec paramètres dynamiques
+    // async getPrerenderParams() {
+    //   const prerenderService = inject(PrerenderService);
+    //   const articleIds = await prerenderService.getArticleIds();
+    //   return articleIds.map((id) => ({ id }));
+    // },
     async getPrerenderParams() {
-      const prerenderService = inject(PrerenderService);
-      const articleIds = await prerenderService.getArticleIds();
-      return articleIds.map((id) => ({ id }));
+      const articleGateway = inject(ArticleGateway);
+      const articleIds = await articleGateway.getArticleUrls();
+      return articleIds.map((url) => ({ url }));
     },
     fallback: PrerenderFallback.Server, // Si l'article n'existe pas en SSG, utiliser SSR
   },

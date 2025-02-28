@@ -1,17 +1,21 @@
-<div class="min-h-screen bg-gray-50 flex flex-col items-center font-open text-mygrey1">
+<div
+  class="min-h-screen bg-gray-50 flex flex-col items-center font-open text-mygrey1"
+>
   <!-- Hero -->
   <div
-    class="relative h-[550px] w-full  text-white px-8 flex flex-col items-center justify-center overflow-x-hidden"
+    class="relative h-[550px] w-full text-white px-8 flex flex-col items-center justify-center overflow-x-hidden"
   >
     <div
-      class="z-10 absolute top-14 left-14 flex items-center justify-center gap-2 bg-myyellow1 text-mygrey1 text-sm px-4 py-2 rounded-full"
+      class="z-10 absolute top-14 left-14 flex items-center justify-center gap-2 bg-myyellow1 hover:bg-myyellow2 transition duration-300 text-mygrey1 text-sm px-4 py-2 rounded-full"
     >
       <img src="assets/img/icon/arrow-black.png" class="w-5" alt="" />
       <a [routerLink]="['/blog']" class="whitespace-nowrap"
         >Retour aux catégories</a
       >
     </div>
-    <h1 class="z-10 text-2xl md:text-5xl font-bold font-raleway text-center max-w-[600px] mb-12">
+    <h1
+      class="z-10 text-2xl md:text-5xl font-bold font-raleway text-center max-w-[600px] mb-12"
+    >
       {{ type.type }}
     </h1>
 
@@ -38,13 +42,25 @@
     ></div>
   </div>
 
-
-<!-- First article -->
-<div class="relative mb-24 w-3/4 max-w-[800px] h-[400px] lg:h-[450px] rounded-2xl">
-  <img [src]="articles[0].article_preview" class="absolute bottom-[175px] md:bottom-0 w-full h-auto md:h-full object-cover rounded-t-2xl md:rounded-2xl"/>
-  <div class="absolute bottom-0 w-full h-[175px] md:h-[130px] bg-white opacity-90 backdrop-blur-lg rounded-b-2xl"></div>
-  <div class=" px-8 absolute bottom-0 w-full h-[175px] md:h-[130px] flex flex-col gap-2 items-start justify-center rounded-2xl">
-    <a [routerLink]="['/blog', articles[0].id]" class="cursor-pointer font-bold text:lg md:text-xl text-mygrey1">{{articles[0].article_title}}</a>
+  <!-- First article -->
+  <div
+    class="relative mb-24 w-3/4 max-w-[800px] h-[400px] lg:h-[450px] rounded-2xl"
+  >
+    <img
+      [src]="articles[0].article_preview"
+      class="absolute bottom-[175px] md:bottom-0 w-full h-auto md:h-full object-cover rounded-t-2xl md:rounded-2xl"
+    />
+    <div
+      class="absolute bottom-0 w-full h-[175px] md:h-[130px] bg-white opacity-90 backdrop-blur-lg rounded-b-2xl"
+    ></div>
+    <div
+      class="px-8 absolute bottom-0 w-full h-[175px] md:h-[130px] flex flex-col gap-2 items-start justify-center rounded-2xl"
+    >
+      <a
+        [routerLink]="['/blog', articles[0].url]"
+        class="cursor-pointer font-bold text:lg md:text-xl text-mygrey1"
+        >{{ articles[0].article_title }}</a
+      >
       <div class="flex items-center gap-5 md:gap-10">
         <div class="flex items-center gap-3">
           <div
@@ -58,32 +74,23 @@
           </div>
           <p class="text-sm">Victor, expert en immobilier</p>
         </div>
-          <div
-            class="flex items-center text-mygrey2 text-sm justify-start gap-2"
-          >
-            <img src="assets/img/icon/calender.png" class="h-5" alt="">
-            <p>{{articles[0].created_date}}</p>
-            <p>•</p>
-            <p>{{articles[0].reading_time}} min</p>
-          </div>
+        <div class="flex items-center text-mygrey2 text-sm justify-start gap-2">
+          <img src="assets/img/icon/calender.png" class="h-5" alt="" />
+          <p>{{ articles[0].created_date }}</p>
+          <p>•</p>
+          <p>{{ articles[0].reading_time }} min</p>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Articles List -->
-<div
-  class="mb-24 m-auto max-w-[1000px] grid md:grid-cols-2 gap-10 lg:grid-cols-3 lg:gap-40 px-8"
->  
-  <app-article-card 
-  *ngFor="let article of articles | slice:1"
-  [article]="article"></app-article-card>
-</div>
-</div>
-
-<div class="blog-list-container">
-  <h1>{{ type.type }}</h1>
-  <div *ngFor="let article of articles">
-    <h2>{{ article.title }}</h2>
-    <a [routerLink]="['/blog', article.id]">Lire la suite</a>
+  <!-- Articles List -->
+  <div
+    class="mb-24 m-auto max-w-[1000px] grid md:grid-cols-2 gap-10 lg:grid-cols-3 lg:gap-40 px-8"
+  >
+    <app-article-card
+      *ngFor="let article of articles | slice : 1"
+      [article]="article"
+    ></app-article-card>
   </div>
 </div>

@@ -4,6 +4,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PrerenderService } from '../../../../core/services/prerender.service';
 import { Article } from '../../../../core/models/article.models';
 import { combineLatest, switchMap, tap } from 'rxjs';
+import { ArticleGateway } from '../../../../core/ports/article.gateway';
 
 @Component({
   selector: 'app-blog-detail',
@@ -14,28 +15,29 @@ import { combineLatest, switchMap, tap } from 'rxjs';
 export class BlogDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private prerenderService: PrerenderService
+    private articleGateway: ArticleGateway
   ) {}
 
   article!: Article;
   types: any[] = [];
-  articleType:any
-  otherTypes:any[] = []
+  articleType: any;
+  otherTypes: any[] = [];
 
   ngOnInit() {
     combineLatest([
-      this.prerenderService.getArticleTypes(),
+      this.articleGateway.getArticleTypes(),
       this.route.params.pipe(
-        switchMap(params => this.prerenderService.getArticleById(params['id']))
-      )
-    ]).subscribe(
-      ([types, article]) => {
-        this.types = types;
-        this.article = article;
-        this.articleType = types.find(type => type.id === article.type_article);
-        this.otherTypes = types.filter(type => type.id !== this.articleType?.id);
-      },
-    );
+        switchMap((params) =>
+          this.articleGateway.getArticleByUrl(params['slug'])
+        )
+      ),
+    ]).subscribe(([types, article]) => {
+      this.types = types;
+      this.article = article;
+      this.articleType = types.find((type) => type.id === article.type_article);
+      this.otherTypes = types.filter(
+        (type) => type.id !== this.articleType?.id
+      );
+    });
   }
-
 }

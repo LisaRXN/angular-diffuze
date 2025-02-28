@@ -16,11 +16,12 @@
     "backGroundColor": "myyellow1",
     "textColor": "mygrey1",
     "text" :  
-    {"text1": "Durée", "number":"illimité", "text2":"diffusion de l’annonce jusqu’à la transaction"}
+    {"text1": "Durée", "number":"illimité", "text2":"diffusion de votre annonce jusqu’à la vente"}
     ,
     "description" : [
     {"text":"Mise en pause ou suppression  à tout moment."},
-    {"text":"Boost hebdomadaire pour maximiser la visibilité sur les portails"}
+    {"text":"Modification illimitée de vos annonces."},
+    {"text":"Boost hebdomadaire pour maximiser la visibilité sur les plateformes."}
   ]
   },
   {
@@ -29,10 +30,10 @@
     "backGroundColor": "myyellow2",
     "textColor": "mygrey1",
     "text" : 
-      {"text1": "Dépôt de l’annonce", "number":"0 €", "text2":"sans abonnement, sans engagement !"}
+      {"text1": "Dépôt de votre annonce", "number":"0 €", "text2":"sans abonnement, sans engagement !"}
     ,
     "description" : [
     {"text":"Paiement au succès, si la vente se fait via un site partenaire."},    
-    {"text": "Paiement basé sur un partage de commission, selon le barème dégressif du co-mandat"}    ]
+    {"text": "Paiement basé sur un partage de commission, selon un barème dégressif."}    ]
   }
 ]

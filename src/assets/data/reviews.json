@@ -2,36 +2,43 @@
     {
         "id": 1,
         "agency":"Century 21",
-        "text": "Super service d’annonce à l’unité qui nous permet de maitriser nos couts de diffusion tout en gardant une visibilité optimale sur les plus grands portails de diffusion. ",
+        "text": "Un outil simple, efficace et surtout adapté à nos besoins. La flexibilité des offres et la diffusion sur les grands portails immobiliers en font une solution incontournable pour les petites agences.",
         "image":"assets/img/logo/century21.png",
-        "date":"25 juin 2024"
+        "date":"25 juin 2023"
     },
     {
         "id": 2,
         "agency":"Laforêt",
-        "text": "Super service d’annonce à l’unité qui nous permet de maitriser nos couts de diffusion tout en gardant une visibilité optimale sur les plus grands portails de diffusion. ",
+        "text": "Simple, rapide et efficace. Tout ce qu’on attend d’un bon service de diffusion d’annonces immobilières ! Je recommande sans hésitation.",
         "image":"assets/img/logo/laforet.png",
-        "date":"25 juin 2024"
+        "date":"5 avril 2023"
     },
     {
         "id": 3,
         "agency":"TOC Immobilier",
-        "text": "Super service d’annonce à l’unité qui nous permet de maitriser nos couts de diffusion tout en gardant une visibilité optimale sur les plus grands portails de diffusion. ",
+        "text": "Une solution parfaite pour les agences souhaitant optimiser leur budget tout en bénéficiant d’une visibilité sur les plus grands portails. Bravo pour cette initiative !",
         "image":"assets/img/logo/toc.png",
-        "date":"25 juin 2024"
+        "date":"28 mai 2024"
     },
     {
         "id": 4,
         "agency":"Maître Carré",
-        "text": "Super service d’annonce à l’unité qui nous permet de maitriser nos couts de diffusion tout en gardant une visibilité optimale sur les plus grands portails de diffusion. ",
+        "text": "Je suis client depuis plusieurs mois et entièrement satisfait. L'équipe est disponible et à l’écoute. Très beau concept qui nous permet de diffuser nos annonces à l’unité.",
         "image":"assets/img/logo/maitrecarre.png",
-        "date":"25 juin 2024"
+        "date":"10 aout 2024"
     },
     {
         "id": 5,
         "agency":"Effiducia Immobilier",
-        "text": "Super service d’annonce à l’unité qui nous permet de maitriser nos couts de diffusion tout en gardant une visibilité optimale sur les plus grands portails de diffusion. ",
-        "image":"assets/img/logo/century21.png",
-        "date":"25 juin 2024"
+        "text": "Super service d’annonce à l’unité qui nous permet de maitriser nos couts de diffusion tout en gardant une visibilité optimale sur les plus grands portails de diffusion.",
+        "image":"assets/img/logo/effiducia.png",
+        "date":"18 septembre 2024"
+    },
+    {
+        "id": 6,
+        "agency":"Alrok",
+        "text": "“Service client réactif et interface facile à utiliser. La passerelle avec notre logiciel est un plus. Je suis client depuis plus d'un ans maintenant. Je recommande vivement !”",
+        "image":"assets/img/logo/alrok.png",
+        "date":"14 novembre 2024"
     }
 ]

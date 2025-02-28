@@ -1,7 +1,7 @@
 <div (click)="navigateTo()" class="h-auto max-w-[400px] rounded-xl bg-white cursor-pointer m-auto mb-10 shadow-lg transform transition ease-in-out hover:translate-y-[-4px] hover:shadow-xl">
   <img [src]="property.media?.images?.[0]?.photo_path" class="rounded-t-xl" alt="">
   <div class="p-5 flex flex-col items-start gap-2 text-sm">
-      <p class="text-mygrey3 font-light">{{property.property_type}}</p>
+      <p class="text-mygrey3 font-light">{{property.property_type | titlecase}}</p>
       <p class="font-raleway font-extrabold">{{property.addressForm.city}}</p>
       <p class="">{{property.addressForm.street_adress}}</p>
       <div class="flex items-center justify-start gap-2 ">

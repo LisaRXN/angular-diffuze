@@ -10,6 +10,7 @@ export class PrerenderService {
   private articles = [
     {
       id: '1',
+      url:'annonces-immobilieres-sans-abonnement',
       article_title: 'Belles Demeures : déposer une annonce pour votre bien immobilier haut-de-gamme',
       type_article: 1,
       author:"Victor, expert en transaction immobilière",
@@ -23,6 +24,7 @@ export class PrerenderService {
     },
     {
       id: '2',
+      url:'annonces-immobilieres-sans-abonnement',
       article_title: 'Article 2',
       type_article: 1,
       author:"Victor, expert en transaction immobilière",   
@@ -36,6 +38,7 @@ export class PrerenderService {
     },
     {
       id: '3',
+      url:'annonces-immobilieres-sans-abonnement',
       article_title: 'Article 3',
       type_article: 2,
       author:"Victor, expert en transaction immobilière",
@@ -49,6 +52,7 @@ export class PrerenderService {
     },
     {
       id: '4',
+      url:'annonces-immobilieres-sans-abonnement',
       article_title: 'Article 4',
       type_article: 2,
       author:"Victor, expert en transaction immobilière",
@@ -62,6 +66,7 @@ export class PrerenderService {
     },
     {
       id: '5',
+      url:'annonces-immobilieres-sans-abonnement',
       article_title: 'Article 5',
       type_article: 3,
       author:"Victor, expert en transaction immobilière",
@@ -100,6 +105,10 @@ export class PrerenderService {
     return this.articles.map((article) => article.id);
   }
 
+  async getArticleUrls(): Promise<string[]> {
+    return this.articles.map((article) => article.url);
+  }
+
   // Méthode pour récupérer tous les articles
   getArticles(): Observable<any[]> {
     // En production, remplacer par un vrai appel API
@@ -122,16 +131,7 @@ export class PrerenderService {
   getArticlesByType(type_id: number): Observable<any[]> {
     const articlesFiltered = this.articles.filter( article => type_id === article.type_article )
     return from([articlesFiltered])
-   
-  //   const url = `http://data.barnabe-immo.fr/articles/pro/${category}`;
-  //   return this.http.get<any[]>(url).pipe(
-  //     catchError((error) => {
-  //       console.error('Erreur lors de la récupération des articles:', error);
-  //       return throwError(() => error);
-  //     })
-  //   );
-  // }
-  
+     
   }
 
 

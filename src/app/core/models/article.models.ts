@@ -1,6 +1,11 @@
+export interface Type {
+  id:number;
+  type:string;
+}
+
 export interface Article {
   id: number;
-  url?:string;
+  url:string;
   main_article?: number;
   article_title?:string;
   article_description?:string;

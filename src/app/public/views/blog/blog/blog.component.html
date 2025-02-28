@@ -42,7 +42,7 @@
       <a
         (click)="selectType(type.id)"
         *ngFor="let type of types"
-        class="m-2 inline-block px-5 py-2 whitespace-nowrap border border-mygrey3 rounded-full cursor-pointer hover:bg-myyellow1 hover:border-myyellow1"
+        class="m-2 inline-block px-5 py-2 whitespace-nowrap border border-mygrey3 rounded-full cursor-pointer hover:bg-myyellow1 hover:border-myyellow1 transition duration-300"
         >{{ type.type }}</a
       >
     </div>
@@ -52,8 +52,9 @@
   <div
     class="mb-24 px-8 bg-mygray4 text-mygrey1 w-full flex flex-col items-center gap-10 justify-center"
   >
+   
     <div
-      *ngFor="let type of selectedType"
+      *ngFor="let type of selectedType || [];"
       class="w-full md:w-4/5 max-w-[1000px] p-5 md:p-10 bg-white rounded-2xl"
     >
       <!-- Title -->
@@ -61,7 +62,7 @@
         class="flex flex-col md:flex-row items-center justify-between gap-5 mb-10"
       >
         <div class="pr-10">
-          <h2 class="font-bold text-2xl md:text-4xl leading-normal mb-2">
+          <h2 class="font-bold text-2xl md:text-4xl leading-normal mb-4">
             {{ type.type }}
           </h2>
           <p *ngIf="type.id === 1">
@@ -73,7 +74,7 @@
           <p *ngIf="type.id === 3">Les dernières actualités sur l'immobilier</p>
         </div>
         <div
-          class="flex items-center justify-center gap-2 bg-mygrey2 text-white text-sm px-4 py-2 rounded-full self-end"
+          class="flex items-center justify-center gap-2 bg-mygrey2 hover:bg-mygrey3 transition duration-300 text-white text-sm px-4 py-2 rounded-full self-end"
         >
           <a [routerLink]="['/blog/type', type.id]" class="whitespace-nowrap"
             >Tous les articles</a
@@ -87,10 +88,11 @@
       </div>
       <!--  Cards -->
       <div class="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-5">
-        @for(article of articlesByType[type.id]; track article){
+        @for(article of articles[type.id-1]; track article){
           <app-article-card [article]="article" bg="mygrey5"></app-article-card>
         }
       </div>
+
     </div>
 
   </div>

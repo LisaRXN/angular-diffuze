@@ -1,53 +1,56 @@
 [
+
     {
         "id":1,
-        "name":"Figaro Immo",
-        "image":"assets/img/logo-partners/lefigaro.png",
-        "web":"https://immobilier.lefigaro.fr/",
-        "alt":"Figaro Immo"
-    },
-    {
-        "id":2,
         "name":"Belles Demeures",
         "image":"assets/img/logo-partners/belles.png",
         "web":"https://www.bellesdemeures.com/",
         "alt":"Belles Demeures"
     },
     {
-        "id":3,
-        "name":"Logic Immo",
-        "image":"assets/img/logo-partners/logic.png",
-        "web":"https://www.logic-immo.com/",
-        "alt":"Logic Immo"
-    },
-    {
-        "id":4,
+        "id":2,
         "name":"Lux Résidence",
         "image":"assets/img/logo-partners/lux.png",
         "web":"https://www.lux-residence.com/en/sale",
         "alt":"Lux Résidence"
     },
     {
-        "id":5,
+        "id":3,
         "name":"Green Acres",
         "image":"assets/img/logo-partners/green.png",
         "web":"https://www.green-acres.fr/",
         "alt":"Green Acres"
     },
     {
-        "id":6,
-        "name":"Seloger",
-        "image":"assets/img/logo-partners/seloger.png",
-        "web":"https://www.seloger.com/",
-        "alt":"Seloger"
-    },
-    {
-        "id":7,
+        "id":4,
         "name":"Jinka",
         "image":"assets/img/logo-partners/jinka.png",
         "web":"https://www.jinka.fr/pro",
         "alt":"Jinka"
     },
+    {
+        "id":5,
+        "name":"Figaro Immo",
+        "image":"assets/img/logo-partners/lefigaro.png",
+        "web":"https://immobilier.lefigaro.fr/",
+        "alt":"Figaro Immo"
+    },
+
+    {
+        "id":6,
+        "name":"Logic Immo",
+        "image":"assets/img/logo-partners/logic.png",
+        "web":"https://www.logic-immo.com/",
+        "alt":"Logic Immo"
+    },
+    {
+        "id":7,
+        "name":"Seloger",
+        "image":"assets/img/logo-partners/seloger.png",
+        "web":"https://www.seloger.com/",
+        "alt":"Seloger"
+    },
+
     {
         "id":8,
         "name":"Gens de Confiance",

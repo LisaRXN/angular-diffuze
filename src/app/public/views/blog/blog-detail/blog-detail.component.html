@@ -6,7 +6,7 @@
     class="relative h-auto md:h-[380px] pt-32 w-full px-8 flex flex-col items-center justify-center"
   >
     <div
-      class="z-10 absolute left-5 top-14 md:left-14 flex items-center justify-center gap-2 border border-mygrey2 text-mygrey1 text-sm px-4 py-2 rounded-full"
+      class="z-10 absolute left-5 top-14 md:left-14 flex items-center justify-center gap-2 border border-mygrey2 hover:bg-mygrey4 transition duration-300 text-mygrey1 text-sm px-4 py-2 rounded-full"
     >
       <img src="assets/img/icon/arrow-black.png" class="w-5" alt="" />
       <a [routerLink]="['/blog/type', articleType.id]" class="whitespace-nowrap"
@@ -34,7 +34,7 @@
   <div class="w-4/5 h-[400px] my-16">
     <img
       [src]="article.article_preview"
-      class="w-full m-auto h-full rounded-4xl object-cover"
+      class="h-full w-auto m-auto rounded-4xl"
       alt=""
     />
   </div>
@@ -80,7 +80,7 @@
     </div>
 
     <!-- sidebar right -->
-    <div class="text-sm flex flex-col gap-2 mb-12 text-[12px]">
+    <div class="text-[12px] flex flex-col gap-2 mb-12">
       <p class="font-light">Autres catégories</p>
       <a
         [routerLink]="['/blog/type/', type.id]"
@@ -89,7 +89,10 @@
       >
         {{ type.type }}</a
       >
-      <hr class="text-mygrey5 w-3/4 justify-start" />
+
+      <!-- V2 -->
+
+      <!-- <hr class="text-mygrey5 w-3/4 justify-start" />
       <p class="font-light">En lien</p>
       <div class="flex flex-col items-start gap-2">
         <a
@@ -116,20 +119,27 @@
             Obtenez une estimation gratuite de votre bien
           </p>
         </a>
-      </div>
+      </div> -->
+
+  <!-- V2 -->
+
     </div>
   </div>
 
   <hr class="w-3/4 m-auto mb-16" />
 
+  <!-- V2 -->
+
   <!-- Ces articles pourraient vous intéresser -->
-  <div class="lg:w-4/5 p-5 md:p-10 rounded-2xl font-open text-mygrey1">
+  <!-- <div class="lg:w-4/5 p-5 md:p-10 rounded-2xl font-open text-mygrey1">
     <h2 class="text-2xl font-bold font-raleway text-center mb-24">
       Ces articles pourraient vous intéresser
     </h2>
   </div>
 
-  <hr class="w-3/4 m-auto mb-16" />
+  <hr class="w-3/4 m-auto mb-16" /> -->
+
+  <!-- V2 -->
 
 
   <!-- Cesoin de plus d'information ? -->

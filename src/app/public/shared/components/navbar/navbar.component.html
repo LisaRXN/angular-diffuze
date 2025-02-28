@@ -1,4 +1,6 @@
-<div class=" lg:fixed z-50 isset-0 navbar bg-white text-mygrey1 font-open py-3 w-full">
+<div
+  class="lg:fixed z-50 isset-0 navbar bg-white text-mygrey1 font-open py-3 w-full"
+>
   <div class="flex-none lg:hidden">
     <label
       for="my-drawer-3"
@@ -22,27 +24,63 @@
   </div>
 
   <div class="flex w-full items-center justify-between gap-2 px-2 mx-2">
-    <a routerLink="/" class="font-paytone text-4xl font-extrabold">DZ<span class="text-myyellow1">.</span></a>
- 
-    <div class="lg:order-2 flex items-center justify-center gap-2 md:gap-4 lg:gap-6">
-      <button (click)="navigateTo('')" class=" bg-myyellow1 text-mygrey1 rounded-full px-4 py-3 font-semibold text-sm hover:bg-myyellow2 transition-all transition-300">Déposer une annonce</button>
-      <a href="https://app.lemcal.com/@diffuze/15min" target="_blank" rel='external' class="hidden lg:block bg-mygrey2 text-white rounded-full px-4 py-3 font-semibold text-sm hover:bg-mygrey3 transition-all transition-300">Prendre rendez-vous</a>
-      <img (click)="navigateTo('auth/login')" src="assets/img/icon/phone.png" class="lg:hidden h-[25px] w-auto cursor-pointer" alt="">
-      <img (click)="navigateTo('auth/login')" src="assets/img/icon/user.png" class="h-[25px] w-auto cursor-pointer" alt="">
+    <a routerLink="/" class="font-paytone text-4xl font-extrabold"
+      >DZ<span class="text-myyellow1">.</span></a
+    >
+
+    <div
+      class="lg:order-2 flex items-center justify-center gap-2 md:gap-4 lg:gap-6"
+    >
+      <a
+        href="http://www.app.diffuze.fr"
+        target="_blank"
+        rel="external"
+        class="bg-myyellow1 text-center text-mygrey1 rounded-full px-4 py-3 font-semibold text-sm hover:bg-myyellow2 transition-all transition-300"
+        >Déposer une annonce</a
+      >
+      <a
+        href="https://app.lemcal.com/@diffuze/15min"
+        target="_blank"
+        rel="external"
+        class="hidden lg:block bg-mygrey2 text-white rounded-full px-4 py-3 font-semibold text-sm hover:bg-mygrey3 transition-all transition-300"
+        >Prendre rendez-vous</a
+      >
+      <a
+        href="https://app.lemcal.com/@diffuze/15min"
+        target="_blank"
+        rel="external"
+        ><img
+          src="assets/img/icon/phone.png"
+          class="lg:hidden h-[25px] w-auto cursor-pointer"
+          alt=""
+      /></a>
+      <a
+        href="http://www.app.diffuze.fr/register"
+        target="_blank"
+        rel="external"
+        ><img
+          src="assets/img/icon/user.png"
+          class="h-[25px] w-auto cursor-pointer"
+          alt=""
+      /></a>
     </div>
 
     <div class="hidden lg:flex flex-1 w-full items-center justify-between">
       <ul class="menu menu-horizontal font-semibold">
         <!-- Navbar menu content here -->
-        <li><a routerLink="/service" >Notre Offre</a></li>
-        <li><a routerLink="/review">Les Avis</a></li>
+        <li><a routerLink="/service">Notre Offre</a></li>
+        <li><a routerLink="/review">Nos Partenaires</a></li>
         <li><a routerLink="/blog">Le Blog</a></li>
-      </ul>  
+      </ul>
+
+      <!-- Coupon -->
+      <!-- <div class=" bg-gray-400 px-5 p-2 h-[60px] w-[180px] rounded-lg">
+        <div class="flex justify-between">
+          <p class="font-semibold text-white text-2xl">-50 %</p>
+          <p class="font-semibold text-myyellow1 text-2xl">DIF25</p>
+        </div>
+        <p class="text-[8px] whitespace-nowrap text-white">Sur votre première commande</p>
+      </div> -->
     </div>
-
   </div>
-
-
-
-
 </div>

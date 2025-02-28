@@ -4,6 +4,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PrerenderService } from '../../../../core/services/prerender.service';
 import { combineLatest, fromEvent, map, Subscription, switchMap } from 'rxjs';
 import { ArticleCardComponent } from '../components/article-card/article-card.component';
+import { ArticleGateway } from '../../../../core/ports/article.gateway';
 
 @Component({
   selector: 'app-blog-list',
@@ -24,7 +25,7 @@ export class BlogListComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private prerenderService: PrerenderService
+    private articleGateway: ArticleGateway
   ) {}
 
   ngOnInit() {
@@ -33,8 +34,8 @@ export class BlogListComponent implements OnInit {
         switchMap((params) => {
           const id = +params['id'];
           return combineLatest([
-            this.prerenderService.getArticlesByType(id),
-            this.prerenderService
+            this.articleGateway.getArticlesByType(id),
+            this.articleGateway
               .getArticleTypes()
               .pipe(map((types) => types.filter((type) => type.id === id))),
           ]);
