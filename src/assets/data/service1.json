@@ -4,7 +4,7 @@
       "image": "assets/img/icon/megaphone-yellow.png",
       "backGroundColor": "mygrey2",
       "textColor": "white",
-      "text" : {"text1": "Sur plus de", "number":"20", "text2":"plateformes de référence"},
+      "text" : {"text1": "Sur plus de", "number":"50", "text2":"plateformes de référence"},
       "description" : [
       {"text":"Diffusion de vos annonces de vente, location et viager."}, 
       {"text":"Que ce soit un appartement, une maison, un local commercial, un bureau, un immeuble et bien d’autres.."}      

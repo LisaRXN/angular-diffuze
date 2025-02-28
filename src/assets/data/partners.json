@@ -1,59 +1,59 @@
 [
     {
         "id":1,
-        "name":"Liveproperty",
-        "image":"assets/img/logo-partners/liveproperty.png",
-        "web":"https://liveproperty.fr/",
-        "alt":"Liveproperty"
+        "name":"Figaro Immo",
+        "image":"assets/img/logo-partners/lefigaro.png",
+        "web":"https://immobilier.lefigaro.fr/",
+        "alt":"Figaro Immo"
     },
     {
         "id":2,
-        "name":"Constructeur de maison",
-        "image":"assets/img/logo-partners/constructeur-de-maison.png",
-        "web":"https://www.constructeurdemaison.net/",
-        "alt":"Constructeur de maison"
+        "name":"Belles Demeures",
+        "image":"assets/img/logo-partners/belles.png",
+        "web":"https://www.bellesdemeures.com/",
+        "alt":"Belles Demeures"
     },
     {
         "id":3,
-        "name":"Entre particuliers et pros",
-        "image":"assets/img/logo-partners/entre-particuliers-et-pros.png",
-        "web":"https://www.entreparticuliersetpros.com/",
-        "alt":"Entre particuliers et pros"
+        "name":"Logic Immo",
+        "image":"assets/img/logo-partners/logic.png",
+        "web":"https://www.logic-immo.com/",
+        "alt":"Logic Immo"
     },
     {
         "id":4,
-        "name":"Inspectimmo.fr",
-        "image":"assets/img/logo-partners/inspect-immo.png",
-        "web":"https://www.inspectimmo.fr/",
-        "alt":"Inspectimmo.fr"
+        "name":"Lux Résidence",
+        "image":"assets/img/logo-partners/lux.png",
+        "web":"https://www.lux-residence.com/en/sale",
+        "alt":"Lux Résidence"
     },
     {
         "id":5,
-        "name":"Digitaleo",
-        "image":"assets/img/logo-partners/digitaleo.png",
-        "web":"https://app.digitaleo.com/",
-        "alt":"Digitaleo"
+        "name":"Green Acres",
+        "image":"assets/img/logo-partners/green.png",
+        "web":"https://www.green-acres.fr/",
+        "alt":"Green Acres"
     },
     {
         "id":6,
-        "name":"LodgeYou",
-        "image":"assets/img/logo-partners/lodgeyou.png",
-        "web":"https://www.lodgeyou.fr/",
-        "alt":"LodgeYou"
+        "name":"Seloger",
+        "image":"assets/img/logo-partners/seloger.png",
+        "web":"https://www.seloger.com/",
+        "alt":"Seloger"
     },
     {
         "id":7,
-        "name":"ImmoGratuit",
-        "image":"assets/img/logo-partners/immo-gratuit.png",
-        "web":"http://www.immo-gratuit.com/",
-        "alt":"ImmoGratuit"
+        "name":"Jinka",
+        "image":"assets/img/logo-partners/jinka.png",
+        "web":"https://www.jinka.fr/pro",
+        "alt":"Jinka"
     },
     {
         "id":8,
-        "name":"Evrovilla",
-        "image":"assets/img/logo-partners/evrovilla.png",
-        "web":"http://www.evrovilla.com/",
-        "alt":"Evrovilla"
+        "name":"Gens de Confiance",
+        "image":"assets/img/logo-partners/gens.png",
+        "web":"https://gensdeconfiance.com/fr",
+        "alt":"Gens de Confiance"
     },
     {
         "id":9,
@@ -196,6 +196,13 @@
         "alt":"Bienveo.fr"
     },
     {
+        "id":29,
+        "name":"Evrovilla",
+        "image":"assets/img/logo-partners/evrovilla.png",
+        "web":"http://www.evrovilla.com/",
+        "alt":"Evrovilla"
+    },
+    {
         "id":30,
         "name":"Wymmo.com",
         "image":"assets/img/logo-partners/wymmo.png",
@@ -302,5 +309,54 @@
         "image":"assets/img/logo-partners/vizzit.png",
         "web":"https://vizzit.com/",
         "alt":"Vizzit"
+    },
+    {
+        "id":45,
+        "name":"Liveproperty",
+        "image":"assets/img/logo-partners/liveproperty.png",
+        "web":"https://liveproperty.fr/",
+        "alt":"Liveproperty"
+    },
+    {
+        "id":46,
+        "name":"Constructeur de maison",
+        "image":"assets/img/logo-partners/constructeur-de-maison.png",
+        "web":"https://www.constructeurdemaison.net/",
+        "alt":"Constructeur de maison"
+    },
+    {
+        "id":47,
+        "name":"Entre particuliers et pros",
+        "image":"assets/img/logo-partners/entre-particuliers-et-pros.png",
+        "web":"https://www.entreparticuliersetpros.com/",
+        "alt":"Entre particuliers et pros"
+    },
+    {
+        "id":48,
+        "name":"Inspectimmo.fr",
+        "image":"assets/img/logo-partners/inspect-immo.png",
+        "web":"https://www.inspectimmo.fr/",
+        "alt":"Inspectimmo.fr"
+    },
+    {
+        "id":49,
+        "name":"Digitaleo",
+        "image":"assets/img/logo-partners/digitaleo.png",
+        "web":"https://app.digitaleo.com/",
+        "alt":"Digitaleo"
+    },
+    {
+        "id":50,
+        "name":"LodgeYou",
+        "image":"assets/img/logo-partners/lodgeyou.png",
+        "web":"https://www.lodgeyou.fr/",
+        "alt":"LodgeYou"
+    },
+    {
+        "id":51,
+        "name":"ImmoGratuit",
+        "image":"assets/img/logo-partners/immo-gratuit.png",
+        "web":"http://www.immo-gratuit.com/",
+        "alt":"ImmoGratuit"
     }
 ]

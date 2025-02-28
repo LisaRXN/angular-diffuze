@@ -1,0 +1,46 @@
+      <!--  Cards -->
+        <a
+          [routerLink]="['/blog', article.id]"
+          class="block"
+        >
+          <div
+            [ngClass]="{
+              'h-full w-[280px] md:w-[320px] cursor-pointer m-auto rounded-b-xl':true,
+              'bg-mygrey5' : bg === 'mygrey5',
+              'bg-white' : bg === 'white'
+              }"
+          >
+            <img
+              [src]="article.article_preview"
+              class="rounded-t-xl w-full"
+              alt=""
+            />
+            <div class="h-[180px] rounded-b-xl p-5 flex flex-col items-start justify-between gap-2">
+              <p class="font-raleway text-lg font-bold">
+                {{ article.article_title }}
+              </p>
+              <div class="flex items-center justify-start gap-3">
+                <div
+                  class="h-10 w-10 p-1 flex items-center justify-center rounded-full bg-myyellow1"
+                >
+                  <img
+                    src="assets/img/icon/victor.png"
+                    class="object-contain"
+                    alt=""
+                  />
+                </div>
+                <div class="font-light flex-col items-center justify-start">
+                  <p class="text-[10px]">{{article.author}}</p>
+                  <div
+                    class="flex items-center text-mygrey2 text-[10px] gap-2"
+                  >
+                    <p>{{ article.creation_date | date:'longDate':'':'fr-FR' }}
+                    </p>
+                    <p>•</p>
+                    <p>{{article.reading_time}} min</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>

@@ -30,7 +30,7 @@
         <p *ngIf="isUnitService" class="leading-8">
           Annonce en paiement immédiat et unique
         </p>
-        <p *ngIf="!isUnitService" class="leading-8">Annonce en co-mandat</p>
+        <p *ngIf="!isUnitService" class="leading-8">Annonce en paiement au succès (co-mandat)</p>
       </div>
       @for (option of diffusionOptions; track option.id) {
       <div class="flex items-center gap-4">

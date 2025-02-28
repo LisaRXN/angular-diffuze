@@ -27,13 +27,13 @@ export const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
+      // {
+      //   path: '',
+      //   pathMatch: 'full',
+      //   redirectTo: 'home',
+      // },
       {
         path: '',
-        pathMatch: 'full',
-        redirectTo: 'home',
-      },
-      {
-        path: 'home',
         loadComponent: () =>
           import('./public/views/home/home.component').then(
             (m) => m.HomeComponent

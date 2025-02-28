@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { ButtonComponent } from "../../shared/components/button/button.component";
 import { PropertyCardComponent } from "../../shared/components/property-card/property-card.component";
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { PropertyGateway } from '../../../core/ports/property.gateway';
 import { Property } from '../../../core/models/property.model';
 import { Observable } from 'rxjs';
@@ -17,7 +17,7 @@ import { PartnersDialogComponent } from '../../shared/components/partners-dialog
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   constructor(private meta: Meta, private title: Title) {
     this.title.setTitle('Accueil - FrontPro');
     this.meta.addTags([
@@ -30,10 +30,18 @@ export class HomeComponent {
     ]);
   }
 
+
   router = inject(Router)
   private readonly dialog = inject(MatDialog)
   propertyGateway = inject(PropertyGateway)
-  properties$: Observable<Property[]> = this.propertyGateway.fetchLastProperties()
+  properties$!: Observable<Property[]>
+
+  properties:Property[] = []
+
+
+  ngOnInit(){
+    this.propertyGateway.fetchLastProperties().subscribe(properties => this.properties = properties)
+  }
 
   navigateToProperty(property:Property){
     this.router.navigate(['property', property.id])

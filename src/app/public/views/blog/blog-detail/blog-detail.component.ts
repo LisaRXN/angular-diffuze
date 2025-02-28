@@ -1,41 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PrerenderService } from '../../../../core/services/prerender.service';
+import { Article } from '../../../../core/models/article.models';
+import { combineLatest, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-blog-detail',
   standalone: true,
-  imports: [CommonModule],
-  template: `
-    <div class="blog-detail-container">
-      <h1>Article de Blog</h1>
-      <p>{{ article.content }}</p>
-    </div>
-  `,
-  styles: [
-    `
-      .blog-detail-container {
-        padding: 2rem;
-      }
-    `,
-  ],
+  imports: [CommonModule, RouterLink],
+  templateUrl: './blog-detail.component.html',
 })
 export class BlogDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private prerenderService: PrerenderService
   ) {}
-  article: any;
+
+  article!: Article;
+  types: any[] = [];
+  articleType:any
+  otherTypes:any[] = []
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      const id = params['id'];
-      // Chargez les données de l'article avec l'ID
-      this.prerenderService.getArticleById(id).subscribe((article) => {
+    combineLatest([
+      this.prerenderService.getArticleTypes(),
+      this.route.params.pipe(
+        switchMap(params => this.prerenderService.getArticleById(params['id']))
+      )
+    ]).subscribe(
+      ([types, article]) => {
+        this.types = types;
         this.article = article;
-      });
-      console.log(this.article);
-    });
+        this.articleType = types.find(type => type.id === article.type_article);
+        this.otherTypes = types.filter(type => type.id !== this.articleType?.id);
+      },
+    );
   }
+
 }

@@ -117,10 +117,10 @@
           <p
             class="absolute -top-2 right-2 transform text-6xl lg:text-8xl font-paytone text-mygrey1"
           >
-            +40
+            +50
           </p>
           <p class="z-0 text-6xl lg:text-8xl font-paytone text-myyellow1">
-            +40
+            +50
           </p>
         </div>
 
@@ -252,7 +252,7 @@
         </div>
         <div class="order-1 md:order-2">
           <p class="font-raleway font-mygrey2 font-bold">
-            Annonce par paiement en co-mandat
+            Annonce par paiement au succès
           </p>
           <p class="py-6 font-raleway text-3xl">
             Paiement au succès, en co-mandat et sans abonnement
@@ -450,7 +450,7 @@
     <div
       class="grid md:grid-cols-3 gap-8 xl:gap-10 2xl:gap-20 text-center font-open z-10"
     >
-      @for( property of properties$ | async; track property){
+      @for( property of properties; track property){
       <app-property-card
         (click)="navigateToProperty(property)"
         [property]="property"
@@ -597,7 +597,7 @@
     </p>
     <div class="grid md:grid-cols-2 place-items-center p-10 gap-8 lg:gap-0">
       <a
-        routerLink=""
+        href="https://app.lemcal.com/@diffuze/15min" target="_blank" rel='external'
         class="ml-10 bg-myyellow1 text-mygrey1 rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-myyellow2 transition-all transition-300 cursor-pointer"
         >Prendre rendez-vous
       </a>
