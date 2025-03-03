@@ -9,8 +9,47 @@ interface UrlData {
 }
 
 async function fetchUrls(): Promise<UrlData[]> {
-  const response = await fetch('http://data.barnabe-immo.fr/api/seo/urls');
-  return response.json();
+  try {
+    // Routes statiques
+    const staticUrls: UrlData[] = [
+      {
+        url: '/',
+        changefreq: 'weekly',
+        priority: 1.0,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        url: '/service',
+        changefreq: 'monthly',
+        priority: 0.8,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        url: '/blog',
+        changefreq: 'weekly',
+        priority: 0.9,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        url: '/review',
+        changefreq: 'monthly',
+        priority: 0.7,
+        lastmod: new Date().toISOString(),
+      },
+    ];
+
+    // Récupérer les URLs dynamiques (articles, propriétés, etc.)
+    const dynamicResponse = await fetch(
+      'http://data.barnabe-immo.fr/api/seo/urls'
+    );
+    const dynamicUrls: UrlData[] = await dynamicResponse.json();
+
+    // Combiner les URLs statiques et dynamiques
+    return [...staticUrls, ...dynamicUrls];
+  } catch (error) {
+    console.error('Error fetching URLs for sitemap:', error);
+    return [];
+  }
 }
 
 async function sitemapHandler(req: Request, res: Response): Promise<void> {

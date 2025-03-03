@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { SeoService } from './core/services/seo.service';
+import { SEO_CONFIG } from './core/services/seo.config';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +11,19 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'front-pro';
+  title = 'diffuze';
+  constructor(private seoService: SeoService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        // Trouver la configuration SEO correspondante à la route actuelle
+        const currentRoute = event.urlAfterRedirects;
+        const seoConfig = SEO_CONFIG[currentRoute] || SEO_CONFIG['/'];
+
+        // Appliquer la configuration SEO
+        this.seoService.updateSeoTags(seoConfig);
+      });
+  }
 }
