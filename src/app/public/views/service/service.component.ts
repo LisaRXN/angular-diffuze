@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ViewChild } from '@angular/core';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import optionsDetails from '../../../../assets/data/options.json';
 import questionDetails from '../../../../assets/data/questions.json';
@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { HowCardComponent } from '../../shared/components/how-card/how-card.component';
 import { OptionSimulatorComponent } from './components/option-simulator/option-simulator.component';
 import { ServiceCardComponent } from './components/service-card/service-card.component';
+import { PackDialogComponent } from '../../shared/components/pack-dialog/pack-dialog.component';
 
 interface Question {
   text: string;
@@ -27,8 +28,7 @@ interface Question {
   styleUrl: './service.component.scss',
 })
 export class ServiceComponent {
-
-  questions = questionDetails
+  questions = questionDetails;
   isUnitService = true;
   currentServices = serviceDetails1;
 

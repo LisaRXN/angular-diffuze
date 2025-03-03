@@ -39,8 +39,11 @@
       {{item.text}}
     </p>
   }
-  <p (click)="openDialog()" *ngIf="service.id === '1'" class="p-2 bg-myyellow2 rounded-lg font-semibold inline underline cursor-pointer">Voir les plateformes</p>
+  <p (click)="openModal()" *ngIf="service.id === '1'" class="p-2 bg-myyellow2 rounded-lg font-semibold inline underline cursor-pointer">Voir les plateformes</p>
   </div>
 </div>
 
 </div>
+
+<app-partners-dialog></app-partners-dialog>
+

@@ -1,18 +1,36 @@
-<div  class="h-auto max-w-[400px] rounded-xl bg-white cursor-pointer m-auto mb-10 shadow-lg transform transition ease-in-out hover:translate-y-[-4px] hover:shadow-xl">
-  <img [src]="baseUrl + property.media?.images?.[0]?.photo_path" class="rounded-t-xl h-[250px] w-full object-cover" alt="">
+<div
+  class="h-auto w-[350px] max-w-[400px] rounded-xl bg-white cursor-pointer m-auto mb-10 shadow-lg transform transition ease-in-out hover:translate-y-[-4px] hover:shadow-xl"
+>
+  <img
+    [src]="baseUrl + property.media?.images?.[0]?.photo_path"
+    class="rounded-t-xl h-[250px] w-full object-cover"
+    alt=""
+  />
 
   <div class="p-5 flex flex-col items-start gap-2 text-sm">
-      <p class="text-mygrey3 font-light">{{property.property_type | titlecase}}</p>
-      <p class="font-raleway font-extrabold">{{property.addressForm.city}}</p>
-      <p class="">{{property.addressForm.street_adress}}</p>
-      <div class="flex items-center justify-start gap-2 ">
-        <p>{{property.living_space}} m²</p>
-        <p>{{property.room}} pièces</p>
-        <p>{{ property.floor !== 0 ? property.floor + 'e étage' : 'Rez de chaussée' }}</p>
-      </div>
-    </div>
-    <div class="px-5 py-2 flex flex-col items-center justify-center bg-mygrey2 rounded-b-xl">
-      <p class="text-lg font-bold text-white">{{selling_price_number | currency:'EUR':'symbol':'1.0-0' }}</p>
-      <p class="text-sm font-light text-myyellow1">{{ surface_price | currency:'EUR':'symbol':'1.0-0' }} / m²</p>
+    <p class="text-mygrey3 font-light">
+      {{ property.property_type | titlecase }}
+    </p>
+    <p class="font-raleway font-extrabold">{{ property.addressForm.city }}</p>
+    <p class="">{{ property.addressForm.street_adress }}</p>
+    <div class="flex items-center justify-start gap-2">
+      <p>{{ property.living_space }} m²</p>
+      <p>{{ property.room }} pièces</p>
+      <p>
+        {{
+          property.floor !== 0 ? property.floor + "e étage" : "Rez de chaussée"
+        }}
+      </p>
     </div>
   </div>
+  <div
+    class="px-5 py-2 flex flex-col items-center justify-center bg-mygrey2 rounded-b-xl"
+  >
+    <p class="text-lg font-bold text-white">
+      {{ selling_price_number | currency : "EUR" : "symbol" : "1.0-0" }}
+    </p>
+    <p class="text-sm font-light text-myyellow1">
+      {{ surface_price | currency : "EUR" : "symbol" : "1.0-0" }} / m²
+    </p>
+  </div>
+</div>

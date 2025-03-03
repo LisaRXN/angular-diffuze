@@ -1,6 +1,6 @@
-<div class="min-h-screen bg-gray-100 flex flex-col items-center font-open">
+<div class="min-h-screen bg-gray-100 flex flex-col items-center font-open  overflow-x-hidden">
   <!-- Hero -->
-  <div
+  <!-- <div
     class="relative h-[550px] w-full mb:10 pb-16 text-mygrey1 px-8 flex flex-col items-center justify-center overflow-x-hidden"
   >
     <h1
@@ -44,20 +44,83 @@
         <p
           class="z-10 md:whitespace-nowrap w-1/2 text-center py-4 px-1.5 md:px-10 rounded-full"
         >
-        Paiement immédiat
+          Paiement immédiat
         </p>
         <p
           class="z-10 md:whitespace-nowrap w-1/2 text-center py-4 px-5 md:px-10 rounded-full"
         >
-        Paiement au succès
+          Paiement au succès
         </p>
       </div>
     </div>
 
     <div
-      class="absolute -top-20 left-1/2 w-[140%] h-[550px] bg-myyellow2 transform -translate-x-1/2 -rotate-3"
+      class="absolute bg-[url(assets/img/photo/photo5.jpg)] -top-20 left-1/2 w-[140%] h-[550px] transform -translate-x-1/2 -rotate-3"
     ></div>
-  </div>
+    <div
+      class="absolute -top-20 left-1/2 w-[140%] h-[550px] bg-white opacity-50 transform -translate-x-1/2 -rotate-3"
+    ></div>
+  </div> -->
+
+  <div class="relative h-[700px] w-full mb:10 pb-16 text-mygrey1 mb-12">
+    <div class="bg-white opacity-60 absolute inset-0 w-full h-full"></div>
+    <span class="absolute z-10 h-[140px] w-[120%] -rotate-3 -bottom-10 bg-gray-100"></span>
+    <div
+      class="bg-[url(assets/img/photo/photo4.jpg)] h-[700px] bg-cover bg-center w-full flex flex-col items-center justify-center overflow-x-hidden"
+    >
+      <h1
+        *ngIf="isUnitService"
+        class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-12"
+      >
+        Paiement immédiat, unique et sans abonnement
+      </h1>
+      <h1
+        *ngIf="!isUnitService"
+        class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-12"
+      >
+        Paiement au succès, en co-mandat et sans abonnement
+      </h1>
+      <p
+        *ngIf="isUnitService"
+        class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
+      >
+        La solution simple, efficace et sans contrainte !
+      </p>
+      <p
+        *ngIf="!isUnitService"
+        class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
+      >
+        Une solution flexible, sans risque et 100 % axée sur votre succès !
+      </p>
+      <div class="p-2 z-10 bg-white rounded-full cursor-pointer">
+        <div
+          (click)="toggleService()"
+          class="relative bg-mygrey5 w-full flex items-center justify-between rounded-full text-center"
+        >
+          <span
+            id="toggle-option"
+            [ngClass]="{
+          'absolute w-1/2 h-full bg-myyellow1 rounded-full transition-all ease-in-out':true,
+          'translate-x-0': isUnitService,
+          'translate-x-full': !isUnitService,
+          }"
+          >
+          </span>
+          <p
+            class="z-10 md:whitespace-nowrap w-1/2 text-center py-4 px-1.5 md:px-10 rounded-full"
+          >
+            Paiement immédiat
+          </p>
+          <p
+            class="z-10 md:whitespace-nowrap w-1/2 text-center py-4 px-5 md:px-10 rounded-full"
+          >
+            Paiement au succès
+          </p>
+        </div>
+      </div>
+    </div>
+    </div>
+
 
   <!-- Ce qui est inclus -->
   <div
@@ -204,7 +267,9 @@
     ></app-option-simulator>
 
     <a
-      href="http://www.app.diffuze.fr" target="_blank" rel='external'
+      href="http://www.app.diffuze.fr"
+      target="_blank"
+      rel="external"
       class="bg-myyellow1 text-mygrey1 rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-myyellow2 transition-all transition-300 cursor-pointer"
       >Déposer une annonce</a
     >
@@ -218,15 +283,14 @@
       Comment ça marche ?
     </h2>
     <app-how-card
-    *ngIf="isUnitService"
+      *ngIf="isUnitService"
       number="1"
       title="Déposez vos annonces"
       [checks]="[
         {
           check:
             'Je me connecte à DiffuZe ou directement à mon logiciel métier',
-          information:
-            'Compatible avec tous les logiciel métier du marché'
+          information: 'Compatible avec tous les logiciel métier du marché'
         },
         {
           check:
@@ -235,19 +299,18 @@
         { check: 'Je télécharge mes photos' },
         { check: 'Je choisis mes options et procède au paiement' }
       ]"
-      information='Compatible avec tous les logiciel métier du marché'
+      information="Compatible avec tous les logiciel métier du marché"
       image="assets/img/illustration/completed.png"
     ></app-how-card>
     <app-how-card
-    *ngIf="!isUnitService"
+      *ngIf="!isUnitService"
       number="1"
       title="Déposez vos annonces"
       [checks]="[
         {
           check:
             'Je me connecte à DiffuZe ou directement à mon logiciel métier',
-          information:
-            'Compatible avec tous les logiciel métier du marché'
+          information: 'Compatible avec tous les logiciel métier du marché'
         },
         {
           check:
@@ -256,7 +319,7 @@
         { check: 'Je télécharge mes photos' },
         { check: 'Je choisis mes options et enregistre mon annonce' }
       ]"
-      information='Compatible avec tous les logiciel métier du marché'
+      information="Compatible avec tous les logiciel métier du marché"
       image="assets/img/illustration/completed.png"
     ></app-how-card>
 
@@ -266,13 +329,13 @@
       title="Gestion et optimisation de vos annnonces "
       [checks]="[
         {
-          check: 'Un prestataire unique qui diffuse sur l’ensemble des plateformes'
+          check:
+            'Un prestataire unique qui diffuse sur l’ensemble des plateformes'
         },
         {
           check:
             'Modification illimitée de vos annonces  depuis votre espace DiffuZe ou votre logiciel métier',
-          information:
-          'Compatible avec tous les logiciel métier du marché'
+          information: 'Compatible avec tous les logiciel métier du marché'
         },
         { check: 'Jusqu’à 10 photos incluses et un lien vidéo / visite 3D' },
         { check: 'Boost hebdomadaire' },
@@ -290,7 +353,9 @@
     ></app-how-card>
 
     <a
-      href="http://www.app.diffuze.fr" target="_blank" rel='external'
+      href="http://www.app.diffuze.fr"
+      target="_blank"
+      rel="external"
       class="bg-myyellow1 text-mygrey1 rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-myyellow2 transition-all transition-300 cursor-pointer"
       >Déposer une annonce</a
     >
@@ -309,7 +374,9 @@
       Vous ne trouvez pas ce que vous cherchez ?
     </p>
     <a
-    href="https://app.lemcal.com/@diffuze/15min" target="_blank" rel='external'
+      href="https://app.lemcal.com/@diffuze/15min"
+      target="_blank"
+      rel="external"
       class="mb-10 bg-mygrey2 text-white rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-mygrey3 transition-all transition-300 cursor-pointer"
       >Prendre rendez-vous</a
     >

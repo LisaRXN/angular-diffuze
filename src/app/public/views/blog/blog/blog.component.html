@@ -1,8 +1,11 @@
-<div class="min-h-screen bg-gray-50 flex flex-col items-center font-open">
+<div class="min-h-screen bg-gray-50 flex flex-col items-center font-open overflow-x-hidden">
   <!-- Hero -->
-  <div
-    class="relative h-[550px] w-full pb-14 text-white px-8 flex flex-col items-center justify-center overflow-x-hidden"
-  >
+  <div class="relative h-[700px] w-full mb:10 pb-16 text-mygrey1 mb-16">
+    <div class="bg-white opacity-60 absolute inset-0 w-full h-full"></div>
+    <span class="absolute z-10 h-[120px] w-[120%] -rotate-3 -bottom-10 bg-gray-50"></span>
+    <div
+    class="bg-[url(assets/img/photo/photo12.jpg)] h-[700px] bg-center bg-cover bg-no-repeat w-full flex flex-col items-center justify-center "
+    >
     <h1 class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-12">
       Guide du vendeur : Tout ce qu'il faut savoir
     </h1>
@@ -12,9 +15,10 @@
       Découvrez tous les incontournables de la vente immobilière dans notre
       guide complet.
     </p>
-    <div
+    <!-- <div
       class="absolute -top-20 left-1/2 w-[140%] h-[500px] bg-mygrey2 transform -translate-x-1/2 -rotate-3"
-    ></div>
+    ></div> -->
+    </div>
   </div>
 
   <!-- Search section -->
@@ -55,7 +59,7 @@
    
     <div
       *ngFor="let type of selectedType || [];"
-      class="w-full md:w-4/5 max-w-[1000px] p-5 md:p-10 bg-white rounded-2xl"
+      class="w-full md:w-4/5 max-w-[1000px] p-5 md:p-10 bg-white rounded-2xl shadow-md"
     >
       <!-- Title -->
       <div
