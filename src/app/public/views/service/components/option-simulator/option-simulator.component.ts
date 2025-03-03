@@ -1,11 +1,9 @@
 import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent } from '../../../../shared/components/button/button.component';
-import optionsDetails from '../../../../../../assets/data/options.json'
+import optionsDetails from '../../../../../../assets/data/options.json';
 import { OptionComponent } from '../../../../shared/components/option/option.component';
 import { PackDialogComponent } from '../../../../shared/components/pack-dialog/pack-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-
 
 interface SurfacePrice {
   maxSurface: number;
@@ -22,28 +20,27 @@ interface DiffusionOption {
 
 @Component({
   selector: 'app-option-simulator',
-  imports: [CommonModule, ButtonComponent, OptionComponent],
+  imports: [CommonModule, OptionComponent],
   templateUrl: './option-simulator.component.html',
   styleUrl: './option-simulator.component.scss',
 })
 export class OptionSimulatorComponent {
-  
-  private readonly dialog = inject(MatDialog)
+  private readonly dialog = inject(MatDialog);
 
   @Input() isUnitService: boolean = false;
 
   options = optionsDetails;
-  isOpenOption = false
+  isOpenOption = false;
   optionView = this.options[0];
 
   activeOption(id: string) {
-    this.isOpenOption = false ? this.isOpenOption : true
+    this.isOpenOption = false ? this.isOpenOption : true;
     const selectedOption = this.options.filter((opt) => opt.id === id);
     this.optionView = selectedOption[0];
   }
 
-  openOption(){
-    this.isOpenOption = !this.isOpenOption
+  openOption() {
+    this.isOpenOption = !this.isOpenOption;
     this.optionView = this.isOpenOption ? this.optionView : this.options[0];
   }
 
@@ -143,11 +140,11 @@ export class OptionSimulatorComponent {
     this.updatePrice();
   }
 
-    openDialog(){
-      const dialogRef = this.dialog.open(PackDialogComponent, {
-        width: '80%',      
-        height: '70%',     
-        maxWidth: '800px', 
-      })
-    }
+  openDialog() {
+    const dialogRef = this.dialog.open(PackDialogComponent, {
+      width: '80%',
+      height: '70%',
+      maxWidth: '800px',
+    });
+  }
 }
