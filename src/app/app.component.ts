@@ -3,6 +3,7 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { SeoService } from './core/services/seo.service';
 import { SEO_CONFIG } from './core/services/seo.config';
 import { filter } from 'rxjs/operators';
+import { AnalyticsService } from './core/services/analytics.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,11 @@ import { filter } from 'rxjs/operators';
 })
 export class AppComponent {
   title = 'diffuze';
-  constructor(private seoService: SeoService, private router: Router) {}
+  constructor(
+    private seoService: SeoService,
+    private router: Router,
+    private analyticsService: AnalyticsService
+  ) {}
 
   ngOnInit(): void {
     this.router.events

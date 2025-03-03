@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { SEO_CONFIG } from './seo.config';
+import { isPlatformBrowser } from '@angular/common';
 
 export interface SeoConfig {
   title: string;
@@ -23,12 +24,16 @@ export interface SeoConfig {
 })
 export class SeoService {
   private readonly baseUrl = 'https://www.diffuze.fr';
+  private isBrowser: boolean;
 
   constructor(
     private meta: Meta,
     private title: Title,
-    private router: Router
-  ) {}
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   updateSeoTags(config: SeoConfig): void {
     // Définir le titre de la page
@@ -97,10 +102,13 @@ export class SeoService {
   }
 
   private getLinkElementByRel(rel: string): HTMLLinkElement | null {
+    if (!this.isBrowser) return null;
     return document.querySelector(`link[rel='${rel}']`);
   }
 
   private createCanonicalLink(url: string): void {
+    if (!this.isBrowser) return;
+
     const link: HTMLLinkElement = document.createElement('link');
     link.setAttribute('rel', 'canonical');
     link.setAttribute('href', url);
