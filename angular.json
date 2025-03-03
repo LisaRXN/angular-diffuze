@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "front-pro": {
+    "diffuze": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/front-pro",
+            "outputPath": "dist/diffuze",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -80,10 +80,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "front-pro:build:production"
+              "buildTarget": "diffuze:build:production"
             },
             "development": {
-              "buildTarget": "front-pro:build:development"
+              "buildTarget": "diffuze:build:development"
             }
           },
           "defaultConfiguration": "development"

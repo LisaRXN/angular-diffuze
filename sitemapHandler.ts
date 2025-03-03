@@ -18,7 +18,7 @@ async function sitemapHandler(req: Request, res: Response): Promise<void> {
     const urls = await fetchUrls();
 
     const sitemapStream = new SitemapStream({
-      hostname: 'https://www.barnabe-immo.fr',
+      hostname: 'https://www.diffuze.fr',
     });
 
     // Écrire directement les URLs dans le stream

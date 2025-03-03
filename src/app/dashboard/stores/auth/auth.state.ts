@@ -147,7 +147,7 @@ export class AuthState {
           loginError: null,
           isLoading: false,
         });
-        //localStorage.setItem('barnabe-auth-token', result.response.token);
+
         ctx.dispatch(new LoginSuccess(result.response));
       }),
       catchError((error) => {
@@ -179,7 +179,6 @@ export class AuthState {
 
   @Action(Logout)
   logout(ctx: StateContext<AuthStateModel>) {
-    //localStorage.removeItem('barnabe-auth-token');
     ctx.setState({
       token: null,
       loginError: null,
@@ -212,7 +211,7 @@ export class AuthState {
           registerError: null,
           isLoading: false,
         });
-        //localStorage.setItem('barnabe-auth-token', result.response.token);
+
         ctx.dispatch(new RegisterSuccess(result.response));
       }),
       catchError((error) => {

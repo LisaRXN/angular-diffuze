@@ -11,7 +11,7 @@ import {
   withRouterConfig,
   withInMemoryScrolling,
 } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { routes } from './app.routes';
 import {
   provideClientHydration,
@@ -31,7 +31,6 @@ import { HttpPropertyGateway } from './core/adapters/http/http-property.gateway'
 import { ArticleGateway } from './core/ports/article.gateway';
 import { HttpArticleGateway } from './core/adapters/http/http-article.gateway';
 
-
 registerLocaleData(localeFr, 'fr-FR');
 
 export const appConfig: ApplicationConfig = {
@@ -47,7 +46,7 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(),
+    provideHttpClient(withFetch()),
     importProvidersFrom(
       NgxsModule.forRoot([], { selectorOptions: { suppressErrors: false } }),
       NgxsFormPluginModule.forRoot(),
@@ -58,7 +57,9 @@ export const appConfig: ApplicationConfig = {
         keys: [],
       })
     ),
-    {provide: PropertyGateway, useFactory: () => new HttpPropertyGateway()}, provideAnimationsAsync(),
-    {provide: ArticleGateway, useFactory: () => new HttpArticleGateway()}, provideAnimationsAsync(),
+    { provide: PropertyGateway, useFactory: () => new HttpPropertyGateway() },
+    provideAnimationsAsync(),
+    { provide: ArticleGateway, useFactory: () => new HttpArticleGateway() },
+    provideAnimationsAsync(),
   ],
 };

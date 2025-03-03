@@ -3,4 +3,4 @@
 
 User-agent: *
 Allow: /
-Sitemap: https://barnabe-immo.fr/sitemap.xml
+Sitemap: https://diffuze.fr/sitemap.xml

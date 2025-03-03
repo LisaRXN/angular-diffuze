@@ -1,13 +1,16 @@
 {
-  "name": "front-pro",
+  "name": "diffuze",
   "version": "0.0.0",
+  "main": "dist/diffuze/server/server.mjs",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node dist/diffuze/server/server.mjs",
     "build": "ng build",
+    "build:ssr": "npx ng build --configuration production && npx ng run serve:ssr:diffuze",
+    "postinstall": "npm run build:ssr",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:front-pro": "node dist/front-pro/server/server.mjs"
+    "serve:ssr:diffuze": "node dist/diffuze/server/server.mjs"
   },
   "private": true,
   "dependencies": {
