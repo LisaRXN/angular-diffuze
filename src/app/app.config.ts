@@ -28,6 +28,8 @@ import { PropertyGateway } from './core/ports/property.gateway';
 import { InMemoryPropertyGateway } from './core/adapters/in-memory/in-memory-property.gateway';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpPropertyGateway } from './core/adapters/http/http-property.gateway';
+import { ArticleGateway } from './core/ports/article.gateway';
+import { HttpArticleGateway } from './core/adapters/http/http-article.gateway';
 
 
 registerLocaleData(localeFr, 'fr-FR');
@@ -57,5 +59,6 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     {provide: PropertyGateway, useFactory: () => new HttpPropertyGateway()}, provideAnimationsAsync(),
+    {provide: ArticleGateway, useFactory: () => new HttpArticleGateway()}, provideAnimationsAsync(),
   ],
 };

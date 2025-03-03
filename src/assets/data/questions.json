@@ -1,0 +1,17 @@
+[
+    {   
+        "id":"1",
+        "text": "Puis-je connecter mon logiciel métier à Diffuze pour la diffusion de mes annonces ?",
+        "response": "Oui, nous pouvons mettre en place une passerelle avec l’ensemble des logiciels métiers du marché. Il vous suffira alors de sélectionner Diffuze directement depuis votre logiciel pour diffuser vos annonces à l’unité sur toutes nos plateformes partenaires. Un vrai gain de temps et une gestion simplifiée !"
+      },
+    {
+        "id":"2",
+        "text": "Y a-t-il vraiment aucun abonnement ?",
+        "response": "Absolument ! La grande force de notre service réside dans sa flexibilité. Aucun abonnement, aucun engagement : vous diffusez vos annonces à l’unité, selon vos besoins. Vous rentrez un mandat de vente ? Vous choisissez un pack visibilité, et c’est tout ! De plus, Diffuze centralise votre diffusion, évitant ainsi la multiplication des interlocuteurs. Un seul partenaire pour simplifier votre gestion !"
+      },
+    {
+        "id":"3",
+        "text": "Dans quelles situations utiliser Diffuze ? À qui s’adresse notre service ?",
+        "response": "Diffuze est destiné à tous les professionnels détenteurs d’une carte T et d’un mandat de vente : agences immobilières, syndics, gestionnaires de patrimoine... Il est idéal pour les petites structures, les besoins ponctuels ou les volumes d’annonces limités. Notre solution vous permet d’optimiser vos coûts de diffusion et de les maîtriser. Elle convient également parfaitement aux créateurs d’activité qui n’ont pas encore de visibilité claire sur leur volume de transactions."
+      }
+]

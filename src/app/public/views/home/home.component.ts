@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(){
     this.propertyGateway.fetchLastProperties().subscribe(properties => this.properties = properties)
+    console.log(this.properties[0])
   }
 
   navigateToProperty(property:Property){

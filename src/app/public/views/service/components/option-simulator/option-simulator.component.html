@@ -9,7 +9,8 @@
         *ngIf="isUnitService"
         class="text-6xl font-bold font-paytone self-center"
       >
-        {{ price }} €
+        {{ price }} € 
+        <span class="text-lg font-bold mx-2">TTC</span>
       </p>
       <p
         *ngIf="!isUnitService"
@@ -18,7 +19,7 @@
         {{ price2 }} €
       </p>
       <p *ngIf="!isUnitService" class="text-mygrey2 self-center">
-        Vous économisez 410 euros !
+        Économisez dès maintenant 459 € !       
       </p>
 
       <div class="flex items-center justify-center gap-4">
@@ -28,9 +29,41 @@
           alt=""
         />
         <p *ngIf="isUnitService" class="leading-8">
-          Annonce en paiement immédiat et unique
+         <span class="font-semibold">Pack principal :</span> diffusion sur plus de <span (click)="openDialog()" class="cursor-pointer font-semibold underline">40 plateformes</span> (SeLoger, Logic Immo, Le Figaro immobilier...)
+        
+          <span class="relative group ml-1">
+            <img
+              src="assets/img/icon/information.png"
+              class="h-[25px] w-[25px] transition inline"
+            />
+            <span
+              class="absolute bottom-full left-1/2 -translate-x-1/2 transform mb-2 hidden group-hover:block bg-gray-800 text-white text-sm px-3 py-1 rounded-md shadow-lg whitespace-nowrap"
+            >
+              99 euros TTC
+            </span>
+          </span>
+        
         </p>
-        <p *ngIf="!isUnitService" class="leading-8">Annonce en paiement au succès (co-mandat)</p>
+
+        <!-- <p *ngIf="!isUnitService" class="leading-8">Annonce en paiement au succès (co-mandat)</p> -->
+
+        <p *ngIf="!isUnitService" class="leading-8">
+          <span class="font-semibold">Pack principal :</span> diffusion sur plus de <span (click)="openDialog()" class="cursor-pointer font-semibold underline">40 plateformes</span> (SeLoger, Logic Immo, Le Figaro immobilier...)
+        
+          <span class="relative group ml-1">
+            <img
+              src="assets/img/icon/information.png"
+              class="h-[25px] w-[25px] transition inline"
+            />
+            <span
+              class="absolute bottom-full left-1/2 -translate-x-1/2 transform mb-2 hidden group-hover:block bg-gray-800 text-white text-sm px-3 py-1 rounded-md shadow-lg whitespace-nowrap"
+            >
+              99 euros TTC
+            </span>
+          </span>
+        
+        </p>
+
       </div>
       @for (option of diffusionOptions; track option.id) {
       <div class="flex items-center gap-4">
@@ -49,7 +82,8 @@
         />
         <label [for]="option.id">
           <p class="leading-8">
-            <span class="bg-myyellow2 p-2 rounded-lg">En option :</span>
+            <span *ngIf="isUnitService || option.id === 'reportage'" class="bg-myyellow2 p-2 rounded-lg">En option :</span>
+            <span *ngIf="!isUnitService && option.id != 'reportage'" class="bg-myyellow2 p-2 rounded-lg">Inclus :</span>
             {{ option.label }}
             <span class="relative group ml-1">
               <img
@@ -60,7 +94,7 @@
                 *ngIf="option.id != 'reportage'"
                 class="absolute bottom-full left-1/2 -translate-x-1/2 transform mb-2 hidden group-hover:block bg-gray-800 text-white text-sm px-3 py-1 rounded-md shadow-lg whitespace-nowrap"
               >
-                {{ option.price }} euros
+                {{ option.price }} euros TTC
               </span>
               <span
                 *ngIf="option.id === 'reportage'"
@@ -127,9 +161,9 @@
         (click)="activeOption('lux')"
         id="lux"
         [ngClass]="{
-          'bg-mygrey5 border border-white flex-1 whitespace-nowrap p-4 rounded-t-lg pb-4 text-center': true,
-          'rounded-bl-2xl': !isOpenOption,
-          'bg-myyellow1': optionView.id === 'lux' && isOpenOption
+          'font-bold  border border-white flex-1 whitespace-nowrap p-4 rounded-t-lg pb-4 text-center': true,
+          'rounded-bl-2xl bg-mygrey2 text-myyellow1': !isOpenOption,
+          'bg-myyellow1 text-mygrey2': optionView.id === 'lux' && isOpenOption
         }"
       >
         Belles Demeures & Lux
@@ -138,8 +172,9 @@
         (click)="activeOption('jinka')"
         id="jinka"
         [ngClass]="{
-          'bg-mygrey5 border border-white flex-1 p-4 rounded-t-lg pb-4 text-center': true,
-          'bg-myyellow1': optionView.id === 'jinka'
+          'font-bold border border-white flex-1 p-4 rounded-t-lg pb-4 text-center': true,
+          'bg-mygrey2 text-myyellow1': optionView.id !='jinka',
+          'bg-myyellow1 text-mygrey2': optionView.id === 'jinka'
         }"
       >
         Jinka
@@ -148,8 +183,9 @@
         (click)="activeOption('gens-de-confiance')"
         id="gens-de-confiance"
         [ngClass]="{
-          'bg-mygrey5 border border-white flex-1  p-4 rounded-t-lg pb-4 text-center': true,
-          'bg-myyellow1': optionView.id === 'gens-de-confiance'
+          'font-semibold border border-white flex-1  p-4 rounded-t-lg pb-4 text-center': true,
+          'bg-mygrey2 text-myyellow1': optionView.id !='gens-de-confiance',
+          'bg-myyellow1 text-mygrey2': optionView.id === 'gens-de-confiance'
         }"
       >
         Gens de Confiance
@@ -158,22 +194,24 @@
         (click)="activeOption('green-acres')"
         id="green-acres"
         [ngClass]="{
-          'bg-mygrey5 border border-white flex-1  p-4 rounded-t-lg pb-4 text-center': true,
-          'bg-myyellow1': optionView.id === 'green-acres'
+          'font-semibold border border-white flex-1  p-4 rounded-t-lg pb-4 text-center': true,
+          'bg-mygrey2 text-myyellow1': optionView.id !='green-acres',
+          'bg-myyellow1 text-mygrey2': optionView.id === 'green-acres'
         }"
       >
         Green-Acres
       </div>
-      <div
+      <!-- <div
         id="reportage"
         [ngClass]="{
-          'bg-mygrey5 border border-white  flex-1 p-4 rounded-t-lg pb-4 text-center': true,
+          ' font-semibold border border-white  flex-1 p-4 rounded-t-lg pb-4 text-center': true,
           'rounded-br-2xl': !isOpenOption,
-          'bg-myyellow1': optionView.id === 'reportage'
+          'bg-mygrey2 text-myyellow1': optionView.id !='reportage',
+          'bg-myyellow1 text-mygrey2': optionView.id === 'reportage'
         }"
       >
         Reportage
-      </div>
+      </div> -->
     </div>
   </div>
 

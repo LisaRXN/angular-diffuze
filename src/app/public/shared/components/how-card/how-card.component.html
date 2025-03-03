@@ -21,7 +21,7 @@
 
     @for(item of checks; track item){
     <ul class="flex items-center justify-start gap-2 md:gap-4 p-2">
-        <li class="font-bold list-disc">{{ item.check }}
+        <li class="list-disc">{{ item.check }}
           <span *ngIf="item.information" class="relative group ml-1">
             <img src="assets/img/icon/information.png" class="h-[25px] w-[25px] transition inline"/>
             <span class="absolute bottom-full left-1/2 -translate-x-1/2 transform mb-2 hidden group-hover:block

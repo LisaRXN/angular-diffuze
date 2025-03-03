@@ -7,7 +7,7 @@
       "text" : {"text1": "Sur plus de", "number":"50", "text2":"plateformes de référence"},
       "description" : [
       {"text":"Diffusion de vos annonces de vente, location et viager."}, 
-      {"text":"Que ce soit un appartement, une maison, un local commercial, un bureau, un immeuble et bien d’autres.."}      
+      {"text":"Que ce soit un appartement, une maison, un local commercial, un bureau, un immeuble et bien d’autres..."}      
     ]
     },
     {
@@ -20,7 +20,8 @@
       ,
       "description" : [
       {"text":"Mise en pause ou renouvellement  à tout moment."},
-      {"text":"Boost hebdomadaire pour maximiser la visibilité sur les portails"}
+      {"text":"Modification illimitée de vos annonces."},
+      {"text":"Boost hebdomadaire pour maximiser la visibilité sur les plateformes."}
     ]
     },
     {
@@ -29,7 +30,7 @@
       "backGroundColor": "myyellow2",
       "textColor": "mygrey1",
       "text" : 
-        {"text1": "Pour seulement", "number":"99 €", "text2":"sans abonnement, sans engagement !"}
+        {"text1": "Pour seulement", "number":"99 €", "ttc":"TTC", "text2":"sans abonnement, sans engagement !"}
       ,
       "description" : [
       {"text":"Paiement immédiat et unique, sans abonnement."},    

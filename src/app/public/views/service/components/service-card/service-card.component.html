@@ -21,7 +21,10 @@
     }"
 >
     <p>{{service.text['text1']}}</p>
-    <p class="text-4xl lg:text-6xl font-bold">{{service.text['number']}}</p>
+    <p class="text-4xl lg:text-6xl font-bold">
+      {{ service.text['number'] }} 
+      <span *ngIf="service.text['ttc']" class="text-lg">{{ service.text['ttc'] }}</span>
+    </p>    
     <p class="text-center w-3/4">{{service.text['text2']}}</p>
 </div>
 
@@ -36,7 +39,7 @@
       {{item.text}}
     </p>
   }
-  <p (click)="openDialog()" *ngIf="service.id === '1'" class="p-2 bg-myyellow2 rounded-lg font-semibold inline underline cursor-pointer">Voir les partenaires</p>
+  <p (click)="openDialog()" *ngIf="service.id === '1'" class="p-2 bg-myyellow2 rounded-lg font-semibold inline underline cursor-pointer">Voir les plateformes</p>
   </div>
 </div>
 

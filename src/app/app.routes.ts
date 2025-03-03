@@ -27,11 +27,6 @@ export const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      // {
-      //   path: '',
-      //   pathMatch: 'full',
-      //   redirectTo: 'home',
-      // },
       {
         path: '',
         loadComponent: () =>

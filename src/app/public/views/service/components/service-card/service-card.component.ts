@@ -9,7 +9,7 @@ interface Service {
   image:string;
   backGroundColor:string;
   textColor:string;
-  text:{ text1: string; number: string, text2:string };
+  text:{ text1: string; number: string, ttc?:string, text2:string };
   klarna?:string;
   description:{text:string, img?:string}[];
 }

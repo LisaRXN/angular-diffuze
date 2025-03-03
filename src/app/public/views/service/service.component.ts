@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import optionsDetails from '../../../../assets/data/options.json';
+import questionDetails from '../../../../assets/data/questions.json';
 import { OptionComponent } from '../../shared/components/option/option.component';
 import serviceDetails1 from '../../../../assets/data/service1.json';
 import serviceDetails2 from '../../../../assets/data/service2.json';
@@ -10,18 +11,14 @@ import { OptionSimulatorComponent } from './components/option-simulator/option-s
 import { ServiceCardComponent } from './components/service-card/service-card.component';
 
 interface Question {
-  id: string;
   text: string;
   response: string;
-  isOpen: boolean;
 }
 
 @Component({
   selector: 'app-service',
   imports: [
     CommonModule,
-    ButtonComponent,
-    OptionComponent,
     HowCardComponent,
     OptionSimulatorComponent,
     ServiceCardComponent,
@@ -30,8 +27,8 @@ interface Question {
   styleUrl: './service.component.scss',
 })
 export class ServiceComponent {
-  openQuesion: boolean = false;
 
+  questions = questionDetails
   isUnitService = true;
   currentServices = serviceDetails1;
 
@@ -50,24 +47,4 @@ export class ServiceComponent {
     this.optionView = selectedOption[0];
   }
 
-  questions: Question[] = [
-    {
-      id: '1',
-      text: 'Question n°1',
-      response: 'Voici la réponse à la question',
-      isOpen: false,
-    },
-    {
-      id: '2',
-      text: 'Question n°2',
-      response: 'Voici la réponse à la question',
-      isOpen: false,
-    },
-    {
-      id: '3',
-      text: 'Question n°3',
-      response: 'Voici la réponse à la question',
-      isOpen: false,
-    },
-  ];
 }
