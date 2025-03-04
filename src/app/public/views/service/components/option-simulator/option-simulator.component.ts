@@ -20,12 +20,11 @@ interface DiffusionOption {
 
 @Component({
   selector: 'app-option-simulator',
-  imports: [CommonModule, OptionComponent],
+  imports: [CommonModule, OptionComponent, PackDialogComponent],
   templateUrl: './option-simulator.component.html',
   styleUrl: './option-simulator.component.scss',
 })
 export class OptionSimulatorComponent {
-
   @Input() isUnitService: boolean = false;
   @ViewChild(PackDialogComponent) dialogComponent!: PackDialogComponent;
 
