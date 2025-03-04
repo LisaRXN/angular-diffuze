@@ -1,7 +1,8 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { PartnersDialogComponent } from '../../../../shared/components/partners-dialog/partners-dialog.component';
+import { PackDialogComponent } from '../../../../shared/components/pack-dialog/pack-dialog.component';
 
 
 interface Service {
@@ -16,21 +17,21 @@ interface Service {
 
 @Component({
   selector: 'app-service-card',
-  imports: [CommonModule],
+  imports: [CommonModule, PartnersDialogComponent],
   templateUrl: './service-card.component.html',
   styleUrl: './service-card.component.scss'
 })
 export class ServiceCardComponent {
 
-  private readonly dialog = inject(MatDialog)
   @Input() service!: Service;
   
-    openDialog(){
-      const dialogRef = this.dialog.open(PartnersDialogComponent, {
-        width: '80%',      
-        height: '70%',     
-        maxWidth: '800px', 
-      })
+    @ViewChild(PartnersDialogComponent) dialogComponent!: PartnersDialogComponent;
+    openModal() {
+      if (this.dialogComponent) {
+        this.dialogComponent.openModal();
+      } else {
+        console.error('modalComponent est undefined');
+      }
     }
 
 }

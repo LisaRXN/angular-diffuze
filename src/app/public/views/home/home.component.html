@@ -49,12 +49,15 @@
         alt="Green Acres Immobilier"
       />
       <p
-        (click)="openDialog()"
+        (click)="openModal()"
+        data-modal-target="default-modal"
+        data-modal-toggle="default-modal"
         class="absolute cursor-pointer rounded-full w-28 h-28 md:w-32 md:h-32 p-4 py-5 md:p-5 text-black text-sm bg-white transition duration-300 hover:scale-105 shadow-diffuze bottom-[5%] right-[5%] md:bottom-[10%] md:right-[10%] lg:bottom-[15%] lg:right-[10%]"
       >
         <span class="font-bold text-md md:text-2xl">+50</span>
         plateformes de diffusion
       </p>
+      <app-partners-dialog></app-partners-dialog>
 
       <h1 class="text-6xl md:text-9xl mb-4 font-paytone">
         DiffuZe<span class="text-yellow-300">.</span>
@@ -224,7 +227,11 @@
           </p>
           <p class="mb-2">
             Un paiement unique, immédiat et sans engagement, avec la possibilité
-            de régler en <span class="bg-myyellow1 font-bold py-1 px-2 rounded-lg">3x sans frais</span> avec Klarna.
+            de régler en
+            <span class="bg-myyellow1 font-bold py-1 px-2 rounded-lg"
+              >3x sans frais</span
+            >
+            avec Klarna.
           </p>
           <p class="mt-6 font-semibold">
             Une solution simple, efficace et sans contrainte !
@@ -255,7 +262,7 @@
             Annonce par paiement au succès
           </p>
           <p class="py-6 font-raleway text-3xl">
-            Paiement au succès, frais de diffusion offert 
+            Paiement au succès, frais de diffusion offert
           </p>
           <p class="mb-2">
             Maximisez la visibilité de vos biens en vente ou viager avec une
@@ -433,7 +440,9 @@
       </div>
     </div>
     <a
-      href="http://www.app.diffuze.fr" target="_blank" rel='external'
+      href="http://www.app.diffuze.fr"
+      target="_blank"
+      rel="external"
       class="bg-myyellow1 text-mygrey1 rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-myyellow2 transition-all transition-300 cursor-pointer"
       >Déposer une annonce</a
     >
@@ -441,21 +450,53 @@
 
   <!-- Découvrez les biens à vendre-->
   <div
-    class="bg-mygray4 w-full pb-32 mt-16 text-mygrey1 px-8 flex flex-col items-center justify-center overflow-x-hidden"
+    class="bg-mygray4 w-full pb-32 mt-16 text-mygrey1 px-10 flex flex-col items-center justify-center overflow-x-hidden"
   >
     <h2 class="text-3xl font-bold font-raleway text-center mb-12 z-10">
       Découvrez les biens à vendre
     </h2>
 
-    <div
-      class="grid md:grid-cols-3 gap-8 xl:gap-10 2xl:gap-20 text-center font-open z-10"
-    >
-      @for( property of properties; track property){
-      <app-property-card
-        
-        [property]="property"
-      ></app-property-card>
-      }
+    <div class="relative z-10 w-[350px] md:w-[750px] xl:w-[1150px]">
+      <div #carousel class="carousel w-full space-x-[10px] lg:space-x-[50px]">
+        @for (property of properties; track property) {
+        <div class="carousel-item w-full md:w-1/2 lg:w-auto">
+          <app-property-card
+            id="slide"
+            class="w-full"
+            [property]="property"
+          ></app-property-card>
+        </div>
+        } @for (property of properties; track property) {
+        <div class="carousel-item w-full md:w-1/2 lg:w-auto">
+          <app-property-card
+            class="w-full"
+            [property]="property"
+          ></app-property-card>
+        </div>
+        }
+      </div>
+      <div
+        class="absolute -inset-10 flex justify-between items-center pointer-events-none"
+      >
+        <button
+          [ngClass]="{
+            'btn btn-circle pointer-events-auto border border-white bg-white hover:bg-mygrey2 hover:border-mygrey2': true,
+            'opacity-0': isCarouselStart
+          }"
+          (click)="prevSlide()"
+        >
+          ❮
+        </button>
+        <button
+          [ngClass]="{
+            'btn btn-circle pointer-events-auto border border-white bg-white hover:bg-mygrey2 hover:border-mygrey2': true,
+            'opacity-0': isCarouselEnd
+          }"
+          (click)="nextSlide()"
+        >
+          ❯
+        </button>
+      </div>
     </div>
 
     <div
@@ -470,7 +511,9 @@
         >Voir tous les biens
       </a> -->
       <a
-        href="http://www.app.diffuze.fr" target="_blank" rel='external'
+        href="http://www.app.diffuze.fr"
+        target="_blank"
+        rel="external"
         class="z-10 bg-mygrey2 text-white rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-mygrey3 transition-all transition-300 cursor-pointer"
         >Deposer une annonce
       </a>
@@ -503,18 +546,22 @@
       />
       <img src="assets/img/logo/bercail.png" class="z-10 w-[140px]" alt="" />
       <img src="assets/img/logo/hotels.png" class="z-10 w-[140px]" alt="" />
-
     </div>
 
-    <div class="flex items-center justify-center m-auto text-lg font-open text-center gap-2 mb-36">
+    <div
+      class="flex items-center justify-center m-auto text-lg font-open text-center gap-2 mb-36"
+    >
       <p>Rejoignez + de</p>
       <div class="relative inline-block">
-        <p class="relative z-10 py-4 px-2 font-bold text-xl">200 agences partenaires</p>
-        <span class="absolute top-1/2 left-0 w-full h-[110%] bg-myyellow1 -rotate-2 transform -translate-y-1/2 z-0"></span>
+        <p class="relative z-10 py-4 px-2 font-bold text-xl">
+          200 agences partenaires
+        </p>
+        <span
+          class="absolute top-1/2 left-0 w-full h-[110%] bg-myyellow1 -rotate-2 transform -translate-y-1/2 z-0"
+        ></span>
       </div>
-      <p>convaincues par nos services ! </p>
+      <p>convaincues par nos services !</p>
     </div>
-
 
     <div
       class="lg:h-[500px] h-auto pb-10 lg:pb-10 bg-mygrey2 grid w-full lg:grid-cols-[1fr_1.5fr]"
@@ -557,7 +604,9 @@
             />
           </div>
           <p class="p-5 leading-relaxed text-justify">
-            “Simple, rapide et efficace. Tout ce qu’on attend d’un bon service de diffusion d’annonces immobilières ! Je recommande sans hésitation.“
+            “Simple, rapide et efficace. Tout ce qu’on attend d’un bon service
+            de diffusion d’annonces immobilières ! Je recommande sans
+            hésitation.“
           </p>
           <div class="w-full flex items-center justify-between">
             <p class="font-bold">Laforêt</p>
@@ -580,7 +629,10 @@
             />
           </div>
           <p class="p-5 leading-relaxed text-justify">
-            “Un outil simple, efficace et surtout adapté à nos besoins. La flexibilité des offres et la diffusion sur les grands portails immobiliers en font une solution incontournable pour les petites agences.“
+            “Un outil simple, efficace et surtout adapté à nos besoins. La
+            flexibilité des offres et la diffusion sur les grands portails
+            immobiliers en font une solution incontournable pour les petites
+            agences.“
           </p>
           <div class="w-full flex items-center justify-between">
             <p class="font-bold">Century 21</p>
@@ -606,7 +658,9 @@
     </p>
     <div class="grid md:grid-cols-2 place-items-center p-10 gap-8 lg:gap-0">
       <a
-        href="https://app.lemcal.com/@diffuze/15min" target="_blank" rel='external'
+        href="https://app.lemcal.com/@diffuze/15min"
+        target="_blank"
+        rel="external"
         class="ml-10 bg-myyellow1 text-mygrey1 rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-myyellow2 transition-all transition-300 cursor-pointer"
         >Prendre rendez-vous
       </a>

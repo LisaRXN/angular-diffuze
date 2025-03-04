@@ -29,7 +29,7 @@
           alt=""
         />
         <p *ngIf="isUnitService" class="leading-8">
-         <span class="font-semibold">Pack principal :</span> diffusion sur plus de <span (click)="openDialog()" class="cursor-pointer font-semibold underline">40 plateformes</span> (SeLoger, Logic Immo, Le Figaro immobilier...)
+         <span class="font-semibold">Pack principal :</span> diffusion sur plus de <span (click)="openModal()" class="cursor-pointer font-semibold underline">40 plateformes</span> (SeLoger, Logic Immo, Le Figaro immobilier...)
         
           <span class="relative group ml-1">
             <img
@@ -48,7 +48,7 @@
         <!-- <p *ngIf="!isUnitService" class="leading-8">Annonce en paiement au succès (co-mandat)</p> -->
 
         <p *ngIf="!isUnitService" class="leading-8">
-          <span class="font-semibold">Pack principal :</span> diffusion sur plus de <span (click)="openDialog()" class="cursor-pointer font-semibold underline">40 plateformes</span> (SeLoger, Logic Immo, Le Figaro immobilier...)
+          <span class="font-semibold">Pack principal :</span> diffusion sur plus de <span (click)="openModal()" class="cursor-pointer font-semibold underline">40 plateformes</span> (SeLoger, Logic Immo, Le Figaro immobilier...)
         
           <span class="relative group ml-1">
             <img
@@ -217,3 +217,5 @@
 
   <app-option *ngIf="isOpenOption" [option]="optionView"></app-option>
 </div>
+
+<app-pack-dialog></app-pack-dialog>

@@ -1,7 +1,4 @@
-import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogClose, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import partnersDetails from '../../../../../assets/data/partners.json'
 
 interface Partner {
@@ -14,12 +11,23 @@ interface Partner {
 
 @Component({
   selector: 'app-pack-dialog',
-  imports: [MatIconModule, MatDialogTitle, MatDialogClose, MatDialogContent, MatButtonModule],
+  imports: [],
   templateUrl: './pack-dialog.component.html',
   styleUrl: './pack-dialog.component.scss'
 })
 export class PackDialogComponent {
 
-  partners:Partner[] = partnersDetails.filter(partner => partner.id > 4)
+  partners:Partner[] = partnersDetails.filter(partner => partner.id > 5)
+
+    @ViewChild('modal') modalRef!: ElementRef<HTMLDialogElement>;
+  
+    openModal() {
+      this.modalRef.nativeElement.showModal();
+      console.log('partners', this.partners)
+    }
+  
+    closeModal() {
+      this.modalRef.nativeElement.close();
+    }
 
 }

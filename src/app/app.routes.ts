@@ -60,6 +60,20 @@ export const routes: Routes = [
             (m) => m.ProfilComponent
           ),
       },
+      {
+        path: 'protection-des-donnees',
+        loadComponent: () =>
+          import('./public/views/rgpd/rgpd.component').then(
+            (m) => m.RGPDComponent
+          ),
+      },
+      {
+        path: 'conditions-generales',
+        loadComponent: () =>
+          import('./public/views/cgv/cgv.component').then(
+            (m) => m.CGVComponent
+          ),
+      }
     ],
   },
   {

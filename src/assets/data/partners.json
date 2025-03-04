@@ -30,12 +30,11 @@
     },
     {
         "id":5,
-        "name":"Figaro Immo",
-        "image":"assets/img/logo-partners/lefigaro.png",
-        "web":"https://immobilier.lefigaro.fr/",
-        "alt":"Figaro Immo"
+        "name":"Gens de Confiance",
+        "image":"assets/img/logo-partners/gens.png",
+        "web":"https://gensdeconfiance.com/fr",
+        "alt":"Gens de Confiance"
     },
-
     {
         "id":6,
         "name":"Logic Immo",
@@ -50,13 +49,12 @@
         "web":"https://www.seloger.com/",
         "alt":"Seloger"
     },
-
     {
-        "id":8,
-        "name":"Gens de Confiance",
-        "image":"assets/img/logo-partners/gens.png",
-        "web":"https://gensdeconfiance.com/fr",
-        "alt":"Gens de Confiance"
+        "id":5,
+        "name":"Figaro Immo",
+        "image":"assets/img/logo-partners/lefigaro.png",
+        "web":"https://immobilier.lefigaro.fr/",
+        "alt":"Figaro Immo"
     },
     {
         "id":9,

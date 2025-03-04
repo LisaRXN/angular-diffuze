@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import optionsDetails from '../../../../../../assets/data/options.json';
 import { OptionComponent } from '../../../../shared/components/option/option.component';
@@ -25,9 +25,9 @@ interface DiffusionOption {
   styleUrl: './option-simulator.component.scss',
 })
 export class OptionSimulatorComponent {
-  private readonly dialog = inject(MatDialog);
 
   @Input() isUnitService: boolean = false;
+  @ViewChild(PackDialogComponent) dialogComponent!: PackDialogComponent;
 
   options = optionsDetails;
   isOpenOption = false;
@@ -140,11 +140,11 @@ export class OptionSimulatorComponent {
     this.updatePrice();
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(PackDialogComponent, {
-      width: '80%',
-      height: '70%',
-      maxWidth: '800px',
-    });
+  openModal() {
+    if (this.dialogComponent) {
+      this.dialogComponent.openModal();
+    } else {
+      console.error('modalComponent est undefined');
+    }
   }
 }
