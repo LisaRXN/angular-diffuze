@@ -1,6 +1,5 @@
 import { Component, inject, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import optionsDetails from '../../../../../../assets/data/options.json';
 import { OptionComponent } from '../../../../shared/components/option/option.component';
 import { PackDialogComponent } from '../../../../shared/components/pack-dialog/pack-dialog.component';
@@ -21,7 +20,7 @@ interface DiffusionOption {
 
 @Component({
   selector: 'app-option-simulator',
-  imports: [CommonModule, OptionComponent, PackDialogComponent],
+  imports: [CommonModule, OptionComponent],
   templateUrl: './option-simulator.component.html',
   styleUrl: './option-simulator.component.scss',
 })
