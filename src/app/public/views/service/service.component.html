@@ -62,36 +62,38 @@
     ></div>
   </div> -->
 
-  <div class="relative h-[700px] w-full mb:10 pb-16 text-mygrey1 mb-12">
+  <div class="relative h-[700px] w-full mb:10 pb-16 text-mygrey1 mb-14">
     <div class="bg-white opacity-60 absolute inset-0 w-full h-full"></div>
-    <span class="absolute z-10 h-[140px] w-[120%] -rotate-3 -bottom-10 bg-gray-100"></span>
+    <span class="absolute z-10 h-[100px] w-[120%] left-1/2 transform -translate-x-1/2 -rotate-3 -bottom-10 bg-gray-100"></span>
     <div
-      class="bg-[url(assets/img/photo/photo4.jpg)] h-[700px] bg-cover bg-center w-full flex flex-col items-center justify-center overflow-x-hidden"
+      class="bg-[url(assets/img/photo/immeuble1.jpg)] h-[700px] bg-cover bg-center w-full flex flex-col items-center justify-center overflow-x-hidden"
     >
       <h1
         *ngIf="isUnitService"
-        class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-12"
+        class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-8"
       >
-        Paiement immédiat, unique et sans abonnement
+        Pack Visibilité
       </h1>
       <h1
         *ngIf="!isUnitService"
-        class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-12"
+        class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-8"
       >
-        Paiement au succès, en co-mandat et sans abonnement
+      Pack Visibilité
       </h1>
-      <p
+      <div
         *ngIf="isUnitService"
-        class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
+        class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 items-center justify-center flex flex-col gap-4"
       >
-        La solution simple, efficace et sans contrainte !
-      </p>
-      <p
+      <h2 class="font-bold">Paiement immédiat, unique et sans abonnement :</h2>
+      <p>la solution simple, efficace et sans contrainte !</p>
+    </div>
+      <div
         *ngIf="!isUnitService"
-        class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
+        class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 items-center justify-center flex flex-col gap-4"
       >
-        Une solution flexible, sans risque et 100 % axée sur votre succès !
-      </p>
+      <h2 class="font-bold">Paiement au succès, en co-mandat et sans abonnement :</h2>
+      <p>la solution flexible, sans risque et 100 % axée sur votre succès !</p>
+  </div>
       <div class="p-2 z-10 bg-white rounded-full cursor-pointer">
         <div
           (click)="toggleService()"
@@ -127,7 +129,7 @@
     class="bg-mygray4 text-mygrey1 md:px-8 w-full mb-10 md:mb-24 flex flex-col items-center justify-center font-open"
   >
     <h2 class="text-3xl font-bold font-raleway text-center mb-16">
-      Ce qui est inclus dans l'offre
+      Ce qui est inclus dans le Pack Visibilité
     </h2>
 
     <p class="text-xl mb-24 md:w-3/4 text-center">
@@ -290,7 +292,7 @@
         {
           check:
             'Je me connecte à DiffuZe ou directement à mon logiciel métier',
-          information: 'Compatible avec tous les logiciel métier du marché'
+          information: 'Compatible avec tous les logiciels métier du marché'
         },
         {
           check:
@@ -299,7 +301,7 @@
         { check: 'Je télécharge mes photos' },
         { check: 'Je choisis mes options et procède au paiement' }
       ]"
-      information="Compatible avec tous les logiciel métier du marché"
+      information="Compatible avec tous les logiciels métier du marché"
       image="assets/img/illustration/completed.png"
     ></app-how-card>
     <app-how-card
@@ -310,16 +312,17 @@
         {
           check:
             'Je me connecte à DiffuZe ou directement à mon logiciel métier',
-          information: 'Compatible avec tous les logiciel métier du marché'
+          information: 'Compatible avec tous les logiciels métier du marché'
         },
         {
           check:
             'J’enregistre les caractéristiques de mon annonce (vente ou location)'
         },
         { check: 'Je télécharge mes photos' },
-        { check: 'Je choisis mes options et enregistre mon annonce' }
+        { check: 'Je choisis mes options et enregistre mon annonce' },
+        { check: 'Aucun paiement, signature du co-mandat' },
       ]"
-      information="Compatible avec tous les logiciel métier du marché"
+      information="Compatible avec tous les logiciels métier du marché"
       image="assets/img/illustration/completed.png"
     ></app-how-card>
 

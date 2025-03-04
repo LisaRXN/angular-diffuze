@@ -5,19 +5,21 @@
     "features": [
       { "icon": "📢", 
         "title": "Où sera diffusée mon annonce ?", 
-        "text": "BellesDemeures.com & Lux-residence.com : les leaders incontestés des portails immobiliers de luxe."
+        "url":"www.bellesdemeures.com",
+        "url2":"www.lux-residence.com",
+        "text": " : les leaders incontestés des portails immobiliers de luxe."
      },
       { "icon": "💡", 
         "title": "Pourquoi est-il essentiel d'avoir votre bien sur des sites haut de gamme ?", 
         "text": "Lorsque vous choisissez de mettre en avant votre propriété sur des sites de luxe comme BellesDemeures et Lux-residence, vous ne faites pas seulement le choix de la visibilité, mais vous vous assurez de maximiser vos chances de vendre au meilleur prix, et ce, rapidement.",
         "list": [
-        { "bold": "Attraction des acheteurs fortunés : ", "text": "Ces plateformes attirent une clientèle aisée..." },
-        { "bold": "Protection de la valeur : ", "text": "Minimisez les négociations à la baisse..." }
+        { "bold": "Attraction des acheteurs fortunés : ", "text": "Ces plateformes attirent une clientèle aisée." },
+        { "bold": "Protection de la valeur : ", "text": "Minimisez les négociations à la baisse." }
       ] },
       { "icon": "🎯", 
         "title": "Pour qui ?", 
         "list": [
-        { "bold": "Paris intra-muros : ", "text": "Biens d’un prix supérieur à 890 000 €..." },
+        { "bold": "Paris intra-muros : ", "text": "Biens d’un prix supérieur à 890 000 €." },
         { "bold": "Île-de-France : ", "text": "Biens d’un prix supérieur à 790 000 €" }
       ]
      }
@@ -30,15 +32,16 @@
       "features": [
         { "icon": "📢", 
           "title": "Pourquoi choisir Jinka pour maximiser la visibilité de votre bien immobilier ?", 
-          "text": "Publier sur Jinka, c’est accéder à une plateforme innovante, conçue pour connecter votre annonce à des acheteurs qualifiés et accroître sa visibilité.",
+          "url": "www.jinka.fr/pro",
+          "text": " : publier sur Jinka, c’est accéder à une plateforme innovante, conçue pour connecter votre annonce à des acheteurs qualifiés et accroître sa visibilité.",
           "list": [
-          { "bold": "Audience locale et nationale : ", "text": "Attirez des milliers de visiteurs actifs..." },
-          { "bold": "Alertes personnalisées : ", "text": "Les utilisateurs reçoivent des notifications instantanées..." }
+          { "bold": "Audience locale et nationale : ", "text": "Attirez des milliers de visiteurs actifs." },
+          { "bold": "Alertes personnalisées : ", "text": "Les utilisateurs reçoivent des notifications instantanées." }
         ] },
         { "icon": "💡", "title": "Pourquoi choisir Jinka pour maximiser la visibilité de votre bien immobilier ?", 
           "list": [
-          { "bold": "Priorité de diffusion : ", "text": "Bénéficiez d’une mise en ligne optimisée..." },
-          { "bold": "Mises en avant spécifiques : ", "text": "Profitez d’options exclusives..." },
+          { "bold": "Priorité de diffusion : ", "text": "Bénéficiez d’une mise en ligne optimisée." },
+          { "bold": "Mises en avant spécifiques : ", "text": "Profitez d’options exclusives." },
           { "bold": "Chiffres clés : ", "text": "Des milliers d’utilisateurs actifs chaque mois, attirés par les fonctionnalités intuitives de la plateforme. Un système de notifications en temps réel, favorisant un engagement élevé et des contacts qualifiés." }
         ]
        }
@@ -51,15 +54,16 @@
       "features": [
         { "icon": "📢", 
           "title": "Où sera diffusée mon annonce ?", 
-          "text": "Gensdeconfiance.com/fr : le réseau exclusif pour des échanges sécurisés et de qualité. "
+          "url":"www.gensdeconfiance.com/fr",
+          "text": " : le réseau exclusif pour des échanges sécurisés et de qualité. "
          },
         { "icon": "💡", 
-          "title": "Pourquoi choisir Gens de confiance pour votre bien immobilier ?", 
+          "title": "Pourquoi choisir Gens de Confiance pour votre bien immobilier ?", 
           "text":"Publier votre bien sur Gens de Confiance, c'est rejoindre une plateforme unique qui repose sur la confiance entre ses membres. Avec plus de 1 million d’utilisateurs inscrits, ce site garantit une audience qualifiée et attentive, parfaite pour vendre ou louer des biens immobiliers.",
           "list": [
           { "bold": "Réseau privé et sécurisé : ", "text": "Chaque membre est parrainé par 3 personnes de confiance, assurant des interactions sérieuses et fiables." },
           { "bold": "Audience ciblée : ", "text": "Une communauté active, majoritairement composée de familles et de particuliers en recherche de biens immobiliers." },
-          { "bold": "Valorisation des annonces: ", "text": "Une visibilité accrue grâce à la qualité du réseau et aux outils proposés, tels que des descriptions détaillées et des échanges directs avec des acheteurs qualifiés." }
+          { "bold": "Valorisation des annonces : ", "text": "Une visibilité accrue grâce à la qualité du réseau et aux outils proposés, tels que des descriptions détaillées et des échanges directs avec des acheteurs qualifiés." }
         ]
        }
       ],
@@ -71,7 +75,8 @@
       "features": [
         { "icon": "📢", 
           "title": "Où sera diffusée mon annonce ?", 
-          "text": "Green-acres.fr : le portail immobilier pour vendre en France et à l’international. "
+          "url" : "www.green-acres.fr",
+          "text": " : le portail immobilier pour vendre en France et à l’international. "
          },
         { "icon": "💡", 
           "title": "Pourquoi choisir Green-Acres pour votre bien immobilier ?", 

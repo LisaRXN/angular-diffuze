@@ -1,8 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 interface Feature {
   icon: string;
   title: string;
+  url?:string;
+  url2?:string;
   text?: string;
   list?: { bold: string; text: string }[];
 }
@@ -16,7 +19,7 @@ interface Option {
 
 @Component({
   selector: 'app-option',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './option.component.html',
   styleUrl: './option.component.scss'
 })

@@ -29,7 +29,7 @@
           alt=""
         />
         <p *ngIf="isUnitService" class="leading-8">
-         <span class="font-semibold">Pack principal :</span> diffusion sur plus de <span (click)="openModal()" class="cursor-pointer font-semibold underline">40 plateformes</span> (SeLoger, Logic Immo, Le Figaro immobilier...)
+         <span class="font-semibold">Pack Visibilité :</span> diffusion sur <span (click)="openModal()" class="cursor-pointer font-semibold underline">50 plateformes</span> (SeLoger, Logic Immo, Le Figaro immobilier...)
         
           <span class="relative group ml-1">
             <img
@@ -48,7 +48,7 @@
         <!-- <p *ngIf="!isUnitService" class="leading-8">Annonce en paiement au succès (co-mandat)</p> -->
 
         <p *ngIf="!isUnitService" class="leading-8">
-          <span class="font-semibold">Pack principal :</span> diffusion sur plus de <span (click)="openModal()" class="cursor-pointer font-semibold underline">40 plateformes</span> (SeLoger, Logic Immo, Le Figaro immobilier...)
+          <span class="font-semibold">Pack Visibilité :</span> diffusion sur plus de <span (click)="openModal()" class="cursor-pointer font-semibold underline">50 plateformes</span> (SeLoger, Logic Immo, Le Figaro immobilier...)
         
           <span class="relative group ml-1">
             <img
@@ -83,7 +83,7 @@
         <label [for]="option.id">
           <p class="leading-8">
             <span *ngIf="isUnitService || option.id === 'reportage'" class="bg-myyellow2 p-2 rounded-lg">En option :</span>
-            <span *ngIf="!isUnitService && option.id != 'reportage'" class="bg-myyellow2 p-2 rounded-lg">Inclus :</span>
+            <span *ngIf="!isUnitService && option.id != 'reportage'" class="bg-myyellow2 p-2 rounded-lg">Offert :</span>
             {{ option.label }}
             <span class="relative group ml-1">
               <img
@@ -100,7 +100,7 @@
                 *ngIf="option.id === 'reportage'"
                 class="absolute bottom-full left-1/2 -translate-x-1/2 transform mb-2 hidden group-hover:block bg-gray-800 text-white text-sm px-3 py-1 rounded-md shadow-lg whitespace-nowrap"
               >
-                A partir de 300 euros
+                A partir de 120 euros
               </span>
             </span>
           </p>
@@ -161,8 +161,9 @@
         (click)="activeOption('lux')"
         id="lux"
         [ngClass]="{
-          'font-bold  border border-white flex-1 whitespace-nowrap p-4 rounded-t-lg pb-4 text-center': true,
-          'rounded-bl-2xl bg-mygrey2 text-myyellow1': !isOpenOption,
+          'font-bold  border border-white rounded-t-lg flex-1 whitespace-nowrap p-4 pb-4 text-center': true,
+          'md:rounded-bl-lg' : !isOpenOption,
+          'bg-mygrey2 text-myyellow1': !isOpenOption || optionView.id != 'lux',
           'bg-myyellow1 text-mygrey2': optionView.id === 'lux' && isOpenOption
         }"
       >
@@ -195,6 +196,7 @@
         id="green-acres"
         [ngClass]="{
           'font-semibold border border-white flex-1  p-4 rounded-t-lg pb-4 text-center': true,
+          'md:rounded-br-lg' : !isOpenOption,
           'bg-mygrey2 text-myyellow1': optionView.id !='green-acres',
           'bg-myyellow1 text-mygrey2': optionView.id === 'green-acres'
         }"

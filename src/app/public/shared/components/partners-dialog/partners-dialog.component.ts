@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import {MatDialogActions, MatDialogTitle, MatDialogClose, MatDialogContent, MatDialogRef} from '@angular/material/dialog'
 import {MatButtonModule} from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon';
@@ -22,7 +22,6 @@ interface Partner {
 export class PartnersDialogComponent {
 
   partners:Partner[] = partnersDetails
-
   @ViewChild('modal') modalRef!: ElementRef<HTMLDialogElement>;
 
   openModal() {
@@ -31,6 +30,12 @@ export class PartnersDialogComponent {
 
   closeModal() {
     this.modalRef.nativeElement.close();
+  }
+
+  closeModalByClick(event: Event) {
+    if (event.target === this.modalRef.nativeElement) {
+    this.closeModal();
+    }
   }
 
 
