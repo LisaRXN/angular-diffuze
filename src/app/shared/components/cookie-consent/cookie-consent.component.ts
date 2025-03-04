@@ -49,14 +49,17 @@ export class CookieConsentComponent implements OnInit {
   constructor(private analyticsService: AnalyticsService) {}
 
   ngOnInit() {
-    // Vérifier si le consentement a déjà été donné
-    if (typeof window !== 'undefined') {
-      const consent = localStorage.getItem('diffuze-cookie-consent');
-      if (consent) {
-        this.consentGiven = consent === 'true';
-        this.analyticsService.setConsent(this.consentGiven);
+    // Utiliser setTimeout pour déplacer la vérification après le cycle de détection des changements
+    setTimeout(() => {
+      // Vérifier si le consentement a déjà été donné
+      if (typeof window !== 'undefined') {
+        const consent = localStorage.getItem('diffuze-cookie-consent');
+        if (consent) {
+          this.consentGiven = consent === 'true';
+          this.analyticsService.setConsent(this.consentGiven);
+        }
       }
-    }
+    }, 0);
   }
 
   acceptCookies() {

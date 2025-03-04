@@ -1,6 +1,4 @@
-# Allow all URLs (see http://www.robotstxt.org/robotstxt.html)
-
+# Bloquer tous les robots (voir http://www.robotstxt.org/robotstxt.html)
 
 User-agent: *
-Allow: /
-Sitemap: https://diffuze.fr/sitemap.xml
+Disallow: /

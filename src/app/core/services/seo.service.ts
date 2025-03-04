@@ -17,6 +17,7 @@ export interface SeoConfig {
   twitterDescription?: string;
   twitterImage?: string;
   canonicalUrl?: string;
+  structuredData?: any;
 }
 
 @Injectable({
@@ -99,6 +100,11 @@ export class SeoService {
     } else {
       this.createCanonicalLink(`${this.baseUrl}${this.router.url}`);
     }
+
+    // Ajouter les données structurées si elles existent
+    if (config.structuredData && this.isBrowser) {
+      this.addStructuredData(config.structuredData);
+    }
   }
 
   private getLinkElementByRel(rel: string): HTMLLinkElement | null {
@@ -113,6 +119,22 @@ export class SeoService {
     link.setAttribute('rel', 'canonical');
     link.setAttribute('href', url);
     document.head.appendChild(link);
+  }
+
+  private addStructuredData(data: any): void {
+    if (!this.isBrowser) return;
+
+    // Supprimer les anciennes données structurées si elles existent
+    const existingScripts = document.querySelectorAll(
+      'script[type="application/ld+json"]'
+    );
+    existingScripts.forEach((script) => script.remove());
+
+    // Ajouter les nouvelles données structurées
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(data);
+    document.head.appendChild(script);
   }
 
   updateDynamicSeoTags(

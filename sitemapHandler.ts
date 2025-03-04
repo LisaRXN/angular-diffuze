@@ -40,7 +40,7 @@ async function fetchUrls(): Promise<UrlData[]> {
 
     // Récupérer les URLs dynamiques (articles, propriétés, etc.)
     const dynamicResponse = await fetch(
-      'http://data.barnabe-immo.fr/api/seo/urls'
+      'http://data.barnabe-immo.fr/api/seo/urls/pro'
     );
     const dynamicUrls: UrlData[] = await dynamicResponse.json();
 
