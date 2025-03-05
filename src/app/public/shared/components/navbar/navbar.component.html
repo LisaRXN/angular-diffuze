@@ -28,8 +28,27 @@
       >DZ<span class="text-myyellow1">.</span></a
     >
 
+    <!-- Coupon -->
     <div
-      class="lg:order-2 flex items-center justify-center gap-2 md:gap-4 lg:gap-6"
+      class="relative hidden sm:block lg:hidden bg-gray-400 px-5 p-2 h-[60px] w-[150px] rounded-lg mx-1"
+    >
+      <span
+        class="absolute left-0 transforme -translate-x-[50%] -translate-y-[50%] top-1/2 h-[20px] w-[20px] rounded-full bg-white"
+      ></span>
+      <span
+        class="absolute right-0 transforme translate-x-[50%] -translate-y-[50%] top-1/2 h-[20px] w-[20px] rounded-full bg-white"
+      ></span>
+      <div class="flex justify-between">
+        <p class="font-semibold text-white text-lg">-50 %</p>
+        <p class="font-semibold text-myyellow1 text-lg">DIF50</p>
+      </div>
+      <p class="text-[9px] whitespace-nowrap text-white">
+        Sur votre 1ère commande
+      </p>
+    </div>
+
+    <div
+      class="lg:order-2 flex items-center justify-center gap-2 md:gap-4 lg:gap-2 xl:gap-6"
     >
       <a
         href="http://www.app.diffuze.fr"
@@ -51,7 +70,7 @@
         rel="external"
         ><img
           src="assets/img/icon/phone.png"
-          class="lg:hidden h-[25px] w-auto cursor-pointer"
+          class="lg:hidden h-auto w-[25px] cursor-pointer"
           alt=""
       /></a>
       <a
@@ -60,12 +79,14 @@
         rel="external"
         ><img
           src="assets/img/icon/user.png"
-          class="h-[25px] w-auto cursor-pointer"
+          class="h-auto w-[25px] cursor-pointer"
           alt=""
       /></a>
     </div>
 
-    <div class="hidden lg:flex flex-1 w-full items-center justify-between">
+    <div
+      class="hidden lg:flex flex-1 w-full items-center justify-between mr-2 xl:mr-20"
+    >
       <ul class="menu menu-horizontal font-semibold">
         <!-- Navbar menu content here -->
         <li><a routerLink="/service">Notre Offre</a></li>
@@ -74,13 +95,23 @@
       </ul>
 
       <!-- Coupon -->
-      <!-- <div class=" bg-gray-400 px-5 p-2 h-[60px] w-[180px] rounded-lg">
+      <div
+        class="relative hidden lg:block bg-gray-400 px-5 p-2 h-[60px] w-[150px] rounded-lg xl:mr-10"
+      >
+        <span
+          class="absolute left-0 transforme -translate-x-[50%] -translate-y-[50%] top-1/2 h-[20px] w-[20px] rounded-full bg-white"
+        ></span>
+        <span
+          class="absolute right-0 transforme translate-x-[50%] -translate-y-[50%] top-1/2 h-[20px] w-[20px] rounded-full bg-white"
+        ></span>
         <div class="flex justify-between">
-          <p class="font-semibold text-white text-2xl">-50 %</p>
-          <p class="font-semibold text-myyellow1 text-2xl">DIF25</p>
+          <p class="font-semibold text-white text-lg">-50 %</p>
+          <p class="font-semibold text-myyellow1 text-lg">DIF50</p>
         </div>
-        <p class="text-[8px] whitespace-nowrap text-white">Sur votre première commande</p>
-      </div> -->
+        <p class="text-[9px] whitespace-nowrap text-white">
+          Sur votre 1ère commande
+        </p>
+      </div>
     </div>
   </div>
 </div>

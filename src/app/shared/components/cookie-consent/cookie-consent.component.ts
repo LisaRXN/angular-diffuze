@@ -6,13 +6,32 @@ import { AnalyticsService } from '../../../core/services/analytics.service';
   template: `
     @if(!consentGiven){
     <div class="cookie-banner">
-      <p>
-        Nous utilisons des cookies pour améliorer votre expérience sur notre
-        site.
-      </p>
-      <div class="buttons">
-        <button (click)="acceptCookies()">Accepter</button>
-        <button (click)="rejectCookies()">Refuser</button>
+      <div class="flex flex-col md:flex-row gap-2 flex-1 justify-between">
+        <div class="flex items-center justify-start gap-4 ">
+          <img
+            src="assets/img/icon/cookies.png"
+            class="z-10 w-[40px] h-auto"
+            alt=""
+          />
+          <p class="text-slate-500 text-justify">
+            Nous utilisons des cookies pour améliorer votre expérience sur notre
+            site.
+          </p>
+        </div>
+        <div class="buttons flex-col md:flex-row">
+          <button
+            (click)="acceptCookies()"
+            class="w-full md:w-auto text-white bg-blue-800 hover:bg-blue-900 px-4 py-3 rounded-xl transition duration-300"
+          >
+            Accepter
+          </button>
+          <button
+            (click)="rejectCookies()"
+            class="w-full md:w-auto text-blue-800 hover:bg-mygrey4 px-4 py-3 rounded-xl  transition duration-300"
+          >
+            Refuser
+          </button>
+        </div>
       </div>
     </div>
     }
@@ -27,7 +46,6 @@ import { AnalyticsService } from '../../../core/services/analytics.service';
         background: #f1f1f1;
         padding: 1rem;
         display: flex;
-        justify-content: space-between;
         align-items: center;
         z-index: 1000;
       }
