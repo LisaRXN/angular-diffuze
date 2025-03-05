@@ -77,13 +77,13 @@
 
   <!-- Features Section -->
   <div
-    class="p-5 md:p-20 w-full bg-myyellow1 font-open text-mygrey1 overflow-hidden mb-16"
+    class="p-5 lg:p-10 w-full bg-myyellow1 font-open text-mygrey1 overflow-hidden mb-16"
   >
     <!-- Pack Visibilité -->
     <div
-      class="max-w-[1500px] m-auto flex flex-col md:flex-row justify-between text-justify gap-8 md:gap-20 mb-16 lg:mb-24"
+      class="md:p-10 max-w-[1500px] m-auto flex flex-col md:flex-row justify-between text-justify gap-5 mb-10 lg:mb-16"
     >
-      <div class="flex-1">
+      <div class="">
         <h2 class="text-xl font-semibold text-mygrey3 mb-4">Notre Offre</h2>
         <h3
           class="text-5xl md:text-7xl font-extrabold font-raleway text-mygrey1 mb-6"
@@ -102,91 +102,59 @@
           >
         </div>
       </div>
-      <div class="flex-1 h-[400px]">
+      <div class="h-[250px] md:h-[350px]">
         <img
           src="assets/img/illustration/advertising.png"
-          class="h-full w-auto max-h-[400px] object-contain m-auto"
+          class="h-full w-auto object-contain m-auto"
           alt=""
         />
       </div>
     </div>
 
     <!-- Numbers -->
-    <div class="relative 2xl:w-3/4 m-auto grid md:grid-cols-3 gap-8 mb-16">
-      <div
-        class="bg-mygrey5 m-auto h-[250px] w-[250px] lg:h-[300px] lg:w-[300px] rounded-4xl flex flex-col items-center justify-center gap-8 p-10 z-10 hover:scale-105 transition-all duration-300 cursor-default"
-      >
-        <div class="relative">
-          <p
-            class="absolute -top-2 right-2 transform text-6xl lg:text-8xl font-paytone text-mygrey1"
-          >
-            +50
-          </p>
-          <p class="z-0 text-6xl lg:text-8xl font-paytone text-myyellow1">
-            +50
-          </p>
-        </div>
-
-        <div class="flex w-3/4 items-center justify-center gap-5">
-          <img src="assets/img/icon/volume.png" class="w-8 h-8" alt="" />
-          <p class="text-mygrey1 font-semibold lg:max-w-32 text-xl">
-            Plateformes de diffusion
-          </p>
-        </div>
-      </div>
-      <div
-        class="bg-myyellow2 m-auto h-[250px] w-[250px] lg:h-[300px] lg:w-[300px] rounded-4xl flex flex-col items-center justify-center gap-8 p-10 z-10 hover:scale-105 transition-all duration-300 cursor-default"
-      >
-        <div class="relative">
-          <p
-            class="absolute -top-2 right-2 transform text-6xl lg:text-8xl font-paytone text-mygrey1"
-          >
-            60
-          </p>
-          <p class="text-6xl lg:text-8xl font-paytone text-myyellow1">60</p>
-        </div>
-        <div class="flex w-3/4 items-center justify-center gap-5">
-          <img src="assets/img/icon/clock.png" class="w-8 h-8" alt="" />
-          <p class="text-mygrey1 font-semibold text-xl">Jours de visibilité</p>
-        </div>
-      </div>
-      <div
-        class="bg-mygrey2 m-auto h-[250px] w-[250px] lg:h-[300px] lg:w-[300px] rounded-4xl flex flex-col items-center justify-center gap-8 p-10 z-10 hover:scale-105 transition-all duration-300 cursor-default"
-      >
-        <div class="relative">
-          <p
-            class="absolute -top-2 right-2 transform text-6xl lg:text-8xl font-paytone text-white"
-          >
-            +75%
-          </p>
-          <p class="text-6xl lg:text-8xl font-paytone text-mygrey1">+75%</p>
-        </div>
-        <div class="flex w-3/4 items-center justify-center gap-5 lg:max-w-44">
-          <img
-            src="assets/img/icon/trending-yellow.png"
-            class="w-10 h-10"
-            alt=""
-          />
-          <p class="text-mygrey5 font-semibold lg:max-w-32 text-xl">
-            D'augmentation des ventes
-          </p>
-        </div>
-      </div>
+    <div
+      #numbers
+      class="relative 2xl:w-3/4 m-auto grid md:grid-cols-3 gap-5 mb-16"
+    >
+      <app-number-card
+        image="assets/img/icon/marketing.png"
+        text="Plateformes de diffusion"
+        bg="mygrey5"
+        [startValue]="0"
+        [endValue]="50"
+      ></app-number-card>
+      <app-number-card
+        image="assets/img/icon/client.png"
+        text="Interlocuteur unique"
+        bg="myyellow2"
+        [startValue]="10"
+        [endValue]="1"
+      ></app-number-card>
+      <app-number-card
+        image="assets/img/icon/freedom-yellow.png"
+        text="Abonnement, engagement"
+        bg="mygrey2"
+        [startValue]="10"
+        [endValue]="0"
+      ></app-number-card>
     </div>
+
   </div>
+
 
   <!-- Découvrez nos offres-->
   <div
-    class="bg-mygray4 w-full mb-16 font-open text-mygrey1 px-8 flex flex-col items-center justify-center overflow-x-hidden"
+    class="bg-mygray4 w-full mb-16 font-open text-mygrey1 px-5 flex flex-col items-center justify-center overflow-x-hidden"
   >
     <h2 class="text-3xl font-bold font-raleway text-center mb-12 z-10">
       Découvrez le Pack Visibilité
     </h2>
     <p class="text-xl leading-relaxed mb-12 md:w-3/4 text-justify">
-      <span class="font-semibold">Deux modes de paiement au choix pour une offre sur-mesure : </span>paiement unique et
-      immédiat ou rémunération au succès avec le co-mandat. Dans les deux cas,
-      bénéficiez d’une diffusion maximale et de services complets pour diffuser
-      vos annonces en toute sérénité !
+      <span class="font-semibold"
+        >Deux modes de paiement au choix pour une offre sur-mesure : </span
+      >paiement unique et immédiat ou rémunération au succès avec le co-mandat.
+      Dans les deux cas, bénéficiez d’une diffusion maximale et de services
+      complets pour diffuser vos annonces en toute sérénité !
     </p>
 
     <!-- Paiement unique -->
@@ -254,8 +222,9 @@
           <a
             routerLink="/service"
             class="bg-myyellow1 text-mygrey1 rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-myyellow2 transition-all transition-300 cursor-pointer"
-            >En savoir plus</a
           >
+          En savoir plus
+        </a>
         </div>
         <div class="order-1 md:order-2 leading-relaxed">
           <p class="font-raleway font-mygrey2 font-bold">
@@ -456,46 +425,14 @@
       Découvrez les biens à vendre
     </h2>
 
-    <div class="relative z-10 w-[350px] md:w-[750px] xl:w-[1150px]">
-      <div #carousel class="carousel w-full space-x-[10px] lg:space-x-[50px]">
+    <div class="relative z-10 w-[350px] md:w-full lg:max-w-[1160px]">
+      <div #carousel class="grid lg:grid-cols-3 lg:gap-5 m-auto">
         @for (property of properties; track property) {
-        <div class="carousel-item w-full md:w-1/2 lg:w-auto">
-          <app-property-card
-            id="slide"
-            class="w-full"
-            [property]="property"
-          ></app-property-card>
-        </div>
-        } @for (property of properties; track property) {
-        <div class="carousel-item w-full md:w-1/2 lg:w-auto">
-          <app-property-card
-            class="w-full"
-            [property]="property"
-          ></app-property-card>
-        </div>
+        <app-property-card
+          class="w-full"
+          [property]="property"
+        ></app-property-card>
         }
-      </div>
-      <div
-        class="absolute -inset-10 flex justify-between items-center pointer-events-none"
-      >
-        <button
-          [ngClass]="{
-            'btn btn-circle pointer-events-auto border border-white bg-white hover:bg-mygrey2 hover:border-mygrey2': true,
-            'opacity-0': isCarouselStart
-          }"
-          (click)="prevSlide()"
-        >
-          ❮
-        </button>
-        <button
-          [ngClass]="{
-            'btn btn-circle pointer-events-auto border border-white bg-white hover:bg-mygrey2 hover:border-mygrey2': true,
-            'opacity-0': isCarouselEnd
-          }"
-          (click)="nextSlide()"
-        >
-          ❯
-        </button>
       </div>
     </div>
 
@@ -532,24 +469,24 @@
     </h2>
 
     <div
-      class="px-8 grid grid-cols-2 md:grid-cols-4 gap-10 lg:gap-20 place-items-center mb-24"
+      class="px-8 grid grid-cols-2 md:grid-cols-4 gap-20 place-items-center mb-24"
     >
-      <img src="assets/img/logo/century21.png" class="z-10 w-[140px]" alt="" />
-      <img src="assets/img/logo/laforet.png" class="z-10 w-[140px]" alt="" />
-      <img src="assets/img/logo/toc.png" class="z-10 w-[140px]" alt="" />
-      <img src="assets/img/logo/setImmo.png" class="z-10 w-[140px]" alt="" />
-      <img src="assets/img/logo/effiducia.png" class="z-10 w-[140px]" alt="" />
+      <img src="assets/img/logo/century21.png" class="z-10 w-[90px] md:w-[140px]" alt="" />
+      <img src="assets/img/logo/laforet.png" class="z-10 w-[90px] md:w-[140px]" alt="" />
+      <img src="assets/img/logo/toc.png" class="z-10 w-[90px] md:w-[140px]" alt="" />
+      <img src="assets/img/logo/setImmo.png" class="z-10 w-[90px] md:w-[140px]" alt="" />
+      <img src="assets/img/logo/effiducia.png" class="z-10 w-[90px] md:w-[140px]" alt="" />
       <img
         src="assets/img/logo/maitrecarre.png"
-        class="z-10 w-[140px]"
+        class="z-10 w-[90px] md:w-[140px]"
         alt=""
       />
-      <img src="assets/img/logo/bercail.png" class="z-10 w-[140px]" alt="" />
-      <img src="assets/img/logo/hotels.png" class="z-10 w-[140px]" alt="" />
+      <img src="assets/img/logo/bercail.png" class="z-10 w-[90px] md:w-[140px]" alt="" />
+      <img src="assets/img/logo/hotels.png" class="z-10 w-[90px] md:w-[140px]" alt="" />
     </div>
 
     <div
-      class="flex items-center justify-center m-auto text-lg font-open text-center gap-2 mb-36"
+      class="px-5 flex flex-col md:flex-row items-center justify-center m-auto text-lg font-open text-center gap-2 mb-36"
     >
       <p>Rejoignez + de</p>
       <div class="relative inline-block">
@@ -567,7 +504,7 @@
       class="lg:h-[500px] h-auto pb-10 lg:pb-10 bg-mygrey2 grid w-full lg:grid-cols-[1fr_1.5fr]"
     >
       <div
-        class="relative p-20 lg:p-10 xl:p-24 flex flex-col items-start justify-center gap-10"
+        class="relative p-5 py-20 md:p-20 lg:p-10 xl:p-24 flex flex-col items-start justify-center gap-10"
       >
         <div
           class="absolute p-10 h-[100px] w-[100px] top-0 left-0 translate-y-[-50%] translate-x-[50%] rounded-full bg-myyellow1 flex items-center justify-center"
@@ -603,7 +540,7 @@
               class="max-w-[140px] max-h-[100px] self-center"
             />
           </div>
-          <p class="p-5 leading-relaxed text-justify">
+          <p class="p-5 leading-relaxed text-justify hyphens-auto">
             “Simple, rapide et efficace. Tout ce qu’on attend d’un bon service
             de diffusion d’annonces immobilières ! Je recommande sans
             hésitation.“
@@ -628,7 +565,7 @@
               class="max-w-[140px] max-h-[100px]"
             />
           </div>
-          <p class="p-5 leading-relaxed text-justify">
+          <p class="p-5 leading-relaxed text-justify hyphens-auto">
             “Un outil simple, efficace et surtout adapté à nos besoins. La
             flexibilité des offres et la diffusion sur les grands portails
             immobiliers en font une solution incontournable pour les petites
@@ -652,8 +589,7 @@
       Besoin de plus d'information ?
     </h2>
     <p class="text-xl leading-relaxed text-justify">
-      Besoin de conseils personnalisés ? Réservez un rendez-vous avec Victor
-      Plessis, expert en transaction immobilière : il répondra à toutes vos
+      Besoin de conseils personnalisés ? Réservez un rendez-vous avec un conseiller : il répondra à toutes vos
       questions !
     </p>
     <div class="grid md:grid-cols-2 place-items-center p-10 gap-8 lg:gap-0">
@@ -661,7 +597,7 @@
         href="https://app.lemcal.com/@diffuze/15min"
         target="_blank"
         rel="external"
-        class="ml-10 bg-myyellow1 text-mygrey1 rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-myyellow2 transition-all transition-300 cursor-pointer"
+        class="md:ml-10 bg-myyellow1 text-mygrey1 rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-myyellow2 transition-all transition-300 cursor-pointer"
         >Prendre rendez-vous
       </a>
       <img

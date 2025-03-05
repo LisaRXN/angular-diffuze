@@ -3,13 +3,13 @@
   #modal
   (click)="closeModalByClick($event)"
   class="modal rounded-lg"
-  id="default-modal rounded-lg"
+  id="default-modal rounded-lg px-4"
   tabindex="-1"
   aria-hidden="true"
 >
   <div
     (click)="$event.stopPropagation()"
-    class="relative bg-white p-4 w-2/3 h-2/3 overflow-scroll rounded-lg shadow-sm"
+    class="relative bg-white p-4 md:w-2/3 h-2/3 overflow-scroll rounded-lg shadow-sm"
   >
     <!-- Modal content -->
     <div>
@@ -53,7 +53,7 @@
           <a [href]="partner.web" target="_blank">
             <img
               [src]="partner.image"
-              class="max-w-[120px] max-h-[80px] cursor-pointer"
+              class="max-w-[100px] max-h-[60px] md:max-w-[120px] md:max-h-[80px] cursor-pointer"
               [alt]="partner.alt"
             />
           </a>

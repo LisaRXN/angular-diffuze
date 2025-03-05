@@ -62,7 +62,7 @@
     ></div>
   </div> -->
 
-  <div class="relative h-[700px] w-full mb:10 pb-16 text-mygrey1 mb-14">
+  <div class="relative h-[700px] w-full pb-16 text-mygrey1 md:mb-14">
     <div class="bg-white opacity-60 absolute inset-0 w-full h-full"></div>
     <span class="absolute z-10 h-[100px] w-[120%] left-1/2 transform -translate-x-1/2 -rotate-3 -bottom-10 bg-gray-100"></span>
     <div
@@ -82,16 +82,16 @@
       </h1>
       <div
         *ngIf="isUnitService"
-        class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 items-center justify-center flex flex-col gap-4"
+        class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
       >
-      <h2 class="font-bold">Paiement immédiat, unique et sans abonnement :</h2>
+      <h2 class="font-bold mb-2">Paiement immédiat, unique et sans abonnement :</h2>
       <p>la solution simple, efficace et sans contrainte !</p>
     </div>
       <div
         *ngIf="!isUnitService"
-        class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 items-center justify-center flex flex-col gap-4"
+        class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
       >
-      <h2 class="font-bold">Paiement au succès, en co-mandat et sans abonnement :</h2>
+      <h2 class="font-bold mb-2">Paiement au succès, en co-mandat et sans abonnement :</h2>
       <p>la solution flexible, sans risque et 100 % axée sur votre succès !</p>
   </div>
       <div class="p-2 z-10 bg-white rounded-full cursor-pointer">
@@ -126,22 +126,30 @@
 
   <!-- Ce qui est inclus -->
   <div
-    class="bg-mygray4 text-mygrey1 md:px-8 w-full mb-10 md:mb-24 flex flex-col items-center justify-center font-open"
+    class="lg:w-4/5 bg-mygray4 text-mygrey1 px-5 md:px-8 w-full mb-10 md:mb-24 flex flex-col items-center justify-center font-open"
   >
     <h2 class="text-3xl font-bold font-raleway text-center mb-16">
       Ce qui est inclus dans le Pack Visibilité
     </h2>
 
-    <p class="text-xl mb-24 md:w-3/4 text-center">
-      Un prestataire unique pour prendre en charge la diffusion de votre annonce
+    <p class="text-xl mb-20 md:text-center text-justify hyphens-auto">
+      Un prestataire unique pour prendre en charge la diffusion de votre annonce. 
     </p>
 
     <!-- Service Cards -->
-    <div class="grid md:grid-cols-3 sm:px-12 px-5 gap-14">
+    <div class="grid px-5 md:px-0 md:grid-cols-3 gap-14 mb-16 md:mb-20">
       @for(service of currentServices; track service){
       <app-service-card [service]="service"></app-service-card>
       }
     </div>
+
+    <div class="flex flex-col md:flex-row items-center justify-start gap-5">
+      <img src="assets/img/icon/diffuze.png" class="hidden md:block h-auto w-12" alt="">
+      <p class="text-xl text-justify hyphens-auto leading-relaxed">
+        Besoin de diffuser un grand volume d’annonces ? Découvrez nos packs adaptés et simplifiez votre gestion. <a class="underline font-semibold cursor-pointer">Prenez rendez-vous dès maintenant !</a>
+      </p>
+    </div>
+
   </div>
 
   <!-- Comprendre le co-mandat -->
@@ -392,7 +400,7 @@
           type="button"
           aria-expanded="false"
         >
-          <p class="font-bold text-lg">{{ question.text }}</p>
+          <p class="font-bold text-lg text-start">{{ question.text }}</p>
           <img
             class="h-[10px] transition-transform duration-300 group-hover:rotate-180"
             src="assets/img/icon/btn-down.png"

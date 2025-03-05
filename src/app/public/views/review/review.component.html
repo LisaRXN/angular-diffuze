@@ -1,24 +1,28 @@
-<div class="min-h-screen bg-gray-50 flex flex-col items-center font-open overflow-x-hidden">
+<div
+  class="min-h-screen bg-gray-50 flex flex-col items-center font-open overflow-x-hidden"
+>
   <!-- Hero -->
   <div class="relative h-[700px] w-full mb:10 pb-16 text-mygrey1 mb-16">
     <div class="bg-white opacity-60 absolute inset-0 w-full h-full"></div>
-    <span class="absolute h-[100px] w-[120%] left-1/2 transform -translate-x-1/2 -rotate-3 -bottom-10 bg-gray-50"></span>
+    <span
+      class="absolute h-[100px] w-[120%] left-1/2 transform -translate-x-1/2 -rotate-3 -bottom-10 bg-gray-50"
+    ></span>
     <div
-    class="bg-[url(assets/img/photo/maison2.jpg)] h-[700px] bg-center bg-cover bg-no-repeat w-full flex flex-col items-center justify-center "
+      class="bg-[url(assets/img/photo/maison2.jpg)] h-[700px] bg-center bg-cover bg-no-repeat w-full flex flex-col items-center justify-center"
     >
-    <h1 class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-12">
-      DiffuZe : adopté et approuvé par nos clients
-    </h1>
-    <p
-      class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
-    >
-      Votre satisfaction est notre meilleure réussite
-    </p>
+      <h1 class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-12">
+        DiffuZe : adopté et approuvé par nos clients
+      </h1>
+      <p
+        class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
+      >
+        Votre satisfaction est notre meilleure réussite
+      </p>
 
-    <!-- <div
+      <!-- <div
       class="absolute -top-20 left-1/2 w-[140%] h-[550px] bg-mygrey2 transform -translate-x-1/2 -rotate-3"
     ></div> -->
-  </div>
+    </div>
   </div>
 
   <!-- First Review -->
@@ -26,9 +30,19 @@
     class="px-8 lg:w-3/4 mb-16 md:mb-24 text-mygrey1 flex flex-col lg:flex-row items-center justify-center gap-10 xl:gap-20"
   >
     <div class="relative flex flex-col gap-10">
-      <p class="z-0 absolute -top-28 -left-6 md:-left-12 font-paytone text-[160px] text-myyellow1">“</p>
-      <p class="z-10 text-2xl italic leading-relaxed text-justify max-w-[500px]">
-        “Un outil <span class="font-bold">simple, efficace</span> et surtout adapté à nos besoins. La flexibilité des offres et la diffusion sur les grands portails immobiliers en font <span class="font-bold">une solution incontournable</span> pour les petites agences.”
+      <p
+        class="z-0 absolute -top-28 -left-6 md:-left-12 font-paytone text-[160px] text-myyellow1"
+      >
+        “
+      </p>
+      <p
+        class="z-10 text-2xl italic leading-relaxed text-justify max-w-[500px]"
+      >
+        “Un outil <span class="font-bold">simple, efficace</span> et surtout
+        adapté à nos besoins. La flexibilité des offres et la diffusion sur les
+        grands portails immobiliers en font
+        <span class="font-bold">une solution incontournable</span> pour les
+        petites agences.”
       </p>
       <div class="flex items-center justify-between">
         <div class="">
@@ -46,73 +60,36 @@
   <hr class="w-3/4 m-auto mb-24" />
 
   <!-- Ils nous font confiance -->
-  <div class="bg-mygray4 w-full mb-16 font-open text-mygrey1 px-8">
+  <div class="bg-mygray4 w-full mb-20 font-open text-mygrey1 px-8">
     <h2 class="text-3xl font-bold font-raleway text-center mb-12">
       Ils nous font confiance
     </h2>
 
     <div
-      class="w-3/4 m-auto grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-y-10 gap-x-28 md:gap-x-20 place-items-center mb-16"
+      class="w-3/4 m-auto grid grid-cols-2 md:grid-cols-3 gap-y-16 gap-x-28 md:gap-x-20 place-items-center mb-20"
     >
+      @for(review of reviews; track review){
       <img
-        src="assets/img/logo/century21.png"
-        class="w-[120px] md:w-[140px]"
+        [src]="review.image"
+        class="w-[120px] md:w-[140px] rounded-lg"
         alt=""
       />
-      <img
-        src="assets/img/logo/laforet.png"
-        class="w-[120px] md:w-[140px]"
-        alt=""
-      />
-      <img
-        src="assets/img/logo/toc.png"
-        class="w-[120px] md:w-[140px]"
-        alt=""
-      />
-      <img
-        src="assets/img/logo/setImmo.png"
-        class="w-[120px] md:w-[140px]"
-        alt=""
-      />
-      <img
-        src="assets/img/logo/effiducia.png"
-        class="w-[120px] md:w-[140px]"
-        alt=""
-      />
-      <img
-        src="assets/img/logo/maitrecarre.png"
-        class="w-[120px] md:w-[140px]"
-        alt=""
-      />
-      <img
-        src="assets/img/logo/bercail.png"
-        class="w-[120px] md:w-[140px]"
-        alt=""
-      />
-      <img
-        src="assets/img/logo/monkey.png"
-        class="w-[120px] md:w-[140px]"
-        alt=""
-      />
-      <img
-        src="assets/img/logo/hotels.png"
-        class="w-[120px] md:w-[140px]"
-        alt=""
-      />
-      <img
-        src="assets/img/logo/alrok.png"
-        class="w-[120px] md:w-[140px]"
-        alt=""
-      />
+      }
     </div>
 
-    <div class="flex items-center justify-center m-auto text-lg font-open text-center gap-2">
+    <div
+      class="flex items-center justify-center m-auto text-lg font-open text-center gap-2"
+    >
       <p>Rejoignez + de</p>
       <div class="relative inline-block">
-        <p class="relative z-10 py-4 px-2 font-bold text-xl">200 agences partenaires</p>
-        <span class="absolute top-1/2 left-0 w-full h-[110%] bg-myyellow1 -rotate-2 transform -translate-y-1/2 z-0"></span>
+        <p class="relative z-10 py-4 px-2 font-bold text-xl">
+          200 agences partenaires
+        </p>
+        <span
+          class="absolute top-1/2 left-0 w-full h-[110%] bg-myyellow1 -rotate-2 transform -translate-y-1/2 z-0"
+        ></span>
       </div>
-      <p>convaincues par nos services ! </p>
+      <p>convaincues par nos services !</p>
     </div>
   </div>
 
@@ -126,11 +103,12 @@
       Nos clients témoignent
     </h2>
 
-    <div class="grid md:grid-cols-2 2xl:grid-cols-3 gap-8 md:gap-y-16 md:gap-x-32 xl:gap-x-40">
-
-        @for(review of reviews; track review){
-            <app-review-card [review]="review"></app-review-card>
-        }
+    <div
+      class="grid md:grid-cols-2 2xl:grid-cols-3 gap-8 md:gap-y-16 md:gap-x-32 xl:gap-x-40"
+    >
+      @for(review of reviews; track review){
+      <app-review-card [review]="review"></app-review-card>
+      }
     </div>
   </div>
 </div>

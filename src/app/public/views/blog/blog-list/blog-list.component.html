@@ -2,14 +2,14 @@
   class="min-h-screen bg-gray-50 flex flex-col items-center font-open text-mygrey1"
 >
   <!-- Hero -->
-  <div class="relative h-[700px] w-full mb:10 pb-16 text-mygrey1 mb-16">
+  <div class="relative h-[700px] w-full pb-16 text-mygrey1 mb-16">
     <div class="bg-white opacity-70 absolute inset-0 w-full h-full"></div>
-    <span class="absolute z-10 h-[140px] w-[120%] -rotate-3 -bottom-10 bg-gray-50"></span>
+    <span class="absolute z-10 h-[120px] w-[120%] -rotate-3 -bottom-10 bg-gray-50"></span>
     <div
     class="bg-[url(assets/img/photo/photo5.jpg)] h-[700px] bg-center bg-cover bg-no-repeat w-full flex flex-col items-center justify-center "
     >
     <div
-      class="z-10 absolute top-14 left-14 flex items-center justify-center gap-2 bg-myyellow1 hover:bg-myyellow2 transition duration-300 text-mygrey1 text-sm px-4 py-2 rounded-full"
+      class="z-10 absolute top-8 left-8 md:top-14 md:left-14 flex items-center justify-center gap-2 bg-myyellow1 hover:bg-myyellow2 transition duration-300 text-mygrey1 text-sm px-4 py-2 rounded-full"
     >
       <img src="assets/img/icon/arrow-black.png" class="w-5" alt="" />
       <a [routerLink]="['/blog']" class="whitespace-nowrap"
@@ -48,7 +48,7 @@
 
   <!-- First article -->
   <div
-    class="relative mb-24 w-3/4 max-w-[800px] h-[400px] lg:h-[450px] rounded-2xl shadow-md"
+    class="z-10 relative mb-24 w-3/4 max-w-[800px] h-[400px] lg:h-[450px] rounded-2xl shadow-md"
   >
     <img
       [src]="articles[0].article_preview"
