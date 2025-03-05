@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Property } from '../../../../core/models/property.model';
 import { environment } from '../../../../../environments/environment';
@@ -10,10 +10,38 @@ import { environment } from '../../../../../environments/environment';
   templateUrl: './property-card.component.html',
   styleUrl: './property-card.component.scss',
 })
-export class PropertyCardComponent {
+export class PropertyCardComponent implements AfterViewInit {
   router = inject(Router);
   @Input() property!: Property;
+  @ViewChild('carousel') carousel!: ElementRef<HTMLDivElement>;
   baseUrl = environment.publicURL;
+  isCarouselStart = true;
+  isCarouselEnd = false;
+
+
+  ngAfterViewInit() {
+    this.checkScrollPosition();
+    this.carousel.nativeElement.addEventListener('scroll', () =>
+      this.checkScrollPosition()
+    );
+  }
+
+  checkScrollPosition() {
+    const carousel = this.carousel.nativeElement;
+    this.isCarouselStart = carousel.scrollLeft === 0;
+    this.isCarouselEnd =
+      carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth;
+  }
+
+  prevSlide() {
+    const carousel = this.carousel.nativeElement;
+    carousel.scrollBy({ left: -carousel.clientWidth, behavior: 'smooth' });
+  }
+
+  nextSlide() {
+    const carousel = this.carousel.nativeElement;
+    carousel.scrollBy({ left: carousel.clientWidth, behavior: 'smooth' });
+  }
 
   get selling_price_number() {
     return this.property.selling_price
