@@ -78,13 +78,17 @@ export class OptionSimulatorComponent {
       label: 'Reportage photo professionnel + visite 3D',
       value: false,
       price: [
-        { maxSurface: 200, price: 300 },
-        { maxSurface: 500, price: 340 },
-        { maxSurface: Infinity, price: 380 },
+        { maxSurface: 49, price: 120 },
+        { maxSurface: 74, price: 130 },
+        { maxSurface: 119, price: 140 },
+        { maxSurface: 159, price: 150 },
+        { maxSurface: 199, price: 160 },
+        { maxSurface: Infinity, price: 160 },
       ],
       isReportage: true,
     },
   ];
+
 
   addOption(event: Event) {
     const checkbox = event.target as HTMLInputElement;

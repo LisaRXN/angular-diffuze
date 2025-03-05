@@ -1,23 +1,36 @@
-import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  inject,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { ButtonComponent } from '../../shared/components/button/button.component';
 import { PropertyCardComponent } from '../../shared/components/property-card/property-card.component';
 import {
-  ActivatedRoute,
   Router,
   RouterLink,
-  RouterLinkActive,
 } from '@angular/router';
 import { PropertyGateway } from '../../../core/ports/property.gateway';
 import { Property } from '../../../core/models/property.model';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { MatDialog } from '@angular/material/dialog';
 import { PartnersDialogComponent } from '../../shared/components/partners-dialog/partners-dialog.component';
+import { NumberCardComponent } from './components/number-card/number-card.component';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, PropertyCardComponent, RouterLink, PartnersDialogComponent],
+  imports: [
+    CommonModule,
+    PropertyCardComponent,
+    RouterLink,
+    PartnersDialogComponent,
+    NumberCardComponent,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -35,48 +48,48 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   router = inject(Router);
-  private readonly dialog = inject(MatDialog);
   propertyGateway = inject(PropertyGateway);
   properties$!: Observable<Property[]>;
-  isDialogOpen:boolean = false 
+  isDialogOpen: boolean = false;
   properties: Property[] = [];
   isCarouselStart = true;
   isCarouselEnd = false;
+  hasStartedAnimation: boolean = false;
 
-  
+  @ViewChild(PartnersDialogComponent) dialogComponent!: PartnersDialogComponent;
+  @ViewChild('carousel') carousel!: ElementRef<HTMLDivElement>;
+
+  @ViewChildren(NumberCardComponent) numberCards!: QueryList<NumberCardComponent>;
+  @ViewChild('numbers') numbersRef!: ElementRef;
+  @HostListener('window:scroll', ['$event'])
+  onScroll() {
+    if (this.hasStartedAnimation) return;
+
+    const numberElement = this.numbersRef.nativeElement;
+    const windowHeight = window.innerHeight;
+
+    if (
+      numberElement &&
+      window.scrollY > numberElement.offsetTop - windowHeight
+    ) {
+      this.numberCards.forEach((card) => card.startCount());
+      this.hasStartedAnimation = true;
+    }
+  }
+
+  ngAfterViewInit(): void {
+    this.onScroll();
+  }
+
   ngOnInit() {
     this.propertyGateway.fetchLastProperties().subscribe((properties) => {
       this.properties = properties;
     });
   }
 
-  ngAfterViewInit() {
-    this.checkScrollPosition();
-    this.carousel.nativeElement.addEventListener('scroll', () => this.checkScrollPosition());
-  }
-
-  checkScrollPosition() {
-    const carousel = this.carousel.nativeElement;
-    this.isCarouselStart = carousel.scrollLeft === 0;
-    this.isCarouselEnd = carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth;
-  }
-
-  prevSlide() {
-    const carousel = this.carousel.nativeElement;
-    carousel.scrollBy({ left: -carousel.clientWidth, behavior: 'smooth' });
-  }
-  
-  nextSlide() {
-    const carousel = this.carousel.nativeElement;
-    carousel.scrollBy({ left: carousel.clientWidth, behavior: 'smooth' });
-  }
-
   navigateToProperty(property: Property) {
     this.router.navigate(['property', property.id]);
   }
-
-  @ViewChild(PartnersDialogComponent) dialogComponent!: PartnersDialogComponent;
-  @ViewChild('carousel') carousel!: ElementRef<HTMLDivElement>;
 
   openModal() {
     if (this.dialogComponent) {
@@ -85,5 +98,4 @@ export class HomeComponent implements OnInit, AfterViewInit {
       console.error('modalComponent est undefined');
     }
   }
-  
 }

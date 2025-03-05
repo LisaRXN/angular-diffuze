@@ -6,14 +6,14 @@
     class="relative h-auto md:h-[380px] pt-32 w-full px-8 flex flex-col items-center justify-center"
   >
     <div
-      class="z-10 absolute left-5 top-14 md:left-14 flex items-center justify-center gap-2 border border-mygrey2 hover:bg-mygrey4 transition duration-300 text-mygrey1 text-sm px-4 py-2 rounded-full"
+      class="z-10 absolute top-8 left-8 md:top-14 md:left-14 flex items-center justify-center gap-2 border border-mygrey2 hover:bg-mygrey4 transition duration-300 text-mygrey1 text-sm px-4 py-2 rounded-full"
     >
       <img src="assets/img/icon/arrow-black.png" class="w-5" alt="" />
       <a [routerLink]="['/blog/type', articleType.id]" class="whitespace-nowrap"
         >Retour aux articles</a
       >
     </div>
-    <div class="flex mb-12 items-center text-mygrey2 text-sm gap-2">
+    <div class="flex mb-12 items-center justify-center text-mygrey2 text-sm gap-2">
       <p>
         Publié le {{ article.creation_date | date : "longDate" : "" : "fr-FR" }}
       </p>
@@ -155,7 +155,7 @@
     <div class="grid md:grid-cols-2 place-items-center p-10 gap-8 lg:gap-0">
       <a
         href="https://app.lemcal.com/@diffuze/15min" target="_blank" rel='external'
-        class="ml-10 bg-myyellow1 text-mygrey1 rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-myyellow2 transition-all transition-300 cursor-pointer"
+        class="md:ml-10 bg-myyellow1 text-mygrey1 rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-myyellow2 transition-all transition-300 cursor-pointer"
         >Prendre rendez-vous
       </a>
       <img

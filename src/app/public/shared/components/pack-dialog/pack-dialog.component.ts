@@ -30,4 +30,11 @@ export class PackDialogComponent {
       this.modalRef.nativeElement.close();
     }
 
+    closeModalByClick(event: Event) {
+      if (event.target === this.modalRef.nativeElement) {
+      this.closeModal();
+      }
+    }
+  
+
 }

@@ -1,11 +1,65 @@
 <div
   class="h-auto w-[350px] max-w-[400px] rounded-xl bg-white cursor-pointer m-auto mb-10 shadow-lg transform transition ease-in-out hover:translate-y-[-4px] hover:shadow-xl"
 >
-  <img
-    [src]="baseUrl + property.media?.images?.[0]?.photo_path"
-    class="rounded-t-xl h-[250px] w-full object-cover"
-    alt=""
-  />
+  <div #carousel class="carousel rounded-t w-full">
+    <div
+      *ngFor="let image of property.media?.images"
+      class="carousel-item w-full"
+    >
+      <img
+        [id]="'photo' + property.id"
+        [src]="baseUrl + image.photo_path"
+        class="rounded-t-xl h-[250px] w-full object-cover"
+        alt=""
+      />
+      <div
+        class="absolute inset-0 -translate-y-20 flex justify-between items-center pointer-events-none"
+      >
+        <button
+          [ngClass]="{
+            'pointer-events-auto border-none group': true,
+            'opacity-0': isCarouselStart
+          }"
+          (click)="prevSlide()"
+        >
+          <svg
+          class="transition-all duration-300 stroke-white"
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <button
+          [ngClass]="{
+            'pointer-events-auto border-none': true,
+            'opacity-0': isCarouselEnd
+          }"
+          (click)="nextSlide()"
+        >
+          <svg
+            class="transition-all stroke-white duration-300 "
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <div class="p-5 flex flex-col items-start gap-2 text-sm">
     <p class="text-mygrey3 font-light">

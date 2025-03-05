@@ -1,37 +1,71 @@
-
-
 <div class="drawer">
-    <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
-    <div class="drawer-content flex flex-col bg-gray-100">
-      <!-- <div class="container mx-auto"> -->
-      <div class="w-full mx-auto">
-        <!-- Navbar -->
-        <app-navbar></app-navbar>
-        <!-- Page content here -->
-        <main class="min-h-screen bg-gray-200 lg:pt-[68px]">
-          <router-outlet></router-outlet>
-        </main>
-  
-        <app-footer></app-footer>
-      </div>
-      <app-cookie-consent></app-cookie-consent>
+  <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
+  <div class="drawer-content flex flex-col bg-gray-100">
+    <!-- <div class="container mx-auto"> -->
+    <div class="w-full mx-auto">
+      <!-- Navbar -->
+      <app-navbar></app-navbar>
+      <!-- Page content here -->
+      <main class="min-h-screen bg-gray-200 lg:pt-[68px]">
+        <router-outlet></router-outlet>
+      </main>
+
+      <app-footer></app-footer>
     </div>
-    <div class="drawer-side z-50">
-      <label
-        for="my-drawer-3"
-        aria-label="close sidebar"
-        class="drawer-overlay"
-      ></label>
-      <ul class="menu bg-mygrey1 min-h-full md:w-80 p-4 text-lg text-mygrey4 flex flex-col gap-4 items-start justify-center md:justify-start">
-        <!-- Sidebar content here -->
-        <li><a routerLink="/service">Notre Offre</a></li>
-        <li><a routerLink="/review">Nos Partenaires</a></li>
-        <li><a routerLink="/blog">Le Blog</a></li>
-        <li><a href="http://www.app.diffuze.fr" target="_blank" rel='external'>Dashboard</a></li>
-        <a href="http://www.app.diffuze.fr" target="_blank" rel='external' class=" bg-mygrey5 text-mygrey1 rounded-full py-4 text-center w-[300px] md:w-[280px]">Déposer une annonce</a>
-        <a href="https://app.lemcal.com/@diffuze/15min" target="_blank" rel='external' class=" bg-myyellow1 text-mygrey1 rounded-full py-4 text-center w-[300px] md:w-[280px]">Prendre rendez-vous</a>
-      </ul>
-      
-    </div>
+    <app-cookie-consent></app-cookie-consent>
   </div>
-  
+  <div class="drawer-side z-50">
+    <label
+      for="my-drawer-3"
+      aria-label="close sidebar"
+      class="drawer-overlay"
+    ></label>
+
+    <ul
+      class="menu bg-mygrey1 min-h-full md:w-80 p-4 text-lg text-mygrey4 flex flex-col gap-4 items-start justify-start md:justify-start"
+    >
+      <!-- Coupon -->
+      <div
+        class="relative block sm:hidden bg-gray-300 px-5 p-2 h-[60px] w-[150px] rounded-lg xl:mr-10"
+      >
+        <span
+          class="absolute left-0 transforme -translate-x-[50%] -translate-y-[50%] top-1/2 h-[20px] w-[20px] rounded-full bg-mygrey1"
+        ></span>
+        <span
+          class="absolute right-0 transforme translate-x-[50%] -translate-y-[50%] top-1/2 h-[20px] w-[20px] rounded-full bg-mygrey1"
+        ></span>
+        <div class="flex justify-between">
+          <p class="font-semibold text-mygrey1 text-xl">-50 %</p>
+          <p class="font-extrabold text-yellow-500 text-xl">DIF50</p>
+        </div>
+        <p class="text-[8px] whitespace-nowrap text-mygrey1">
+          Sur votre 1ère commande
+        </p>
+      </div>
+
+      <!-- Sidebar content here -->
+      <li><a routerLink="/service">Notre Offre</a></li>
+      <li><a routerLink="/review">Nos Partenaires</a></li>
+      <li><a routerLink="/blog">Le Blog</a></li>
+      <li>
+        <a href="http://www.app.diffuze.fr" target="_blank" rel="external"
+          >Dashboard</a
+        >
+      </li>
+      <a
+        href="http://www.app.diffuze.fr"
+        target="_blank"
+        rel="external"
+        class="bg-mygrey5 text-mygrey1 rounded-full py-4 text-center w-[300px] md:w-[280px]"
+        >Déposer une annonce</a
+      >
+      <a
+        href="https://app.lemcal.com/@diffuze/15min"
+        target="_blank"
+        rel="external"
+        class="bg-myyellow1 text-mygrey1 rounded-full py-4 text-center w-[300px] md:w-[280px]"
+        >Prendre rendez-vous</a
+      >
+    </ul>
+  </div>
+</div>

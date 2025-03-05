@@ -17,7 +17,7 @@ interface Service {
 
 @Component({
   selector: 'app-service-card',
-  imports: [CommonModule, PartnersDialogComponent],
+  imports: [CommonModule, PackDialogComponent],
   templateUrl: './service-card.component.html',
   styleUrl: './service-card.component.scss'
 })
@@ -25,7 +25,7 @@ export class ServiceCardComponent {
 
   @Input() service!: Service;
   
-    @ViewChild(PartnersDialogComponent) dialogComponent!: PartnersDialogComponent;
+    @ViewChild(PackDialogComponent) dialogComponent!: PackDialogComponent;
     openModal() {
       if (this.dialogComponent) {
         this.dialogComponent.openModal();

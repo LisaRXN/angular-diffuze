@@ -4,9 +4,9 @@
     "image": "assets/img/icon/megaphone-yellow.png",
     "backGroundColor": "mygrey2",
     "textColor": "white",
-    "text" : {"text1": "Sur plus de", "number":"50", "text2":"plateformes de référence"},
+    "text" : {"text1": "Diffusion de votre annonce sur", "number":"50", "text2":"plateformes de référence"},
     "description" : [
-    {"text":"Diffusion de vos annonces de vente et viager."}, 
+    {"text":"Diffusion d'annonces de vente et viager."}, 
     {"text":"Que ce soit un appartement, une maison, un local commercial, un bureau, un immeuble et bien d’autres.."}      
   ]
   },
@@ -34,6 +34,6 @@
     ,
     "description" : [
     {"text":"Paiement au succès, si la vente se fait via un site partenaire."},    
-    {"text": "Paiement basé sur un partage de commission, selon un barème dégressif."}    ]
+    {"text": "Paiement basé sur un partage de commission, selon le barème dégressif ci-dessous."}    ]
   }
 ]

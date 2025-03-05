@@ -1,0 +1,43 @@
+<div
+  [ngClass]="{
+    ' m-auto h-[250px] w-[250px] lg:h-[300px] lg:w-[300px] rounded-4xl flex flex-col items-center justify-center gap-8 p-10 z-10 hover:scale-105 transition-all duration-300 cursor-default': true,
+    'bg-mygrey5': bg === 'mygrey5',
+    'bg-myyellow2': bg === 'myyellow2',
+    'bg-mygrey2': bg === 'mygrey2',
+  }"
+>
+  <div class="relative">
+    <p
+      [ngClass]="{
+        'absolute -top-2 right-2 transform text-6xl lg:text-8xl font-paytone ': true,
+        'text-mygrey1': bg != 'mygrey2',
+        'text-mygrey5': bg === 'mygrey2'
+      }"
+    >
+      {{ number }}
+    </p>
+    <p
+      [ngClass]="{
+        'z-0 text-6xl lg:text-8xl font-paytone': true,
+        'text-myyellow1': bg != 'mygrey2',
+        'text-black': bg === 'mygrey2'
+      }"
+    >
+      {{ number }}
+    </p>
+  </div>
+
+  <div class="flex w-3/4 items-center justify-center gap-5">
+    <img [src]="image" class="w-9 h-9" alt="" />
+    <p 
+    [ngClass]="{
+        ' font-semibold lg:max-w-32 text-xl': true,
+        'text-mygrey1': bg != 'mygrey2',
+        'text-mygrey5': bg === 'mygrey2'
+      }"
+    >
+    
+      {{ text }}
+    </p>
+  </div>
+</div>

@@ -22,23 +22,23 @@
     },
     {
         "id": 4,
-        "agency":"Maître Carré",
+        "agency":"Coreag",
         "text": "Je suis client depuis plusieurs mois et entièrement satisfait. L'équipe est disponible et à l’écoute. Très beau concept qui nous permet de diffuser nos annonces à l’unité.",
-        "image":"assets/img/logo/maitrecarre.png",
+        "image":"assets/img/logo/coreag.png",
         "date":"10 aout 2024"
     },
     {
         "id": 5,
-        "agency":"Effiducia Immobilier",
+        "agency":"Tandem",
         "text": "Super service d’annonce à l’unité qui nous permet de maitriser nos couts de diffusion tout en gardant une visibilité optimale sur les plus grands portails de diffusion.",
-        "image":"assets/img/logo/effiducia.png",
+        "image":"assets/img/logo/tandem.png",
         "date":"18 septembre 2024"
     },
     {
         "id": 6,
-        "agency":"Alrok",
+        "agency":"seTImmo",
         "text": "“Service client réactif et interface facile à utiliser. La passerelle avec notre logiciel est un plus. Je suis client depuis plus d'un ans maintenant. Je recommande vivement !”",
-        "image":"assets/img/logo/alrok.png",
+        "image":"assets/img/logo/setImmo.png",
         "date":"14 novembre 2024"
     }
 ]
