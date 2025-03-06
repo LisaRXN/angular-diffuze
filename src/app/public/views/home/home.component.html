@@ -230,7 +230,7 @@
           <p class="font-raleway font-mygrey2 font-bold">
             Annonce par paiement au succès
           </p>
-          <p class="py-6 font-raleway text-3xl">
+          <p class="py-6 font-raleway text-3xl font-semibold">
             Paiement au succès, frais de diffusion offert
           </p>
           <p class="mb-2">
@@ -469,22 +469,16 @@
     </h2>
 
     <div
-      class="px-8 grid grid-cols-2 md:grid-cols-4 gap-20 place-items-center mb-24"
-    >
-      <img src="assets/img/logo/century21.png" class="z-10 w-[90px] md:w-[140px]" alt="" />
-      <img src="assets/img/logo/laforet.png" class="z-10 w-[90px] md:w-[140px]" alt="" />
-      <img src="assets/img/logo/toc.png" class="z-10 w-[90px] md:w-[140px]" alt="" />
-      <img src="assets/img/logo/setImmo.png" class="z-10 w-[90px] md:w-[140px]" alt="" />
-      <img src="assets/img/logo/effiducia.png" class="z-10 w-[90px] md:w-[140px]" alt="" />
-      <img
-        src="assets/img/logo/maitrecarre.png"
-        class="z-10 w-[90px] md:w-[140px]"
-        alt=""
-      />
-      <img src="assets/img/logo/bercail.png" class="z-10 w-[90px] md:w-[140px]" alt="" />
-      <img src="assets/img/logo/hotels.png" class="z-10 w-[90px] md:w-[140px]" alt="" />
-    </div>
-
+    class="w-3/4 m-auto grid grid-cols-2 md:grid-cols-4 gap-y-16 gap-x-28 md:gap-x-20 place-items-center mb-24"
+  >
+    @for(review of reviews; track review){
+    <img
+      [src]="review.image"
+      class="w-[120px] md:w-[140px] rounded-lg"
+      alt=""
+    />
+    }
+  </div>
     <div
       class="px-5 flex flex-col md:flex-row items-center justify-center m-auto text-lg font-open text-center gap-2 mb-36"
     >

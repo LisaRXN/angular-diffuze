@@ -1,6 +1,27 @@
 <div
-  class="lg:fixed z-50 isset-0 navbar bg-white text-mygrey1 font-open py-3 w-full"
+  class="relative lg:fixed z-50 isset-0 navbar bg-white text-mygrey1 font-open py-3 w-full"
 >
+  <!-- Coupon -->
+  <div class="absolute top-1/2 left-1/2 transform -translate-x-[50%] -translate-y-[50%]">
+    <div
+      class="relative hidden md:block bg-gray-400 px-5 p-2 h-[60px] w-[150px] rounded-lg xl:mr-10"
+    >
+      <span
+        class="absolute left-0 transforme -translate-x-[50%] -translate-y-[50%] top-1/2 h-[20px] w-[20px] rounded-full bg-white"
+      ></span>
+      <span
+        class="absolute right-0 transforme translate-x-[50%] -translate-y-[50%] top-1/2 h-[20px] w-[20px] rounded-full bg-white"
+      ></span>
+      <div class="flex justify-between">
+        <p class="font-semibold text-white text-lg">-50 %</p>
+        <p class="font-semibold text-myyellow1 text-lg">DIF50</p>
+      </div>
+      <p class="text-[9px] whitespace-nowrap text-white">
+        Sur votre 1ère commande
+      </p>
+    </div>
+  </div>
+
   <div class="flex-none lg:hidden">
     <label
       for="my-drawer-3"
@@ -30,7 +51,7 @@
 
     <!-- Coupon -->
     <div
-      class="relative hidden sm:block lg:hidden bg-gray-400 px-5 p-2 h-[60px] w-[150px] rounded-lg mx-1"
+      class="relative hidden sm:block md:hidden bg-gray-400 px-5 p-2 h-[60px] w-[150px] rounded-lg mx-1"
     >
       <span
         class="absolute left-0 transforme -translate-x-[50%] -translate-y-[50%] top-1/2 h-[20px] w-[20px] rounded-full bg-white"
@@ -54,7 +75,7 @@
         href="http://www.app.diffuze.fr"
         target="_blank"
         rel="external"
-        class="bg-myyellow1 text-center text-mygrey1 rounded-full px-4 py-3 font-semibold text-sm hover:bg-myyellow2 transition-all transition-300"
+        class="bg-myyellow1 text-center text-mygrey1 rounded-full p-2 py-3 md:px-4 md:py-3 font-semibold text-[12px] md:text-sm hover:bg-myyellow2 transition-all transition-300"
         >Déposer une annonce</a
       >
       <a
@@ -79,7 +100,7 @@
         rel="external"
         ><img
           src="assets/img/icon/user.png"
-          class="h-auto w-[25px] cursor-pointer"
+          class="hidden md:block h-auto w-[25px] cursor-pointer"
           alt=""
       /></a>
     </div>
@@ -93,25 +114,6 @@
         <li><a routerLink="/review">Nos Partenaires</a></li>
         <li><a routerLink="/blog">Le Blog</a></li>
       </ul>
-
-      <!-- Coupon -->
-      <div
-        class="relative hidden lg:block bg-gray-400 px-5 p-2 h-[60px] w-[150px] rounded-lg xl:mr-10"
-      >
-        <span
-          class="absolute left-0 transforme -translate-x-[50%] -translate-y-[50%] top-1/2 h-[20px] w-[20px] rounded-full bg-white"
-        ></span>
-        <span
-          class="absolute right-0 transforme translate-x-[50%] -translate-y-[50%] top-1/2 h-[20px] w-[20px] rounded-full bg-white"
-        ></span>
-        <div class="flex justify-between">
-          <p class="font-semibold text-white text-lg">-50 %</p>
-          <p class="font-semibold text-myyellow1 text-lg">DIF50</p>
-        </div>
-        <p class="text-[9px] whitespace-nowrap text-white">
-          Sur votre 1ère commande
-        </p>
-      </div>
     </div>
   </div>
 </div>

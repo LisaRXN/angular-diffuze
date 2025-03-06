@@ -4,9 +4,9 @@ import { Component, Input } from '@angular/core';
 interface Review {
   id:number,
   agency:string;
-  text:string,
+  text?:string,
   image:string,
-  date:string
+  date?:string
 }
 
 @Component({

@@ -14,7 +14,7 @@
         'text-mygrey5': bg === 'mygrey2'
       }"
     >
-      {{ number }}
+      <span *ngIf="text === 'Plateformes de diffusion'">+</span>{{ number }}
     </p>
     <p
       [ngClass]="{
@@ -23,20 +23,19 @@
         'text-black': bg === 'mygrey2'
       }"
     >
-      {{ number }}
+      <span *ngIf="text === 'Plateformes de diffusion'">+</span>{{ number }}
     </p>
   </div>
 
   <div class="flex w-3/4 items-center justify-center gap-5">
     <img [src]="image" class="w-9 h-9" alt="" />
-    <p 
-    [ngClass]="{
+    <p
+      [ngClass]="{
         ' font-semibold lg:max-w-32 text-xl': true,
         'text-mygrey1': bg != 'mygrey2',
         'text-mygrey5': bg === 'mygrey2'
       }"
     >
-    
       {{ text }}
     </p>
   </div>

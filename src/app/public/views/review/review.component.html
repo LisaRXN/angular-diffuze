@@ -2,26 +2,23 @@
   class="min-h-screen bg-gray-50 flex flex-col items-center font-open overflow-x-hidden"
 >
   <!-- Hero -->
-  <div class="relative h-[700px] w-full mb:10 pb-16 text-mygrey1 mb-16">
-    <div class="bg-white opacity-60 absolute inset-0 w-full h-full"></div>
+  <div class="relative h-[600px] md:h-[700px]  w-full mb:10 pb-16 text-white mb-16">
+    <div class="bg-black opacity-55 absolute inset-0 w-full h-full"></div>
     <span
       class="absolute h-[100px] w-[120%] left-1/2 transform -translate-x-1/2 -rotate-3 -bottom-10 bg-gray-50"
     ></span>
     <div
-      class="bg-[url(assets/img/photo/maison2.jpg)] h-[700px] bg-center bg-cover bg-no-repeat w-full flex flex-col items-center justify-center"
+      class="px-5 bg-[url(assets/img/photo/maison2.jpg)] h-[600px] md:h-[700px]  bg-center bg-cover bg-no-repeat w-full flex items-center justify-center"
     >
-      <h1 class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-12">
+    <div class="z-20 transform -translate-y-10 flex flex-col items-center">
+      <h1 class="z-20 text-4xl font-paytone text-center max-w-[600px] mb-12">
         DiffuZe : adopté et approuvé par nos clients
       </h1>
-      <p
-        class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
-      >
+      <p class="z-20 text-lg md:text-xl leading-relaxed md:w-3/4 text-center">
         Votre satisfaction est notre meilleure réussite
       </p>
+    </div>
 
-      <!-- <div
-      class="absolute -top-20 left-1/2 w-[140%] h-[550px] bg-mygrey2 transform -translate-x-1/2 -rotate-3"
-    ></div> -->
     </div>
   </div>
 
@@ -36,7 +33,7 @@
         “
       </p>
       <p
-        class="z-10 text-2xl italic leading-relaxed text-justify max-w-[500px]"
+        class="z-10 text-xl md:text-2xl hyphens-auto italic leading-relaxed text-justify max-w-[500px]"
       >
         “Un outil <span class="font-bold">simple, efficace</span> et surtout
         adapté à nos besoins. La flexibilité des offres et la diffusion sur les
@@ -66,7 +63,7 @@
     </h2>
 
     <div
-      class="w-3/4 m-auto grid grid-cols-2 md:grid-cols-3 gap-y-16 gap-x-28 md:gap-x-20 place-items-center mb-20"
+      class="w-3/4 m-auto grid grid-cols-2 md:grid-cols-4 gap-y-16 gap-x-28 md:gap-x-20 place-items-center mb-20"
     >
       @for(review of reviews; track review){
       <img
@@ -78,7 +75,7 @@
     </div>
 
     <div
-      class="flex items-center justify-center m-auto text-lg font-open text-center gap-2"
+      class="flex flex-col md:flex-row items-center justify-center m-auto text-lg font-open text-center gap-4 md:gap-2"
     >
       <p>Rejoignez + de</p>
       <div class="relative inline-block">
@@ -106,9 +103,9 @@
     <div
       class="grid md:grid-cols-2 2xl:grid-cols-3 gap-8 md:gap-y-16 md:gap-x-32 xl:gap-x-40"
     >
-      @for(review of reviews; track review){
+      @for (review of reviews; track review.id) { @if (review.text) {
       <app-review-card [review]="review"></app-review-card>
-      }
+      } }
     </div>
   </div>
 </div>

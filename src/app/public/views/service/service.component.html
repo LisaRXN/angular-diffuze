@@ -1,73 +1,16 @@
-<div class="min-h-screen bg-gray-100 flex flex-col items-center font-open  overflow-x-hidden">
+<div
+  class="min-h-screen bg-gray-100 flex flex-col items-center font-open overflow-x-hidden"
+>
   <!-- Hero -->
-  <!-- <div
-    class="relative h-[550px] w-full mb:10 pb-16 text-mygrey1 px-8 flex flex-col items-center justify-center overflow-x-hidden"
-  >
-    <h1
-      *ngIf="isUnitService"
-      class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-12"
-    >
-      Paiement immédiat, unique et sans abonnement
-    </h1>
-    <h1
-      *ngIf="!isUnitService"
-      class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-12"
-    >
-      Paiement au succès, en co-mandat et sans abonnement
-    </h1>
-    <p
-      *ngIf="isUnitService"
-      class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
-    >
-      La solution simple, efficace et sans contrainte !
-    </p>
-    <p
-      *ngIf="!isUnitService"
-      class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
-    >
-      Une solution flexible, sans risque et 100 % axée sur votre succès !
-    </p>
-    <div class="p-2 z-10 bg-white rounded-full cursor-pointer">
-      <div
-        (click)="toggleService()"
-        class="relative bg-mygrey5 w-full flex items-center justify-between rounded-full text-center"
-      >
-        <span
-          id="toggle-option"
-          [ngClass]="{
-            'absolute w-1/2 h-full bg-myyellow1 rounded-full transition-all ease-in-out':true,
-            'translate-x-0': isUnitService,
-            'translate-x-full': !isUnitService,
-            }"
-        >
-        </span>
-        <p
-          class="z-10 md:whitespace-nowrap w-1/2 text-center py-4 px-1.5 md:px-10 rounded-full"
-        >
-          Paiement immédiat
-        </p>
-        <p
-          class="z-10 md:whitespace-nowrap w-1/2 text-center py-4 px-5 md:px-10 rounded-full"
-        >
-          Paiement au succès
-        </p>
-      </div>
-    </div>
-
+  <div class="relative h-[600px] md:h-[700px]  w-full pb-16 text-white md:mb-14">
+    <div class="bg-black opacity-55 absolute inset-0 w-full h-full"></div>
+    <span
+      class="absolute z-10 h-[100px] w-[120%] left-1/2 transform -translate-x-1/2 -rotate-3 -bottom-10 bg-gray-100"
+    ></span>
     <div
-      class="absolute bg-[url(assets/img/photo/photo5.jpg)] -top-20 left-1/2 w-[140%] h-[550px] transform -translate-x-1/2 -rotate-3"
-    ></div>
-    <div
-      class="absolute -top-20 left-1/2 w-[140%] h-[550px] bg-white opacity-50 transform -translate-x-1/2 -rotate-3"
-    ></div>
-  </div> -->
-
-  <div class="relative h-[700px] w-full pb-16 text-mygrey1 md:mb-14">
-    <div class="bg-white opacity-60 absolute inset-0 w-full h-full"></div>
-    <span class="absolute z-10 h-[100px] w-[120%] left-1/2 transform -translate-x-1/2 -rotate-3 -bottom-10 bg-gray-100"></span>
-    <div
-      class="bg-[url(assets/img/photo/immeuble1.jpg)] h-[700px] bg-cover bg-center w-full flex flex-col items-center justify-center overflow-x-hidden"
+      class="px-5 bg-[url(assets/img/photo/immeuble1.jpg)] h-[600px] md:h-[700px]  bg-cover bg-center w-full flex flex-col items-center justify-center overflow-x-hidden"
     >
+    <div class="z-20 md:w-3/4 flex flex-col items-center justify-center transform -translate-y-5">
       <h1
         *ngIf="isUnitService"
         class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-8"
@@ -78,23 +21,30 @@
         *ngIf="!isUnitService"
         class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-8"
       >
-      Pack Visibilité
+        Pack Visibilité
       </h1>
       <div
         *ngIf="isUnitService"
         class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
       >
-      <h2 class="font-bold mb-2">Paiement immédiat, unique et sans abonnement :</h2>
-      <p>la solution simple, efficace et sans contrainte !</p>
-    </div>
+        <h2 class="font-bold mb-2">
+          Paiement immédiat, unique et sans abonnement :
+        </h2>
+        <p>la solution simple, efficace et sans contrainte !</p>
+      </div>
       <div
         *ngIf="!isUnitService"
         class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
       >
-      <h2 class="font-bold mb-2">Paiement au succès, en co-mandat et sans abonnement :</h2>
-      <p>la solution flexible, sans risque et 100 % axée sur votre succès !</p>
-  </div>
-      <div class="p-2 z-10 bg-white rounded-full cursor-pointer">
+        <h2 class="font-bold mb-2">
+          Paiement au succès, en co-mandat et sans abonnement :
+        </h2>
+        <p>
+          la solution flexible, sans risque et 100 % axée sur votre succès !
+        </p>
+      </div>
+    </div>
+      <div class="p-2 z-10 bg-white rounded-full text-mygrey1 cursor-pointer">
         <div
           (click)="toggleService()"
           class="relative bg-mygrey5 w-full flex items-center justify-between rounded-full text-center"
@@ -109,20 +59,19 @@
           >
           </span>
           <p
-            class="z-10 md:whitespace-nowrap w-1/2 text-center py-4 px-1.5 md:px-10 rounded-full"
+            class="z-10 md:whitespace-nowrap w-1/2 text-center py-1 md:py-4 px-1.5 md:px-10 rounded-full"
           >
             Paiement immédiat
           </p>
           <p
-            class="z-10 md:whitespace-nowrap w-1/2 text-center py-4 px-5 md:px-10 rounded-full"
+            class="z-10 md:whitespace-nowrap w-1/2 text-center py-1 md:py-4 px-5 md:px-10 rounded-full"
           >
             Paiement au succès
           </p>
         </div>
       </div>
     </div>
-    </div>
-
+  </div>
 
   <!-- Ce qui est inclus -->
   <div
@@ -133,7 +82,8 @@
     </h2>
 
     <p class="text-xl mb-20 md:text-center text-justify hyphens-auto">
-      Un prestataire unique pour prendre en charge la diffusion de votre annonce. 
+      Un prestataire unique pour prendre en charge la diffusion de votre
+      annonce.
     </p>
 
     <!-- Service Cards -->
@@ -144,12 +94,19 @@
     </div>
 
     <div class="flex flex-col md:flex-row items-center justify-start gap-5">
-      <img src="assets/img/icon/diffuze.png" class="hidden md:block h-auto w-12" alt="">
+      <img
+        src="assets/img/icon/diffuze.png"
+        class="hidden md:block h-auto w-12"
+        alt=""
+      />
       <p class="text-xl text-justify hyphens-auto leading-relaxed">
-        Besoin de diffuser un grand volume d’annonces ? Découvrez nos packs adaptés et simplifiez votre gestion. <a class="underline font-semibold cursor-pointer">Prenez rendez-vous dès maintenant !</a>
+        Besoin de diffuser un grand volume d’annonces ? Découvrez nos packs
+        adaptés et simplifiez votre gestion.
+        <a class="underline font-semibold cursor-pointer"
+          >Prenez rendez-vous dès maintenant !</a
+        >
       </p>
     </div>
-
   </div>
 
   <!-- Comprendre le co-mandat -->
@@ -328,7 +285,7 @@
         },
         { check: 'Je télécharge mes photos' },
         { check: 'Je choisis mes options et enregistre mon annonce' },
-        { check: 'Aucun paiement, signature du co-mandat' },
+        { check: 'Aucun paiement, signature du co-mandat' }
       ]"
       information="Compatible avec tous les logiciels métier du marché"
       image="assets/img/illustration/completed.png"
@@ -346,7 +303,7 @@
         {
           check:
             'Modification illimitée de vos annonces  depuis votre espace DiffuZe ou votre logiciel métier',
-          information: 'Compatible avec tous les logiciel métier du marché'
+          information: 'Compatible avec tous les logiciels métier du marché'
         },
         { check: 'Jusqu’à 10 photos incluses et un lien vidéo / visite 3D' },
         { check: 'Boost hebdomadaire' },
