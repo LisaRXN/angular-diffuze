@@ -116,7 +116,7 @@ export const SEO_CONFIG: RouteSeoConfig = {
               name: 'Comment fonctionne le paiement immédiat ?',
               acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Le paiement immédiat est un paiement unique sans abonnement. Vous payez une seule fois pour une diffusion de 60 jours sur plus de 20 portails immobiliers, avec possibilité de payer en 3 fois sans frais.',
+                text: 'Le paiement immédiat est un paiement unique sans abonnement. Vous payez une seule fois pour une diffusion de 60 jours sur plus de 50 plateformes immobiliers, avec possibilité de payer en 3 fois sans frais.',
               },
             },
             {

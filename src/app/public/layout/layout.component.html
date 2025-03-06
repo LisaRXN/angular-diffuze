@@ -1,5 +1,5 @@
 <div class="drawer">
-  <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
+  <input #drawerCheckbox id="my-drawer-3" type="checkbox" class="drawer-toggle" />
   <div class="drawer-content flex flex-col bg-gray-100">
     <!-- <div class="container mx-auto"> -->
     <div class="w-full mx-auto">
@@ -26,7 +26,7 @@
     >
       <!-- Coupon -->
       <div
-        class="relative block sm:hidden bg-gray-300 px-5 p-2 h-[60px] w-[150px] rounded-lg xl:mr-10"
+        class="relative block sm:hidden bg-zinc-200 px-5 p-2 h-[60px] w-[160px] rounded-lg xl:mr-10"
       >
         <span
           class="absolute left-0 transforme -translate-x-[50%] -translate-y-[50%] top-1/2 h-[20px] w-[20px] rounded-full bg-mygrey1"
@@ -35,24 +35,29 @@
           class="absolute right-0 transforme translate-x-[50%] -translate-y-[50%] top-1/2 h-[20px] w-[20px] rounded-full bg-mygrey1"
         ></span>
         <div class="flex justify-between">
-          <p class="font-semibold text-mygrey1 text-xl">-50 %</p>
-          <p class="font-extrabold text-yellow-500 text-xl">DIF50</p>
+          <p class="font-semibold text-mygrey1 text-xl whitespace-nowrap">-50 %</p>
+          <p class="font-extrabold text-yellow-500 text-xl whitespace-nowrap">DIF50</p>
         </div>
-        <p class="text-[8px] whitespace-nowrap text-mygrey1">
+        <p class="text-[9px] whitespace-nowrap text-mygrey1">
           Sur votre 1ère commande
         </p>
       </div>
 
+    
+
       <!-- Sidebar content here -->
-      <li><a routerLink="/service">Notre Offre</a></li>
-      <li><a routerLink="/review">Nos Partenaires</a></li>
-      <li><a routerLink="/blog">Le Blog</a></li>
+      <li><a (click)="closeDrawer()" routerLink="/service">Notre Offre</a></li>
+      <li>
+        <a (click)="closeDrawer()" routerLink="/review">Nos Partenaires</a>
+      </li>
+      <li><a (click)="closeDrawer()" routerLink="/blog">Le Blog</a></li>
       <li>
         <a href="http://www.app.diffuze.fr" target="_blank" rel="external"
-          >Dashboard</a
+          >Espace personnel</a
         >
       </li>
       <a
+        (click)="closeDrawer()"
         href="http://www.app.diffuze.fr"
         target="_blank"
         rel="external"
@@ -60,6 +65,7 @@
         >Déposer une annonce</a
       >
       <a
+        (click)="closeDrawer()"
         href="https://app.lemcal.com/@diffuze/15min"
         target="_blank"
         rel="external"
