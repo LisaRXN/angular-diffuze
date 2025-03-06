@@ -2,48 +2,50 @@
   class="min-h-screen bg-gray-100 flex flex-col items-center font-open overflow-x-hidden"
 >
   <!-- Hero -->
-  <div class="relative h-[600px] md:h-[700px]  w-full pb-16 text-white md:mb-14">
+  <div class="relative h-[600px] md:h-[700px] w-full pb-16 text-white md:mb-14">
     <div class="bg-black opacity-55 absolute inset-0 w-full h-full"></div>
     <span
       class="absolute z-10 h-[100px] w-[120%] left-1/2 transform -translate-x-1/2 -rotate-3 -bottom-10 bg-gray-100"
     ></span>
     <div
-      class="px-5 bg-[url(assets/img/photo/immeuble1.jpg)] h-[600px] md:h-[700px]  bg-cover bg-center w-full flex flex-col items-center justify-center overflow-x-hidden"
+      class="px-5 bg-[url(assets/img/photo/immeuble1.jpg)] h-[600px] md:h-[700px] bg-cover bg-center w-full flex flex-col items-center justify-center overflow-x-hidden"
     >
-    <div class="z-20 md:w-3/4 flex flex-col items-center justify-center transform -translate-y-5">
-      <h1
-        *ngIf="isUnitService"
-        class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-8"
-      >
-        Pack Visibilité
-      </h1>
-      <h1
-        *ngIf="!isUnitService"
-        class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-8"
-      >
-        Pack Visibilité
-      </h1>
       <div
-        *ngIf="isUnitService"
-        class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
+        class="z-20 md:w-3/4 flex flex-col items-center justify-center transform -translate-y-5"
       >
-        <h2 class="font-bold mb-2">
-          Paiement immédiat, unique et sans abonnement :
-        </h2>
-        <p>la solution simple, efficace et sans contrainte !</p>
+        <h1
+          *ngIf="isUnitService"
+          class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-8"
+        >
+          Pack Visibilité
+        </h1>
+        <h1
+          *ngIf="!isUnitService"
+          class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-8"
+        >
+          Pack Visibilité
+        </h1>
+        <div
+          *ngIf="isUnitService"
+          class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
+        >
+          <h2 class="font-bold mb-2">
+            Paiement immédiat, unique et sans abonnement :
+          </h2>
+          <p>la solution simple, efficace et sans contrainte !</p>
+        </div>
+        <div
+          *ngIf="!isUnitService"
+          class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
+        >
+          <h2 class="font-bold mb-2">
+            Paiement au succès, en co-mandat et sans abonnement :
+          </h2>
+          <p>
+            la solution flexible, sans risque et 100 % axée sur votre succès !
+          </p>
+        </div>
       </div>
-      <div
-        *ngIf="!isUnitService"
-        class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
-      >
-        <h2 class="font-bold mb-2">
-          Paiement au succès, en co-mandat et sans abonnement :
-        </h2>
-        <p>
-          la solution flexible, sans risque et 100 % axée sur votre succès !
-        </p>
-      </div>
-    </div>
       <div class="p-2 z-10 bg-white rounded-full text-mygrey1 cursor-pointer">
         <div
           (click)="toggleService()"
@@ -102,7 +104,11 @@
       <p class="text-xl text-justify hyphens-auto leading-relaxed">
         Besoin de diffuser un grand volume d’annonces ? Découvrez nos packs
         adaptés et simplifiez votre gestion.
-        <a class="underline font-semibold cursor-pointer"
+        <a
+          href="https://app.lemcal.com/@diffuze/15min"
+          target="_blank"
+          rel="external"
+          class="underline font-semibold cursor-pointer"
           >Prenez rendez-vous dès maintenant !</a
         >
       </p>
