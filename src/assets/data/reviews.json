@@ -40,5 +40,15 @@
         "text": "“Service client réactif et interface facile à utiliser. La passerelle avec notre logiciel est un plus. Je suis client depuis plus d'un ans maintenant. Je recommande vivement !”",
         "image":"assets/img/logo/setImmo.png",
         "date":"14 novembre 2024"
+    },
+    {
+        "id": 7,
+        "agency":"Bercail",
+        "image":"assets/img/logo/bercail.png"
+    },
+    {
+        "id": 8,
+        "agency":"Monkey",
+        "image":"assets/img/logo/monkey.png"
     }
 ]

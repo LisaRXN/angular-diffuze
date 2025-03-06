@@ -1,12 +1,12 @@
 <div
-  class="min-h-screen bg-gray-50 flex flex-col items-center font-open text-mygrey1"
+  class="min-h-screen bg-zinc-100 flex flex-col items-center font-open text-mygrey1"
 >
   <!-- Hero -->
-  <div class="relative h-[700px] w-full pb-16 text-mygrey1 mb-16">
-    <div class="bg-white opacity-70 absolute inset-0 w-full h-full"></div>
-    <span class="absolute z-10 h-[120px] w-[120%] -rotate-3 -bottom-10 bg-gray-50"></span>
+  <div class="relative h-[600px] md:h-[700px] w-full pb-16 text-white mb-16">
+    <div class="bg-black opacity-55 absolute inset-0 w-full h-full"></div>
+    <span class="absolute z-10 h-[120px] w-[120%] -rotate-3 -bottom-10 bg-zinc-100"></span>
     <div
-    class="bg-[url(assets/img/photo/photo5.jpg)] h-[700px] bg-center bg-cover bg-no-repeat w-full flex flex-col items-center justify-center "
+    class="bg-[url(assets/img/photo/photo5.jpg)] h-[600px] md:h-[700px] bg-center bg-cover bg-no-repeat w-full flex flex-col items-center justify-center "
     >
     <div
       class="z-10 absolute top-8 left-8 md:top-14 md:left-14 flex items-center justify-center gap-2 bg-myyellow1 hover:bg-myyellow2 transition duration-300 text-mygrey1 text-sm px-4 py-2 rounded-full"
@@ -16,6 +16,8 @@
         >Retour aux catégories</a
       >
     </div>
+    <div class="z-20 transform -translate-y-10 flex flex-col items-center">
+
     <h1
       class="z-10 text-2xl md:text-5xl font-bold font-raleway text-center max-w-[600px] mb-12"
     >
@@ -23,23 +25,24 @@
     </h1>
 
     <p
-      class="z-10 text-lg font-semibold md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
+      class="z-10 text-lg font-semibold md:text-xl leading-relaxed md:w-3/4 text-center"
       *ngIf="type.id === 1"
     >
       Les dernières tendances, conseils et analyses du marché
     </p>
     <p
-      class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
+      class="z-10 text-lg md:text-xl leading-relaxed md:w-3/4 text-center"
       *ngIf="type.id === 2"
     >
       Les plateformes et professionnels qui façonnent le marché
     </p>
     <p
-      class="z-10 text-lg md:text-xl leading-relaxed mb-12 md:w-3/4 text-center"
+      class="z-10 text-lg md:text-xl leading-relaxed md:w-3/4 text-center"
       *ngIf="type.id === 3"
     >
       Les dernières actualités sur l'immobilier
     </p>
+    </div>
     <!-- <div
       class="absolute -top-20 left-1/2 w-[140%] h-[500px] bg-mygrey2 transform -translate-x-1/2 -rotate-3"
     ></div> -->

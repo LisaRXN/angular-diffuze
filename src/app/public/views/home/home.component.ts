@@ -21,6 +21,7 @@ import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { PartnersDialogComponent } from '../../shared/components/partners-dialog/partners-dialog.component';
 import { NumberCardComponent } from './components/number-card/number-card.component';
+import reviewsDetails from '../../../../assets/data/reviews.json'
 
 @Component({
   selector: 'app-home',
@@ -55,6 +56,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   isCarouselStart = true;
   isCarouselEnd = false;
   hasStartedAnimation: boolean = false;
+  reviews = reviewsDetails;
 
   @ViewChild(PartnersDialogComponent) dialogComponent!: PartnersDialogComponent;
   @ViewChild('carousel') carousel!: ElementRef<HTMLDivElement>;
