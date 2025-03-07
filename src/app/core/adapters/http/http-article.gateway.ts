@@ -42,4 +42,13 @@ export class HttpArticleGateway extends ArticleGateway {
             map(response => response.data)
         )
     }
+
+    override getSlugCategory(id: number): string {
+        return this.categories[id]
+    }
+
+    override getIdCategory(slug: string): number{
+        const category = Object.entries(this.categories).find(([key, value]) => value === slug);
+        return category ? parseInt(category[0]) : 1
+    }
 }

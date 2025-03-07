@@ -3,6 +3,10 @@ export interface Type {
   type:string;
 }
 
+export interface Categories {
+  [key: number]: string
+}
+
 export interface Article {
   id: number;
   url:string;

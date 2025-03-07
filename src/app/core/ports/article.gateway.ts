@@ -1,10 +1,17 @@
 import { Observable } from 'rxjs';
 import { Property } from '../models/property.model';
-import { Article } from '../models/article.models';
+import { Article, Categories } from '../models/article.models';
 import { Type } from '../models/article.models';
 
 export abstract class ArticleGateway {
+
   private articles: Article[] = [];
+
+  categories: Categories = {
+    1: "guide-immo",
+    2: "acteurs-immo",
+    3: "actualite-immobiliere",
+  }
 
   // Méthode utilisée par app.routes.server.ts
   async getArticleIds(): Promise<number[]> {
@@ -26,4 +33,9 @@ export abstract class ArticleGateway {
   abstract getArticlesByType(type_id: number): Observable<Article[]>;
 
   abstract getLastArticlesByType(): Observable<Article[][]>;
+
+  abstract getSlugCategory(id:number): string;
+
+  abstract getIdCategory(slug:string): number;
+
 }

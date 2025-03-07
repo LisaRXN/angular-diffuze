@@ -43,18 +43,27 @@
         </p>
       </div>
 
-    
-
       <!-- Sidebar content here -->
-      <li><a (click)="closeDrawer()" routerLink="/service">Notre Offre</a></li>
       <li>
-        <a (click)="closeDrawer()" routerLink="/review">Nos Partenaires</a>
+        <div class="flex items-center"><img src="assets/img/icon/emoji-speaker.png" class="w-[18px]"/>
+        <a (click)="closeDrawer()" routerLink="/service">Notre Offre</a>
+        </div>
       </li>
-      <li><a (click)="closeDrawer()" routerLink="/blog">Le Blog</a></li>
       <li>
+        <div class="flex items-center"><img src="assets/img/icon/emoji-client.png" class="w-[18px]"/>
+        <a (click)="closeDrawer()" routerLink="/review">Nos Partenaires</a>
+        </div>
+      </li>
+      <li>
+        <div class="flex items-center"><img src="assets/img/icon/emoji-pencil.png" class="w-[18px]"/>
+        <a (click)="closeDrawer()" routerLink="/blog">Le Blog</a>
+        </div>
+      <li>
+        <div class="flex items-center"><img src="assets/img/icon/emoji-login.png" class="w-[18px]"/>
         <a href="http://www.app.diffuze.fr" target="_blank" rel="external"
           >Espace personnel</a
         >
+        </div>
       </li>
       <a
         (click)="closeDrawer()"

@@ -16,6 +16,13 @@ export const BLOG_ROUTES: Routes = [
       ),
   },
   {
+    path: 'categorie/:slug',
+    loadComponent: () =>
+      import('./blog-list/blog-list.component').then(
+        (m) => m.BlogListComponent
+      ),
+  },
+  {
     path: ':slug',
     loadComponent: () =>
       import('./blog-detail/blog-detail.component').then(
