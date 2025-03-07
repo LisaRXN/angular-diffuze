@@ -19,7 +19,7 @@ async function fetchUrls(): Promise<UrlData[]> {
         lastmod: new Date().toISOString(),
       },
       {
-        url: '/service',
+        url: '/notre-offre',
         changefreq: 'monthly',
         priority: 0.8,
         lastmod: new Date().toISOString(),
@@ -31,9 +31,21 @@ async function fetchUrls(): Promise<UrlData[]> {
         lastmod: new Date().toISOString(),
       },
       {
-        url: '/review',
+        url: '/nos-partenaires',
         changefreq: 'monthly',
         priority: 0.7,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        url: '/conditions-generales',
+        changefreq: 'monthly',
+        priority: 0.1,
+        lastmod: new Date().toISOString(),
+      },
+      {
+        url: '/protection-des-donnees',
+        changefreq: 'monthly',
+        priority: 0.1,
         lastmod: new Date().toISOString(),
       },
     ];

@@ -1,4 +1,13 @@
-# Bloquer tous les robots (voir http://www.robotstxt.org/robotstxt.html)
+# Autoriser tous les robots (voir http://www.robotstxt.org/robotstxt.html)
 
+# Règles pour tous les robots
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /dashboard/           # Décommentez pour bloquer l'accès à /dashboard/
+
+
+# Délai de crawl recommandé (en secondes)
+Crawl-delay: 3
+
+# Emplacement du sitemap
+Sitemap: https://www.diffuze.com/sitemap.xml

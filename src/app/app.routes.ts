@@ -35,7 +35,7 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'service',
+        path: 'notre-offre',
         loadComponent: () =>
           import('./public/views/service/service.component').then(
             (m) => m.ServiceComponent
@@ -73,7 +73,7 @@ export const routes: Routes = [
           import('./public/views/cgv/cgv.component').then(
             (m) => m.CGVComponent
           ),
-      }
+      },
     ],
   },
   {

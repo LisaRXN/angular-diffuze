@@ -11,17 +11,14 @@ import {
 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { PropertyCardComponent } from '../../shared/components/property-card/property-card.component';
-import {
-  Router,
-  RouterLink,
-} from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { PropertyGateway } from '../../../core/ports/property.gateway';
 import { Property } from '../../../core/models/property.model';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { PartnersDialogComponent } from '../../shared/components/partners-dialog/partners-dialog.component';
 import { NumberCardComponent } from './components/number-card/number-card.component';
-import reviewsDetails from '../../../../assets/data/reviews.json'
+import reviewsDetails from '../../../../assets/data/reviews.json';
 
 @Component({
   selector: 'app-home',
@@ -61,11 +58,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild(PartnersDialogComponent) dialogComponent!: PartnersDialogComponent;
   @ViewChild('carousel') carousel!: ElementRef<HTMLDivElement>;
 
-  @ViewChildren(NumberCardComponent) numberCards!: QueryList<NumberCardComponent>;
+  @ViewChildren(NumberCardComponent)
+  numberCards!: QueryList<NumberCardComponent>;
   @ViewChild('numbers') numbersRef!: ElementRef;
   @HostListener('window:scroll', ['$event'])
   onScroll() {
-    if (this.hasStartedAnimation) return;
+    if (this.hasStartedAnimation || typeof window === 'undefined') return;
 
     const numberElement = this.numbersRef.nativeElement;
     const windowHeight = window.innerHeight;
@@ -80,7 +78,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.onScroll();
+    if (typeof window !== 'undefined') {
+      this.onScroll();
+    }
   }
 
   ngOnInit() {
