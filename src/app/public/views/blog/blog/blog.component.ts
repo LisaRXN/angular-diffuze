@@ -8,6 +8,7 @@ import { ArticleCardComponent } from '../components/article-card/article-card.co
 import { ArticleGateway } from '../../../../core/ports/article.gateway';
 import { Article } from '../../../../core/models/article.models';
 
+
 @Component({
   selector: 'app-blog',
   imports: [CommonModule, RouterLink, FormsModule, ArticleCardComponent],
@@ -37,5 +38,9 @@ export class BlogComponent implements OnInit {
 
   selectType(id: number) {
     return (this.selectedType = this.types.filter((type) => type.id === id));
+  }
+
+  getSlugCategory(id: number): string | undefined {
+    return this.articleGateway.getSlugCategory(id);
   }
 }

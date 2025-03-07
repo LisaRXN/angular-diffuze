@@ -23,21 +23,21 @@
     {
         "id": 4,
         "agency":"Coreag",
-        "text": "Je suis client depuis plusieurs mois et entièrement satisfait. L'équipe est disponible et à l’écoute. Très beau concept qui nous permet de diffuser nos annonces à l’unité.",
+        "text": "Super service d’annonce à l’unité qui nous permet de maitriser nos couts de diffusion tout en gardant une visibilité optimale sur les plus grands portails de diffusion.",
         "image":"assets/img/logo/coreag.png",
         "date":"10 aout 2024"
     },
     {
         "id": 5,
         "agency":"Tandem",
-        "text": "Super service d’annonce à l’unité qui nous permet de maitriser nos couts de diffusion tout en gardant une visibilité optimale sur les plus grands portails de diffusion.",
+        "text": "Je suis client depuis plusieurs mois et entièrement satisfait. L'équipe est disponible et à l’écoute. Très beau concept qui nous permet de diffuser nos annonces à l’unité.",
         "image":"assets/img/logo/tandem.png",
         "date":"18 septembre 2024"
     },
     {
         "id": 6,
         "agency":"seTImmo",
-        "text": "Service client réactif et interface facile à utiliser. La passerelle avec notre logiciel est un plus. Je suis client depuis plus d'un ans maintenant. Je recommande vivement !”",
+        "text": "Un outil simple, efficace et surtout adapté à nos besoins. La flexibilité des offres et la diffusion sur les grands portails immobiliers en font une solution incontournable pour les petites agences.",
         "image":"assets/img/logo/setImmo.png",
         "date":"14 novembre 2024"
     },
