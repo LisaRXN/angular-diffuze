@@ -21,13 +21,13 @@ import { AnalyticsService } from '../../../core/services/analytics.service';
         <div class="buttons flex-col md:flex-row">
           <button
             (click)="acceptCookies()"
-            class="w-full md:w-auto text-white bg-blue-800 hover:bg-blue-900 px-4 py-3 rounded-xl transition duration-300"
+            class="w-full md:w-auto text-mygrey2 bg-myyellow1 hover:bg-myyellow2 px-4 py-3 rounded-xl transition duration-300"
           >
             Accepter
           </button>
           <button
             (click)="rejectCookies()"
-            class="w-full md:w-auto text-blue-800 hover:bg-mygrey4 px-4 py-3 rounded-xl  transition duration-300"
+            class="w-full md:w-auto text-mygrey2 hover:bg-mygrey4 px-4 py-3 rounded-xl  transition duration-300"
           >
             Refuser
           </button>

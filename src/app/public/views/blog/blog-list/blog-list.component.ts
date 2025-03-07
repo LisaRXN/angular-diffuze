@@ -6,6 +6,7 @@ import { combineLatest, fromEvent, map, Subscription, switchMap } from 'rxjs';
 import { ArticleCardComponent } from '../components/article-card/article-card.component';
 import { ArticleGateway } from '../../../../core/ports/article.gateway';
 
+
 @Component({
   selector: 'app-blog-list',
   standalone: true,
@@ -27,12 +28,13 @@ export class BlogListComponent implements OnInit {
     private route: ActivatedRoute,
     private articleGateway: ArticleGateway
   ) {}
-
+ 
   ngOnInit() {
     this.route.params
       .pipe(
         switchMap((params) => {
-          const id = +params['id'];
+          const slug = params['slug'];
+          const id = this.articleGateway.getIdCategory(slug)
           return combineLatest([
             this.articleGateway.getArticlesByType(id),
             this.articleGateway
@@ -49,4 +51,6 @@ export class BlogListComponent implements OnInit {
         error: (error) => console.error('Erreur:', error),
       });
   }
+
+
 }
