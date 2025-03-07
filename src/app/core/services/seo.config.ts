@@ -6,21 +6,21 @@ export interface RouteSeoConfig {
 
 export const SEO_CONFIG: RouteSeoConfig = {
   '/': {
-    title: 'DiffuZe. Immobilier - Accueil',
+    title: 'Diffuze - Maîtrisez vos coûts de diffusion immobilière​',
     description:
-      "Page d'accueil de DiffuZe. Immobilier - Diffusez vos annonces immobilières sans abonnement",
+      'Découvrez Diffuze, votre partenaire pour booster la visibilité de vos annonces immobilières sur plus de 50 plateformes, sans abonnement ni engagement.​',
     keywords:
-      'immobilier, annonces, diffusion, sans abonnement, vente, location',
-    ogTitle: 'DiffuZe. Immobilier - Accueil',
+      'immobilier, annonces, diffusion, sans abonnement, vente, location, booster la visibilité, coûts de diffusion',
+    ogTitle: 'Diffuze - Maîtrisez vos coûts de diffusion immobilière​',
     ogDescription:
-      "Découvrez nos services professionnels de diffusion d'annonces immobilières",
+      'Découvrez Diffuze, votre partenaire pour booster la visibilité de vos annonces immobilières sur plus de 50 plateformes, sans abonnement ni engagement.​',
     ogImage: 'https://www.diffuze.fr/assets/img/photo/banniere.jpg',
     structuredData: {
       '@context': 'https://schema.org',
       '@graph': [
         {
           '@type': 'Organization',
-          '@id': 'https://www.diffuze.fr/#organization',
+          '@id': 'https://www.diffuze.fr/',
           name: 'DiffuZe. Immobilier',
           url: 'https://www.diffuze.fr/',
           logo: {
@@ -31,24 +31,22 @@ export const SEO_CONFIG: RouteSeoConfig = {
           },
           description:
             "Service de diffusion d'annonces immobilières sans abonnement pour les professionnels",
-          sameAs: [
-            'https://www.facebook.com/diffuze.immobilier',
-            'https://www.linkedin.com/company/diffuze-immobilier',
-          ],
+          sameAs: ['https://www.linkedin.com/company/diffuze-immobilier'],
           contactPoint: {
             '@type': 'ContactPoint',
-            telephone: '+33XXXXXXXXX',
             contactType: 'customer service',
             availableLanguage: 'French',
+            url: 'https://app.lemcal.com/@diffuze/15min',
+            contactOption: 'Prise de rendez-vous en ligne',
           },
         },
         {
           '@type': 'WebSite',
-          '@id': 'https://www.diffuze.fr/#website',
+          '@id': 'https://www.diffuze.fr/',
           url: 'https://www.diffuze.fr/',
           name: 'DiffuZe. Immobilier',
           publisher: {
-            '@id': 'https://www.diffuze.fr/#organization',
+            '@id': 'https://www.diffuze.fr/',
           },
           potentialAction: {
             '@type': 'SearchAction',
@@ -58,14 +56,14 @@ export const SEO_CONFIG: RouteSeoConfig = {
         },
         {
           '@type': 'WebPage',
-          '@id': 'https://www.diffuze.fr/#webpage',
+          '@id': 'https://www.diffuze.fr/',
           url: 'https://www.diffuze.fr/',
           name: "DiffuZe. Immobilier - Diffusion d'annonces immobilières sans abonnement",
           isPartOf: {
-            '@id': 'https://www.diffuze.fr/#website',
+            '@id': 'https://www.diffuze.fr/',
           },
           about: {
-            '@id': 'https://www.diffuze.fr/#organization',
+            '@id': 'https://www.diffuze.fr/',
           },
           description:
             "Diffusez vos annonces immobilières sur plus de 50 plateformes sans abonnement. Solutions pour professionnels de l'immobilier.",
@@ -88,14 +86,14 @@ export const SEO_CONFIG: RouteSeoConfig = {
                 '@type': 'Offer',
                 name: 'Paiement immédiat',
                 description: 'Paiement immédiat, unique et sans abonnement',
-                url: 'https://www.diffuze.fr/service',
+                url: 'https://www.diffuze.fr/notre-offre',
               },
               {
                 '@type': 'Offer',
                 name: 'Paiement au succès',
                 description:
                   'Paiement au succès, en co-mandat et sans abonnement',
-                url: 'https://www.diffuze.fr/service',
+                url: 'https://www.diffuze.fr/notre-offre',
               },
             ],
           },
@@ -137,20 +135,23 @@ export const SEO_CONFIG: RouteSeoConfig = {
           },
           ratingValue: '4.9',
           bestRating: '5',
-          worstRating: '1',
-          ratingCount: '120',
+          worstRating: '4',
+          ratingCount: '20',
         },
       ],
     },
   },
-  '/service': {
-    title: 'Nos Services - DiffuZe. Immobilier',
+  '/notre-offre': {
+    title:
+      "Nos Offres - Diffuze : Solutions de diffusion pour professionnels de l'immobilier​",
     description:
-      "Découvrez nos services de diffusion d'annonces immobilières sans abonnement",
-    keywords: 'services immobiliers, diffusion annonces, sans abonnement',
-    ogTitle: 'Nos Services - DiffuZe. Immobilier',
+      'Explorez nos solutions de diffusion : paiement immédiat ou au succès, pour maximiser la visibilité de vos biens immobiliers tout en maîtrisant vos coûts.​',
+    keywords:
+      'services immobiliers, diffusion annonces, sans abonnement, coûts de diffusion, booster la visibilité, annonces immobilières',
+    ogTitle:
+      "Nos Offres - Diffuze : Solutions de diffusion pour professionnels de l'immobilier​",
     ogDescription:
-      'Services professionnels pour diffuser vos annonces immobilières',
+      'Explorez nos solutions de diffusion : paiement immédiat ou au succès, pour maximiser la visibilité de vos biens immobiliers tout en maîtrisant vos coûts.​',
     structuredData: {
       '@context': 'http://schema.org',
       '@type': 'Product',
@@ -165,18 +166,19 @@ export const SEO_CONFIG: RouteSeoConfig = {
         offers: [
           {
             '@type': 'Offer',
-            name: 'Offre Standard',
+            name: 'Paiement immédiat',
             description:
-              'Diffusion de votre annonce sur les principaux portails immobiliers',
+              'Diffusion de votre annonce sur les principaux portails immobiliers sans abonnement',
             price: '99',
             priceCurrency: 'EUR',
             availability: 'https://schema.org/InStock',
             priceValidUntil: '2030-01-01',
-            url: 'https://www.diffuze.fr/service/standard',
+            url: 'https://www.diffuze.fr/notre-offre',
             itemOffered: {
               '@type': 'Service',
-              name: 'Diffusion Standard',
-              description: 'Diffusion sur les portails immobiliers principaux',
+              name: 'Diffusion paiement immédiat',
+              description:
+                'Diffusion sur les portails immobiliers principaux sans abonnement',
               serviceOutput: 'Visibilité immobilière optimisée',
               provider: {
                 '@type': 'Organization',
@@ -185,40 +187,52 @@ export const SEO_CONFIG: RouteSeoConfig = {
               serviceType: "Diffusion d'annonces immobilières",
               potentialAction: {
                 '@type': 'UseAction',
-                target: 'https://www.diffuze.fr/service/standard',
+                target: 'https://www.diffuze.fr/notre-offre',
               },
             },
             additionalProperty: [
               {
                 '@type': 'PropertyValue',
                 name: 'Portails inclus',
-                value: 'SeLoger, LeBonCoin, Jinka, Gens de Confiance',
+                value:
+                  'SeLoger, Belles Demeures, Jinka, Gens de Confiance, Green-Acres',
               },
               {
                 '@type': 'PropertyValue',
-                name: 'Nombre de photos',
-                value: "Jusqu'à 10 photos",
+                name: 'Boost hebdomadaire de votre annonce',
+                value: 'Oui',
               },
+              {
+                '@type': 'PropertyValue',
+                name: 'Estimation en ligne',
+                value: 'Grâce à notre outil gratuit en ligne',
+              },
+              {
+                '@type': 'PropertyValue',
+                name: 'Rédaction de votre annonce par IA',
+                value: 'Grâce à notre outil gratuit en ligne',
+              },
+
               {
                 '@type': 'PropertyValue',
                 name: 'Durée',
-                value: 'Sans limite de temps',
+                value: '60 jours',
               },
             ],
           },
           {
             '@type': 'Offer',
-            name: 'Offre Premium',
+            name: 'Paiement au succès',
             description:
               'Diffusion prioritaire avec photos professionnelles et visibilité accrue',
             price: '149',
             priceCurrency: 'EUR',
             availability: 'https://schema.org/InStock',
             priceValidUntil: '2030-01-01',
-            url: 'https://www.diffuze.fr/service/premium',
+            url: 'https://www.diffuze.fr/notre-offre',
             itemOffered: {
               '@type': 'Service',
-              name: 'Diffusion Premium',
+              name: 'Diffusion paiement au succès',
               description:
                 'Diffusion prioritaire sur tous les portails immobiliers premium',
               serviceOutput: 'Visibilité immobilière maximale',
@@ -229,20 +243,30 @@ export const SEO_CONFIG: RouteSeoConfig = {
               serviceType: "Diffusion d'annonces immobilières premium",
               potentialAction: {
                 '@type': 'UseAction',
-                target: 'https://www.diffuze.fr/service/premium',
+                target: 'https://www.diffuze.fr/notre-offre',
               },
             },
             additionalProperty: [
               {
                 '@type': 'PropertyValue',
-                name: 'Portails premium inclus',
+                name: 'Portails inclus',
                 value:
-                  'SeLoger, LeBonCoin, Belles Demeures, Jinka, Gens de Confiance, Green-Acres',
+                  'SeLoger, Belles Demeures, Jinka, Gens de Confiance, Green-Acres',
               },
               {
                 '@type': 'PropertyValue',
                 name: 'Nombre de photos',
                 value: "Jusqu'à 20 photos",
+              },
+              {
+                '@type': 'PropertyValue',
+                name: 'Estimation en ligne',
+                value: 'Grâce à notre outil gratuit en ligne',
+              },
+              {
+                '@type': 'PropertyValue',
+                name: 'Rédaction de votre annonce par IA',
+                value: 'Grâce à notre outil gratuit en ligne',
               },
               {
                 '@type': 'PropertyValue',
@@ -260,7 +284,7 @@ export const SEO_CONFIG: RouteSeoConfig = {
       },
       brand: {
         '@type': 'Brand',
-        name: 'DiffuZe. Immobilier',
+        name: 'DiffuZe.',
       },
       positiveNotes: {
         '@type': 'ItemList',
@@ -290,7 +314,7 @@ export const SEO_CONFIG: RouteSeoConfig = {
       aggregateRating: {
         '@type': 'AggregateRating',
         ratingValue: '4.9',
-        reviewCount: '120',
+        reviewCount: '20',
       },
       mainEntityOfPage: {
         '@type': 'FAQPage',
@@ -340,8 +364,9 @@ export const SEO_CONFIG: RouteSeoConfig = {
     },
   },
   '/blog': {
-    title: 'Blog Immobilier - DiffuZe. Immobilier',
-    description: "Conseils, actualités et guides sur l'immobilier",
+    title: 'Blog Diffuze - Actualités et conseils en diffusion immobilière​',
+    description:
+      "Consultez notre blog pour des actualités, conseils et astuces sur la diffusion d'annonces immobilières et les meilleures pratiques du secteur.​",
     keywords: 'blog immobilier, conseils immobiliers, actualités immobilières',
     ogTitle: 'Blog Immobilier - DiffuZe',
     ogDescription: "Découvrez nos articles sur l'immobilier",
@@ -350,11 +375,11 @@ export const SEO_CONFIG: RouteSeoConfig = {
       '@graph': [
         {
           '@type': 'WebPage',
-          '@id': 'https://www.diffuze.fr/blog/#webpage',
+          '@id': 'https://www.diffuze.fr/blog/',
           url: 'https://www.diffuze.fr/blog/',
           name: 'Blog Immobilier - DiffuZe. Immobilier',
           isPartOf: {
-            '@id': 'https://www.diffuze.fr/#website',
+            '@id': 'https://www.diffuze.fr/',
           },
           about: {
             '@type': 'Thing',
@@ -363,12 +388,12 @@ export const SEO_CONFIG: RouteSeoConfig = {
           description:
             "Conseils, actualités et guides sur l'immobilier pour les professionnels et particuliers",
           breadcrumb: {
-            '@id': 'https://www.diffuze.fr/blog/#breadcrumb',
+            '@id': 'https://www.diffuze.fr/blog/',
           },
         },
         {
           '@type': 'BreadcrumbList',
-          '@id': 'https://www.diffuze.fr/blog/#breadcrumb',
+          '@id': 'https://www.diffuze.fr/blog/',
           itemListElement: [
             {
               '@type': 'ListItem',
@@ -386,13 +411,13 @@ export const SEO_CONFIG: RouteSeoConfig = {
         },
         {
           '@type': 'CollectionPage',
-          '@id': 'https://www.diffuze.fr/blog/#collectionpage',
+          '@id': 'https://www.diffuze.fr/blog/',
           url: 'https://www.diffuze.fr/blog/',
           name: 'Blog Immobilier - DiffuZe',
           description:
             "Découvrez nos articles sur l'immobilier classés par catégories",
           isPartOf: {
-            '@id': 'https://www.diffuze.fr/blog/#webpage',
+            '@id': 'https://www.diffuze.fr/blog/',
           },
           about: {
             '@type': 'Thing',
@@ -405,10 +430,10 @@ export const SEO_CONFIG: RouteSeoConfig = {
             {
               '@type': 'ListItem',
               position: 1,
-              name: 'Tendances du marché',
+              name: 'Conseils pour les vendeurs',
               url: 'https://www.diffuze.fr/blog/type/1',
               description:
-                'Les dernières tendances, conseils et analyses du marché immobilier',
+                "Conseils pour les vendeurs, conseils pour les acquéreurs, conseils pour les professionnels de l'immobilier",
             },
             {
               '@type': 'ListItem',
@@ -434,85 +459,149 @@ export const SEO_CONFIG: RouteSeoConfig = {
           description:
             "Conseils, actualités et guides sur l'immobilier pour les professionnels",
           url: 'https://www.diffuze.fr/blog/',
-          sameAs: [
-            'https://www.facebook.com/diffuze.immobilier',
-            'https://www.linkedin.com/company/diffuze-immobilier',
-          ],
+          sameAs: ['https://www.linkedin.com/company/diffuze-immobilier'],
           publisher: {
-            '@id': 'https://www.diffuze.fr/#organization',
+            '@id': 'https://www.diffuze.fr/',
           },
-          blogPost: [
-            {
-              '@type': 'BlogPosting',
-              headline: "Guide du vendeur : Tout ce qu'il faut savoir",
-              description:
-                'Découvrez tous les incontournables de la vente immobilière dans notre guide complet.',
-              image: 'https://www.diffuze.fr/assets/img/photo/photo12.jpg',
-              url: 'https://www.diffuze.fr/blog/article/guide-du-vendeur',
-              datePublished: '2023-09-15T08:00:00+01:00',
-              dateModified: '2023-09-15T08:00:00+01:00',
-              author: {
-                '@type': 'Person',
-                name: 'Équipe DiffuZe',
-              },
-              publisher: {
-                '@id': 'https://www.diffuze.fr/#organization',
-              },
-              mainEntityOfPage: {
-                '@type': 'WebPage',
-                '@id': 'https://www.diffuze.fr/blog/article/guide-du-vendeur',
-              },
-              articleSection: 'Tendances du marché',
-            },
-            {
-              '@type': 'BlogPosting',
-              headline: 'Les meilleures plateformes immobilières en 2023',
-              description:
-                'Découvrez notre classement des plateformes immobilières les plus performantes cette année.',
-              image: 'https://www.diffuze.fr/assets/img/photo/photo8.jpg',
-              url: 'https://www.diffuze.fr/blog/article/meilleures-plateformes',
-              datePublished: '2023-08-22T10:30:00+01:00',
-              dateModified: '2023-08-22T10:30:00+01:00',
-              author: {
-                '@type': 'Person',
-                name: 'Équipe DiffuZe',
-              },
-              publisher: {
-                '@id': 'https://www.diffuze.fr/#organization',
-              },
-              mainEntityOfPage: {
-                '@type': 'WebPage',
-                '@id':
-                  'https://www.diffuze.fr/blog/article/meilleures-plateformes',
-              },
-              articleSection: 'Plateformes immobilières',
-            },
-            {
-              '@type': 'BlogPosting',
-              headline: 'Évolution des prix immobiliers : tendances actuelles',
-              description:
-                'Analyse des dernières tendances du marché immobilier et prévisions pour les mois à venir.',
-              image: 'https://www.diffuze.fr/assets/img/photo/photo5.jpg',
-              url: 'https://www.diffuze.fr/blog/article/evolution-prix',
-              datePublished: '2023-07-10T09:15:00+01:00',
-              dateModified: '2023-07-10T09:15:00+01:00',
-              author: {
-                '@type': 'Person',
-                name: 'Équipe DiffuZe',
-              },
-              publisher: {
-                '@id': 'https://www.diffuze.fr/#organization',
-              },
-              mainEntityOfPage: {
-                '@type': 'WebPage',
-                '@id': 'https://www.diffuze.fr/blog/article/evolution-prix',
-              },
-              articleSection: 'Actualités immobilières',
-            },
-          ],
         },
       ],
     },
   },
+  '/nos-partenaires': {
+    title:
+      'Avis Clients - Diffuze : Ils nous font confiance pour leur diffusion immobilière​​',
+    description:
+      "Découvrez les professionnels de l'immobilier qui ont choisi Diffuze pour optimiser la visibilité de leurs annonces et maîtriser leurs coûts de diffusion. Leur satisfaction est notre priorité !​",
+    keywords:
+      'partenaires, diffusion annonces, sans abonnement, coûts de diffusion, booster la visibilité, annonces immobilières',
+    ogTitle:
+      'Avis Clients - Diffuze : Ils nous font confiance pour leur diffusion immobilière​​',
+    ogDescription:
+      "Découvrez les professionnels de l'immobilier qui ont choisi Diffuze pour optimiser la visibilité de leurs annonces et maîtriser leurs coûts de diffusion. Leur satisfaction est notre priorité !​",
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebPage',
+          '@id': 'https://www.diffuze.fr/nos-partenaires/',
+          url: 'https://www.diffuze.fr/nos-partenaires/',
+          name: 'Avis Clients - Diffuze : Ils nous font confiance',
+          isPartOf: {
+            '@id': 'https://www.diffuze.fr/',
+          },
+          description:
+            "Découvrez les professionnels de l'immobilier qui ont choisi Diffuze pour optimiser la visibilité de leurs annonces",
+          breadcrumb: {
+            '@id': 'https://www.diffuze.fr/nos-partenaires/',
+          },
+        },
+        {
+          '@type': 'BreadcrumbList',
+          '@id': 'https://www.diffuze.fr/nos-partenaires/',
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Accueil',
+              item: 'https://www.diffuze.fr/',
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Avis Clients',
+              item: 'https://www.diffuze.fr/nos-partenaires/',
+            },
+          ],
+        },
+        {
+          '@type': 'ItemList',
+          itemListElement: [
+            {
+              '@type': 'Review',
+              reviewRating: {
+                '@type': 'Rating',
+                ratingValue: '5',
+                bestRating: '5',
+              },
+              author: {
+                '@type': 'Organization',
+                name: 'Agence Century 21',
+              },
+              itemReviewed: {
+                '@type': 'Service',
+                name: "Diffusion d'annonces immobilières",
+              },
+              reviewBody:
+                'Un outil simple, efficace et surtout adapté à nos besoins. La flexibilité des offres et la diffusion sur les grands portails immobiliers en font une solution incontournable pour les petites agences.',
+            },
+            {
+              '@type': 'Review',
+              reviewRating: {
+                '@type': 'Rating',
+                ratingValue: '5',
+                bestRating: '5',
+              },
+              author: {
+                '@type': 'Organization',
+                name: 'Agence Laforêt',
+              },
+              itemReviewed: {
+                '@type': 'Service',
+                name: "Diffusion d'annonces immobilières",
+              },
+              reviewBody:
+                'Simple, rapide et efficace. Tout ce qu’on attend d’un bon service de diffusion d’annonces immobilières ! Je recommande sans hésitation.',
+            },
+            {
+              '@type': 'Review',
+              reviewRating: {
+                '@type': 'Rating',
+                ratingValue: '4',
+                bestRating: '5',
+              },
+              author: {
+                '@type': 'Organization',
+                name: 'TOC immobilier',
+              },
+              itemReviewed: {
+                '@type': 'Service',
+                name: "Diffusion d'annonces immobilières",
+              },
+              reviewBody:
+                'Une solution parfaite pour les agences souhaitant optimiser leur budget tout en bénéficiant d’une visibilité sur les plus grands portails. Bravo pour cette initiative !',
+            },
+          ],
+        },
+        {
+          '@type': 'AggregateRating',
+          itemReviewed: {
+            '@type': 'Service',
+            name: "Diffusion d'annonces immobilières - DiffuZe",
+            provider: {
+              '@type': 'Organization',
+              name: 'DiffuZe. Immobilier',
+            },
+          },
+          ratingValue: '4.9',
+          bestRating: '5',
+          worstRating: '1',
+          ratingCount: '42',
+          reviewCount: '38',
+        },
+      ],
+    },
+  },
+  '/conditions-generales​': {
+    title:
+      "Conditions Générales de Vente - Diffuze : Diffusion d'annonces immobilières​",
+    description:
+      "Prenez connaissance des conditions générales d'utilisation de Diffuze, votre service de diffusion d'annonces immobilières.​​",
+  },
+  '/protection-des-donnees​': {
+    title: 'Protection des Données - Diffuze : Confidentialité et sécurité​',
+    description:
+      'Découvrez comment Diffuze protège vos données personnelles conformément aux réglementations en vigueur.​',
+  },
+
   // Ajoutez d'autres routes selon vos besoins
 };

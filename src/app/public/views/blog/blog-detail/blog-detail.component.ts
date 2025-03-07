@@ -53,14 +53,41 @@ export class BlogDetailComponent implements OnInit {
         ),
         ogImage: article.article_preview,
         canonicalUrl: `https://www.diffuze.fr/blog/${article.url}`,
+        structuredData: {
+          '@type': 'BlogPosting',
+          headline: article.page_title,
+          description: this.stripHtml(article.article_description).substring(
+            0,
+            160
+          ),
+          image: article.article_preview,
+          url: `https://www.diffuze.fr/blog/${article.url}`,
+          datePublished: article.creation_date || new Date().toISOString(),
+          dateModified:
+            article.update_date ||
+            article.creation_date ||
+            new Date().toISOString(),
+          author: {
+            '@type': 'Person',
+            name: article.author,
+          },
+          publisher: {
+            '@id': 'https://www.diffuze.fr/',
+          },
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': `https://www.diffuze.fr/blog/${article.url}`,
+          },
+          articleSection: this.articleType?.name || 'Blog',
+        },
       });
     });
   }
   // Fonction utilitaire pour supprimer les balises HTML
   private stripHtml(html: string | undefined): string {
     if (!html) return '';
-    const tmp = document.createElement('DIV');
-    tmp.innerHTML = html;
-    return tmp.textContent || tmp.innerText || '';
+
+    // Éviter l'utilisation de document qui n'est pas disponible côté serveur
+    return html.replace(/<[^>]*>/g, '');
   }
 }
