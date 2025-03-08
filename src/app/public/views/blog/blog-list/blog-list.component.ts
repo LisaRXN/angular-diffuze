@@ -5,7 +5,7 @@ import { PrerenderService } from '../../../../core/services/prerender.service';
 import { combineLatest, fromEvent, map, Subscription, switchMap } from 'rxjs';
 import { ArticleCardComponent } from '../components/article-card/article-card.component';
 import { ArticleGateway } from '../../../../core/ports/article.gateway';
-
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-blog-list',
@@ -28,13 +28,15 @@ export class BlogListComponent implements OnInit {
     private route: ActivatedRoute,
     private articleGateway: ArticleGateway
   ) {}
- 
+
+  env = environment;
+
   ngOnInit() {
     this.route.params
       .pipe(
         switchMap((params) => {
           const slug = params['slug'];
-          const id = this.articleGateway.getIdCategory(slug)
+          const id = this.articleGateway.getIdCategory(slug);
           return combineLatest([
             this.articleGateway.getArticlesByType(id),
             this.articleGateway
@@ -51,6 +53,4 @@ export class BlogListComponent implements OnInit {
         error: (error) => console.error('Erreur:', error),
       });
   }
-
-
 }
