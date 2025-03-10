@@ -18,6 +18,9 @@
       >
         {{ price2 }} €
       </p>
+      <p *ngIf="allOptionsChecked" class="text-mygrey2 self-center bg-myyellow1 rounded-sm px-4 py-2 ">
+        Vous économisez 50 € !       
+      </p>
       <p *ngIf="!isUnitService" class="text-mygrey2 self-center">
         Économisez dès maintenant 459 € !       
       </p>
