@@ -42,7 +42,7 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'review',
+        path: 'nos-partenaires',
         loadComponent: () =>
           import('./public/views/review/review.component').then(
             (m) => m.ReviewComponent
