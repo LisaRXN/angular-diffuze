@@ -6,6 +6,7 @@ import { Article } from '../../../../core/models/article.models';
 import { combineLatest, switchMap, tap } from 'rxjs';
 import { ArticleGateway } from '../../../../core/ports/article.gateway';
 import { SeoService } from '../../../../core/services/seo.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-blog-detail',
@@ -24,6 +25,8 @@ export class BlogDetailComponent implements OnInit {
   types: any[] = [];
   articleType: any;
   otherTypes: any[] = [];
+
+  env = environment;
 
   ngOnInit() {
     combineLatest([
@@ -51,7 +54,7 @@ export class BlogDetailComponent implements OnInit {
           0,
           160
         ),
-        ogImage: article.article_preview,
+        ogImage: this.env.publicURL + article.article_preview,
         canonicalUrl: `https://www.diffuze.fr/blog/${article.url}`,
         structuredData: {
           '@type': 'BlogPosting',
@@ -60,7 +63,7 @@ export class BlogDetailComponent implements OnInit {
             0,
             160
           ),
-          image: article.article_preview,
+          image: this.env.publicURL + article.article_preview,
           url: `https://www.diffuze.fr/blog/${article.url}`,
           datePublished: article.creation_date || new Date().toISOString(),
           dateModified:
