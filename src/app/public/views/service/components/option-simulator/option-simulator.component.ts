@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import optionsDetails from '../../../../../../assets/data/options.json';
 import { OptionComponent } from '../../../../shared/components/option/option.component';
 import { PackDialogComponent } from '../../../../shared/components/pack-dialog/pack-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
 
 interface SurfacePrice {
   maxSurface: number;
@@ -31,6 +30,7 @@ export class OptionSimulatorComponent {
   options = optionsDetails;
   isOpenOption = false;
   optionView = this.options[0];
+  allOptionsChecked = false;
 
   activeOption(id: string) {
     this.isOpenOption = false ? this.isOpenOption : true;
@@ -89,7 +89,6 @@ export class OptionSimulatorComponent {
     },
   ];
 
-
   addOption(event: Event) {
     const checkbox = event.target as HTMLInputElement;
     const option = this.diffusionOptions.find((opt) => opt.id === checkbox.id);
@@ -124,7 +123,10 @@ export class OptionSimulatorComponent {
     });
 
     if (this.allOptionsExceptReportage()) {
+      this.allOptionsChecked = true;
       updatedPrice -= 50;
+    } else {
+      this.allOptionsChecked = false;
     }
 
     this.price = updatedPrice;
