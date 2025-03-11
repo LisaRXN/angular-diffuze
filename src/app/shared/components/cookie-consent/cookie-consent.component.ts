@@ -15,7 +15,8 @@ import { AnalyticsService } from '../../../core/services/analytics.service';
           />
           <p class="text-slate-500 text-justify">
             Nous utilisons des cookies pour améliorer votre expérience sur notre
-            site.
+            site. 
+            <span RouterLink="protection-des-donnees" class="text-slate-500 text-sm underline cursor-pointer ml-1">En savoir plus</span>
           </p>
         </div>
         <div class="buttons flex-col md:flex-row">

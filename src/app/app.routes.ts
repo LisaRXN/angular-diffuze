@@ -5,6 +5,7 @@ import { AuthSelectors } from './dashboard/stores/auth/auth.selectors';
 import { Store } from '@ngxs/store';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './public/layout/layout.component';
+import { AnnoncesComponent } from './public/views/annonces/annonces.component';
 
 export const routes: Routes = [
   {
@@ -48,6 +49,13 @@ export const routes: Routes = [
             (m) => m.ReviewComponent
           ),
       },
+      // {
+      //   path: 'annonces',
+      //   loadComponent: () =>
+      //     import('./public/views/annonces/annonces.component').then(
+      //       (m) => m.AnnoncesComponent
+      //     ),
+      // },
       {
         path: 'blog',
         loadChildren: () =>
