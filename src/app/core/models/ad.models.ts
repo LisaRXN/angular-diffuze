@@ -1,3 +1,22 @@
+export interface Filters{
+    hasType: string;
+    budgetMin: number | null;
+    budgetMax: number | null;
+    roomMin: number;
+    bedroomMin: number;
+    surfaceMin: number | null;
+    surfaceMax: number | null;
+    others: {
+      hasElevator: boolean;
+      hasBalcony: boolean;
+      hasTerrace: boolean;
+      hasParking: boolean;
+      hasBox: boolean;
+      hasBasement: boolean;
+    };
+    location: string[];
+  };
+
 interface Photos {
     id:number;
     id_ad:number;
@@ -17,7 +36,7 @@ export interface Ad {
     DPEdate?: string;
     EG?: string;
     EGletter?: string;
-    bedroom?: number;
+    bedroom: number;
     city?: string;
     comments?: string;
     construction_period?: any;
@@ -56,7 +75,7 @@ export interface Ad {
     has_terrace?: number | null;
     heating_format?: string;
     heating_type?: string;
-    id?: number;
+    id: number;
     id_ad_settings?: number;
     id_order?: number;
     id_source?: any;
@@ -66,7 +85,7 @@ export interface Ad {
     land_area?: number;
     lastName?: string;
     latitude?: number;
-    living_space?: number;
+    living_space: number;
     longitude?: number;
     lots?: any;
     mail?: string;
@@ -80,7 +99,7 @@ export interface Ad {
     property_type?: string;
     rent_by_month?: any;
     rental_expenses?: any;
-    room?: number;
+    room: number;
     selling_price?: string;
     sign_up?: string;
     start_pause?: any;

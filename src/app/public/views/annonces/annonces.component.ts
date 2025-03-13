@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   Component,
-  computed,
   ElementRef,
   inject,
   NgZone,
@@ -10,13 +9,15 @@ import {
   signal,
   ViewChild,
   viewChildren,
+  WritableSignal,
 } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMap, MapAdvancedMarker } from '@angular/google-maps';
 import { map, Observable } from 'rxjs';
 import { PropertyGateway } from '../../../core/ports/property.gateway';
 import { AdCardComponent } from './components/ad-card/ad-card.component';
-import { Ad } from '../../../core/models/ad.models';
+import { Ad, Filters } from '../../../core/models/ad.models';
+import { FiltersDialogComponent } from './components/filters-dialog/filters-dialog.component';
 
 @Component({
   selector: 'app-annonces',
@@ -27,11 +28,14 @@ import { Ad } from '../../../core/models/ad.models';
     GoogleMap,
     MapAdvancedMarker,
     AdCardComponent,
+    FiltersDialogComponent,
   ],
   templateUrl: './annonces.component.html',
   styleUrl: './annonces.component.scss',
 })
 export class AnnoncesComponent implements OnInit, AfterViewInit {
+  @ViewChild(FiltersDialogComponent) dialogComponent!: FiltersDialogComponent;
+
   @ViewChild('addresstext') addresstext!: ElementRef;
   @ViewChild('propertiesContainer') propertiesContainer!: ElementRef;
   propertyGateway = inject(PropertyGateway);
@@ -39,6 +43,7 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
   properties: Ad[] = [];
   displayedPproperties: Ad[] = [];
   selectedProperty: Ad | null = null;
+  hoveredPropertyId: number = 0;
 
   markersRef = viewChildren(MapAdvancedMarker);
   advancedMarkerOptions: google.maps.marker.AdvancedMarkerElementOptions = {
@@ -47,19 +52,12 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
   mapCenter = signal({ lat: 48.8566, lng: 2.3522 }); // Paris par défaut
   zoom = signal(5);
   place: any;
-  location = signal('');
-  type = signal('');
-  budget = signal('');
-
-  search = computed(() => {
-    this.location(), this.type(), this.budget();
-  });
+  isDialogOpen: boolean = false;
 
   sortingType: string = 'recent';
 
-  filters: any = {
-    hasHouse: false,
-    hasApartment: false,
+  filters: Filters = {
+    hasType: '',
     budgetMin: null,
     budgetMax: null,
     roomMin: 0,
@@ -83,7 +81,6 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     this.propertyGateway.getPaidAds().subscribe((properties) => {
       this.properties = properties;
       this.displayedPproperties = properties;
-      console.log(properties);
     });
     this.changeSortingType();
   }
@@ -98,11 +95,15 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
       document.body.style.overflow = '';
     });
 
-    if (typeof google === 'undefined' || !google.maps || !google.maps.places) {
-      console.error("Google Maps API n'est pas encore chargée !");
-      return;
-    }
     this.getPlaceAutocomplete();
+  }
+
+  openModal() {
+    if (this.dialogComponent) {
+      this.dialogComponent.openModal();
+    } else {
+      console.error('modalComponent est undefined');
+    }
   }
 
   clearSelected() {
@@ -130,8 +131,8 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
   countValidBiens() {
     let count = 0;
     this.displayedPproperties.forEach((property) => {
-    count++;
-    })
+      count++;
+    });
     return count;
   }
 
@@ -149,7 +150,6 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
       this.zoom.set(6);
     }
   }
-
 
   changeSortingType() {
     if (this.sortingType == 'recent') {
@@ -190,6 +190,10 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
   }
 
   private getPlaceAutocomplete() {
+    if (typeof google === 'undefined' || !google.maps) {
+      console.error('Google Maps API non chargé');
+      return;
+    }
     const options = {
       componentRestrictions: { country: 'FR' },
     };
@@ -210,30 +214,67 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
         this.filters.location.push(this.place.name);
         this.updateDisplayedProperties();
       });
+      const newCenter = {
+        lat: this.place.geometry.location.lat(),
+        lng: this.place.geometry.location.lng(),
+      };
+      // Recentre la map
+      this.mapCenter.set(newCenter);
+      this.zoom.set(12);
     });
   }
 
   checkPrice(property: Ad) {
-    const min = this.filters.budgetMin ? this.filters.budgetMin : 0;
-    const max = this.filters.budgetMax ? this.filters.budgetMax : 300000000;
+    const min = this.filters.budgetMin ? Number(this.filters.budgetMin) : 0;
+    const max = this.filters.budgetMax
+      ? Number(this.filters.budgetMax)
+      : 300000000;
 
-    if (property.selling_price !=undefined && property.selling_price >= min && property.selling_price <= max) {
+    if (
+      Number(property.selling_price) != undefined &&
+      Number(property.selling_price) >= min &&
+      Number(property.selling_price) <= max
+    ) {
       return true;
-    }else{
-      return false
+    } else {
+      return false;
+    }
+  }
+
+  checkSurface(property: Ad) {
+    const min = this.filters.surfaceMin ? this.filters.surfaceMin : 0;
+    const max = this.filters.surfaceMax ? this.filters.surfaceMax : 1000000;
+
+    if (property.living_space >= min && property.living_space <= max) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkRooms(property: Ad) {
+    if (property.room >= this.filters.roomMin) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkBedrooms(property: Ad) {
+    if (property.bedroom >= this.filters.bedroomMin) {
+      return true;
+    } else {
+      return false;
     }
   }
 
   checkType(property: Ad) {
-    if (!this.filters.hasHouse && !this.filters.hasApartment) {
+    if (this.filters.hasType === '') {
       return true;
-    } else if (
-      (this.filters.hasHouse && property.property_type == 'maison') ||
-      (this.filters.hasApartment && property.property_type == 'appartement')
-    ) {
+    } else if (this.filters.hasType === property.property_type) {
       return true;
-    }else{
-      return false
+    } else {
+      return false;
     }
   }
 
@@ -250,13 +291,85 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     return false;
   }
 
+  checkCriterias(property: Ad) {
+    const criterias = this.filters.others;
+
+    let elevatorFilter = true;
+    let balconyFilter = true;
+    let terraceFilter = true;
+    let parkingFilter = true;
+    let boxFilter = true;
+    let basementFilter = true;
+
+    if (
+      !criterias.hasElevator &&
+      !criterias.hasBalcony &&
+      !criterias.hasTerrace &&
+      !criterias.hasParking &&
+      !criterias.hasBox &&
+      !criterias.hasBasement
+    ) {
+      return true;
+    }
+    if (criterias.hasElevator) {
+      if (property.has_elevator) elevatorFilter = true;
+      else elevatorFilter = false;
+    }
+    if (criterias.hasBalcony) {
+      if (property.has_balcony) balconyFilter = true;
+      else balconyFilter = false;
+    }
+    if (criterias.hasTerrace) {
+      if (property.has_terrace) terraceFilter = true;
+      else terraceFilter = false;
+    }
+    if (criterias.hasParking) {
+      if (property.has_parking) parkingFilter = true;
+      else parkingFilter = false;
+    }
+    if (criterias.hasBox) {
+      if (property.has_box) boxFilter = true;
+      else boxFilter = false;
+    }
+    if (criterias.hasBasement) {
+      if (property.has_cellar) basementFilter = true;
+      else basementFilter = false;
+    } else {
+      return false;
+    }
+    return (
+      elevatorFilter &&
+      balconyFilter &&
+      terraceFilter &&
+      parkingFilter &&
+      boxFilter &&
+      basementFilter
+    );
+  }
+
+  removeLocation() {
+    this.filters.location = [];
+    this.mapCenter = signal({ lat: 48.8566, lng: 2.3522 });
+    this.zoom = signal(5);
+    this.updateDisplayedProperties();
+  }
+
   updateDisplayedProperties() {
     this.displayedPproperties = [];
     this.properties.forEach((property) => {
-      if (this.checkLocation(property)) {
+      if (
+        this.checkLocation(property) &&
+        this.checkType(property) &&
+        this.checkPrice(property) &&
+        this.checkSurface(property) &&
+        this.checkRooms(property) &&
+        this.checkBedrooms(property) &&
+        this.checkCriterias(property)
+      ) {
         this.displayedPproperties.push(property);
       }
     });
+
     localStorage.setItem('filters', JSON.stringify(this.filters));
   }
 }

@@ -1,7 +1,6 @@
 @use '@fontsource/paytone-one';
 @use '@fontsource-variable/open-sans';
 @use '@fontsource-variable/raleway';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,3 +9,43 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.required {
+    color: red;
+    font-weight: bold;
+    font-size: 0.8em;
+  }
+  
+  .error {
+    color: red;
+    font-size: 0.8em;
+  }
+  
+.pac-container { 
+    position: absolute !important;
+    z-index: 100000; 
+  }
+  
+  .ui-autocomplete
+  {
+      position:absolute;
+      cursor:default;
+      z-index:4000 !important
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input:-webkit-autofill {
+    background-color: transparent !important;
+    color: #282828 !important;
+    -webkit-text-fill-color: #282828 !important;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+  input:-webkit-autofill::after {
+    content: "";
+    background-color: white !important;
+  }
+  
