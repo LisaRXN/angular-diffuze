@@ -49,14 +49,13 @@ export const routes: Routes = [
             (m) => m.ReviewComponent
           ),
       },
-
-      // {
-      //   path: 'annonces',
-      //   loadComponent: () =>
-      //     import('./public/views/annonces/annonces.component').then(
-      //       (m) => m.AnnoncesComponent
-      //     ),
-      // },
+      {
+        path: 'annonces',
+        loadComponent: () =>
+          import('./public/views/annonces/annonces.component').then(
+            (m) => m.AnnoncesComponent
+          ),
+      },
       {
         path: 'blog',
         loadChildren: () =>

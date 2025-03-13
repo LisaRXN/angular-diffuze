@@ -7,12 +7,12 @@
 >
   <div #carousel class="carousel rounded-t w-full">
     <div
-      *ngFor="let image of property.media?.images"
+      *ngFor="let photo of property.photos"
       class="carousel-item w-full"
     >
       <img
         [id]="'photo' + property.id"
-        [src]="baseUrl + image.photo_path"
+        [src]="baseUrl + photo.photo_path"
         class="rounded-t-xl h-[250px] w-full object-cover"
         alt=""
       />
@@ -69,14 +69,14 @@
     <p class="text-mygrey3 font-light">
       {{ property.property_type | titlecase }}
     </p>
-    <p class="font-raleway font-extrabold text-mygrey1">{{ property.addressForm.city }}</p>
-    <p class="">{{ property.addressForm.street_adress }}</p>
+    <p class="font-raleway font-extrabold text-mygrey1">{{ property.city }}</p>
+    <p class="">{{ property.street_address }}</p>
     <div class="flex items-center justify-start gap-2">
       <p>{{ property.living_space }} m²</p>
       <p>{{ property.room }} pièces</p>
-      <p>
+      <p *ngIf="property.floor">
         {{
-          property.floor !== 0 ? property.floor + "e étage" : "Rez de chaussée"
+          property.floor + "e étage" 
         }}
       </p>
     </div>

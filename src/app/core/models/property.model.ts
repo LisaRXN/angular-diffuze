@@ -1,9 +1,11 @@
 interface addressForm {
     streetAutoComplete?:string;
-    city?: string
-    country?:string
-    street_adress?:string
-    zip_code?:string
+    city?: string;
+    country?:string;
+    street_adress?:string;
+    zip_code?:string;
+    latitude:number;
+    longitude:number;
 }
 
 interface Images {

@@ -48,8 +48,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   router = inject(Router);
   propertyGateway = inject(PropertyGateway);
   properties$!: Observable<Property[]>;
-  isDialogOpen: boolean = false;
   properties: Property[] = [];
+  isDialogOpen: boolean = false;
   isCarouselStart = true;
   isCarouselEnd = false;
   hasStartedAnimation: boolean = false;

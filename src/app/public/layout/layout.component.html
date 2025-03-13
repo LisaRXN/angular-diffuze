@@ -10,7 +10,7 @@
         <router-outlet></router-outlet>
       </main>
 
-      <app-footer></app-footer>
+      <app-footer *ngIf="!isAnnoncesPage()"></app-footer>
     </div>
     <app-cookie-consent></app-cookie-consent>
   </div>

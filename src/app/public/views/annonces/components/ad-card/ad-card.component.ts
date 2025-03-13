@@ -1,18 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, inject, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Property } from '../../../../core/models/property.model';
-import { environment } from '../../../../../environments/environment';
+import { environment } from '../../../../../../environments/environment';
+import { Property } from '../../../../../core/models/property.model';
+import { Ad } from '../../../../../core/models/ad.models';
 
 @Component({
-  selector: 'app-property-card',
+  selector: 'app-ad-card',
   imports: [CommonModule],
-  templateUrl: './property-card.component.html',
-  styleUrl: './property-card.component.scss',
+  templateUrl: './ad-card.component.html',
+  styleUrl: './ad-card.component.scss'
 })
-export class PropertyCardComponent implements AfterViewInit {
+export class AdCardComponent implements AfterViewInit  {
+
   router = inject(Router);
-  @Input() property!: Property;
+  @Input() property!: Ad;
   @Input() smallCard: boolean = false
 
   @ViewChild('carousel') carousel!: ElementRef<HTMLDivElement>;
@@ -64,3 +66,4 @@ export class PropertyCardComponent implements AfterViewInit {
     this.router.navigate([`property/${this.property.id}`]);
   }
 }
+

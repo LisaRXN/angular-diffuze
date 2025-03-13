@@ -30,6 +30,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { HttpPropertyGateway } from './core/adapters/http/http-property.gateway';
 import { ArticleGateway } from './core/ports/article.gateway';
 import { HttpArticleGateway } from './core/adapters/http/http-article.gateway';
+import { environment } from '../environments/environment';
+import { GoogleMapsModule } from '@angular/google-maps';
+
 
 registerLocaleData(localeFr, 'fr-FR');
 
