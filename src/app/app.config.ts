@@ -32,6 +32,9 @@ import { ArticleGateway } from './core/ports/article.gateway';
 import { HttpArticleGateway } from './core/adapters/http/http-article.gateway';
 import { environment } from '../environments/environment';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { AlertGateway } from './core/ports/alert.gateway';
+import { HttpAlertGateway } from './core/adapters/http/http-alert.gateway';
+import { InMemoryAlertGateway } from './core/adapters/in-memory/in-memory-alert.gateway';
 
 
 registerLocaleData(localeFr, 'fr-FR');
@@ -61,8 +64,8 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     { provide: PropertyGateway, useFactory: () => new HttpPropertyGateway() },
-    provideAnimationsAsync(),
     { provide: ArticleGateway, useFactory: () => new HttpArticleGateway() },
+    { provide: AlertGateway, useFactory: () => new InMemoryAlertGateway() },
     provideAnimationsAsync(),
   ],
 };

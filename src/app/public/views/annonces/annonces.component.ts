@@ -18,6 +18,7 @@ import { PropertyGateway } from '../../../core/ports/property.gateway';
 import { AdCardComponent } from './components/ad-card/ad-card.component';
 import { Ad, Filters } from '../../../core/models/ad.models';
 import { FiltersDialogComponent } from './components/filters-dialog/filters-dialog.component';
+import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-annonces',
@@ -29,14 +30,16 @@ import { FiltersDialogComponent } from './components/filters-dialog/filters-dial
     MapAdvancedMarker,
     AdCardComponent,
     FiltersDialogComponent,
+    AlertDialogComponent,
   ],
   templateUrl: './annonces.component.html',
   styleUrl: './annonces.component.scss',
 })
 export class AnnoncesComponent implements OnInit, AfterViewInit {
-  @ViewChild(FiltersDialogComponent) dialogComponent!: FiltersDialogComponent;
-
-  @ViewChild('addresstext') addresstext!: ElementRef;
+  @ViewChild(FiltersDialogComponent)
+  filterDialogComponent!: FiltersDialogComponent;
+  @ViewChild(AlertDialogComponent) alertDialogComponent!: AlertDialogComponent;
+  @ViewChild('addresstext') addresstext!: ElementRef<HTMLInputElement>;
   @ViewChild('propertiesContainer') propertiesContainer!: ElementRef;
   propertyGateway = inject(PropertyGateway);
   properties$!: Observable<Ad[]>;
@@ -98,11 +101,18 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     this.getPlaceAutocomplete();
   }
 
-  openModal() {
-    if (this.dialogComponent) {
-      this.dialogComponent.openModal();
+  openFilterModal() {
+    if (this.filterDialogComponent) {
+      this.filterDialogComponent.openModal();
     } else {
       console.error('modalComponent est undefined');
+    }
+  }
+  openAlertModal() {
+    if (this.alertDialogComponent) {
+      this.alertDialogComponent.openModal();
+    } else {
+      console.error('alertDialogComponent est undefined');
     }
   }
 
@@ -222,6 +232,7 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
       this.mapCenter.set(newCenter);
       this.zoom.set(12);
     });
+
   }
 
   checkPrice(property: Ad) {
@@ -348,6 +359,7 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
   }
 
   removeLocation() {
+    this.addresstext.nativeElement.value = ''
     this.filters.location = [];
     this.mapCenter = signal({ lat: 48.8566, lng: 2.3522 });
     this.zoom = signal(5);
