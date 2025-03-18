@@ -220,7 +220,6 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
   }
 
   private getPlaceAutocomplete() {
-
     if (typeof google === 'undefined' || !google.maps) {
       console.error('Google Maps API non chargé');
       return;
@@ -228,6 +227,12 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
 
     const options = {
       componentRestrictions: { country: 'FR' },
+      types: [
+        'locality',
+        'sublocality',
+        'postal_code',
+        'administrative_area_level_2',
+      ],
     };
 
     const autocomplete = new google.maps.places.Autocomplete(
@@ -242,10 +247,8 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
 
     autocomplete.addListener('place_changed', () => {
       this.ngZone.run(() => {
-        //get the place result
         this.place = autocomplete.getPlace();
 
-        //verify result
         if (this.place.geometry === undefined || this.place.geometry === null) {
           return;
         }
@@ -255,24 +258,20 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
         ]);
         this.addresstext.nativeElement.value = '';
         this.currentPage.set(1);
-
       });
       const newCenter = {
         lat: this.place.geometry.location.lat(),
         lng: this.place.geometry.location.lng(),
       };
-      // Recentre la map
       this.mapCenter.set(newCenter);
       this.zoom.set(12);
-
     });
 
     filterAutoComplete.addListener('place_changed', () => {
       this.ngZone.run(() => {
-        //get the place result
-        this.place = autocomplete.getPlace();
+        this.place = filterAutoComplete.getPlace();
+        console.log(this.place);
 
-        //verify result
         if (this.place.geometry === undefined || this.place.geometry === null) {
           return;
         }
@@ -282,17 +281,10 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
         ]);
       });
 
-      setTimeout(() => {
-        const pacContainer = document.querySelectorAll('.pac-container');
-        if (pacContainer && this.modalRef) {
-          this.modalRef.nativeElement.appendChild(pacContainer[1]);
-        }
-      }, 300);
       const newCenter = {
         lat: this.place.geometry.location.lat(),
         lng: this.place.geometry.location.lng(),
       };
-      // Recentre la map
       this.mapCenter.set(newCenter);
       this.zoom.set(12);
     });
@@ -380,7 +372,6 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
         this.checkBedrooms(property) &&
         this.checkCriterias(property)
     );
-    //   localStorage.setItem('filters', JSON.stringify(this.filters));
   }
 
   incrementRooms() {
@@ -403,6 +394,7 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
 
   closeModal() {
     this.updateDisplayedProperties();
+
     this.modalRef.nativeElement.close();
   }
 
