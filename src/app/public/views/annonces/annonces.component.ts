@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   Component,
+  computed,
   ElementRef,
   inject,
   NgZone,
@@ -13,12 +14,16 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMap, MapAdvancedMarker } from '@angular/google-maps';
-import { map, Observable } from 'rxjs';
-import { PropertyGateway } from '../../../core/ports/property.gateway';
+import { debounceTime, map, Observable, switchMap } from 'rxjs';
+import {
+  FetchAdResponse,
+  PropertyGateway,
+} from '../../../core/ports/property.gateway';
 import { AdCardComponent } from './components/ad-card/ad-card.component';
 import { Ad, Filters } from '../../../core/models/ad.models';
-import { FiltersDialogComponent } from './components/filters-dialog/filters-dialog.component';
 import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.component';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { Advantages, Property } from '../../../core/models/property.model';
 
 @Component({
   selector: 'app-annonces',
@@ -29,24 +34,56 @@ import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.com
     GoogleMap,
     MapAdvancedMarker,
     AdCardComponent,
-    FiltersDialogComponent,
     AlertDialogComponent,
   ],
   templateUrl: './annonces.component.html',
   styleUrl: './annonces.component.scss',
 })
 export class AnnoncesComponent implements OnInit, AfterViewInit {
-  @ViewChild(FiltersDialogComponent)
-  filterDialogComponent!: FiltersDialogComponent;
   @ViewChild(AlertDialogComponent) alertDialogComponent!: AlertDialogComponent;
   @ViewChild('addresstext') addresstext!: ElementRef<HTMLInputElement>;
+  @ViewChild('filtertext') filtertext!: ElementRef<HTMLInputElement>;
   @ViewChild('propertiesContainer') propertiesContainer!: ElementRef;
+  @ViewChild('modal') modalRef!: ElementRef<HTMLDialogElement>;
+
   propertyGateway = inject(PropertyGateway);
-  properties$!: Observable<Ad[]>;
-  properties: Ad[] = [];
-  displayedPproperties: Ad[] = [];
-  selectedProperty: Ad | null = null;
+  properties$!: Observable<Property[]>;
+  properties: Property[] = [];
+  displayedProperties: Property[] = [];
+  selectedProperty: Property | null = null;
   hoveredPropertyId: number = 0;
+  totalPages: number = 1;
+  totalItems: number = 0;
+  locations: string[] = [];
+
+  currentPage = signal(1);
+  localization = signal<string[]>([]);
+  propertyType = signal('');
+  transactionType = signal('selling');
+  minPrice = signal(0);
+  maxPrice = signal(Infinity);
+  minSurface = signal(0);
+  maxSurface = signal(Infinity);
+
+  search = computed(() => ({
+    page: this.currentPage(),
+    localization: this.localization(),
+    propertyType: this.propertyType(),
+    transactionType: this.transactionType(),
+    minPrice: this.minPrice(),
+    maxPrice: this.maxPrice(),
+    minSurface: this.minSurface(),
+    maxSurface: this.maxSurface(),
+  }));
+
+  filteredProperties$: Observable<FetchAdResponse> = toObservable(
+    this.search
+  ).pipe(
+    debounceTime(300),
+    switchMap((filters) =>
+      this.propertyGateway.fetchFilteredProperties(filters)
+    )
+  );
 
   markersRef = viewChildren(MapAdvancedMarker);
   advancedMarkerOptions: google.maps.marker.AdvancedMarkerElementOptions = {
@@ -59,32 +96,30 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
 
   sortingType: string = 'recent';
 
-  filters: Filters = {
-    hasType: '',
-    budgetMin: null,
-    budgetMax: null,
-    roomMin: 0,
-    bedroomMin: 0,
-    surfaceMin: null,
-    surfaceMax: null,
-    others: {
-      hasElevator: false,
-      hasBalcony: false,
-      hasTerrace: false,
-      hasParking: false,
-      hasBox: false,
-      hasBasement: false,
-    },
-    location: [],
+  filters = {
+    room: 1,
+    bedroom: 1,
+  };
+
+  advantages: Advantages = {
+    has_balcony: false,
+    has_box: false,
+    has_cellar: false,
+    has_elevator: false,
+    has_parking: false,
+    has_terrace: false,
   };
 
   constructor(private ngZone: NgZone) {}
 
   ngOnInit() {
-    this.propertyGateway.getPaidAds().subscribe((properties) => {
-      this.properties = properties;
-      this.displayedPproperties = properties;
+    this.filteredProperties$.subscribe((fetchAdResponse) => {
+      this.properties = fetchAdResponse.properties;
+      this.displayedProperties = fetchAdResponse.properties;
+      this.totalPages = fetchAdResponse.pagination.totalPages;
+      this.totalItems = fetchAdResponse.pagination.totalItems;
     });
+
     this.changeSortingType();
   }
 
@@ -101,13 +136,6 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     this.getPlaceAutocomplete();
   }
 
-  openFilterModal() {
-    if (this.filterDialogComponent) {
-      this.filterDialogComponent.openModal();
-    } else {
-      console.error('modalComponent est undefined');
-    }
-  }
   openAlertModal() {
     if (this.alertDialogComponent) {
       this.alertDialogComponent.openModal();
@@ -120,7 +148,7 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     this.selectedProperty = null;
   }
 
-  displayOnMap(property: Ad) {
+  displayOnMap(property: Property) {
     if (this.selectedProperty == null) {
       this.selectedProperty = property;
     } else if (this.selectedProperty.id != property.id) {
@@ -132,18 +160,10 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
 
   getPosition(property: any) {
     const pos = {
-      lat: parseFloat(property.latitude),
-      lng: parseFloat(property.longitude),
+      lat: parseFloat(property.addressForm?.latitude),
+      lng: parseFloat(property.addressForm?.longitude),
     };
     return pos;
-  }
-
-  countValidBiens() {
-    let count = 0;
-    this.displayedPproperties.forEach((property) => {
-      count++;
-    });
-    return count;
   }
 
   clearPlace() {
@@ -200,15 +220,23 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
   }
 
   private getPlaceAutocomplete() {
+
     if (typeof google === 'undefined' || !google.maps) {
       console.error('Google Maps API non chargé');
       return;
     }
+
     const options = {
       componentRestrictions: { country: 'FR' },
     };
+
     const autocomplete = new google.maps.places.Autocomplete(
       this.addresstext.nativeElement,
+      options
+    );
+
+    const filterAutoComplete = new google.maps.places.Autocomplete(
+      this.filtertext.nativeElement,
       options
     );
 
@@ -221,8 +249,13 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
         if (this.place.geometry === undefined || this.place.geometry === null) {
           return;
         }
-        this.filters.location.push(this.place.name);
-        this.updateDisplayedProperties();
+        this.localization.update((currentLocations) => [
+          ...currentLocations,
+          this.place.name,
+        ]);
+        this.addresstext.nativeElement.value = '';
+        this.currentPage.set(1);
+
       });
       const newCenter = {
         lat: this.place.geometry.location.lat(),
@@ -231,80 +264,58 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
       // Recentre la map
       this.mapCenter.set(newCenter);
       this.zoom.set(12);
+
     });
 
+    filterAutoComplete.addListener('place_changed', () => {
+      this.ngZone.run(() => {
+        //get the place result
+        this.place = autocomplete.getPlace();
+
+        //verify result
+        if (this.place.geometry === undefined || this.place.geometry === null) {
+          return;
+        }
+        this.localization.update((currentLocations) => [
+          ...currentLocations,
+          this.place.name,
+        ]);
+      });
+
+      setTimeout(() => {
+        const pacContainer = document.querySelectorAll('.pac-container');
+        if (pacContainer && this.modalRef) {
+          this.modalRef.nativeElement.appendChild(pacContainer[1]);
+        }
+      }, 300);
+      const newCenter = {
+        lat: this.place.geometry.location.lat(),
+        lng: this.place.geometry.location.lng(),
+      };
+      // Recentre la map
+      this.mapCenter.set(newCenter);
+      this.zoom.set(12);
+    });
   }
 
-  checkPrice(property: Ad) {
-    const min = this.filters.budgetMin ? Number(this.filters.budgetMin) : 0;
-    const max = this.filters.budgetMax
-      ? Number(this.filters.budgetMax)
-      : 300000000;
-
-    if (
-      Number(property.selling_price) != undefined &&
-      Number(property.selling_price) >= min &&
-      Number(property.selling_price) <= max
-    ) {
+  checkRooms(property: Property) {
+    if (property.room >= this.filters.room) {
       return true;
     } else {
       return false;
     }
   }
 
-  checkSurface(property: Ad) {
-    const min = this.filters.surfaceMin ? this.filters.surfaceMin : 0;
-    const max = this.filters.surfaceMax ? this.filters.surfaceMax : 1000000;
-
-    if (property.living_space >= min && property.living_space <= max) {
+  checkBedrooms(property: Property) {
+    if (property.bedroom >= this.filters.bedroom) {
       return true;
     } else {
       return false;
     }
   }
 
-  checkRooms(property: Ad) {
-    if (property.room >= this.filters.roomMin) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  checkBedrooms(property: Ad) {
-    if (property.bedroom >= this.filters.bedroomMin) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  checkType(property: Ad) {
-    if (this.filters.hasType === '') {
-      return true;
-    } else if (this.filters.hasType === property.property_type) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  checkLocation(property: Ad) {
-    if (this.filters.location.length == 0) {
-      return true;
-    } else {
-    }
-    for (let i = 0; i < this.filters.location.length; i++) {
-      if (property.city == this.filters.location[i]) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  checkCriterias(property: Ad) {
-    const criterias = this.filters.others;
-
+  checkCriterias(property: Property) {
+    const criterias = this.advantages;
     let elevatorFilter = true;
     let balconyFilter = true;
     let terraceFilter = true;
@@ -313,37 +324,37 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     let basementFilter = true;
 
     if (
-      !criterias.hasElevator &&
-      !criterias.hasBalcony &&
-      !criterias.hasTerrace &&
-      !criterias.hasParking &&
-      !criterias.hasBox &&
-      !criterias.hasBasement
+      !criterias.has_elevator &&
+      !criterias.has_balcony &&
+      !criterias.has_terrace &&
+      !criterias.has_parking &&
+      !criterias.has_box &&
+      !criterias.has_cellar
     ) {
       return true;
     }
-    if (criterias.hasElevator) {
-      if (property.has_elevator) elevatorFilter = true;
+    if (criterias.has_elevator) {
+      if (property.advantages.has_elevator) elevatorFilter = true;
       else elevatorFilter = false;
     }
-    if (criterias.hasBalcony) {
-      if (property.has_balcony) balconyFilter = true;
+    if (criterias.has_balcony) {
+      if (property.advantages.has_balcony) balconyFilter = true;
       else balconyFilter = false;
     }
-    if (criterias.hasTerrace) {
-      if (property.has_terrace) terraceFilter = true;
+    if (criterias.has_terrace) {
+      if (property.advantages.has_terrace) terraceFilter = true;
       else terraceFilter = false;
     }
-    if (criterias.hasParking) {
-      if (property.has_parking) parkingFilter = true;
+    if (criterias.has_parking) {
+      if (property.advantages.has_parking) parkingFilter = true;
       else parkingFilter = false;
     }
-    if (criterias.hasBox) {
-      if (property.has_box) boxFilter = true;
+    if (criterias.has_box) {
+      if (property.advantages.has_box) boxFilter = true;
       else boxFilter = false;
     }
-    if (criterias.hasBasement) {
-      if (property.has_cellar) basementFilter = true;
+    if (criterias.has_cellar) {
+      if (property.advantages.has_cellar) basementFilter = true;
       else basementFilter = false;
     } else {
       return false;
@@ -358,30 +369,90 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     );
   }
 
-  removeLocation() {
-    this.addresstext.nativeElement.value = ''
-    this.filters.location = [];
-    this.mapCenter = signal({ lat: 48.8566, lng: 2.3522 });
-    this.zoom = signal(5);
-    this.updateDisplayedProperties();
+  removeLocation(index: number) {
+    this.localization.set(this.localization().filter((_, i) => i !== index));
   }
 
   updateDisplayedProperties() {
-    this.displayedPproperties = [];
-    this.properties.forEach((property) => {
-      if (
-        this.checkLocation(property) &&
-        this.checkType(property) &&
-        this.checkPrice(property) &&
-        this.checkSurface(property) &&
+    this.displayedProperties = this.displayedProperties.filter(
+      (property) =>
         this.checkRooms(property) &&
         this.checkBedrooms(property) &&
         this.checkCriterias(property)
-      ) {
-        this.displayedPproperties.push(property);
-      }
-    });
+    );
+    //   localStorage.setItem('filters', JSON.stringify(this.filters));
+  }
 
-    localStorage.setItem('filters', JSON.stringify(this.filters));
+  incrementRooms() {
+    if (this.filters.room < 5) this.filters.room++;
+  }
+  decrementRooms() {
+    if (this.filters.room > 1) this.filters.room--;
+  }
+  incrementBedrooms() {
+    if (this.filters.bedroom < 5) this.filters.bedroom++;
+  }
+
+  decrementBedrooms() {
+    if (this.filters.bedroom > 1) this.filters.bedroom--;
+  }
+
+  openModal() {
+    this.modalRef.nativeElement.showModal();
+  }
+
+  closeModal() {
+    this.updateDisplayedProperties();
+    this.modalRef.nativeElement.close();
+  }
+
+  closeModalByClick(event: Event) {
+    if (event.target === this.modalRef.nativeElement) {
+      this.closeModal();
+    }
+  }
+
+  removeFilters() {
+    this.localization.set([]);
+    this.propertyType.set('');
+    this.transactionType.set('');
+    this.minPrice.set(0);
+    this.maxPrice.set(Infinity);
+    this.minSurface.set(0);
+    this.maxSurface.set(Infinity);
+    (this.filters = {
+      room: 1,
+      bedroom: 1,
+    }),
+      (this.advantages = {
+        has_elevator: false,
+        has_balcony: false,
+        has_terrace: false,
+        has_parking: false,
+        has_box: false,
+        has_cellar: false,
+      });
+  }
+
+  previousPage() {
+    const scrollDiv = this.propertiesContainer.nativeElement;
+    if (this.currentPage() > 1) {
+      this.currentPage.set(this.currentPage() - 1);
+      scrollDiv.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }
+  }
+
+  nextPage() {
+    const scrollDiv = this.propertiesContainer.nativeElement;
+    if (this.currentPage() < this.totalPages) {
+      this.currentPage.set(this.currentPage() + 1);
+      scrollDiv.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }
   }
 }

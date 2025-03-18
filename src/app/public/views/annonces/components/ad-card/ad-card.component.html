@@ -7,7 +7,7 @@
 >
   <div #carousel class="carousel rounded-t w-full">
     <div
-      *ngFor="let photo of property.photos"
+      *ngFor="let photo of property.media.images"
       class="carousel-item w-full"
     >
       <img
@@ -69,8 +69,8 @@
     <p class="text-mygrey3 font-light">
       {{ property.property_type | titlecase }}
     </p>
-    <p class="font-raleway font-extrabold text-mygrey1">{{ property.city }}</p>
-    <p class="">{{ property.street_address }}</p>
+    <p class="font-raleway font-extrabold text-mygrey1">{{ property.addressForm.city }}</p>
+    <p class="">{{ property.addressForm.street_address }}</p>
     <div class="flex items-center justify-start gap-2">
       <p>{{ property.living_space }} m²</p>
       <p>{{ property.room }} pièces</p>

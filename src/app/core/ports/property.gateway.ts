@@ -1,11 +1,26 @@
 import { Observable } from "rxjs";
 import { Property } from "../models/property.model";
-import { Ad } from "../models/ad.models";
+
+export interface FetchPropertiesResponse {
+    properties: Property[];
+    message: string;
+    count: number;
+  }
+
+export interface FetchAdResponse {
+    pagination: {
+        page: number;
+        limit: number;
+        totalItems: number;
+        totalPages: number;
+    };
+    properties: Property[];
+  }
 
 export abstract class PropertyGateway {
 
     abstract fetchLastProperties():Observable<Property[]>
 
-    abstract getPaidAds():Observable<Ad[]>
+    abstract fetchFilteredProperties(filters:any):Observable<FetchAdResponse>
 
 }

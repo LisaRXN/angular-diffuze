@@ -21,6 +21,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AlertGateway } from '../../../../../core/ports/alert.gateway';
+import { Advantages } from '../../../../../core/models/property.model';
 
 @Component({
   selector: 'app-alert-dialog',
@@ -31,24 +32,25 @@ import { AlertGateway } from '../../../../../core/ports/alert.gateway';
 export class AlertDialogComponent implements AfterViewInit {
   @ViewChild('modal') modalRef!: ElementRef<HTMLDialogElement>;
   @ViewChild('alerttext') alerttext!: ElementRef<HTMLInputElement>;
-  @Input() filters!: Filters;
+  @ViewChild('alertLocationContainer')
+  alertLocationContainerRef!: ElementRef<HTMLInputElement>;
   place: any;
-
+  submitted = false;
   alertForm: FormGroup = new FormGroup({
-    hasType: new FormControl('', Validators.required),
-    budgetMin: new FormControl(null, [Validators.required]),
-    budgetMax: new FormControl(null, [Validators.required]),
-    roomMin: new FormControl(0, Validators.required),
-    bedroomMin: new FormControl(0, Validators.required),
-    surfaceMin: new FormControl(null, Validators.required),
-    surfaceMax: new FormControl(null, Validators.required),
-    others: new FormGroup({
-      hasElevator: new FormControl(false),
-      hasBalcony: new FormControl(false),
-      hasTerrace: new FormControl(false),
-      hasParking: new FormControl(false),
-      hasBox: new FormControl(false),
-      hasBasement: new FormControl(false),
+    propertyType: new FormControl('', Validators.required),
+    minPrice: new FormControl(null, [Validators.required]),
+    maxPrice: new FormControl(null, [Validators.required]),
+    room: new FormControl(1, Validators.required),
+    bedroom: new FormControl(1, Validators.required),
+    minSurface: new FormControl(null, Validators.required),
+    maxSurface: new FormControl(null, Validators.required),
+    advantages: new FormGroup({
+      has_elevator: new FormControl(false),
+      has_balcony: new FormControl(false),
+      has_terrace: new FormControl(false),
+      has_parking: new FormControl(false),
+      has_box: new FormControl(false),
+      has_cellar: new FormControl(false),
     }),
     locations: new FormControl([], Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -69,59 +71,69 @@ export class AlertDialogComponent implements AfterViewInit {
   }
 
   onSubmitAlert() {
-    const filters: alertFilters = this.alertForm.getRawValue();
-    this.alertGateway
-      .createAlert(this.alertForm.getRawValue())
-      .subscribe((data) => {
-        console.log(data);
-        this.resetForm();
-        this.closeModal();
-        // this.alertCheckbox.nativeElement.checked = false;
-        // if (data.status == 200) this.showSuccessNotif();
-        // else this.showErrorNotif();
-      });
+    this.submitted = true; // Active l'affichage des erreurs
+    if (this.alertForm.valid) {
+      this.submitted = false;
+      const filters: alertFilters = this.alertForm.getRawValue();
+      this.alertGateway
+        .createAlert(this.alertForm.getRawValue())
+        .subscribe((data) => {
+          console.log(data);
+          this.resetForm();
+          this.closeModal();
+          // this.alertCheckbox.nativeElement.checked = false;
+          // if (data.status == 200) this.showSuccessNotif();
+          // else this.showErrorNotif();
+        });
+    }else{
+      return
+    }
   }
 
   resetForm() {
     this.alertForm.reset({
       hasType: '',
-      budgetMin: null,
-      budgetMax: null,
-      roomMin: 0,
-      bedroomMin: 0,
+      minPrice: null,
+      maxrice: null,
+      roomMin: 1,
+      bedroomMin: 1,
       surfaceMin: null,
       surfaceMax: null,
-      others: {
-        hasElevator: false,
-        hasBalcony: false,
-        hasTerrace: false,
-        hasParking: false,
-        hasBox: false,
-        hasBasement: false,
+      advantages: {
+        has_balcony: false,
+        has_box: false,
+        has_cellar: false,
+        has_elevator: false,
+        has_parking: false,
+        has_terrace: false,
       },
       locations: [],
     });
   }
   incrementRooms() {
-    if (this.filters.roomMin < 5) {
-      this.filters.roomMin++;
+    const room = this.alertForm.get('room');
+    if (room && room.value < 5) {
+      room.setValue(room.value + 1, { emitEvent: false });
     }
   }
 
   decrementRooms() {
-    if (this.filters.roomMin > 1) {
-      this.filters.roomMin--;
+    const room = this.alertForm.get('room');
+    if (room && room.value > 1) {
+      room.setValue(room.value - 1, { emitEvent: false });
     }
   }
   incrementBedrooms() {
-    if (this.filters.bedroomMin < 5) {
-      this.filters.bedroomMin++;
+    const bedroom = this.alertForm.get('bedroom');
+    if (bedroom && bedroom.value < 5) {
+      bedroom.setValue(bedroom.value + 1, { emitEvent: false });
     }
   }
 
   decrementBedrooms() {
-    if (this.filters.bedroomMin > 1) {
-      this.filters.bedroomMin--;
+    const bedroom = this.alertForm.get('bedroom');
+    if (bedroom && bedroom.value > 1) {
+      bedroom.setValue(bedroom.value - 1, { emitEvent: false });
     }
   }
 
@@ -156,13 +168,6 @@ export class AlertDialogComponent implements AfterViewInit {
       this.alerttext.nativeElement,
       options
     );
-
-    setTimeout(() => {
-      const pacContainer = document.querySelector('.pac-container');
-      if (pacContainer && this.modalRef) {
-        this.modalRef.nativeElement.appendChild(pacContainer);
-      }
-    });
 
     autocomplete.addListener('place_changed', () => {
       this.ngZone.run(() => {

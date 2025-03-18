@@ -20,11 +20,46 @@
       </div>
 
       <div
-        class="z-10 flex items-center justify-center rounded-2xl bg-white text-mygrey1 gap-5 p-5 w-full md:w-4/5"
+        class="z-10 relative flex items-center justify-center rounded-b-2xl rounded-tr-2xl bg-white text-mygrey1 gap-5 p-5 w-full md:w-4/5"
       >
+        <div
+          class="absolute top-0 transform -translate-y-[100%] left-0 bg-myyellow2 flex items-center justify-center gap-4 p-3 rounded-t-xl text-[12px] text-mygrey3"
+        >
+          <label
+            class="cursor-pointer"
+            [ngClass]="{
+              'font-bold text-mygrey2 border-b-2 border-myyellow1 inline-block':
+                transactionType() === 'selling'
+            }"
+            >
+            Achat
+            <input
+              [(ngModel)]="transactionType"
+              class="hidden"
+              type="radio"
+              value="selling"
+            />
+          </label>
+          <label
+            class="cursor-pointer"
+            [ngClass]="{
+              'font-bold text-mygrey2 border-b-2 border-myyellow1 inline-block':
+                transactionType() === 'renting'
+            }"
+            >Location
+            <input
+              [(ngModel)]="transactionType"
+              class="hidden"
+              type="radio"
+              value="renting"
+            />
+          </label>
+        </div>
         <div class="flex-1 flex flex-col gap-5 border-r border-zinc-100 pr-5">
-          <label for="location">Location </label>
-          <div class="relative flex items-stretch">
+          <label for="location">Localisation </label>
+          <div
+            class="flex-1 relative flex flex-col items-start justify-center gap-4 w-full"
+          >
             <input
               #addresstext
               type="location"
@@ -32,22 +67,29 @@
               id="location"
               class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:ring-1 focus:ring-myyellow1 focus:outline-none"
               placeholder="Choisissez la ville"
-              required=""
             />
-            <button
-              *ngIf="this.filters.location.length != 0"
-              (click)="removeLocation()"
-              class="absolute top-2 right-2"
+            <div
+              *ngIf="localization().length > 0"
+              class="z-20 flex items-center justify-start gap-2 flex-wrap"
             >
-              <i class="fa-solid fa-trash"></i>
-            </button>
+              <div
+                class="p-1 px-2 border border-mygrey3 rounded-lg flex items-center justify-center gap-1 text-[12px]"
+                *ngFor="let location of localization(); let i = index"
+              >
+                <p>{{ location }}</p>
+                <button class="ml-2" (click)="removeLocation(i)">
+                  <i class="fa-solid fa-trash w-2 h-auto"></i>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="hidden flex-1 md:flex flex-col gap-5 border-r border-zinc-100 pr-5">
+        <div
+          class="hidden flex-1 md:flex flex-col gap-5 border-r border-zinc-100 pr-5"
+        >
           <label for="type">Type de bien </label>
           <select
-            [(ngModel)]="filters.hasType"
-            (change)="updateDisplayedProperties()"
+            [(ngModel)]="propertyType"
             name="type"
             id="type"
             class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 pr-10 text-start border-none focus:outline-none focus:ring-1 focus:ring-myyellow1"
@@ -60,26 +102,28 @@
             <option value="loft">Loft</option>
           </select>
         </div>
-        <div class="hidden flex-1 md:flex flex-col gap-5 border-r border-zinc-100 pr-5">
-          <label for="budget">Budget </label>
+        <div
+          class="hidden flex-1 md:flex flex-col gap-5 border-r border-zinc-100 pr-5"
+        >
+          <label for="budget">Budget maximum</label>
           <input
             #budgetInput
-            [(ngModel)]="filters.budgetMax"
-            (input)="updateDisplayedProperties()"
+            [(ngModel)]="maxPrice"
             type="number"
             user-select="none"
-            name="budget"
-            id="budget"
             class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
             placeholder="Votre buget maximum (en €)"
-            required=""
           />
         </div>
         <div class="h-full flex items-center justify-center">
           <div
             class="rounded-2xl bg-myyellow1 h-4/5 w-auto flex items-center justify-center px-3"
           >
-            <img src="assets/img/icon/loupe.png" class="w-8 h-8 md:h-12 md:w-12" alt="" />
+            <img
+              src="assets/img/icon/loupe.png"
+              class="w-8 h-8 md:h-12 md:w-12"
+              alt=""
+            />
           </div>
         </div>
       </div>
@@ -91,16 +135,22 @@
     id="filters-section"
     class="relative mb-5 px-8 py-5 md:py-0 bg-mygray4 text-mygrey1 w-full flex flex-col md:flex-row items-center gap-5 justify-between"
   >
-    <p class="flex-1 ">
+    <p class="flex-1">
       Découvrez
-      <span class="font-bold text-lg">{{ countValidBiens() }} biens</span>
+      <span class="font-bold text-lg">{{ totalItems }} biens</span>
       correspondant à vos critères
     </p>
-    <div class="flex flex-1 flex-col w-full lg:flex-row items-center justify-center gap-2 lg:gap-5">
+    <div
+      class="flex flex-1 flex-col w-full lg:flex-row items-center justify-center gap-2 lg:gap-5"
+    >
       <div
-        class="flex-1 w-full lg:w-auto order-3 lg:order-1 relative border rounded-xl flex items-center justify-center  gap-4 p-4"
+        class="flex-1 w-full lg:w-auto order-3 lg:order-1 border rounded-xl flex items-center justify-center gap-4 p-4"
       >
-        <img src="assets/img/icon/selection.png" class="w-6 h-auto" alt="" />
+        <img
+          src="assets/img/icon/selection.png"
+          class="w-6 h-auto ml-2"
+          alt=""
+        />
         <select
           [(ngModel)]="sortingType"
           (change)="changeSortingType()"
@@ -114,40 +164,63 @@
         </select>
       </div>
       <button
-        (click)="openFilterModal()"
+        (click)="openModal()"
         class="flex-1 w-full lg:w-auto border order-1 lg:order-2 rounded-xl flex items-center justify-center gap-4 p-4"
       >
         <img src="assets/img/icon/filters.png" class="w-6 h-auto" alt="" />
         <p>Filtrer</p>
       </button>
-      <!-- modale Filter -->
-      <app-filters-dialog
-        [filters]="filters"
-        (close)="updateDisplayedProperties()"
-      >
-        ></app-filters-dialog
-      >
       <button
         (click)="openAlertModal()"
-        class="flex-1  w-full lg:w-auto rounded-xl order-2 lg:order-3 flex items-center justify-center gap-4 p-4 bg-myyellow1"
+        class="flex-1 w-full lg:w-auto rounded-xl order-2 lg:order-3 flex items-center justify-center gap-4 p-4 bg-myyellow1"
       >
         <img src="assets/img/icon/bell-plus.png" class="w-6 h-auto" alt="" />
         <p class="whitespace-nowrap">Alerte achat</p>
       </button>
       <!-- modale Altert -->
-      <app-alert-dialog [filters]="filters"></app-alert-dialog>
+      <app-alert-dialog></app-alert-dialog>
     </div>
   </div>
 
   <!-- GOOGLE MAP -->
   <div class="flex flex-col lg:flex-row h-auto lg:h-[600px] w-full">
-    <div #propertiesContainer class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 place-items-center gap-x-5 order-2 lg:order-1 lg:w-1/3 h-[500px] lg:h-full overflow-y-auto px-10 pt-2 mb-10 lg:mb-0">
-      @for (property of displayedPproperties; track property) {
-      <app-ad-card class="transform md:scale-90 lg:scale-100" [property]="property"></app-ad-card>
+    <div
+      #propertiesContainer
+      class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 place-items-center gap-x-5 lg:gap-0 order-2 lg:order-1 lg:w-1/3 h-[500px] lg:h-full overflow-y-auto px-10 pt-2 mb-10 lg:mb-0"
+    >
+      @for (property of displayedProperties; track property) {
+      <app-ad-card
+        class="transform md:scale-90 lg:scale-100"
+        [property]="property"
+      ></app-ad-card>
       }
+
+      <div class="flex items-center justify-center gap-4 pb-10">
+        <button
+          (click)="previousPage()"
+          class="p-3 border border-mygrey2 rounded-full cursor-pointer hover:bg-zinc-300"
+          [ngClass]="{'hidden': currentPage() === 1 }"
+          [disabled]="currentPage() === 1"
+        >
+          <img src="assets/img/icon/arrow-black.png" class="w-5" />
+        </button>
+        <span class="font-semibold"
+          >Page {{ currentPage() }} / {{ totalPages }}</span
+        >
+        <button
+          (click)="nextPage()"
+          class="p-3 bg-mygrey2 rounded-full text-white cursor-pointer hover:bg-zinc-900"
+          [ngClass]="{ 'hidden': currentPage() === totalPages }"
+          [disabled]="currentPage() === totalPages"
+        >
+          <img src="assets/img/icon/arrow-white.png" class="w-5 rotate-180" />
+        </button>
+      </div>
     </div>
 
-    <div class="relative w-full order-1 lg:order-2 lg:w-2/3 h-[400px] lg:h-[500px] flex px-2 md:px-10 mb-10">
+    <div
+      class="relative w-full order-1 lg:order-2 lg:w-2/3 h-[400px] lg:h-[500px] flex px-2 md:px-10 mb-10"
+    >
       <div
         *ngIf="selectedProperty != null"
         class="z-10 absolute top-3 right-2 w-1/3"
@@ -167,9 +240,11 @@
         [center]="mapCenter()"
         [zoom]="zoom()"
       >
-        @for (property of displayedPproperties; track property) {
+        @for (property of displayedProperties; track property) {
         <map-advanced-marker
-          *ngIf="property.latitude && property.longitude"
+          *ngIf="
+            property.addressForm?.latitude && property.addressForm?.longitude
+          "
           #marker="mapAdvancedMarker"
           (mapMouseup)="displayOnMap(property)"
           (mapMouseover)="displayOnMap(property)"
@@ -182,3 +257,385 @@
     </div>
   </div>
 </div>
+
+<!-- --------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------------------------------------------------- -->
+
+<!-- Filters Modal -->
+<dialog
+  #modal
+  (click)="closeModalByClick($event)"
+  class="modal rounded-2xl px-4 text-mygrey1"
+  id="default-modal rounded-lg"
+  tabindex="-1"
+>
+  <div
+    (click)="$event.stopPropagation()"
+    class="relative bg-white md:w-2/3 h-2/3 overflow-scroll rounded-lg shadow-sm"
+  >
+    <!-- Modal header -->
+    <div
+      class="sticky top-0 left-0 right-0 bg-white z-10 flex items-center justify-center p-4 border-b border-gray-200"
+    >
+      <h3 class="text-xl font-semibold text-gray-900 self-center">
+        Filtrer votre recherche
+      </h3>
+      <button
+        (click)="closeModal()"
+        type="button"
+        class="absolute right-2 top-2 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+        data-modal-hide="default-modal"
+      >
+        <svg
+          class="w-3 h-3"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 14 14"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+          />
+        </svg>
+        <span class="sr-only">Close modal</span>
+      </button>
+    </div>
+
+    <!-- Modal content -->
+    <div>
+      <!-- Modal body -->
+      <!-- Localisation -->
+      <div class="p-10 flex flex-col gap-8">
+        <section id="filter-localization">
+          <p class="text-xl font-semibold pb-4">Location</p>
+          <div
+            class="relative flex flex-col items-start justify-center gap-4 w-full"
+          >
+            <input
+              #filtertext
+              type="text"
+              class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+              placeholder="Choisissez la ville"
+            />
+            <div
+              *ngIf="localization().length > 0"
+              class="z-20 flex items-center justify-start gap-2 flex-wrap"
+            >
+              <div
+                class="p-1 px-2 border border-mygrey3 rounded-2xl flex items-center justify-center gap-1 text-[12px]"
+                *ngFor="let location of localization(); let i = index"
+              >
+                <p>{{ location }}</p>
+                <button class="ml-2" (click)="removeLocation(i)">
+                  <i class="fa-solid fa-trash w-2 h-auto"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Budget -->
+        <section id="filter-budget">
+          <p class="text-xl font-semibold pb-4">Budget</p>
+          <div class="flex items-center justify-start gap-4 w-full">
+            <div class="flex-1">
+              <label class="whitespace-nowrap block mb-2" for="budgetMin"
+                >Budget Minimum :
+              </label>
+              <input
+                [(ngModel)]="minPrice"
+                (keyup)="minPrice.set($any($event.target).value)"
+                type="number"
+                name="budget"
+                id="budget"
+                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                placeholder="Votre buget minimum (en €)"
+                required=""
+              />
+            </div>
+            <div class="flex-1">
+              <label class="whitespace-nowrap block mb-2" for="budgetMin"
+                >Budget Maximum :
+              </label>
+              <input
+                [(ngModel)]="maxPrice"
+                (keyup)="maxPrice.set($any($event.target).value)"
+                type="number"
+                name="budget"
+                id="budget"
+                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                placeholder="Votre buget maximum (en €)"
+                required=""
+              />
+            </div>
+          </div>
+        </section>
+        <!-- Surface -->
+        <section id="filter-surface">
+          <p class="text-xl font-semibold pb-4">Surface</p>
+          <div class="flex items-center justify-start gap-4 w-full">
+            <div class="flex-1">
+              <label class="whitespace-nowrap block mb-2" for="surfaceMin"
+                >Surface Minimum :
+              </label>
+              <div class="relative flex items-stretch">
+                <input
+                [(ngModel)]="minSurface"
+                (keyup)="minSurface.set($any($event.target).value)"
+                type="number"
+                placeholder="Surface minimum"
+                class=" bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+              />
+              <span
+              class="absolute text-zinc-600 right-6 top-2 font-semibold text-sm"
+              >m²</span
+              >
+              </div>
+
+            </div>
+            <div class="flex-1">
+              <label class="whitespace-nowrap block mb-2" for="surfaceMax"
+                >Surface Maximum :
+              </label>
+              <div class="relative flex items-stretch">
+              <input
+                [(ngModel)]="maxSurface"
+                (keyup)="maxSurface.set($any($event.target).value)"
+                type="number"
+                placeholder="Surface maximum"
+                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+              />
+              <span
+              class="absolute text-zinc-600 right-6 top-2 font-semibold text-sm"
+              >m²</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Chambres et pièces -->
+        <section id="filter-rooms">
+          <p class="text-xl font-semibold pb-4">Chambres et pièces</p>
+          <div class="flex flex-col gap4">
+            <div class="flex items-center justify-between w-full">
+              <p>Nombre de pièces</p>
+              <div class="flex items-center gap-4 mt-2 rounded-lg px-4 py-2">
+                <button
+                  (click)="decrementRooms()"
+                  [disabled]="filters.room <= 1"
+                  class="p-2 bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center disabled:opacity-50"
+                >
+                  <i class="fa-solid fa-minus"></i>
+                </button>
+
+                <span class="text-lg font-semibold">{{ filters.room }}</span>
+
+                <button
+                  (click)="incrementRooms()"
+                  [disabled]="filters.bedroom >= 5"
+                  class="p-2 bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center"
+                >
+                  <i class="fa-solid fa-plus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="flex items-center justify-between w-full">
+              <p>Nombre de chambre</p>
+              <div class="flex items-center gap-4 mt-2 rounded-lg px-4 py-2">
+                <button
+                  (click)="decrementBedrooms()"
+                  [disabled]="filters.bedroom <= 1"
+                  class="p-2 bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center disabled:opacity-50"
+                >
+                  <i class="fa-solid fa-minus"></i>
+                </button>
+
+                <span class="text-lg font-semibold">{{ filters.bedroom }}</span>
+
+                <button
+                  (click)="incrementBedrooms()"
+                  class="p-2 bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center"
+                >
+                  <i class="fa-solid fa-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Type de logement -->
+        <section id="filter-type">
+          <p class="text-xl font-semibold pb-4">Type de logements</p>
+          <div class="flex items-center gap-4">
+            <label
+              class="p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer"
+              [ngClass]="
+                propertyType() === 'maison'
+                  ? 'border-2 border-black'
+                  : 'border-mygrey3'
+              "
+            >
+              <input
+                type="radio"
+                class="hidden"
+                [(ngModel)]="propertyType"
+                value="maison"
+              />
+              <i class="fa-solid fa-house"></i> Maison
+            </label>
+
+            <label
+              class="p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer"
+              [ngClass]="
+                propertyType() === 'appartement'
+                  ? 'border-2 border-black'
+                  : 'border-mygrey3'
+              "
+            >
+              <input
+                type="radio"
+                class="hidden"
+                [(ngModel)]="propertyType"
+                value="appartement"
+              />
+              <i class="fa-solid fa-building"></i> Appartement
+            </label>
+
+            <label
+              class="p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer"
+              [ngClass]="
+                propertyType() === 'loft'
+                  ? 'border-2 border-black'
+                  : 'border-mygrey3'
+              "
+            >
+              <input
+                type="radio"
+                class="hidden"
+                [(ngModel)]="propertyType"
+                value="loft"
+              />
+              <i class="fa-solid fa-warehouse"></i> Loft
+            </label>
+          </div>
+        </section>
+
+        <!-- Autre critères -->
+        <section id="filter-others">
+          <p class="text-xl font-semibold pb-4">Avantages et infrastructures</p>
+          <div class="flex items-center gap-4">
+            <label
+              [ngClass]="{
+                'p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
+                'border-mygrey3': !advantages.has_parking,
+                'border-2 border-black': advantages.has_parking
+              }"
+            >
+              <input
+                type="checkbox"
+                class="hidden"
+                [(ngModel)]="advantages.has_parking"
+              />
+              <i class="fa-solid fa-square-parking"></i> Parking
+            </label>
+
+            <label
+              [ngClass]="{
+                'p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
+                'border-mygrey3': !advantages.has_cellar,
+                'border-2 border-black': advantages.has_cellar
+              }"
+            >
+              <input
+                type="checkbox"
+                class="hidden"
+                [(ngModel)]="advantages.has_cellar"
+              />
+              <i class="fa-solid fa-box-archive"></i>
+              Cave
+            </label>
+
+            <label
+              [ngClass]="{
+                'p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
+                'border-mygrey3': !advantages.has_elevator,
+                'border-2 border-black': advantages.has_elevator
+              }"
+            >
+              <input
+                type="checkbox"
+                class="hidden"
+                [(ngModel)]="advantages.has_elevator"
+              />
+              <i class="fa-solid fa-elevator"></i> Ascenseur
+            </label>
+            <label
+              [ngClass]="{
+                'p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
+                'border-mygrey3': !advantages.has_balcony,
+                'border-2 border-black': advantages.has_balcony
+              }"
+            >
+              <input
+                type="checkbox"
+                class="hidden"
+                [(ngModel)]="advantages.has_balcony"
+              />
+              <i class="fa-solid fa-tree-city"></i> Balcon
+            </label>
+            <label
+              [ngClass]="{
+                'p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
+                'border-mygrey3': !advantages.has_terrace,
+                'border-2 border-black': advantages.has_terrace
+              }"
+            >
+              <input
+                type="checkbox"
+                class="hidden"
+                [(ngModel)]="advantages.has_terrace"
+              />
+              <i class="fa-solid fa-sun"></i> Terrasse
+            </label>
+            <label
+              [ngClass]="{
+                'p-4 border border-mygrey3 rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
+                'border-mygrey3': !advantages.has_box,
+                'border-2 border-black': advantages.has_box
+              }"
+            >
+              <input
+                type="checkbox"
+                class="hidden"
+                [(ngModel)]="advantages.has_box"
+              />
+              <i class="fa-solid fa-warehouse"></i> Box
+            </label>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Modal footer -->
+    <div
+      class="sticky top-0 left-0 right-0 bg-white z-10 flex items-center justify-between p-4 border-b border-gray-200"
+    >
+      <div class="flex items-center justify-between w-full">
+        <button
+          (click)="removeFilters()"
+          class="rounded-lg p-4 hover:bg-zinc-100 font-semibold"
+        >
+          Effacer les filtres
+        </button>
+        <button
+          (click)="closeModal()"
+          class="rounded-lg p-4 px-6 text-white bg-zinc-700 font-semibold hover:bg-zinc-900"
+        >
+          Voir {{totalItems}} logements
+        </button>
+      </div>
+    </div>
+  </div>
+</dialog>

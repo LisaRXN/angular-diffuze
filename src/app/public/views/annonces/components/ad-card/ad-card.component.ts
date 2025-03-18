@@ -14,7 +14,7 @@ import { Ad } from '../../../../../core/models/ad.models';
 export class AdCardComponent implements AfterViewInit  {
 
   router = inject(Router);
-  @Input() property!: Ad;
+  @Input() property!: Property;
   @Input() smallCard: boolean = false
 
   @ViewChild('carousel') carousel!: ElementRef<HTMLDivElement>;

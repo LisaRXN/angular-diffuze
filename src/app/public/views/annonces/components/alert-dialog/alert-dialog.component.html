@@ -45,18 +45,21 @@
       <div>
         <!-- Modal body -->
         <div class="p-10 flex flex-col gap-8">
-          <!-- Budget -->
-          <section id="location">
+          <!-- Location -->
+          <section>
             <label for="location" class="text-lg font-semibold mb-4"
               >Location</label
             >
-            <div class="flex flex-col items-start justify-center gap-4 w-full">
+            <div
+              #alertLocationContainer
+              class="relative flex flex-col items-start justify-center gap-4 w-full"
+            >
               <input
                 #alerttext
                 type="text"
                 name="location"
                 id="location"
-                class="relative bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
                 placeholder="Choisissez la ville"
                 required=""
               />
@@ -79,15 +82,16 @@
               </div>
             </div>
           </section>
+          <!-- Budget -->
           <section id="budget" class="">
             <p class="text-lg font-semibold mb-4">Budget</p>
             <div class="flex items-center justify-start gap-4 w-full">
               <div class="flex-1">
-                <label class="whitespace-nowrap block mb-2" for="budget"
+                <label class="whitespace-nowrap block mb-2" for="minPrice"
                   >Budget Minimum :
                 </label>
                 <input
-                  formControlName="budgetMin"
+                  formControlName="minPrice"
                   type="number"
                   id="budget"
                   class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
@@ -96,11 +100,11 @@
                 />
               </div>
               <div class="flex-1">
-                <label class="whitespace-nowrap block mb-2" for="budget"
+                <label class="whitespace-nowrap block mb-2" for="maxPrice"
                   >Budget Maximum :
                 </label>
                 <input
-                  formControlName="budgetMax"
+                  formControlName="maxPrice"
                   type="number"
                   id="budget"
                   class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
@@ -109,21 +113,21 @@
                 />
               </div>
             </div>
-            <!-- Surface  -->
           </section>
+          <!-- Surface  -->
           <section id="surface" class="">
             <p class="text-lg font-semibold mb-4">Surface</p>
             <div class="flex items-center justify-start gap-4 w-full">
               <div class="flex-1">
-                <label class="whitespace-nowrap block mb-2" for="budget"
+                <label class="whitespace-nowrap block mb-2" for="minSurface"
                   >Surface Minimum :
                 </label>
                 <div class="relative flex items-stretch">
                   <input
-                    formControlName="surfaceMin"
+                    formControlName="minSurface"
                     type="number"
                     placeholder="Surface minimum"
-                    class=" bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                    class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
                   />
                   <span
                     class="absolute text-zinc-600 right-6 top-2 font-semibold text-sm"
@@ -132,12 +136,12 @@
                 </div>
               </div>
               <div class="flex-1">
-                <label class="whitespace-nowrap block mb-2" for="budget"
+                <label class="whitespace-nowrap block mb-2" for="maxSurface"
                   >Surface Maximum :
                 </label>
                 <div class="relative flex items-stretch">
                   <input
-                    formControlName="surfaceMax"
+                    formControlName="maxSurface"
                     type="number"
                     placeholder="Surface maximum"
                     class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
@@ -161,20 +165,20 @@
                   <button
                     type="button"
                     (click)="decrementRooms()"
-                    [disabled]="filters.roomMin <= 1"
+                    [disabled]="alertForm.get('room')?.value <= 1"
                     class="p-2 bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center disabled:opacity-50"
                   >
                     <i class="fa-solid fa-minus"></i>
                   </button>
 
                   <span class="text-lg font-semibold">{{
-                    filters.roomMin
+                    alertForm.get("room")?.value
                   }}</span>
 
                   <button
                     type="button"
                     (click)="incrementRooms()"
-                    [disabled]="filters.bedroomMin >= 5"
+                    [disabled]="alertForm.get('room')?.value >= 5"
                     class="p-2 bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center"
                   >
                     <i class="fa-solid fa-plus"></i>
@@ -186,18 +190,19 @@
                 <div class="flex items-center gap-4 mt-2 rounded-lg px-4 py-2">
                   <button
                     (click)="decrementBedrooms()"
-                    [disabled]="filters.bedroomMin <= 1"
+                    [disabled]="alertForm.get('bedroom')?.value <= 1"
                     class="p-2 bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center disabled:opacity-50"
                   >
                     <i class="fa-solid fa-minus"></i>
                   </button>
 
                   <span class="text-lg font-semibold">{{
-                    filters.bedroomMin
+                    alertForm.get("bedroom")?.value
                   }}</span>
 
                   <button
                     (click)="incrementBedrooms()"
+                    [disabled]="alertForm.get('bedroom')?.value >= 5"
                     class="p-2 bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center"
                   >
                     <i class="fa-solid fa-plus"></i>
@@ -215,11 +220,11 @@
                 [ngClass]="{
                   'p-4 border border-mygrey3 rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
                   'border-2 border-black':
-                    this.alertForm.get('hasType')?.value === 'maison'
+                    this.alertForm.get('propertyType')?.value === 'maison'
                 }"
               >
                 <input
-                  formControlName="hasType"
+                  formControlName="propertyType"
                   type="radio"
                   class="hidden"
                   value="maison"
@@ -233,7 +238,7 @@
                      }"
               >
                 <input
-                  formControlName="hasType"
+                  formControlName="propertyType"
                   type="radio"
                   class="hidden"
                   value="appartement"
@@ -245,7 +250,7 @@
                 [ngClass]="{
                   'p-4 border border-mygrey3 rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
                   'border-2 border-black':
-                    this.alertForm.get('hasType')?.value === 'loft'
+                    this.alertForm.get('propertyType')?.value === 'loft'
                 }"
               >
                 <input type="radio" class="hidden" name="type" value="loft" />
@@ -255,23 +260,25 @@
           </section>
 
           <!-- Autre critères -->
-          <section id="others">
+          <section id="advantages">
             <p class="text-lg font-semibold mb-4">
               Avantages et infrastructures
             </p>
 
-            <div formGroupName="others" class="flex items-center gap-4">
+            <div formGroupName="advantages" class="flex items-center gap-4">
               <label
                 [ngClass]="{
                   'p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
-                  'border-mygrey3':
-                    !this.alertForm.get('others.hasParking')?.value,
-                  'border-2 border-black':
-                    this.alertForm.get('others.hasParking')?.value
+                  'border-mygrey3': !this.alertForm.get(
+                    'advantages.has_parking'
+                  )?.value,
+                  'border-2 border-black': this.alertForm.get(
+                    'advantages.has_parking'
+                  )?.value
                 }"
               >
                 <input
-                  formControlName="hasParking"
+                  formControlName="has_parking"
                   type="checkbox"
                   class="hidden"
                 />
@@ -281,14 +288,15 @@
               <label
                 [ngClass]="{
                   'p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
-                  'border-mygrey3':
-                    !this.alertForm.get('others.hasBasement')?.value,
-                  'border-2 border-black':
-                    this.alertForm.get('others.hasBasement')?.value
+                  'border-mygrey3': !this.alertForm.get('advantages.has_cellar')
+                    ?.value,
+                  'border-2 border-black': this.alertForm.get(
+                    'advantages.has_cellar'
+                  )?.value
                 }"
               >
                 <input
-                  formControlName="hasBasement"
+                  formControlName="has_cellar"
                   type="checkbox"
                   class="hidden"
                 />
@@ -299,14 +307,16 @@
               <label
                 [ngClass]="{
                   'p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
-                  'border-mygrey3':
-                    !this.alertForm.get('others.hasElevator')?.value,
-                  'border-2 border-black':
-                    this.alertForm.get('others.hasElevator')?.value
+                  'border-mygrey3': !this.alertForm.get(
+                    'advantages.has_elevator'
+                  )?.value,
+                  'border-2 border-black': this.alertForm.get(
+                    'advantages.has_elevator'
+                  )?.value
                 }"
               >
                 <input
-                  formControlName="hasElevator"
+                  formControlName="has_elevator"
                   type="checkbox"
                   class="hidden"
                 />
@@ -315,14 +325,16 @@
               <label
                 [ngClass]="{
                   'p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
-                  'border-mygrey3':
-                    !this.alertForm.get('others.hasBalcony')?.value,
-                  'border-2 border-black':
-                    this.alertForm.get('others.hasBalcony')?.value
+                  'border-mygrey3': !this.alertForm.get(
+                    'advantages.has_balcony'
+                  )?.value,
+                  'border-2 border-black': this.alertForm.get(
+                    'advantages.has_balcony'
+                  )?.value
                 }"
               >
                 <input
-                  formControlName="hasBalcony"
+                  formControlName="has_balcony"
                   type="checkbox"
                   class="hidden"
                 />
@@ -331,14 +343,16 @@
               <label
                 [ngClass]="{
                   'p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
-                  'border-mygrey3':
-                    !this.alertForm.get('others.hasTerrace')?.value,
-                  'border-2 border-black':
-                    this.alertForm.get('others.hasTerrace')?.value
+                  'border-mygrey3': !this.alertForm.get(
+                    'advantages.has_terrace'
+                  )?.value,
+                  'border-2 border-black': this.alertForm.get(
+                    'advantages.has_terrace'
+                  )?.value
                 }"
               >
                 <input
-                  formControlName="hasTerrace"
+                  formControlName="has_terrace"
                   type="checkbox"
                   class="hidden"
                 />
@@ -347,13 +361,14 @@
               <label
                 [ngClass]="{
                   'p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
-                  'border-mygrey3': !this.alertForm.get('others.hasBox')?.value,
+                  'border-mygrey3':
+                    !this.alertForm.get('advantages.has_box')?.value,
                   'border-2 border-black':
-                    this.alertForm.get('others.hasBox')?.value
+                    this.alertForm.get('advantages.has_box')?.value
                 }"
               >
                 <input
-                  formControlName="hasBox"
+                  formControlName="has_box"
                   type="checkbox"
                   class="hidden"
                 />
@@ -371,8 +386,8 @@
             </p>
             <div class="grid grid-cols-2 justify-start gap-4 w-full">
               <div class="flex-1">
-                <label class="whitespace-nowrap block mb-2" for="budget"
-                  >Nom :
+                <label class="whitespace-nowrap block mb-2" for="lastName"
+                  >Nom :<span class="required">*</span>
                 </label>
                 <input
                   formControlName="lastName"
@@ -381,10 +396,18 @@
                   class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
                   placeholder="Votre nom"
                 />
+                <p
+                  class="error"
+                  *ngIf="
+                    submitted && alertForm.get('lastName')?.hasError('required')
+                  "
+                >
+                  Le nom est requis.
+                </p>
               </div>
               <div class="flex-1">
-                <label class="whitespace-nowrap block mb-2" for="budget"
-                  >Prénom :
+                <label class="whitespace-nowrap block mb-2" for="firstName"
+                  >Prénom :<span class="required">*</span>
                 </label>
                 <input
                   formControlName="firstName"
@@ -393,10 +416,18 @@
                   class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
                   placeholder="Votre prénom"
                 />
+                <p
+                  class="error"
+                  *ngIf="
+                    submitted && alertForm.get('lastName')?.hasError('required')
+                  "
+                >
+                  Le prénom est requis.
+                </p>
               </div>
               <div class="flex-1">
                 <label class="whitespace-nowrap block mb-2" for="budget"
-                  >Téléphone :
+                  >Téléphone : <span class="required">*</span>
                 </label>
                 <input
                   formControlName="phone"
@@ -406,10 +437,18 @@
                   placeholder="Votre numéro de téléphone"
                   required=""
                 />
+                <p
+                  class="error"
+                  *ngIf="
+                    submitted && alertForm.get('lastName')?.hasError('required')
+                  "
+                >
+                  Le téléphone est requis.
+                </p>
               </div>
               <div class="flex-1">
                 <label class="whitespace-nowrap block mb-2" for="budget"
-                  >Email :
+                  >Email<span class="required">*</span> :
                 </label>
                 <input
                   formControlName="email"
@@ -418,6 +457,20 @@
                   class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
                   placeholder="Votre email"
                 />
+                <p
+                  class="error"
+                  *ngIf="
+                    submitted && alertForm.get('email')?.hasError('required')
+                  "
+                >
+                  L'email est requis.
+                </p>
+                <p
+                  class="error"
+                  *ngIf="submitted && alertForm.get('email')?.hasError('email')"
+                >
+                  L'email n'est pas valide.
+                </p>
               </div>
             </div>
           </section>
