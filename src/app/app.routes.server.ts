@@ -9,8 +9,12 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender, // SSG - Généré statiquement
   },
   {
-    path: 'profil', // Page profil en SSR (données utilisateur dynamiques)
-    renderMode: RenderMode.Server, // SSR - Rendu côté serveur
+    path: 'nos-offres',
+    renderMode: RenderMode.Prerender,
+  },
+  {
+    path: 'nos-partenaires',
+    renderMode: RenderMode.Prerender,
   },
   {
     path: 'blog/:url', // Articles de blog en SSG avec paramètres
