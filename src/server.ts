@@ -62,4 +62,4 @@ export const reqHandler = createNodeRequestHandler(app);
 /**
  * Export the Express app for Vercel serverless deployment
  */
-export default app;
+export { app };
