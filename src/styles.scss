@@ -1,9 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@use '@fontsource/paytone-one';
-@use '@fontsource-variable/open-sans';
-@use '@fontsource-variable/raleway';
+@import '@fontsource/paytone-one';
+@import '@fontsource-variable/open-sans';
+@import '@fontsource-variable/raleway';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
