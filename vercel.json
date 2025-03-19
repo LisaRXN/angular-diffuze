@@ -1,20 +1,7 @@
 {
   "version": 2,
   "framework": "angular",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/node",
-      "config": {
-        "buildCommand": "npm run build:ssr",
-        "outputDirectory": "dist/diffuze"
-      }
-    },
-    {
-      "src": "dist/diffuze/server/server.mjs",
-      "use": "@vercel/node"
-    }
-  ],
+
   "routes": [
     {
       "src": "/(.*)",
