@@ -9,7 +9,7 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender, // SSG - Généré statiquement
   },
   {
-    path: 'nos-offres',
+    path: 'notre-offre',
     renderMode: RenderMode.Prerender,
   },
   {
