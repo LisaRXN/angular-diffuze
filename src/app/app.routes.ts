@@ -6,6 +6,7 @@ import { Store } from '@ngxs/store';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './public/layout/layout.component';
 import { AnnoncesComponent } from './public/views/annonces/annonces.component';
+import { AnnonceDetailComponent } from './public/views/annonce-detail/annonce-detail.component';
 
 export const routes: Routes = [
   {
@@ -51,10 +52,22 @@ export const routes: Routes = [
       },
       {
         path: 'annonces',
-        loadComponent: () =>
-          import('./public/views/annonces/annonces.component').then(
-            (m) => m.AnnoncesComponent
-          ),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./public/views/annonces/annonces.component').then(
+                (m) => m.AnnoncesComponent
+              ),
+          },
+          {
+            path: ':id',
+            loadComponent: () =>
+              import('./public/views/annonce-detail/annonce-detail.component').then(
+                (m) => m.AnnonceDetailComponent
+              ),
+          },
+        ],
       },
       {
         path: 'blog',

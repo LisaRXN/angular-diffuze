@@ -68,14 +68,14 @@
                 class="z-20 flex items-center justify-start gap-4"
               >
                 <div
-                  class="p-2 border border-mygrey3 rounded-2xl flex items-center justify-center gap-2"
+                  class="p-1 px-2 border border-mygrey3 rounded-lg flex items-center justify-center gap-2"
                   *ngFor="
                     let location of this.alertForm.get('locations')?.value;
                     let i = index
                   "
                 >
                   <p>{{ location }}</p>
-                  <button class="ml-2" (click)="removeLocation(i)">
+                  <button class="ml-2" (click)="removeLocationInForm(i)">
                     <i class="fa-solid fa-trash"></i>
                   </button>
                 </div>
@@ -387,7 +387,7 @@
             <div class="grid grid-cols-2 justify-start gap-4 w-full">
               <div class="flex-1">
                 <label class="whitespace-nowrap block mb-2" for="lastName"
-                  >Nom :<span class="required">*</span>
+                  >Nom <span class="required">*</span> :
                 </label>
                 <input
                   formControlName="lastName"

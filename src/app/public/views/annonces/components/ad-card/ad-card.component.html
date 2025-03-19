@@ -7,7 +7,7 @@
 >
   <div #carousel class="carousel rounded-t w-full">
     <div
-      *ngFor="let photo of property.media.images"
+      *ngFor="let photo of property.media?.images"
       class="carousel-item w-full"
     >
       <img
@@ -17,11 +17,11 @@
         alt=""
       />
       <div
-        class="absolute inset-0 -translate-y-20 flex justify-between items-center pointer-events-none"
+        class="absolute h-[250px] inset-0 top-0 flex justify-between items-center pointer-events-none"
       >
         <button
           [ngClass]="{
-            'pointer-events-auto border-none group': true,
+            'pointer-events-auto border-none': true,
             'opacity-0': isCarouselStart
           }"
           (click)="prevSlide()"

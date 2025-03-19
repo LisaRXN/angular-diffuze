@@ -144,7 +144,7 @@ export class AlertDialogComponent implements AfterViewInit {
   closeModal() {
     this.modalRef.nativeElement.close();
   }
-  removeLocation(index: number) {
+  removeLocationInForm(index: number) {
     const array = this.alertForm.get('locations')?.value;
     array.splice(index, 1);
     this.alertForm.get('locations')?.setValue(array);

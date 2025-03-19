@@ -10,20 +10,38 @@ import {
   signal,
   ViewChild,
   viewChildren,
-  WritableSignal,
 } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { GoogleMap, MapAdvancedMarker } from '@angular/google-maps';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { GoogleMap, MapAdvancedMarker,MapMarkerClusterer } from '@angular/google-maps';
 import { debounceTime, map, Observable, switchMap } from 'rxjs';
 import {
   FetchAdResponse,
   PropertyGateway,
 } from '../../../core/ports/property.gateway';
 import { AdCardComponent } from './components/ad-card/ad-card.component';
-import { Ad, Filters } from '../../../core/models/ad.models';
+import { Ad, alertFilters, Filters } from '../../../core/models/ad.models';
 import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.component';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Advantages, Property } from '../../../core/models/property.model';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AlertGateway } from '../../../core/ports/alert.gateway';
+import { RouterLink, Router } from "@angular/router";
+
+
 
 @Component({
   selector: 'app-annonces',
@@ -32,19 +50,33 @@ import { Advantages, Property } from '../../../core/models/property.model';
     ReactiveFormsModule,
     FormsModule,
     GoogleMap,
+    MapMarkerClusterer,
     MapAdvancedMarker,
     AdCardComponent,
-    AlertDialogComponent,
+    RouterLink
   ],
   templateUrl: './annonces.component.html',
   styleUrl: './annonces.component.scss',
+  animations: [
+    trigger('slideIn', [
+      state('hidden', style({ opacity: 0, transform: 'translateY(20px)' })),
+      state('visible', style({ opacity: 1, transform: 'translateY(0)' })),
+      transition('hidden => visible', [animate('300ms ease-out')]),
+    ]),
+  ],
 })
 export class AnnoncesComponent implements OnInit, AfterViewInit {
   @ViewChild(AlertDialogComponent) alertDialogComponent!: AlertDialogComponent;
   @ViewChild('addresstext') addresstext!: ElementRef<HTMLInputElement>;
+  @ViewChild('alerttext') alerttext!: ElementRef<HTMLInputElement>;
   @ViewChild('filtertext') filtertext!: ElementRef<HTMLInputElement>;
   @ViewChild('propertiesContainer') propertiesContainer!: ElementRef;
-  @ViewChild('modal') modalRef!: ElementRef<HTMLDialogElement>;
+  @ViewChild('modal') modalRef!: ElementRef;
+  @ViewChild('alertCheckbox') alertCheckboxRef!: ElementRef<HTMLInputElement>;
+  @ViewChild('filterCheckbox') filterCheckboxRef!: ElementRef<HTMLInputElement>;
+
+  private alertGateway = inject(AlertGateway);
+  private ngZone = inject(NgZone);
 
   propertyGateway = inject(PropertyGateway);
   properties$!: Observable<Property[]>;
@@ -55,6 +87,7 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
   totalPages: number = 1;
   totalItems: number = 0;
   locations: string[] = [];
+  sortingType: string = 'recent';
 
   currentPage = signal(1);
   localization = signal<string[]>([]);
@@ -85,6 +118,30 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     )
   );
 
+  submitted = false;
+  alertForm: FormGroup = new FormGroup({
+    propertyType: new FormControl('', Validators.required),
+    minPrice: new FormControl(null, [Validators.required]),
+    maxPrice: new FormControl(null, [Validators.required]),
+    room: new FormControl(1, Validators.required),
+    bedroom: new FormControl(1, Validators.required),
+    minSurface: new FormControl(null, Validators.required),
+    maxSurface: new FormControl(null, Validators.required),
+    advantages: new FormGroup({
+      has_elevator: new FormControl(false),
+      has_balcony: new FormControl(false),
+      has_terrace: new FormControl(false),
+      has_parking: new FormControl(false),
+      has_box: new FormControl(false),
+      has_cellar: new FormControl(false),
+    }),
+    locations: new FormControl([], Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    firstName: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
+    phone: new FormControl('', Validators.required),
+  });
+
   markersRef = viewChildren(MapAdvancedMarker);
   advancedMarkerOptions: google.maps.marker.AdvancedMarkerElementOptions = {
     gmpDraggable: false,
@@ -92,25 +149,12 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
   mapCenter = signal({ lat: 48.8566, lng: 2.3522 }); // Paris par défaut
   zoom = signal(5);
   place: any;
-  isDialogOpen: boolean = false;
-
-  sortingType: string = 'recent';
-
-  filters = {
-    room: 1,
-    bedroom: 1,
+  imagePath: string =
+    'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m';
+  iconConfig = {
+    url: 'assets/img/icon/rectangle.png',
+    scaledSize: new google.maps.Size(60, 20)
   };
-
-  advantages: Advantages = {
-    has_balcony: false,
-    has_box: false,
-    has_cellar: false,
-    has_elevator: false,
-    has_parking: false,
-    has_terrace: false,
-  };
-
-  constructor(private ngZone: NgZone) {}
 
   ngOnInit() {
     this.filteredProperties$.subscribe((fetchAdResponse) => {
@@ -128,7 +172,6 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     scrollDiv.addEventListener('mouseover', () => {
       document.body.style.overflow = 'hidden';
     });
-
     scrollDiv.addEventListener('mouseleave', () => {
       document.body.style.overflow = '';
     });
@@ -136,14 +179,9 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     this.getPlaceAutocomplete();
   }
 
-  openAlertModal() {
-    if (this.alertDialogComponent) {
-      this.alertDialogComponent.openModal();
-    } else {
-      console.error('alertDialogComponent est undefined');
-    }
+  ngOnDestroy() {
+    document.body.style.overflow = ''; 
   }
-
   clearSelected() {
     this.selectedProperty = null;
   }
@@ -239,6 +277,10 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
       this.addresstext.nativeElement,
       options
     );
+    const alertAutocomplete = new google.maps.places.Autocomplete(
+      this.alerttext.nativeElement,
+      options
+    );
 
     const filterAutoComplete = new google.maps.places.Autocomplete(
       this.filtertext.nativeElement,
@@ -267,6 +309,23 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
       this.zoom.set(12);
     });
 
+    alertAutocomplete.addListener('place_changed', () => {
+      this.ngZone.run(() => {
+        this.place = alertAutocomplete.getPlace();
+
+        if (this.place.geometry === undefined || this.place.geometry === null) {
+          return;
+        }
+        let locations = this.alertForm.get('locations')?.value || [];
+        if (!locations.includes(this.place.name)) {
+          locations.push(this.place.name);
+          this.alertForm.get('locations')?.setValue(locations);
+        }
+        this.alertForm.get('locations')?.setValue(locations);
+        this.alerttext.nativeElement.value = '';
+      });
+    });
+
     filterAutoComplete.addListener('place_changed', () => {
       this.ngZone.run(() => {
         this.place = filterAutoComplete.getPlace();
@@ -290,117 +349,36 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     });
   }
 
-  checkRooms(property: Property) {
-    if (property.room >= this.filters.room) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  checkBedrooms(property: Property) {
-    if (property.bedroom >= this.filters.bedroom) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  checkCriterias(property: Property) {
-    const criterias = this.advantages;
-    let elevatorFilter = true;
-    let balconyFilter = true;
-    let terraceFilter = true;
-    let parkingFilter = true;
-    let boxFilter = true;
-    let basementFilter = true;
-
-    if (
-      !criterias.has_elevator &&
-      !criterias.has_balcony &&
-      !criterias.has_terrace &&
-      !criterias.has_parking &&
-      !criterias.has_box &&
-      !criterias.has_cellar
-    ) {
-      return true;
-    }
-    if (criterias.has_elevator) {
-      if (property.advantages.has_elevator) elevatorFilter = true;
-      else elevatorFilter = false;
-    }
-    if (criterias.has_balcony) {
-      if (property.advantages.has_balcony) balconyFilter = true;
-      else balconyFilter = false;
-    }
-    if (criterias.has_terrace) {
-      if (property.advantages.has_terrace) terraceFilter = true;
-      else terraceFilter = false;
-    }
-    if (criterias.has_parking) {
-      if (property.advantages.has_parking) parkingFilter = true;
-      else parkingFilter = false;
-    }
-    if (criterias.has_box) {
-      if (property.advantages.has_box) boxFilter = true;
-      else boxFilter = false;
-    }
-    if (criterias.has_cellar) {
-      if (property.advantages.has_cellar) basementFilter = true;
-      else basementFilter = false;
-    } else {
-      return false;
-    }
-    return (
-      elevatorFilter &&
-      balconyFilter &&
-      terraceFilter &&
-      parkingFilter &&
-      boxFilter &&
-      basementFilter
-    );
-  }
-
   removeLocation(index: number) {
     this.localization.set(this.localization().filter((_, i) => i !== index));
   }
 
-  updateDisplayedProperties() {
-    this.displayedProperties = this.displayedProperties.filter(
-      (property) =>
-        this.checkRooms(property) &&
-        this.checkBedrooms(property) &&
-        this.checkCriterias(property)
-    );
+  removeLocationInForm(index: number) {
+    const array = this.alertForm.get('locations')?.value;
+    array.splice(index, 1);
+    this.alertForm.get('locations')?.setValue(array);
   }
 
-  incrementRooms() {
-    if (this.filters.room < 5) this.filters.room++;
+  roomsForm(decrement = false) {
+    const room = this.alertForm.get('room');
+    if (decrement && room && room.value > 1)
+      room.setValue(room.value - 1, { emitEvent: false });
+    if (!decrement && room && room.value < 5)
+      room.setValue(room.value + 1, { emitEvent: false });
   }
-  decrementRooms() {
-    if (this.filters.room > 1) this.filters.room--;
-  }
-  incrementBedrooms() {
-    if (this.filters.bedroom < 5) this.filters.bedroom++;
-  }
-
-  decrementBedrooms() {
-    if (this.filters.bedroom > 1) this.filters.bedroom--;
-  }
-
-  openModal() {
-    this.modalRef.nativeElement.showModal();
+  bedroomsForm(decrement = false) {
+    const bedroom = this.alertForm.get('bedroom');
+    if (decrement && bedroom && bedroom.value > 1)
+      bedroom.setValue(bedroom.value - 1, { emitEvent: false });
+    if (!decrement && bedroom && bedroom.value < 5)
+      bedroom.setValue(bedroom.value + 1, { emitEvent: false });
   }
 
-  closeModal() {
-    this.updateDisplayedProperties();
-
-    this.modalRef.nativeElement.close();
-  }
-
-  closeModalByClick(event: Event) {
-    if (event.target === this.modalRef.nativeElement) {
-      this.closeModal();
+  togglePropertyType(type: string) {
+    if (this.propertyType() === type) {
+      this.propertyType.set('');
+    } else {
+      this.propertyType.set(type);
     }
   }
 
@@ -412,18 +390,46 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     this.maxPrice.set(Infinity);
     this.minSurface.set(0);
     this.maxSurface.set(Infinity);
-    (this.filters = {
-      room: 1,
-      bedroom: 1,
-    }),
-      (this.advantages = {
-        has_elevator: false,
+  }
+
+  onSubmitAlert() {
+    this.submitted = true;
+    if (this.alertForm.valid) {
+      this.submitted = false;
+      const filters: alertFilters = this.alertForm.getRawValue();
+      this.alertGateway
+        .createAlert(this.alertForm.getRawValue())
+        .subscribe((data) => {
+          console.log(data);
+          this.resetForm();
+          this.alertCheckboxRef.nativeElement.checked = false;
+          // if (data.status == 200) this.showSuccessNotif();
+          // else this.showErrorNotif();
+        });
+    } else {
+      return;
+    }
+  }
+
+  resetForm() {
+    this.alertForm.reset({
+      hasType: '',
+      minPrice: null,
+      maxrice: null,
+      roomMin: 1,
+      bedroomMin: 1,
+      surfaceMin: null,
+      surfaceMax: null,
+      advantages: {
         has_balcony: false,
-        has_terrace: false,
-        has_parking: false,
         has_box: false,
         has_cellar: false,
-      });
+        has_elevator: false,
+        has_parking: false,
+        has_terrace: false,
+      },
+      locations: [],
+    });
   }
 
   previousPage() {
