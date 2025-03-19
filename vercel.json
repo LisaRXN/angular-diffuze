@@ -4,11 +4,12 @@
     "name": "diffuze",
     "devCommand": "node dist/diffuze/server/server.mjs",
     "rewrites": [
+      { "source": "/sitemap.xml", "destination": "/api/sitemap" },
       { "source": "/(.*)", "destination": "/api" }
     ],
     "functions": {
-      "api/index.ts": {
+      "api/index.js": {
         "includeFiles": "dist/diffuze/**"
+      }
     }
-  }
 }
