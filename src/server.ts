@@ -8,9 +8,12 @@ import express from 'express';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { sitemapHandler } from '../sitemapHandler';
+
+// Déterminer les chemins de dossiers
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
 const browserDistFolder = resolve(serverDistFolder, '../browser');
 
+// Créer l'application Express
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
@@ -55,3 +58,8 @@ if (isMainModule(import.meta.url)) {
  * The request handler used by the Angular CLI (dev-server and during build).
  */
 export const reqHandler = createNodeRequestHandler(app);
+
+/**
+ * Export the Express app for Vercel serverless deployment
+ */
+export default app;
