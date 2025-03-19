@@ -3,7 +3,6 @@
     "public": true,
     "name": "diffuze",
     "rewrites": [
-        { "source": "/sitemap.xml", "destination": "/api/sitemap.xml" },
       { "source": "/(.*)", "destination": "/api" }
     ],
     "functions": {
