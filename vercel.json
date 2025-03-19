@@ -2,16 +2,13 @@
     "version": 2,
     "public": true,
     "name": "diffuze",
+    "devCommand": "node dist/diffuze/server/server.mjs",
     "rewrites": [
-      { "source": "/sitemap.xml", "destination": "/api/sitemap.xml.js" },
       { "source": "/(.*)", "destination": "/api" }
     ],
     "functions": {
-      "api/index.js": {
+      "api/index.ts": {
         "includeFiles": "dist/diffuze/**"
-    },
-    "api/sitemap.xml.js": {
-      "includeFiles": "dist/diffuze/**"
     }
   }
 }

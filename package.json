@@ -7,9 +7,7 @@
     "start": "node dist/diffuze/server/server.mjs",
     "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "postinstall": ""
-
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
