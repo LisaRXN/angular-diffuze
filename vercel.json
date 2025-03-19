@@ -9,9 +9,8 @@
       "api/index.js": {
         "includeFiles": "dist/diffuze/**"
       },
-      "api/sitemap.xml": {
-        "includeFiles": "sitemapHandler.ts"
+      "api/sitemap.js": {
+        "includeFiles": "dist/diffuze/**"
       }
-
     }
-  }
+}

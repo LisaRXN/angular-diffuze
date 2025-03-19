@@ -1,5 +1,4 @@
-// La méthode d'importation originale n'est pas correcte
-// Voici une version corrigée :
+const express = require("express");
 const { app } = require("../dist/diffuze/server/server.mjs");
 
 // Exportez l'application pour que Vercel puisse l'utiliser
