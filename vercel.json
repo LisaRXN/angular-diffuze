@@ -6,8 +6,11 @@
       { "source": "/(.*)", "destination": "/api" }
     ],
     "functions": {
-      "api/index.js": {
+      "api/index.mjs": {
         "includeFiles": "dist/diffuze/**"
+      },
+      "api/*.mjs": {
+        "runtime": "nodejs18"
       }
     }
 }
