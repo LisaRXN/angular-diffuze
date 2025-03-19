@@ -1,4 +1,4 @@
-import { SitemapStream, streamToPromise } from 'sitemap';
+const { SitemapStream, streamToPromise } = require('sitemap');
 import { Request, Response } from 'express';
 
 interface UrlData {
