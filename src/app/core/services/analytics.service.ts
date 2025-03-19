@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
+import { isPlatformBrowser } from '@angular/common';
 
 declare const gtag: Function;
 
@@ -12,16 +13,24 @@ export class AnalyticsService {
   private gaId = 'G-7GQN9G60FD';
   private isInitialized = false;
   private consentGranted = false;
+  private isBrowser: boolean;
 
-  constructor(private router: Router) {
-    // Initialiser GA uniquement en production
-    if (environment.production) {
+  constructor(
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+
+    // Initialiser GA uniquement en production et dans un navigateur
+    if (environment.production && this.isBrowser) {
       this.initializeGoogleAnalytics();
     }
   }
 
   private initializeGoogleAnalytics() {
     try {
+      if (!this.isBrowser) return;
+
       // Ajouter le script GA
       const script1 = document.createElement('script');
       script1.async = true;
