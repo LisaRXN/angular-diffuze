@@ -5,14 +5,12 @@
   "scripts": {
     "ng": "ng",
     "start": "node dist/diffuze/server/server.mjs",
-    "build": "ng build --configuration production && ng run diffuze:server:production",
-    "build:ssr": "ng build --configuration production",
-    "postinstall": "",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:diffuze": "node dist/diffuze/server/server.mjs"
+    "postinstall": ""
+
   },
-  
   "private": true,
   "dependencies": {
     "@angular/animations": "^19.0.0",

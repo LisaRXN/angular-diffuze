@@ -2,7 +2,7 @@ import { PrerenderFallback, RenderMode, ServerRoute } from '@angular/ssr';
 import { inject } from '@angular/core';
 import { PrerenderService } from './core/services/prerender.service';
 import { ArticleGateway } from './core/ports/article.gateway';
-
+import { sitemapHandler } from '../../sitemapHandler';
 export const serverRoutes: ServerRoute[] = [
   {
     path: '', // Page d'accueil
@@ -16,6 +16,7 @@ export const serverRoutes: ServerRoute[] = [
     path: 'nos-partenaires',
     renderMode: RenderMode.Prerender,
   },
+
   {
     path: 'blog/:url', // Articles de blog en SSG avec paramètres
     renderMode: RenderMode.Prerender, // SSG avec paramètres dynamiques
