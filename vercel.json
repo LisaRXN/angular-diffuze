@@ -3,11 +3,15 @@
     "public": true,
     "name": "diffuze",
     "rewrites": [
+      { "source": "/sitemap.xml", "destination": "/api/sitemap.xml.js" },
       { "source": "/(.*)", "destination": "/api" }
     ],
     "functions": {
       "api/index.js": {
         "includeFiles": "dist/diffuze/**"
-      }
+    },
+    "api/sitemap.xml.js": {
+      "includeFiles": "dist/diffuze/**"
     }
+  }
 }
