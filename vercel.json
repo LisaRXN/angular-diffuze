@@ -2,7 +2,7 @@
     "builds": [
       {
         "src": "angular.json",
-        "use": "@angular/ssr"
+          "use": "@vercel/angular"
       }
     ],
     "routes": [
