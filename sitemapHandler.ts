@@ -100,4 +100,4 @@ async function sitemapHandler(req: Request, res: Response): Promise<void> {
   }
 }
 
-export { sitemapHandler };
+module.exports = { sitemapHandler };
