@@ -4,7 +4,6 @@
   "main": "dist/diffuze/server/server.mjs",
   "scripts": {
     "ng": "ng",
-    "vercel-build": "npm run build:ssr && node dist/diffuze/server/server.mjs",
     "start": "node dist/diffuze/server/server.mjs",
     "build": "ng build",
     "build:ssr": "ng build --configuration production",
@@ -13,6 +12,7 @@
     "test": "ng test",
     "serve:ssr:diffuze": "node dist/diffuze/server/server.mjs"
   },
+  
   "private": true,
   "dependencies": {
     "@angular/animations": "^19.0.0",
