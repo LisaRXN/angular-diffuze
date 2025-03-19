@@ -3,7 +3,7 @@ let app;
 
 async function initApp() {
   try {
-    const serverModule = await import("./dist/diffuze/server/server.mjs");
+    const serverModule = await import("../dist/diffuze/server/server.mjs");
     app = serverModule.app;
     return app;
   } catch (error) {
