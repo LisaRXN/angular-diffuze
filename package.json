@@ -7,7 +7,7 @@
     "start": "node dist/diffuze/server/server.mjs",
     "build": "ng build",
     "build:ssr": "ng build --configuration production",
-    "postinstall": "npm run build:ssr && serve:ssr:diffuze",
+    "postinstall": "npm run build:ssr && npm run serve:ssr:diffuze",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:diffuze": "node dist/diffuze/server/server.mjs"
