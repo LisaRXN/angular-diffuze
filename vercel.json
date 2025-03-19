@@ -1,0 +1,14 @@
+{
+    "builds": [
+      {
+        "src": "angular.json",
+        "use": "@angular/ssr"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "dist/diffuze/server/server.mjs"
+      }
+    ]
+  }

@@ -11,7 +11,7 @@ import { sitemapHandler } from '../sitemapHandler';
 
 // Déterminer les chemins de dossiers
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
-const browserDistFolder = resolve(serverDistFolder, '../server');
+const browserDistFolder = resolve(serverDistFolder, '../browser');
 
 // Créer l'application Express
 const app = express();
