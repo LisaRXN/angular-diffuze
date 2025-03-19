@@ -5,8 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "node dist/diffuze/server/server.mjs",
-    "build": "ng build --configuration production --server",
-    "build:ssr": "ng build --configuration production --server",
+    "build": "ng build --configuration production ",
+    "build:ssr": "ng build --configuration production ",
     "postinstall": "",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
