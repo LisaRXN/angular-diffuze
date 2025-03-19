@@ -17,23 +17,6 @@ const angularApp = new AngularNodeAppEngine();
 // **Sitemap**
 app.get('/sitemap.xml', sitemapHandler);
 
-// **Redirection 301**
-/*  app.get("/guide/quel-apport-achat-immobilier-2023", (req, res) => {
-    res.redirect(301, "/guide/quel-apport-achat-immobilier");
-  });
- */
-/**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/**', (req, res) => {
- *   // Handle API request
- * });
- * ```
- */
-
 /**
  * Serve static files from /browser
  */

@@ -15,11 +15,6 @@ export const serverRoutes: ServerRoute[] = [
   {
     path: 'blog/:url', // Articles de blog en SSG avec paramètres
     renderMode: RenderMode.Prerender, // SSG avec paramètres dynamiques
-    // async getPrerenderParams() {
-    //   const prerenderService = inject(PrerenderService);
-    //   const articleIds = await prerenderService.getArticleIds();
-    //   return articleIds.map((id) => ({ id }));
-    // },
     async getPrerenderParams() {
       const articleGateway = inject(ArticleGateway);
       const articleIds = await articleGateway.getArticleUrls();
