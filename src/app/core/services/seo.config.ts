@@ -14,7 +14,7 @@ export const SEO_CONFIG: RouteSeoConfig = {
     ogTitle: 'Diffuze - Maîtrisez vos coûts de diffusion immobilière​',
     ogDescription:
       'Découvrez Diffuze, votre partenaire pour booster la visibilité de vos annonces immobilières sur plus de 50 plateformes, sans abonnement ni engagement.​',
-    ogImage: 'https://www.diffuze.fr/assets/img/photo/banniere.jpg',
+    ogImage: 'https://data.barnabe-immo.fr/img/google/paiement-immediat.jpeg',
     structuredData: {
       '@context': 'https://schema.org',
       '@graph': [
@@ -31,7 +31,10 @@ export const SEO_CONFIG: RouteSeoConfig = {
           },
           description:
             "Service de diffusion d'annonces immobilières sans abonnement pour les professionnels",
-          sameAs: ['https://www.linkedin.com/company/diffuze-immobilier'],
+          sameAs: [
+            'https://www.linkedin.com/company/diffuze-immobilier',
+            'https://www.instagram.com/diffuze.immo/',
+          ],
           contactPoint: {
             '@type': 'ContactPoint',
             contactType: 'customer service',
@@ -49,9 +52,8 @@ export const SEO_CONFIG: RouteSeoConfig = {
             '@id': 'https://www.diffuze.fr/',
           },
           potentialAction: {
-            '@type': 'SearchAction',
-            target: 'https://www.diffuze.fr/search?q={search_term_string}',
-            'query-input': 'required name=search_term_string',
+            '@type': 'UseAction',
+            target: 'https://www.diffuze.fr/notre-offre',
           },
         },
         {
@@ -156,7 +158,7 @@ export const SEO_CONFIG: RouteSeoConfig = {
       '@context': 'http://schema.org',
       '@type': 'Product',
       name: "Diffusion d'annonces immobilières - DiffuZe",
-      image: 'https://www.diffuze.fr/assets/img/photo/photo4.jpg',
+      image: 'https://data.barnabe-immo.fr/img/google/paiement-immediat.jpeg',
       description:
         'Un prestataire unique pour prendre en charge la diffusion de votre annonce sur les plus grands portails immobiliers, sans abonnement',
       offers: {
@@ -174,6 +176,8 @@ export const SEO_CONFIG: RouteSeoConfig = {
             availability: 'https://schema.org/InStock',
             priceValidUntil: '2030-01-01',
             url: 'https://www.diffuze.fr/notre-offre',
+            image:
+              'https://data.barnabe-immo.fr/img/google/paiement-immediat.jpeg',
             itemOffered: {
               '@type': 'Service',
               name: 'Diffusion paiement immédiat',
@@ -230,6 +234,8 @@ export const SEO_CONFIG: RouteSeoConfig = {
             availability: 'https://schema.org/InStock',
             priceValidUntil: '2030-01-01',
             url: 'https://www.diffuze.fr/notre-offre',
+            image:
+              'https://data.barnabe-immo.fr/img/google/paiement-comandat.jpeg',
             itemOffered: {
               '@type': 'Service',
               name: 'Diffusion paiement au succès',
@@ -459,13 +465,124 @@ export const SEO_CONFIG: RouteSeoConfig = {
           description:
             "Conseils, actualités et guides sur l'immobilier pour les professionnels",
           url: 'https://www.diffuze.fr/blog/',
-          sameAs: ['https://www.linkedin.com/company/diffuze-immobilier'],
+          sameAs: [
+            'https://www.linkedin.com/company/diffuze-immobilier',
+            'https://www.instagram.com/diffuze.immo/',
+          ],
           publisher: {
             '@id': 'https://www.diffuze.fr/',
           },
         },
       ],
     },
+  },
+  '/annonces': {
+    title: 'Annonces Immobilières - Trouvez votre bien idéal avec Diffuze',
+    description:
+      "Explorez notre sélection d'annonces immobilières de qualité, publiées par des professionnels de l'immobilier partenaires de Diffuze. Trouvez votre prochain bien facilement.",
+    keywords:
+      'annonces immobilières, recherche immobilière, biens à vendre, biens à louer, immobilier, DiffuZe',
+    ogTitle: 'Annonces Immobilières - Trouvez votre bien idéal | Diffuze',
+    ogDescription:
+      "Explorez notre sélection d'annonces immobilières de qualité. Filtrez par type, prix, localisation et trouvez le bien qui répond à vos attentes.",
+    structuredData: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'WebPage',
+          '@id': 'https://www.diffuze.fr/annonces/',
+          url: 'https://www.diffuze.fr/annonces/',
+          name: 'Annonces Immobilières - Trouvez votre bien idéal | Diffuze',
+          description:
+            "Recherchez parmi nos annonces immobilières de qualité, publiées par des professionnels de l'immobilier partenaires",
+          isPartOf: {
+            '@id': 'https://www.diffuze.fr/',
+          },
+          breadcrumb: {
+            '@id': 'https://www.diffuze.fr/annonces/#breadcrumb',
+          },
+        },
+        {
+          '@type': 'BreadcrumbList',
+          '@id': 'https://www.diffuze.fr/annonces/#breadcrumb',
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Accueil',
+              item: 'https://www.diffuze.fr/',
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Annonces Immobilières',
+              item: 'https://www.diffuze.fr/annonces/',
+            },
+          ],
+        },
+        {
+          '@type': 'SearchResultsPage',
+          '@id': 'https://www.diffuze.fr/annonces/#searchresults',
+          about: {
+            '@type': 'RealEstateListing',
+            name: 'Annonces immobilières',
+          },
+          mainContentOfPage: {
+            '@type': 'WebPageElement',
+            isPartOf: {
+              '@id': 'https://www.diffuze.fr/annonces/',
+            },
+          },
+          potentialAction: {
+            '@type': 'SearchAction',
+            target: {
+              '@type': 'EntryPoint',
+              urlTemplate:
+                'https://www.diffuze.fr/annonces/?q={search_term_string}',
+            },
+            'query-input': 'required name=search_term_string',
+          },
+        },
+        {
+          '@type': 'ItemList',
+          '@id': 'https://www.diffuze.fr/annonces/#listings',
+          name: 'Annonces immobilières disponibles',
+          description: 'Liste des biens immobiliers à vendre ou à louer',
+          numberOfItems: '{{dynamicNumberOfItems}}',
+          itemListOrder: 'https://schema.org/ItemListOrderDescending',
+        },
+        {
+          '@type': 'FAQPage',
+          mainEntity: [
+            {
+              '@type': 'Question',
+              name: "Comment filtrer mes recherches d'annonces immobilières ?",
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Vous pouvez filtrer vos recherches par type de bien (appartement, maison, terrain), par prix, par surface, par nombre de pièces et par localisation pour trouver facilement le bien qui correspond à vos critères.',
+              },
+            },
+            {
+              '@type': 'Question',
+              name: 'Les annonces sont-elles vérifiées ?',
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: "Oui, toutes nos annonces sont publiées par des professionnels de l'immobilier partenaires de Diffuze. La qualité et la véracité des informations sont vérifiées avant publication.",
+              },
+            },
+            {
+              '@type': 'Question',
+              name: "Comment contacter l'agent immobilier pour une annonce ?",
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: "Sur la page détaillée de chaque annonce, vous trouverez les coordonnées de l'agent immobilier en charge du bien, ainsi qu'un formulaire de contact pour demander plus d'informations ou organiser une visite.",
+              },
+            },
+          ],
+        },
+      ],
+    },
+    ogImage: 'https://data.barnabe-immo.fr/img/google/paiement-immediat.jpeg',
   },
   '/nos-partenaires': {
     title:
@@ -550,7 +667,7 @@ export const SEO_CONFIG: RouteSeoConfig = {
                 name: "Diffusion d'annonces immobilières",
               },
               reviewBody:
-                'Simple, rapide et efficace. Tout ce qu’on attend d’un bon service de diffusion d’annonces immobilières ! Je recommande sans hésitation.',
+                "Simple, rapide et efficace. Tout ce qu'on attend d'un bon service de diffusion d'annonces immobilières ! Je recommande sans hésitation.",
             },
             {
               '@type': 'Review',
@@ -568,7 +685,7 @@ export const SEO_CONFIG: RouteSeoConfig = {
                 name: "Diffusion d'annonces immobilières",
               },
               reviewBody:
-                'Une solution parfaite pour les agences souhaitant optimiser leur budget tout en bénéficiant d’une visibilité sur les plus grands portails. Bravo pour cette initiative !',
+                "Une solution parfaite pour les agences souhaitant optimiser leur budget tout en bénéficiant d'une visibilité sur les plus grands portails. Bravo pour cette initiative !",
             },
           ],
         },
