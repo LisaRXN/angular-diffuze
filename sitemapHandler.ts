@@ -1,4 +1,4 @@
-const { SitemapStream, streamToPromise } = require('sitemap');
+import { SitemapStream, streamToPromise } from 'sitemap';
 import { Request, Response } from 'express';
 
 interface UrlData {
@@ -100,4 +100,4 @@ async function sitemapHandler(req: Request, res: Response): Promise<void> {
   }
 }
 
-module.exports = { sitemapHandler };
+export { sitemapHandler };
