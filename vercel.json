@@ -2,12 +2,11 @@
     "version": 2,
     "public": true,
     "name": "diffuze",
-    "devCommand": "node dist/diffuze/server/main.server.mjs",
     "rewrites": [
       { "source": "/(.*)", "destination": "/api" }
     ],
     "functions": {
-      "api/index.mjs": {
+      "api/index.js": {
         "includeFiles": "dist/diffuze/**"
       }
     }
