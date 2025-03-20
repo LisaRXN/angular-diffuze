@@ -3,6 +3,7 @@ import { Property } from '../../models/property.model';
 import { FetchAdResponse, FetchPropertiesResponse, PropertyGateway } from '../../ports/property.gateway';
 import { inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ContactDetails } from '../../models/contactDetails';
 
 
 export class HttpPropertyGateway extends PropertyGateway {
@@ -32,5 +33,14 @@ export class HttpPropertyGateway extends PropertyGateway {
     return this.http.get<FetchAdResponse>(
       `https://data.barnabe-immo.fr/api/properties/getAll?${params.toString()}`
     );
+  }
+  
+  override fetchPropertyById(propertyId: string): Observable<Property> {
+    return this.http.get<Property>(`https://data.barnabe-immo.fr/api/properties/id/${propertyId}`)
+  }
+
+  override sendPropertyInquiry(contactDetails: ContactDetails): Observable<any> {
+    console.log('message send', contactDetails)
+    return this.http.post('/', contactDetails)
   }
 }

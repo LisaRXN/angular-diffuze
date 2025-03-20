@@ -49,6 +49,14 @@ interface DPE {
     in_charge: number;
     specific_num: string;
   }
+
+  interface Valuation {
+      id: number;
+      token: string;
+      low: number;
+      mid: number;
+      high: number;
+  }
   
   interface Media {
     images: { 
@@ -95,6 +103,7 @@ interface DPE {
     addressForm: Address;
     advantages: Advantages;
     contact: Contact;
+    valuation?:Valuation;
     media: Media;
     settings: Settings;
   }

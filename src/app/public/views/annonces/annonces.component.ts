@@ -19,7 +19,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { GoogleMap, MapAdvancedMarker,MapMarkerClusterer } from '@angular/google-maps';
+import { GoogleMapsModule } from '@angular/google-maps';
+import {
+  GoogleMap,
+  MapAdvancedMarker,
+  MapMarkerClusterer,
+} from '@angular/google-maps';
 import { debounceTime, map, Observable, switchMap } from 'rxjs';
 import {
   FetchAdResponse,
@@ -39,9 +44,9 @@ import {
 } from '@angular/animations';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertGateway } from '../../../core/ports/alert.gateway';
-import { RouterLink, Router } from "@angular/router";
-
-
+import { RouterLink, Router } from '@angular/router';
+import { MapPricePipe } from '../../../pipes/mapPrice/map-price.pipe';
+import { WindowService } from '../../../core/services/window.service';
 
 @Component({
   selector: 'app-annonces',
@@ -50,10 +55,10 @@ import { RouterLink, Router } from "@angular/router";
     ReactiveFormsModule,
     FormsModule,
     GoogleMap,
-    MapMarkerClusterer,
-    MapAdvancedMarker,
+    GoogleMapsModule,
     AdCardComponent,
-    RouterLink
+    RouterLink,
+    MapPricePipe,
   ],
   templateUrl: './annonces.component.html',
   styleUrl: './annonces.component.scss',
@@ -74,11 +79,13 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
   @ViewChild('modal') modalRef!: ElementRef;
   @ViewChild('alertCheckbox') alertCheckboxRef!: ElementRef<HTMLInputElement>;
   @ViewChild('filterCheckbox') filterCheckboxRef!: ElementRef<HTMLInputElement>;
+  @ViewChild('mapContainer') mapContainerRef!: ElementRef;
 
   private alertGateway = inject(AlertGateway);
   private ngZone = inject(NgZone);
+  private propertyGateway = inject(PropertyGateway);
+  private WindowService = inject(WindowService)
 
-  propertyGateway = inject(PropertyGateway);
   properties$!: Observable<Property[]>;
   properties: Property[] = [];
   displayedProperties: Property[] = [];
@@ -93,10 +100,10 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
   localization = signal<string[]>([]);
   propertyType = signal('');
   transactionType = signal('selling');
-  minPrice = signal(0);
-  maxPrice = signal(Infinity);
-  minSurface = signal(0);
-  maxSurface = signal(Infinity);
+  minPrice = signal(null);
+  maxPrice = signal(null);
+  minSurface = signal(null);
+  maxSurface = signal(null);
 
   search = computed(() => ({
     page: this.currentPage(),
@@ -153,8 +160,10 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m';
   iconConfig = {
     url: 'assets/img/icon/rectangle.png',
-    scaledSize: new google.maps.Size(60, 20)
+    scaledSize: new google.maps.Size(60, 30),
   };
+  isDesktop:boolean = true
+  openMap:boolean = false
 
   ngOnInit() {
     this.filteredProperties$.subscribe((fetchAdResponse) => {
@@ -165,6 +174,8 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     });
 
     this.changeSortingType();
+
+    this.isDesktop = this.WindowService.isDesktop()
   }
 
   ngAfterViewInit() {
@@ -180,7 +191,7 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
   }
 
   ngOnDestroy() {
-    document.body.style.overflow = ''; 
+    document.body.style.overflow = '';
   }
   clearSelected() {
     this.selectedProperty = null;
@@ -386,10 +397,10 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     this.localization.set([]);
     this.propertyType.set('');
     this.transactionType.set('');
-    this.minPrice.set(0);
-    this.maxPrice.set(Infinity);
-    this.minSurface.set(0);
-    this.maxSurface.set(Infinity);
+    this.minPrice.set(null);
+    this.maxPrice.set(null);
+    this.minSurface.set(null);
+    this.maxSurface.set(null);
   }
 
   onSubmitAlert() {

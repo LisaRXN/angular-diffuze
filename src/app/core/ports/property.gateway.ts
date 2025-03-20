@@ -1,5 +1,6 @@
 import { Observable } from "rxjs";
 import { Property } from "../models/property.model";
+import { ContactDetails } from "../models/contactDetails";
 
 export interface FetchPropertiesResponse {
     properties: Property[];
@@ -23,4 +24,7 @@ export abstract class PropertyGateway {
 
     abstract fetchFilteredProperties(filters:any):Observable<FetchAdResponse>
 
+    abstract fetchPropertyById(propertyId:string):Observable<Property>
+
+    abstract sendPropertyInquiry(contactDetails: ContactDetails):Observable<any>
 }

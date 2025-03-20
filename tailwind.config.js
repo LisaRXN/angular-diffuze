@@ -5,6 +5,61 @@ module.exports = {
     extend: {
       colors: {
         // Définition des couleurs principales
+        // dpeA:"#1FC3AC",
+        // dpeB:"#6BDCCE",
+        // dpeC:"#CDF3EF",
+        // dpeD:"#FEE4AC",
+        // dpeE:"#FECAAD",
+        // dpeF:"#FCCAD3",
+        // dpeG:"#F7718A",
+        // gesA:"#EFF3FF",
+        // gesB:"#DDE5FC",
+        // gesC:"#CCD7FB",
+        // gesD:"#A8BCF8",
+        // gesE:"#86A1F6",
+        // gesF:"#7594F5",
+        // gesG:"#537AF3",
+        dpeA: "#1FC3AC", 
+        dpeADark: "#1A9F8D", 
+      
+        dpeB: "#6BDCCE", 
+        dpeBDark: "#58B8AD", 
+      
+        dpeC: "#CDF3EF", 
+        dpeCDark: "#A3DBD9", 
+      
+        dpeD: "#FEE4AC", 
+        dpeDDark: "#E5C98D", 
+      
+        dpeE: "#FECAAD", 
+        dpeEDark: "#E6B093", 
+      
+        dpeF: "#FCCAD3", 
+        dpeFDark: "#E0A9B5", 
+      
+        dpeG: "#F7718A", 
+        dpeGDark: "#D65E75", 
+      
+        gesA: "#EFF3FF", 
+        gesADark: "#D8E0F0", 
+      
+        gesB: "#DDE5FC", 
+        gesBDark: "#C2D1F0", 
+      
+        gesC: "#CCD7FB", 
+        gesCDark: "#AABBE3", 
+      
+        gesD: "#A8BCF8", 
+        gesDDark: "#869EDC", 
+      
+        gesE: "#86A1F6", 
+        gesEDark: "#6B86D6", 
+      
+        gesF: "#7594F5", 
+        gesFDark: "#5D79D0", 
+      
+        gesG: "#537AF3", 
+        gesGDark: "#4060CF",
         primary: "#00007A",
         secondary: "#FB9031",
         accent: "#FF4081",
@@ -15,6 +70,7 @@ module.exports = {
         error: "#F87272",
         myyellow1: "#FFDE59",
         myyellow2: "#FAF3D4",
+        myyellow3: "#EDBE00",
         mygrey1: "#282828",
         mygrey2: "#494949",
         mygrey3: "#717171",

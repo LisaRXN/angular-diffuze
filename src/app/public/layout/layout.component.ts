@@ -30,8 +30,9 @@ export class LayoutComponent {
   }
 
   isAnnoncesPage(): boolean {
-    return this.router.url.startsWith('/annonces'); 
+    return this.router.url === '/annonces';
   }
+  
 
 
 

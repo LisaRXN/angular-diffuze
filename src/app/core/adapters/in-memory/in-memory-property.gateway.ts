@@ -1,6 +1,7 @@
 import { FetchAdResponse, PropertyGateway } from '../../ports/property.gateway';
 import { Property } from '../../models/property.model';
 import { Observable, of, take } from 'rxjs';
+import { ContactDetails } from '../../models/contactDetails';
 
 export class InMemoryPropertyGateway extends PropertyGateway {
   
@@ -10,6 +11,14 @@ export class InMemoryPropertyGateway extends PropertyGateway {
   }
 
   override fetchFilteredProperties(filters: any): Observable<FetchAdResponse> {
+    return of()
+  }
+
+  override fetchPropertyById(propertyId: string): Observable<Property> {
+    return of()
+  }
+
+  override sendPropertyInquiry(contactDetails: ContactDetails){
     return of()
   }
 

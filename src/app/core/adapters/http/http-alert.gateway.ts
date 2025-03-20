@@ -9,7 +9,7 @@ export class HttpAlertGateway extends AlertGateway {
   http = inject(HttpClient);
 
   override createAlert(filters:alertFilters): Observable<any> {
-    return this.http.post(environment.apiURL + `/alertes/`, alert, {
+    return this.http.post(environment.apiURL + `/alertes/`, filters, {
       observe: 'response',
     }) 
   }
