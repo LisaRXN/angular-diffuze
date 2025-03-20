@@ -15,7 +15,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular/build:application",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/diffuze",
             "index": "src/index.html",
@@ -111,7 +111,7 @@
           }
         },
         "server": {
-          "builder": "@angular/build:server",
+          "builder": "@angular-devkit/build-angular:server",
           "options": {
             "outputPath": "dist/diffuze/server",
             "main": "src/server.ts",
