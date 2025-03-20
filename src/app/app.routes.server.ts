@@ -3,6 +3,7 @@ import { inject } from '@angular/core';
 import { PrerenderService } from './core/services/prerender.service';
 import { ArticleGateway } from './core/ports/article.gateway';
 import { sitemapHandler } from '../../sitemapHandler';
+import { map } from 'rxjs';
 export const serverRoutes: ServerRoute[] = [
   {
     path: '', // Page d'accueil
@@ -16,14 +17,26 @@ export const serverRoutes: ServerRoute[] = [
     path: 'nos-partenaires',
     renderMode: RenderMode.Prerender,
   },
-
   {
-    path: 'blog/:url', // Articles de blog en SSG avec paramètres
+    path: 'conditions-generales',
+    renderMode: RenderMode.Prerender,
+  },
+  {
+    path: 'protection-des-donnees',
+    renderMode: RenderMode.Prerender,
+  },
+  /* {
+    path: 'annonces',
+    renderMode: RenderMode.Client,
+  }, */
+  {
+    path: 'blog/:slug', // Articles de blog en SSG avec paramètres
     renderMode: RenderMode.Prerender, // SSG avec paramètres dynamiques
     async getPrerenderParams() {
       const articleGateway = inject(ArticleGateway);
-      const articleIds = await articleGateway.getArticleUrls();
-      return articleIds.map((url) => ({ url }));
+      const articleUrls = await articleGateway.getArticleUrls();
+      console.log('articleUrls', articleUrls);
+      return articleUrls.map((item) => ({ slug: item.url }));
     },
     fallback: PrerenderFallback.Server, // Si l'article n'existe pas en SSG, utiliser SSR
   },
