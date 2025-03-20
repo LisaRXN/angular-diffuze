@@ -49,6 +49,7 @@ export const routes: Routes = [
             (m) => m.ReviewComponent
           ),
       },
+
       // {
       //   path: 'annonces',
       //   loadComponent: () =>

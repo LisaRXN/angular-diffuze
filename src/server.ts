@@ -8,31 +8,17 @@ import express from 'express';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { sitemapHandler } from '../sitemapHandler';
+
+// Déterminer les chemins de dossiers
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
 const browserDistFolder = resolve(serverDistFolder, '../browser');
 
+// Créer l'application Express
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
 // **Sitemap**
-app.get('/sitemap.xml', sitemapHandler);
-
-// **Redirection 301**
-/*  app.get("/guide/quel-apport-achat-immobilier-2023", (req, res) => {
-    res.redirect(301, "/guide/quel-apport-achat-immobilier");
-  });
- */
-/**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/**', (req, res) => {
- *   // Handle API request
- * });
- * ```
- */
+/* app.get('/sitemap.xml', sitemapHandler); */
 
 /**
  * Serve static files from /browser
@@ -72,3 +58,8 @@ if (isMainModule(import.meta.url)) {
  * The request handler used by the Angular CLI (dev-server and during build).
  */
 export const reqHandler = createNodeRequestHandler(app);
+
+/**
+ * Export the Express app for Vercel serverless deployment
+ */
+export { app };

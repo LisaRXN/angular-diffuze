@@ -4,23 +4,15 @@ import { Article, Categories } from '../models/article.models';
 import { Type } from '../models/article.models';
 
 export abstract class ArticleGateway {
-
   private articles: Article[] = [];
 
   categories: Categories = {
-    1: "guide-immo",
-    2: "acteurs-immo",
-    3: "actualite-immobiliere",
-  }
+    1: 'guide-immo',
+    2: 'acteurs-immo',
+    3: 'actualite-immobiliere',
+  };
 
-  // Méthode utilisée par app.routes.server.ts
-  async getArticleIds(): Promise<number[]> {
-    return this.articles.map((article) => article.id);
-  }
-  // Méthode utilisée par app.routes.server.ts
-  async getArticleUrls(): Promise<string[]> {
-    return this.articles.map((article) => article.url);
-  }
+  abstract getArticleUrls(): Promise<any[]>;
 
   abstract getArticles(): Observable<Article[]>;
 
@@ -34,8 +26,7 @@ export abstract class ArticleGateway {
 
   abstract getLastArticlesByType(): Observable<Article[][]>;
 
-  abstract getSlugCategory(id:number): string;
+  abstract getSlugCategory(id: number): string;
 
-  abstract getIdCategory(slug:string): number;
-
+  abstract getIdCategory(slug: string): number;
 }
