@@ -10,7 +10,6 @@
     "test": "ng test"
   },
   "private": true,
-  "type": "module",
   "dependencies": {
     "@angular/animations": "^19.0.0",
     "@angular/cdk": "^19.1.5",
