@@ -7,7 +7,9 @@
       ]
     },
     "files": [
-      "src/main.server.ts"
+      "src/main.server.ts",
+      "src/server.ts" ,
+      "src/main.ts",
     ],
     
 }
