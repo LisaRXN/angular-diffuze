@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node dist/diffuze/server/main.server.mjs",
-    "build": "ng build --configuration production && ng run diffuze:server",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
