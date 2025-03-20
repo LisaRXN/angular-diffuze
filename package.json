@@ -1,10 +1,10 @@
 {
   "name": "diffuze",
   "version": "0.0.0",
-  "main": "dist/diffuze/server/server.mjs",
+  "main": "dist/diffuze/server/main.server.mjs",
   "scripts": {
     "ng": "ng",
-    "start": "node dist/diffuze/server/server.mjs",
+    "start": "node dist/diffuze/server/main.server.mjs",
     "build": "ng build --configuration production && ng run diffuze:server",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

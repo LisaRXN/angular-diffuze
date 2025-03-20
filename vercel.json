@@ -2,7 +2,7 @@
     "version": 2,
     "public": true,
     "name": "diffuze",
-    "devCommand": "node dist/diffuze/server/server.mjs",
+    "devCommand": "node dist/diffuze/server/main.server.mjs",
     "rewrites": [
       { "source": "/(.*)", "destination": "/api" }
     ],
