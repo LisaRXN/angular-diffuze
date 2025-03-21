@@ -31,13 +31,13 @@ export const serverRoutes: ServerRoute[] = [
   }, */
   {
     path: 'blog/:slug', // Articles de blog en SSG avec paramètres
-    renderMode: RenderMode.Prerender, // SSG avec paramètres dynamiques
-    async getPrerenderParams() {
+    renderMode: RenderMode.Client, // SSG avec paramètres dynamiques
+    /* async getPrerenderParams() {
       const articleGateway = inject(ArticleGateway);
       const articleUrls = await articleGateway.getArticleUrls();
       return articleUrls.map((item) => ({ slug: item.url }));
     },
-    fallback: PrerenderFallback.Server, // Si l'article n'existe pas en SSG, utiliser SSR
+    fallback: PrerenderFallback.Server, */ // Si l'article n'existe pas en SSG, utiliser SSR
   },
   {
     path: 'dashboard', // Dashboard en CSR (rendu côté client)
