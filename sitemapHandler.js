@@ -1,7 +1,6 @@
 const { SitemapStream, streamToPromise } = require("sitemap");
 const fs = require("fs");
 const path = require("path");
-const fetch = require("node-fetch"); // Pour Node.js < 18
 
 async function fetchUrls() {
   try {
