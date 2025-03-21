@@ -18,8 +18,8 @@ const app = express();
 const angularApp = new AngularNodeAppEngine();
 
 // **Sitemap**
-/* app.get('/sitemap.xml', sitemapHandler); */
-
+/*  app.get('/sitemap.xml', sitemapHandler);
+ */
 /**
  * Serve static files from /browser
  */
