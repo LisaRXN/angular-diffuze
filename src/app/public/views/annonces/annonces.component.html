@@ -144,7 +144,7 @@
       correspondant à vos critères
     </p>
     <div
-      class="flex flex-1 flex-col w-full lg:flex-row items-center justify-center gap-2 lg:gap-5"
+      class="flex flex-1 flex-col w-full lg:flex-row items-center justify-center gap-2 lg:gap-6"
     >
       <div
         class="flex-1 lg:flex-none w-full lg:w-auto order-3 lg:order-1 border border-mygrey4 hover:bg-transparent hover:border-mygrey2 transition duration-300 rounded-xl flex items-center justify-center gap-4 p-4"
@@ -168,11 +168,19 @@
       </div>
       <label
         for="my_modal_6"
-        class="btn text-[16px] font-normal bg-transparent text-mygrey1 border-mygrey4 order-1 hover:bg-transparent lg:order-2 w-full lg:w-auto flex-1 lg:flex-none transition duration-300"
+        class="btn relative text-[16px] font-normal bg-transparent text-mygrey1 order-1 hover:bg-transparent lg:order-2 w-full lg:w-auto flex-1 lg:flex-none transition duration-300"
+        [ngClass]="
+          selectedFiltersCount() > 0 ? 'border-mygrey1' : 'border-mygrey4'
+        "
       >
         <img src="assets/img/icon/filters.png" class="w-6 h-auto" alt="" />
-        Filtrer</label
-      >
+        Filtrer
+        <span
+          *ngIf="selectedFiltersCount() > 0"
+          class="text-sm absolute top-0 right-0 h-5 w-5 rounded-full bg-zinc-800 text-white transform translate-x-[50%] -translate-y-[50%]"
+          >{{ selectedFiltersCount() }}</span
+        >
+      </label>
       <label
         for="my_modal_7"
         class="btn text-[16px] font-normal text-mygrey1 border-none flex-1 lg:flex-none w-full lg:w-auto rounded-xl order-2 lg:order-3 bg-myyellow1 hover:border hover:bg-myyellow2 transition duration-300"
@@ -186,11 +194,11 @@
   <div
     *ngIf="!isDesktop"
     (click)="openMap = !openMap"
-    class="flex items-center justify-center gap-4 mb-5 w-full"
+    class="flex items-center justify-center gap-4 mb-5 w-full cursor-pointer"
   >
     <i class="fa-solid fa-location-dot"></i>
-    <p *ngIf="!openMap" class="underline">Afficher carte</p>
-    <p *ngIf="openMap" class="underline">Masquer carte</p>
+    <p *ngIf="!openMap" class="underline">Afficher la carte</p>
+    <p *ngIf="openMap" class="underline">Masquer la carte</p>
   </div>
 
   <!-- GOOGLE MAP -->
@@ -204,6 +212,8 @@
       >
         @for (property of displayedProperties; track property) {
         <app-ad-card
+          #propertyCard
+          [id]="property.id"
           [routerLink]="['/annonces/', property.id]"
           routerLinkActive="router-link-active"
           class="transform md:scale-90 lg:scale-100"
@@ -268,7 +278,7 @@
             #marker
             [position]="getPosition(property)"
             class="!text-white"
-            [label]="property.selling_price | mapPrice"
+            [label]="property.transaction_type === 'selling' ? (property.selling_price | mapPrice ) + ' €' : (property.rent_by_month + ' €')"
             [icon]="iconConfig"
             (mapClick)="displayOnMap(property)"
           ></map-marker>
@@ -283,28 +293,31 @@
 <!-- --------------------------------------------------------------------------------------------------------------------------------- -->
 
 <!-- FILTERS MODAL -->
-<input #filterChe type="checkbox" id="my_modal_6" class="modal-toggle" />
+<input #filterCheckbox type="checkbox" id="my_modal_6" class="modal-toggle" />
 <div class="modal" role="dialog" #modal>
   <div
-    class="modal-box bg-white text-mygrey1 max-h-5/6 h-5/6 lg:max-h-none lg:!w-5/6 lg:!max-w-full"
+    class="modal-box relative bg-white text-mygrey1 max-h-5/6 h-5/6 lg:max-h-none lg:!w-5/6 lg:!max-w-full !p-0"
   >
-    <!-- Modal header -->
-    <div class="modal-action absolute right-2 -top-4">
-      <label
-        for="my_modal_6"
-        class="py-1 px-2 sm:px-4 sm:py-2 bg-b-blue rounded-full cursor-pointer"
-      >
-        <i class="fa-solid fa-xmark"></i>
-      </label>
-    </div>
-    <!-- Modal body -->
-    <h3
-      class="text-xl font-semibold text-gray-900 self-center text-center w-full mb-5"
+    <!-- Modal Header -->
+    <div
+      class="z-10 sticky inset-0 w-full p-4 bg-white border-b border-zinc-100"
     >
-      Filtrer votre recherche
-    </h3>
+      <div class="modal-action absolute right-2 -top-4">
+        <label
+          for="my_modal_6"
+          class="py-1 px-2 sm:px-4 sm:py-2 bg-b-blue rounded-full cursor-pointer"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </label>
+      </div>
+      <h3
+        class="text-xl font-semibold text-gray-900 self-center text-center w-full"
+      >
+        Filtrer votre recherche
+      </h3>
+    </div>
     <!-- Localisation -->
-    <div class="p-2 md:p-10 flex flex-col gap-8 mb-10">
+    <div class="p-2 md:px-10 flex flex-col gap-8 mb-10">
       <section id="filter-localization">
         <p class="text-xl font-semibold pb-4">Localisation</p>
         <div
@@ -321,7 +334,7 @@
             class="z-20 flex items-center justify-start gap-2 flex-wrap"
           >
             <div
-              class="p-1 px-2 border border-mygrey3 rounded-lg flex items-center justify-center gap-1 text-[12px]"
+              class="p-1 px-2 border border-myyellow1 rounded-lg flex items-center justify-center gap-1 text-[12px]"
               *ngFor="let location of localization(); let i = index"
             >
               <p>{{ location }}</p>
@@ -349,7 +362,12 @@
                 type="number"
                 min="0"
                 placeholder="Votre buget minimum"
-                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                [ngClass]="
+                  minPrice() != null && minPrice() != ''
+                    ? 'border border-myyellow1'
+                    : 'border-none'
+                "
               />
               <span
                 class="absolute text-zinc-600 right-6 top-3 font-semibold text-sm"
@@ -368,7 +386,12 @@
                 type="number"
                 min="0"
                 placeholder="Votre buget maximum"
-                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                [ngClass]="
+                  maxPrice() != null && maxPrice() != ''
+                    ? 'border border-myyellow1'
+                    : 'border-none'
+                "
               />
               <span
                 class="absolute text-zinc-600 right-6 top-3 font-semibold text-sm"
@@ -395,7 +418,12 @@
                 type="number"
                 min="0"
                 placeholder="Surface minimum"
-                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                [ngClass]="
+                  minSurface() != null && minSurface() != ''
+                    ? 'border border-myyellow1'
+                    : 'border-none'
+                "
               />
               <span
                 class="absolute text-zinc-600 right-6 top-3 font-semibold text-sm"
@@ -414,7 +442,12 @@
                 type="number"
                 min="0"
                 placeholder="Surface maximum"
-                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                [ngClass]="
+                  maxSurface() != null && maxSurface() != ''
+                    ? 'border border-myyellow1'
+                    : 'border-none'
+                "
               />
               <span
                 class="absolute text-zinc-600 right-6 top-3 font-semibold text-sm"
@@ -482,10 +515,10 @@
         <p class="text-xl font-semibold pb-4">Type de logements</p>
         <div class="flex flex-wrap items-center gap-4">
           <label
-            class="p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer"
+            class="p-4 border rounded-2xl hover:border-myyellow1 hover:border-2 cursor-pointer"
             [ngClass]="
               propertyType() === 'maison'
-                ? 'border-2 border-black'
+                ? 'border-2 border-myyellow1'
                 : 'border-mygrey3'
             "
           >
@@ -500,10 +533,10 @@
           </label>
 
           <label
-            class="p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer"
+            class="p-4 border rounded-2xl hover:border-myyellow1 hover:border-2 cursor-pointer"
             [ngClass]="
               propertyType() === 'appartement'
-                ? 'border-2 border-black'
+                ? 'border-2 border-myyellow1'
                 : 'border-mygrey3'
             "
           >
@@ -518,10 +551,10 @@
           </label>
 
           <label
-            class="p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer"
+            class="p-4 border rounded-2xl hover:border-myyellow1 hover:border-2 cursor-pointer"
             [ngClass]="
               propertyType() === 'loft'
-                ? 'border-2 border-black'
+                ? 'border-2 border-myyellow1'
                 : 'border-mygrey3'
             "
           >
@@ -631,19 +664,24 @@
         </div>
       </section> -->
     </div>
-    <div class="flex items-center justify-between w-full">
-      <button
-        (click)="removeFilters()"
-        class="rounded-lg p-4 hover:bg-zinc-100 font-semibold"
-      >
-        Réinitialiser
-      </button>
-      <label
-        for="my_modal_6"
-        class="btn rounded-lg p-4 lg:px-6 text-white bg-zinc-700 font-semibold hover:bg-zinc-900"
-      >
-        Voir {{ totalItems }} logements
-      </label>
+    <!-- Modal Footer -->
+    <div
+      class="sticky bg-white z-10 bottom-0 p-2 px-8 border-t border-zinc-100 shadow-xl overflow-hidden"
+    >
+      <div class="flex items-center justify-between w-full">
+        <button
+          (click)="removeFilters()"
+          class="rounded-lg p-4 hover:bg-zinc-100 font-semibold"
+        >
+          Réinitialiser
+        </button>
+        <label
+          for="my_modal_6"
+          class="btn rounded-lg p-4 lg:px-6 text-white bg-zinc-700 font-semibold hover:bg-zinc-900"
+        >
+          Voir {{ totalItems }} logements
+        </label>
+      </div>
     </div>
   </div>
 </div>
@@ -1033,7 +1071,7 @@
           </p>
           <div class="grid md:grid-cols-2 gap-4 w-full">
             <div class="w-full">
-              <label class="whitespace-nowrap block mb-2" for="lastName"
+              <label class="whitespace-nowrap block mb-2"
                 >Nom :<span class="required">*</span>
               </label>
               <input
@@ -1053,7 +1091,7 @@
               </p>
             </div>
             <div class="w-full">
-              <label class="whitespace-nowrap block mb-2" for="firstName"
+              <label class="whitespace-nowrap block mb-2"
                 >Prénom :<span class="required">*</span>
               </label>
               <input
@@ -1073,7 +1111,7 @@
               </p>
             </div>
             <div class="w-full">
-              <label class="whitespace-nowrap block mb-2" for="budget"
+              <label class="whitespace-nowrap block mb-2"
                 >Téléphone : <span class="required">*</span>
               </label>
               <input
@@ -1094,7 +1132,7 @@
               </p>
             </div>
             <div class="w-full">
-              <label class="whitespace-nowrap block mb-2" for="budget"
+              <label class="whitespace-nowrap block mb-2"
                 >Email<span class="required">*</span> :
               </label>
               <input

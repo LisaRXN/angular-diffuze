@@ -6,12 +6,13 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 export class MapPricePipe implements PipeTransform {
   transform(value: string): string {
-    if (parseFloat(value) < 1000) {
+    const valueNumber = parseFloat(value.replace(/\s/g, ''))
+    if (valueNumber < 1000) {
       return value;
-    } else if (parseFloat(value) >= 1000000) {
-      return parseFloat(value) / 1000000 + "M";
+    } else if (valueNumber >= 1000000) {
+      return valueNumber/ 1000000 + "M";
     } else {
-      return value.slice(0, -3) + "K";
+      return valueNumber/ 1000 + "K";
     }
   }
 }

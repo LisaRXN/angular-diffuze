@@ -7,8 +7,10 @@ import {
   inject,
   NgZone,
   OnInit,
+  QueryList,
   signal,
   ViewChild,
+  ViewChildren,
   viewChildren,
 } from '@angular/core';
 import {
@@ -25,13 +27,13 @@ import {
   MapAdvancedMarker,
   MapMarkerClusterer,
 } from '@angular/google-maps';
-import { debounceTime, map, Observable, switchMap } from 'rxjs';
+import { debounceTime, map, Observable, switchMap, tap } from 'rxjs';
 import {
   FetchAdResponse,
   PropertyGateway,
 } from '../../../core/ports/property.gateway';
 import { AdCardComponent } from './components/ad-card/ad-card.component';
-import { Ad, alertFilters, Filters } from '../../../core/models/ad.models';
+import { Ad, alertFilters } from '../../../core/models/ad.models';
 import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.component';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Advantages, Property } from '../../../core/models/property.model';
@@ -80,11 +82,12 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
   @ViewChild('alertCheckbox') alertCheckboxRef!: ElementRef<HTMLInputElement>;
   @ViewChild('filterCheckbox') filterCheckboxRef!: ElementRef<HTMLInputElement>;
   @ViewChild('mapContainer') mapContainerRef!: ElementRef;
+  @ViewChildren('propertyCard') propertiesCardRef!: QueryList<AdCardComponent>;
 
   private alertGateway = inject(AlertGateway);
   private ngZone = inject(NgZone);
   private propertyGateway = inject(PropertyGateway);
-  private WindowService = inject(WindowService)
+  private WindowService = inject(WindowService);
 
   properties$!: Observable<Property[]>;
   properties: Property[] = [];
@@ -116,10 +119,29 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     maxSurface: this.maxSurface(),
   }));
 
+  selectedFiltersCount = computed(() => {
+    const filters = this.search();
+    console.log(filters);
+    let count = 0;
+    Object.entries(filters).forEach(([key, value]) => {
+      if (
+        key !== 'page' &&
+        key !== 'transactionType' &&
+        value !== null &&
+        value !== '' &&
+        !(Array.isArray(value) && value.length === 0)
+      ) {
+        count++;
+      }
+    });
+    return count;
+  });
+
   filteredProperties$: Observable<FetchAdResponse> = toObservable(
     this.search
   ).pipe(
     debounceTime(300),
+    tap(() => this.saveFilters()),
     switchMap((filters) =>
       this.propertyGateway.fetchFilteredProperties(filters)
     )
@@ -162,8 +184,8 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     url: 'assets/img/icon/rectangle.png',
     scaledSize: new google.maps.Size(60, 30),
   };
-  isDesktop:boolean = true
-  openMap:boolean = false
+  isDesktop: boolean = true;
+  openMap: boolean = false;
 
   ngOnInit() {
     this.filteredProperties$.subscribe((fetchAdResponse) => {
@@ -173,9 +195,9 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
       this.totalItems = fetchAdResponse.pagination.totalItems;
     });
 
+    this.loadFilters();
     this.changeSortingType();
-
-    this.isDesktop = this.WindowService.isDesktop()
+    this.isDesktop = this.WindowService.isDesktop();
   }
 
   ngAfterViewInit() {
@@ -205,6 +227,22 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     } else {
       this.selectedProperty = null;
     }
+    const propertyCardRef = this.propertiesCardRef
+      .toArray()
+      .find((element) => element.property.id === property.id);
+
+    setTimeout(() => {
+      const propertyCardRef = this.propertiesCardRef
+        .toArray()
+        .find((element) => element.property.id === property.id);
+
+      if (propertyCardRef?.carousel?.nativeElement) {
+        propertyCardRef.carousel.nativeElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }
+    }, 50);
   }
 
   getPosition(property: any) {
@@ -340,7 +378,6 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     filterAutoComplete.addListener('place_changed', () => {
       this.ngZone.run(() => {
         this.place = filterAutoComplete.getPlace();
-        console.log(this.place);
 
         if (this.place.geometry === undefined || this.place.geometry === null) {
           return;
@@ -362,6 +399,8 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
 
   removeLocation(index: number) {
     this.localization.set(this.localization().filter((_, i) => i !== index));
+    this.mapCenter.set({ lat: 48.8566, lng: 2.3522 }); // Paris par défaut
+    this.zoom.set(5);
   }
 
   removeLocationInForm(index: number) {
@@ -393,6 +432,29 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     }
   }
 
+  loadFilters() {
+    const savedFilters = JSON.parse(localStorage.getItem('filters') || '{}');
+    if (savedFilters.page) this.currentPage.set(savedFilters.page);
+    if (savedFilters.localization)
+      this.localization.set(savedFilters.localization);
+    if (savedFilters.propertyType)
+      this.propertyType.set(savedFilters.propertyType);
+    if (savedFilters.transactionType)
+      this.transactionType.set(savedFilters.transactionType);
+    if (savedFilters.minPrice !== undefined)
+      this.minPrice.set(savedFilters.minPrice);
+    if (savedFilters.maxPrice !== undefined)
+      this.maxPrice.set(savedFilters.maxPrice);
+    if (savedFilters.minSurface !== undefined)
+      this.minSurface.set(savedFilters.minSurface);
+    if (savedFilters.maxSurface !== undefined)
+      this.maxSurface.set(savedFilters.maxSurface);
+  }
+
+  saveFilters() {
+    localStorage.setItem('filters', JSON.stringify(this.search()));
+  }
+
   removeFilters() {
     this.localization.set([]);
     this.propertyType.set('');
@@ -401,6 +463,8 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     this.maxPrice.set(null);
     this.minSurface.set(null);
     this.maxSurface.set(null);
+
+    localStorage.removeItem('filters');
   }
 
   onSubmitAlert() {

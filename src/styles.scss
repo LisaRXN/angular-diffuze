@@ -39,15 +39,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 
   input:-webkit-autofill {
-    // background-color: #a1a1aa !important;
     background-color: transparent !important;
-    -webkit-background-color: transparent !important;
+    color: #282828 !important;
     -webkit-text-fill-color: #282828 !important;
-    // transition: background-color 5000s ease-in-out 0s;
+    transition: background-color 5000s ease-in-out 0s;
   }
-
   input:-webkit-autofill::after {
     content: "";
-    background-color: transparent !important;
+    background-color: white !important;
   }
   
