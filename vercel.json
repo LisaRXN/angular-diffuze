@@ -3,15 +3,11 @@
     "public": true,
     "name": "diffuze",
     "rewrites": [
-      { "source": "/sitemap.xml", "destination": "/api/sitemap" },
       { "source": "/(.*)", "destination": "/api" }
     ],
     "functions": {
       "api/index.js": {
         "includeFiles": "dist/diffuze/**"
-      },
-      "api/sitemap.js": {
-        "memory": 128
       }
     }
 }
