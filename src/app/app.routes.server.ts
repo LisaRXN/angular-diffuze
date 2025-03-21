@@ -35,7 +35,6 @@ export const serverRoutes: ServerRoute[] = [
     async getPrerenderParams() {
       const articleGateway = inject(ArticleGateway);
       const articleUrls = await articleGateway.getArticleUrls();
-      console.log('articleUrls', articleUrls);
       return articleUrls.map((item) => ({ slug: item.url }));
     },
     fallback: PrerenderFallback.Server, // Si l'article n'existe pas en SSG, utiliser SSR

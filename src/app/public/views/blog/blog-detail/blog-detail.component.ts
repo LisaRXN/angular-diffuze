@@ -39,10 +39,11 @@ export class BlogDetailComponent implements OnInit {
     ]).subscribe(([types, article]) => {
       this.types = types;
       this.article = article;
-      this.articleType = types.find((type) => type.id === article.type_article);
-      this.otherTypes = types.filter(
-        (type) => type.id !== this.articleType?.id
-      );
+      this.articleType =
+        types.find((type) => type.id === article.type_article) || null;
+      this.otherTypes = this.articleType
+        ? types.filter((type) => type.id !== this.articleType.id)
+        : types;
       this.seoService.updateDynamicSeoTags({
         title: `${article.article_title} - DiffuZe Blog`,
         description: this.stripHtml(article.article_description).substring(
