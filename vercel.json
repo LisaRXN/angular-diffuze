@@ -2,11 +2,12 @@
     "version": 2,
     "public": true,
     "name": "diffuze",
-    "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/server.js"
+    "rewrites": [
+      { "source": "/(.*)", "destination": "/api" }
+    ],
+    "functions": {
+      "api/index.js": {
+        "includeFiles": "dist/diffuze/**"
+      }
     }
-  ]
-  
 }
