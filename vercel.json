@@ -1,18 +1,12 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/angular",
-      "config": {
-        "buildCommand": "npm run build"
-      }
-    }
-  ],
-  "routes": [
+    "version": 2,
+    "public": true,
+    "name": "diffuze",
+    "routes": [
     {
       "src": "/(.*)",
       "dest": "/server.js"
     }
   ]
+  
 }
