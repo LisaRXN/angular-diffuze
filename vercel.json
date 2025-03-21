@@ -1,13 +1,18 @@
 {
-    "version": 2,
-    "public": true,
-    "name": "diffuze",
-    "rewrites": [
-      { "source": "/(.*)", "destination": "/api" }
-    ],
-    "functions": {
-      "api/index.js": {
-        "includeFiles": "dist/diffuze/**"
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/angular",
+      "config": {
+        "buildCommand": "npm run build"
       }
     }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/server.js"
+    }
+  ]
 }
