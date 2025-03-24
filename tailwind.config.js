@@ -1,24 +1,10 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: ["./src/**/*.{html,ts,scss}"],
   theme: {
     extend: {
       colors: {
-        // Définition des couleurs principales
-        // dpeA:"#1FC3AC",
-        // dpeB:"#6BDCCE",
-        // dpeC:"#CDF3EF",
-        // dpeD:"#FEE4AC",
-        // dpeE:"#FECAAD",
-        // dpeF:"#FCCAD3",
-        // dpeG:"#F7718A",
-        // gesA:"#EFF3FF",
-        // gesB:"#DDE5FC",
-        // gesC:"#CCD7FB",
-        // gesD:"#A8BCF8",
-        // gesE:"#86A1F6",
-        // gesF:"#7594F5",
-        // gesG:"#537AF3",
         dpeA: "#1FC3AC", 
         dpeADark: "#1A9F8D", 
       

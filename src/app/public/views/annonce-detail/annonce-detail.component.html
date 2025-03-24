@@ -167,10 +167,22 @@
           <div
             class="order-1 md:order-2 flex flex-col gap-5 px-5 md:px-0 mb-16"
           >
-            <p class="text-5xl font-bold">
+            <p
+              *ngIf="property.transaction_type === 'selling'"
+              class="text-5xl font-bold"
+            >
               {{
                 property.selling_price | currency : "EUR" : "symbol" : "1.0-0"
               }}
+            </p>
+            <p
+              *ngIf="property.transaction_type === 'renting'"
+              class="text-5xl font-bold"
+            >
+              {{
+                property.rent_by_month | currency : "EUR" : "symbol" : "1.0-0"
+              }}
+              <span class="text-sm font-light text-mygrey3">/ mois</span>
             </p>
             <p class="font-bold text-mygrey3 text-lg">
               {{ property.addressForm.city }}
@@ -195,23 +207,23 @@
                 <i class="fa-solid fa-bed"></i>{{ property.bedroom }} chambre(s)
               </p>
               <div
-              class="flex flex-col items-center justify-center gap-2"
-              *ngIf="property.advantages.has_elevator"
-            >
-              <i class="fa-solid fa-elevator text-myyellow3"></i>
-              <p
-              class="bg-myyellow2 p-1 px-2 rounded-md text-myyellow3 font-bold"
+                class="flex flex-col items-center justify-center gap-2"
+                *ngIf="property.advantages.has_elevator"
               >
-              Ascenseurs
-              </p>
-            </div>
+                <i class="fa-solid fa-elevator text-myyellow3"></i>
+                <p
+                  class="bg-myyellow2 p-1 px-2 rounded-md text-myyellow3 font-bold"
+                >
+                  Ascenseurs
+                </p>
+              </div>
               <div
                 class="flex flex-col items-center justify-center gap-2"
                 *ngIf="property.advantages.has_balcony"
               >
                 <i class="fa-solid fa-warehouse text-myyellow3"></i>
                 <p
-                class="bg-myyellow2 p-1 px-2 rounded-md text-myyellow3 font-bold"
+                  class="bg-myyellow2 p-1 px-2 rounded-md text-myyellow3 font-bold"
                 >
                   Balcon
                 </p>
@@ -277,12 +289,22 @@
             <div
               class="p-4 px-8 flex items-center justify-between md:border-r border-r-myyellow3"
             >
+
+            @if(property.transaction_type==='selling'){
               <p>Prix de mise en vente :</p>
               <p>
                 {{
                   property.selling_price | currency : "EUR" : "symbol" : "1.0-0"
                 }}
               </p>
+            }@else {
+              <p>Prix de location par mois :</p>
+              <p>
+                {{
+                  property.rent_by_month | currency : "EUR" : "symbol" : "1.0-0"
+                }}
+              </p>
+            }
             </div>
             <div
               class="p-4 px-8 flex items-center justify-between bg-myyellow2 md:bg-transparent"
@@ -329,7 +351,7 @@
           </div>
         </div>
         <!-- Performances Énergétique -->
-        <div class="mb-16">
+        <div *ngIf="property.DPE.has_DPE" class="mb-16">
           <p class="text-xl font-extrabold mb-10">
             Diagnostic de Performances Énergétique
           </p>

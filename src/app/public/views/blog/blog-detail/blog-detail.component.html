@@ -1,8 +1,16 @@
 <div
-  class="min-h-screen bg-gray-50 flex flex-col items-center font-open text-mygrey1"
+  class="relative min-h-screen bg-gray-50 flex flex-col items-center font-open text-mygrey1"
 >
-  <!-- Hero -->
   <div
+    class="z-10 absolute top-8 left-8 md:top-14 md:left-14 flex items-center justify-center gap-2 border border-mygrey2 hover:bg-mygrey4 transition duration-300 text-mygrey1 text-sm px-4 py-2 rounded-full"
+  >
+    <img src="assets/img/icon/arrow-black.png" class="w-5" alt="" />
+    <a [routerLink]="['/blog/type', articleType.id]" class="whitespace-nowrap"
+      >Retour aux articles</a
+    >
+  </div>
+  <!-- Hero -->
+  <!-- <div
     class="relative h-auto md:h-[380px] pt-32 w-full px-8 flex flex-col items-center justify-center"
   >
     <div
@@ -13,9 +21,11 @@
         >Retour aux articles</a
       >
     </div>
-    <div class="flex mb-12 items-center justify-center text-mygrey2 text-sm gap-2">
+    <div
+      class="flex mb-12 items-center justify-center text-mygrey2 text-sm gap-2"
+    >
       <p>
-        Publié le {{ article.creation_date | date : "longDate" : "" : "fr-FR" }}
+        Publié le {{ article.update_date | date : "longDate" : "" : "fr-FR" }}
       </p>
       <p>•</p>
       <p>Par {{ article.author }}</p>
@@ -37,14 +47,14 @@
       class="h-full w-auto m-auto rounded-4xl"
       alt=""
     />
-  </div>
+  </div> -->
 
   <!-- Article -->
   <div
-    class="mb-24 px-8 text-mygrey1 w-full grid md:grid-cols-[1fr_4fr_1fr] space-y-10 md:space-x-12 justify-start"
+    class="mb-24 pt-32 px-8 text-mygrey1 w-full grid md:grid-cols-[1fr_4fr_1fr] space-y-10 md:space-y-0 md:space-x-12 justify-start"
   >
     <!-- sidebar left -->
-    <div class="text-[12px] flex flex-col gap-2">
+    <div class="text-[12px] flex flex-col gap-2 py-14">
       <p class="font-light">Rédacteur</p>
       <div class="flex items-center justify-start gap-3">
         <div
@@ -69,18 +79,47 @@
     </div>
 
     <!-- Article Body -->
-    <div class="">
-      <h2 class="text-2xl font-semibold font-raleway mb-5">Introduction</h2>
+    <!-- markdown -->
+    <div
+      class="flex flex-col items-center justify-center border border-mygrey4 shadow-md bg-white py-20"
+    >
+      <div class="h-auto w-full px-8 flex flex-col items-center justify-center">
+        <div
+          class="flex mb-12 items-center justify-center text-mygrey2 text-sm gap-2"
+        >
+          <p>
+            Publié le
+            {{ article.update_date | date : "longDate" : "" : "fr-FR" }}
+          </p>
+          <p>•</p>
+          <p>Par {{ article.author }}</p>
+        </div>
+        <h1
+          class="z-10 text-2xl md:text-3xl leading-relaxed font-bold font-raleway text-center max-w-[600px] mb-12"
+        >
+          {{ article.article_title }}
+        </h1>
+
+        <span
+          class="bg-myyellow2 px-5 py-3 font-bold text-yellow-500 rounded-xl"
+          >{{ articleType.type }}</span
+        >
+      </div>
+      <div class="w-4/5 h-[400px] my-3">
+        <img
+          [src]="env.publicURL + article.article_preview"
+          class="h-full w-auto m-auto rounded-4xl"
+          alt=""
+        />
+      </div>
       <div
-        class="text-justify font-open mb-10"
-        [innerHTML]="article.article_description"
+        class="text-justify font-open mb-10 prose prose-stone text-mygrey1"
+        [innerHTML]="article.html_code"
       ></div>
-      <h2 class="text-2xl font-semibold font-raleway mb-5">Article</h2>
-      <div class="text-justify font-open" [innerHTML]="article.html_code"></div>
     </div>
 
     <!-- sidebar right -->
-    <div class="text-[12px] flex flex-col gap-2 mb-12">
+    <div class="text-[12px] flex flex-col gap-2 mb-12 py-14">
       <p class="font-light">Autres catégories</p>
       <a
         [routerLink]="['/blog/type/', type.id]"
@@ -121,8 +160,7 @@
         </a>
       </div> -->
 
-  <!-- V2 -->
-
+      <!-- V2 -->
     </div>
   </div>
 
@@ -141,19 +179,20 @@
 
   <!-- V2 -->
 
-
   <!-- Besoin de plus d'information ? -->
   <div class="lg:w-4/5 p-5 md:p-10 rounded-2xl mb-12 font-open text-mygrey1">
     <h2 class="text-2xl font-bold font-raleway text-center mb-12 z-10">
       Besoin de plus d'information ?
     </h2>
     <p class="text-xl leading-relaxed text-justify">
-      Besoin de conseils personnalisés ? Réservez un rendez-vous avec un conseiller : il répondra à toutes vos
-      questions !
+      Besoin de conseils personnalisés ? Réservez un rendez-vous avec un
+      conseiller : il répondra à toutes vos questions !
     </p>
     <div class="grid md:grid-cols-2 place-items-center p-10 gap-8 lg:gap-0">
       <a
-        href="https://app.lemcal.com/@diffuze/15min" target="_blank" rel='external'
+        href="https://app.lemcal.com/@diffuze/15min"
+        target="_blank"
+        rel="external"
         class="md:ml-10 bg-myyellow1 text-mygrey1 rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-myyellow2 transition-all transition-300 cursor-pointer"
         >Prendre rendez-vous
       </a>

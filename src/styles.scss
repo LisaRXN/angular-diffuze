@@ -9,6 +9,18 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.prose strong {
+  color: #282828 !important; 
+}
+.prose h1, 
+.prose h2, 
+.prose h3, 
+.prose h4, 
+.prose h5, 
+.prose h6 {
+  color: #282828;
+}
+
 .required {
     color: red;
     font-weight: bold;
