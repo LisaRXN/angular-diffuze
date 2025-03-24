@@ -68,6 +68,8 @@
   <div class="p-5 flex flex-col items-start gap-2 text-sm">
     <p class="text-mygrey3 font-light">
       {{ property.property_type | titlecase }}
+      <span *ngIf="property.transaction_type === 'selling'">en vente</span>
+      <span *ngIf="property.transaction_type === 'renting'">en location</span>
     </p>
     <p class="font-raleway font-extrabold text-mygrey1">{{ property.addressForm.city }}</p>
     <p class="">{{ property.addressForm.street_address }}</p>
