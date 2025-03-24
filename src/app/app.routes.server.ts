@@ -2,7 +2,7 @@ import { PrerenderFallback, RenderMode, ServerRoute } from '@angular/ssr';
 import { inject } from '@angular/core';
 import { PrerenderService } from './core/services/prerender.service';
 import { ArticleGateway } from './core/ports/article.gateway';
-import { sitemapHandler } from '../../sitemapHandler';
+
 import { map } from 'rxjs';
 export const serverRoutes: ServerRoute[] = [
   {

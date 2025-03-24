@@ -1,3 +1,3 @@
-import { app } from "../dist/diffuze/server-express/main.js";
+import { app } from "../dist/diffuze/server/server.mjs";
 
 export default app;

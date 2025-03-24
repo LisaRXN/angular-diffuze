@@ -9,65 +9,8 @@ interface UrlData {
 }
 
 async function fetchUrls(): Promise<UrlData[]> {
-  try {
-    // Routes statiques
-    const staticUrls: UrlData[] = [
-      {
-        url: '/',
-        changefreq: 'weekly',
-        priority: 1.0,
-        lastmod: new Date().toISOString(),
-      },
-      {
-        url: '/notre-offre',
-        changefreq: 'monthly',
-        priority: 0.8,
-        lastmod: new Date().toISOString(),
-      },
-      {
-        url: '/annonces',
-        changefreq: 'weekly',
-        priority: 0.9,
-        lastmod: new Date().toISOString(),
-      },
-      {
-        url: '/blog',
-        changefreq: 'weekly',
-        priority: 0.9,
-        lastmod: new Date().toISOString(),
-      },
-      {
-        url: '/nos-partenaires',
-        changefreq: 'monthly',
-        priority: 0.7,
-        lastmod: new Date().toISOString(),
-      },
-      {
-        url: '/conditions-generales',
-        changefreq: 'monthly',
-        priority: 0.1,
-        lastmod: new Date().toISOString(),
-      },
-      {
-        url: '/protection-des-donnees',
-        changefreq: 'monthly',
-        priority: 0.1,
-        lastmod: new Date().toISOString(),
-      },
-    ];
-
-    // Récupérer les URLs dynamiques (articles, propriétés, etc.)
-    const dynamicResponse = await fetch(
-      'https://data.barnabe-immo.fr/api/seo/urls/pro'
-    );
-    const dynamicUrls: UrlData[] = await dynamicResponse.json();
-
-    // Combiner les URLs statiques et dynamiques
-    return [...staticUrls, ...dynamicUrls];
-  } catch (error) {
-    console.error('Error fetching URLs for sitemap:', error);
-    return [];
-  }
+  const response = await fetch('http://data.barnabe-immo.fr/api/seo/urls');
+  return response.json();
 }
 
 async function sitemapHandler(req: Request, res: Response): Promise<void> {
@@ -75,7 +18,7 @@ async function sitemapHandler(req: Request, res: Response): Promise<void> {
     const urls = await fetchUrls();
 
     const sitemapStream = new SitemapStream({
-      hostname: 'https://www.diffuze.fr',
+      hostname: 'https://www.barnabe-immo.fr',
     });
 
     // Écrire directement les URLs dans le stream
