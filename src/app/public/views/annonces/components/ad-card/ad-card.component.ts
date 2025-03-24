@@ -61,9 +61,18 @@ export class AdCardComponent implements AfterViewInit  {
       ? this.selling_price_number / this.property.living_space
       : 0;
   }
+  get sellingPrice(): number {
+    return Number(this.property.selling_price.replace(/\s/g, ""));
+  }
+  get rentingPrice(): number {
+    return Number(this.property.rent_by_month.replace(/\s/g, ""));
+  }
 
   navigateTo() {
     this.router.navigate([`property/${this.property.id}`]);
   }
+
+
 }
+
 

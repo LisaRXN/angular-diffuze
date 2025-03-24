@@ -88,7 +88,7 @@
     class="px-5 py-2 flex flex-col items-center justify-center bg-mygrey2 rounded-b-xl"
   >
     <p class="text-lg font-bold text-white">
-      {{ selling_price_number | currency : "EUR" : "symbol" : "1.0-0" }}
+      {{ sellingPrice | currency : "EUR" : "symbol" : "1.0-0" }}
     </p>
     <p  class="text-sm font-light text-myyellow1">
       {{ surface_price | currency : "EUR" : "symbol" : "1.0-0" }} / m²
@@ -99,7 +99,7 @@
     class="p-5 flex items-center justify-center bg-mygrey2 rounded-b-xl"
   >
     <p class="text-lg font-bold text-white">
-      {{ property.rent_by_month | currency : "EUR" : "symbol" : "1.0-0" }} <span class="text-sm font-light text-myyellow1">/ mois</span> 
+      {{ rentingPrice | currency : "EUR" : "symbol" : "1.0-0" }} <span class="text-sm font-light text-myyellow1">/ mois</span> 
     </p>
   </div>
 </div>

@@ -171,17 +171,13 @@
               *ngIf="property.transaction_type === 'selling'"
               class="text-5xl font-bold"
             >
-              {{
-                property.selling_price | currency : "EUR" : "symbol" : "1.0-0"
-              }}
+              {{ sellingPrice | currency : "EUR" : "symbol" : "1.0-0" }}
             </p>
             <p
               *ngIf="property.transaction_type === 'renting'"
               class="text-5xl font-bold"
             >
-              {{
-                property.rent_by_month | currency : "EUR" : "symbol" : "1.0-0"
-              }}
+              {{ rentingPrice | currency : "EUR" : "symbol" : "1.0-0" }}
               <span class="text-sm font-light text-mygrey3">/ mois</span>
             </p>
             <p class="font-bold text-mygrey3 text-lg">
@@ -289,22 +285,21 @@
             <div
               class="p-4 px-8 flex items-center justify-between md:border-r border-r-myyellow3"
             >
-
-            @if(property.transaction_type==='selling'){
+              @if(property.transaction_type==='selling'){
               <p>Prix de mise en vente :</p>
               <p>
                 {{
-                  property.selling_price | currency : "EUR" : "symbol" : "1.0-0"
+                  sellingPrice | currency : "EUR" : "symbol" : "1.0-0"
                 }}
               </p>
-            }@else {
+              }@else {
               <p>Prix de location par mois :</p>
               <p>
                 {{
-                  property.rent_by_month | currency : "EUR" : "symbol" : "1.0-0"
+                  rentingPrice | currency : "EUR" : "symbol" : "1.0-0"
                 }}
               </p>
-            }
+              }
             </div>
             <div
               class="p-4 px-8 flex items-center justify-between bg-myyellow2 md:bg-transparent"

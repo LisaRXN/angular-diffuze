@@ -63,4 +63,11 @@ export class PropertyCardComponent implements AfterViewInit {
   navigateTo() {
     this.router.navigate([`property/${this.property.id}`]);
   }
+
+  get sellingPrice(): number {
+    return Number(this.property.selling_price.replace(/\s/g, ""));
+  }
+  get rentingPrice(): number {
+    return Number(this.property.rent_by_month.replace(/\s/g, ""));
+  }
 }
