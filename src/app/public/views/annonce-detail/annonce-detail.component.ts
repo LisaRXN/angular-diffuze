@@ -43,7 +43,7 @@ export class AnnonceDetailComponent {
   @ViewChild('carousel') carousel!: ElementRef<HTMLDivElement>;
   private route = inject(ActivatedRoute);
   private propertyGateway = inject(PropertyGateway);
-  private sanitizer = inject(DomSanitizer)
+  private sanitizer = inject(DomSanitizer);
   baseUrl = environment.publicURL;
   loading: boolean = false;
   submitted: boolean = false;
@@ -59,10 +59,12 @@ export class AnnonceDetailComponent {
   isCarouselStart = true;
   isCarouselEnd = false;
 
-  cityScanToken = 'YHszkGLePsRYQTf1dI9UqY2eufBzLs2phZwYa9a8Ort6yr-jvxYpz0tE_U5UyCnLjjWNn_PTB_P0pMm8nkue0l0yq93jsbHH7fYQZQpN3lemt2LlAP_j1c78dEhYLFyxZlMoeUeDB0GUZVu5xW0boLKmbQ'
-  cityScanApiKey = environment.cityScanApiKey
+  cityScanToken!: string
+  cityScanApiKey = environment.cityScanApiKey;
   url = `https://location-insight.cityscan.fr/${this.cityScanApiKey}/${this.cityScanToken}`;
-  safeUrl: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+  safeUrl: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+    this.url
+  );
 
   mapCenter = { lat: 48.8566, lng: 2.3522 };
   zoom: number = 12;
@@ -89,13 +91,14 @@ export class AnnonceDetailComponent {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    message: new FormControl<string>('Bonjour,\nJe souhaiterais avoir plus de renseignements sur ce bien.\nCordialement.', {
-      validators: [Validators.required],
-    }),
+    message: new FormControl<string>(
+      'Bonjour,\nJe souhaiterais avoir plus de renseignements sur ce bien.\nCordialement.',
+      {
+        validators: [Validators.required],
+      }
+    ),
     propertyId: new FormControl<number>(0, { nonNullable: true }),
   });
-
-
 
   ngAfterViewInit() {
     setTimeout(() => {
@@ -116,7 +119,13 @@ export class AnnonceDetailComponent {
         switchMap((property: Property) => {
           this.loading = false;
           this.property = property;
-          this.mapCenter = { lat: parseFloat(property.addressForm.latitude), lng: parseFloat(property.addressForm.longitude) };
+          if (property && property.valuation && property.valuation.token !== undefined) {
+            this.cityScanToken = property.valuation.token;
+          }          
+          this.mapCenter = {
+            lat: parseFloat(property.addressForm.latitude),
+            lng: parseFloat(property.addressForm.longitude),
+          };
           this.contactForm.patchValue({ propertyId: this.property.id });
           this.filters.propertyType = property.property_type;
           this.filters.localization.push(property.addressForm.city);
@@ -178,10 +187,9 @@ export class AnnonceDetailComponent {
   }
 
   get sellingPrice(): number {
-    return Number(this.property.selling_price.replace(/\s/g, ""));
+    return Number(this.property.selling_price.replace(/\s/g, ''));
   }
   get rentingPrice(): number {
-    return Number(this.property.rent_by_month.replace(/\s/g, ""));
+    return Number(this.property.rent_by_month.replace(/\s/g, ''));
   }
-
 }
