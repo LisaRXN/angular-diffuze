@@ -92,7 +92,7 @@ async function generateSitemap() {
     const sitemapXML = await streamToPromise(sitemapStream);
 
     // Créer le dossier public s'il n'existe pas
-    const publicDir = path.join(process.cwd(), "public");
+    const publicDir = path.join(process.cwd(), "dist/diffuze/browser");
     if (!fs.existsSync(publicDir)) {
       fs.mkdirSync(publicDir, { recursive: true });
     }

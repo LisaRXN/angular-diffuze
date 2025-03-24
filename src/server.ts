@@ -17,9 +17,6 @@ const browserDistFolder = resolve(serverDistFolder, '../browser');
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
-// **Sitemap**
-/* app.get('/sitemap.xml', sitemapHandler); */
-
 /**
  * Serve static files from /browser
  */
