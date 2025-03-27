@@ -1,10 +1,10 @@
 <div
-  class="z-50 relative lg:fixed isset-0 navbar bg-white text-mygrey1 font-open py-3 w-full"
+  class="z-50 relative lg:fixed isset-0 navbar bg-white text-mygrey1 font-open py-3 w-full no-print"
 >
-  <!-- Coupon -->
-  <div class="sm:absolute lg:hidden xl:block top-1/2 left-1/2 transform -translate-x-[50%] -translate-y-[50%]">
+  <!-- Coupon sm et xl -->
+  <div class="sm:absolute lg:hidden xl:block top-1/2 left-1/2 transform -translate-x-[50%] -translate-y-[50%] xl:ml-10 2xl:ml-0">
     <div
-      class="relative hidden md:block bg-gray-400 px-5 p-2 h-[60px] w-[150px] rounded-lg xl:mr-10"
+      class="relative hidden md:block bg-gray-400 px-5 p-2 h-[60px] w-[150px] rounded-lg"
     >
       <span
         class="absolute left-0 transforme -translate-x-[50%] -translate-y-[50%] top-1/2 h-[20px] w-[20px] rounded-full bg-white"
@@ -44,27 +44,30 @@
     </label>
   </div>
 
-  <div class="flex w-full items-center justify-between gap-2 px-2 mx-2">
+  <div class="flex w-full items-center justify-between gap-6 px-2 mx-2">
     <a routerLink="/" class="font-paytone text-4xl font-extrabold"
-      >DZ<span class="text-myyellow1">.</span></a
+      >
+      <img src="assets/img/logo/diffuze-black.png" class="w-20">
+      <!-- DZ<span class="text-myyellow1">.</span> -->
+      </a
     >
 
 
     <div
-      class="lg:order-2 flex xl:flex-1 items-center justify-end gap-2 md:gap-4 lg:gap-2 xl:gap-6"
+      class="lg:order-2 flex xl:flex-1 items-center justify-end gap-2 md:gap-4 xl:gap-6"
     >
       <a
         href="https://www.app.diffuze.fr"
         target="_blank"
         rel="external"
-        class="bg-myyellow1 text-center text-mygrey1 rounded-full p-2 py-3 md:px-4 md:py-3 font-semibold text-[12px] md:text-sm hover:bg-myyellow2 transition-all transition-300"
+        class="whitespace-nowrap bg-myyellow1 text-center text-mygrey1 rounded-full p-2 md:px-4 md:py-3 font-semibold text-[12px] hover:bg-myyellow2 transition-all transition-300"
         >Déposer une annonce</a
       >
       <a
         href="https://app.lemcal.com/@diffuze/15min"
         target="_blank"
         rel="external"
-        class="hidden xl:block bg-mygrey2 text-white rounded-full px-4 py-3 font-semibold text-sm hover:bg-mygrey3 transition-all transition-300"
+        class="hidden xl:block bg-mygrey2 text-white rounded-full px-4 py-3 font-semibold text-[12px] hover:bg-mygrey3 transition-all transition-300"
         >Prendre rendez-vous</a
       >
       <a
@@ -88,17 +91,19 @@
     </div>
 
     <div
-      class="hidden lg:flex xl:flex-1 w-3/4 xl:w-full items-center justify-start xl:justify-between gap-10"
+      class="hidden lg:flex xl:flex-1 w-3/4 xl:w-full items-center justify-start xl:justify-between gap-5"
     >
-      <ul class="menu menu-horizontal font-semibold">
+      <!-- <ul class="menu menu-horizontal font-semibold"> -->
+      <ul class="flex items-center justify-start gap-6 font-semibold text-sm 2xl:text-[16px] cursor-pointer">
         <!-- Navbar menu content here -->
-        <li routerLink="/notre-offre"><div class="flex items-center"><img src="assets/img/icon/emoji-speaker.png" class="w-[18px]"/><a >Notre Offre</a></div></li>
-        <li routerLink="/nos-partenaires"><div class="flex items-center"><img src="assets/img/icon/emoji-client.png" class="w-[18px]"/><a >Nos Partenaires</a></div></li>
-        <li routerLink="/blog"><div class="flex items-center"><img src="assets/img/icon/emoji-pencil.png" class="w-[18px]"/><a >Le Blog</a></div></li>
+        <li routerLink="/notre-offre"><div class="flex items-center gap-2"><img src="assets/img/icon/emoji-offer.png" class="w-[22px]"/><a >Notre Offre</a></div></li>
+        <li routerLink="/nos-partenaires"><div class="flex items-center gap-2"><img src="assets/img/icon/emoji-partners.png" class="w-[24px]"/><a >Partenaires</a></div></li>
+        <li routerLink="/blog"><div class="flex items-center gap-2"><img src="assets/img/icon/emoji-blog.png" class="w-[22px]"/><a>Blog</a></div></li>
+        <li routerLink="/annonces"><div class="flex items-center gap-2"><img src="assets/img/icon/emoji-ad.png" class="w-[22px]"/><a >Annonces</a></div></li>
       </ul>
-      <!-- coupon -->
+      <!-- Coupon md et lg -->
         <div
-          class="self-end relative hidden md:block xl:hidden bg-gray-400 px-5 p-2 h-[60px] w-[150px] rounded-lg"
+          class="self-end relative hidden md:block xl:hidden bg-gray-400 px-5 p-2 h-[60px] w-[150px] rounded-lg lg:ml-10"
         >
           <span
             class="absolute left-0 transforme -translate-x-[50%] -translate-y-[50%] top-1/2 h-[20px] w-[20px] rounded-full bg-white"

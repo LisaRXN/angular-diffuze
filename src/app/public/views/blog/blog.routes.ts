@@ -29,4 +29,5 @@ export const BLOG_ROUTES: Routes = [
         (m) => m.BlogDetailComponent
       ),
   },
+  { path: '**', redirectTo: '' },
 ];

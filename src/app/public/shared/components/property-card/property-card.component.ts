@@ -13,6 +13,8 @@ import { environment } from '../../../../../environments/environment';
 export class PropertyCardComponent implements AfterViewInit {
   router = inject(Router);
   @Input() property!: Property;
+  @Input() smallCard: boolean = false
+
   @ViewChild('carousel') carousel!: ElementRef<HTMLDivElement>;
   baseUrl = environment.publicURL;
   isCarouselStart = true;
@@ -20,11 +22,14 @@ export class PropertyCardComponent implements AfterViewInit {
 
 
   ngAfterViewInit() {
-    this.checkScrollPosition();
-    this.carousel.nativeElement.addEventListener('scroll', () =>
-      this.checkScrollPosition()
-    );
+    setTimeout(() => {
+      this.checkScrollPosition();
+      this.carousel.nativeElement.addEventListener('scroll', () =>
+        this.checkScrollPosition()
+      );
+    });
   }
+  
 
   checkScrollPosition() {
     const carousel = this.carousel.nativeElement;
@@ -57,5 +62,12 @@ export class PropertyCardComponent implements AfterViewInit {
 
   navigateTo() {
     this.router.navigate([`property/${this.property.id}`]);
+  }
+
+  get sellingPrice(): number {
+    return Number(this.property.selling_price.replace(/\s/g, ""));
+  }
+  get rentingPrice(): number {
+    return Number(this.property.rent_by_month.replace(/\s/g, ""));
   }
 }

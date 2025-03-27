@@ -1,0 +1,683 @@
+<div
+  class="min-h-screen bg-gray-50 print:bg-white flex flex-col items-start font-open text-mygrey1"
+>
+  <div class="relative px-4 md:px-14 pt-32 print:pt-10 w-full mb-12">
+    <div
+      class="no-print z-10 absolute top-8 left-8 md:top-14 md:left-14 flex items-center justify-center gap-2 border border-mygrey2 hover:bg-mygrey4 transition duration-300 text-mygrey1 text-sm px-4 py-2 rounded-full"
+    >
+      <img src="assets/img/icon/arrow-black.png" class="w-5" alt="" />
+      <a [routerLink]="['/annonces']" class="whitespace-nowrap"
+        >Retour aux annonces</a
+      >
+    </div>
+
+    <div class="flex flex-col lg:flex-row items-start gap-10 justify-between">
+      <!-- Contact -->
+      <div
+        class="lg:sticky top-28 w-full lg:w-1/3 order-2 px-5 md:px-10 flex flex-col items-center justify-center lg:pb-60 no-print"
+      >
+        <p class="font-bold text-xl mb-2">Ce bien vous intéresse ?</p>
+        <p class="font-semibold mb-4">Demander plus d'information</p>
+        <div
+          *ngIf="showSuccessNotif"
+          class="flex flex-col items-center justify-center gap-5 pt-20 px-10"
+        >
+          <img
+            src="assets/img/icon/sendMessage.png"
+            class="w-24 h-auto"
+            alt=""
+          />
+          <p class="font-normal text-mygrey3 text-center">
+            Votre demande a été envoyée avec succès à l'agent immobilier
+          </p>
+        </div>
+        <div
+          *ngIf="showErrorNotif"
+          class="flex flex-col items-center justify-center gap-5 pt-20 px-10"
+        >
+          <img
+            src="assets/img/icon/sendMessageError.png"
+            class="w-24 h-auto"
+            alt=""
+          />
+          <p class="font-normal text-mygrey3 text-center">
+            Oups... Une erreur s'est produite lors de l'envoi du message.
+          </p>
+          <button (click)="showErrorNotif = !showErrorNotif" class="font-semibold underline text-center cursor-pointer">Réessayer</button>
+        </div>
+        <form
+          *ngIf="!showSuccessNotif && !showErrorNotif"
+          [formGroup]="contactForm"
+          (ngSubmit)="onSubmitContact()"
+          class="w-full flex flex-col gap-3"
+        >
+          <input
+            formControlName="clientName"
+            type="text"
+            id="clientName"
+            class="bg-zinc-100 text-mygrey1 sm:text-sm rounded-lg block w-full p-2.5 focus:ring-1 focus:ring-myyellow1 focus:outline-none focus:border-none select-none"
+            [ngClass]="
+              submitted && contactForm.get('clientName')?.hasError('required')
+                ? 'border-red-500'
+                : 'border-none'
+            "
+            placeholder="Votre nom et prénom*"
+          />
+          <input
+            formControlName="clientPhone"
+            type="tel"
+            id="clientPhone"
+            class="bg-zinc-100 text-mygrey1 sm:text-sm rounded-lg block w-full p-2.5 focus:ring-1 focus:ring-myyellow1 focus:outline-none focus:border-none select-none"
+            [ngClass]="
+              submitted && contactForm.get('clientPhone')?.hasError('required')
+                ? 'border-red-500'
+                : 'border-none'
+            "
+            placeholder="Votre téléphone*"
+          />
+          <input
+            formControlName="clientEmail"
+            type="email"
+            id="clientEmail"
+            class="bg-zinc-100 text-mygrey1 sm:text-sm rounded-lg block w-full p-2.5 focus:ring-1 focus:ring-myyellow1 focus:outline-none focus:border-none select-none"
+            [ngClass]="
+              submitted && contactForm.get('clientEmail')?.hasError('required')
+                ? 'border-red-500'
+                : 'border-none'
+            "
+            placeholder="Votre email*"
+          />
+          <p class="error" *ngIf="contactFormError()">
+            {{ contactFormError() }}
+          </p>
+          <p class="error" *ngIf="emailError()">
+            {{ emailError() }}
+          </p>
+          <div
+            (click)="isMessageOpen = !isMessageOpen"
+            class="group w-full flex items-center justify-between cursor-pointer"
+          >
+            <p class="">Ajouter un message</p>
+            <button
+              class="flex items-center justify-between p-5 cursor-pointer peer"
+              type="button"
+              aria-expanded="false"
+            >
+              <img
+                [ngClass]="{
+                  'w-3 transition-transform duration-300': true,
+                  'rotate-180': isMessageOpen
+                }"
+                src="assets/img/icon/btn-down.png"
+                alt="Toggle"
+              />
+            </button>
+          </div>
+          <div
+            class="overflow-hidden transition-all duration-300 ease-in"
+            [ngClass]="
+              isMessageOpen ? 'max-h-32 opacity-100' : 'max-h-0 opacity-50'
+            "
+          >
+            <textarea
+              formControlName="message"
+              role="textbox"
+              aria-multiline="true"
+              class="border border-mygrey3 rounded-md w-full h-28 focus:ring-1 focus:border-none focus:ring-myyellow1 focus:outline-none"
+            >
+            </textarea>
+          </div>
+          <button
+            type="submit"
+            class="bg-myyellow1 rounded-full px-4 py-3 hover:bg-myyellow3 transition duration-300"
+          >
+            <i class="fa-solid fa-envelope mr-2"></i>
+            Envoyer mon message
+          </button>
+          <button
+            (click)="isContactVisible = !isContactVisible"
+            type="button"
+            class="rounded-full border border-mygrey3 px-4 py-3 flex items-center justify-center gap-2"
+          >
+            <i class="fa-solid fa-phone mr-2"></i>
+            <p *ngIf="!isContactVisible">Afficher le numéro</p>
+            <p *ngIf="isContactVisible">
+              {{ property.contact.specific_num | phoneNumber }}
+            </p>
+          </button>
+        </form>
+      </div>
+
+      <!-- Description de l'annonce -->
+      <section
+        *ngIf="!loading && property"
+        id="description"
+        class="w-full lg:w-2/3 order-1 overflow-y-auto"
+      >
+        <div class="flex flex-col">
+          <!-- Carousel -->
+          <div class="order-2 md:order-1 relative flex items-stretch">
+            <div #carousel class="carousel rounded-t mb-10">
+              <div
+                *ngFor="let photo of property?.media?.images"
+                class="carousel-item w-full"
+              >
+                <img
+                  [id]="'photo' + property.id"
+                  [src]="baseUrl + photo.photo_path"
+                  class="rounded-xl w-full object-cover h-[450px] print:h-[350px]"
+                  alt=""
+                />
+                <div
+                  class="absolute left-2 right-2 top-1/2 flex -translate-y-1/2 transform justify-between"
+                >
+                  <a
+                    (click)="prevSlide()"
+                    class="btn btn-circle backdrop-blur-lg opacity-10 bg-white border-none shadow-none text-lg text-black"
+                    >❮</a
+                  >
+                  <a
+                    (click)="nextSlide()"
+                    class="btn btn-circle backdrop-blur-lg opacity-10 bg-white border-none shadow-none text-lg text-black"
+                    >❯</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Avantages -->
+          <div
+            class="order-1 md:order-2 flex flex-col gap-5 px-5 md:px-0 mb-16"
+          >
+            <p
+              *ngIf="property.transaction_type === 'selling'"
+              class="text-5xl font-bold"
+            >
+              {{ sellingPrice | currency : "EUR" : "symbol" : "1.0-0" }}
+            </p>
+            <p
+              *ngIf="property.transaction_type === 'renting'"
+              class="text-5xl font-bold"
+            >
+              {{ rentingPrice | currency : "EUR" : "symbol" : "1.0-0" }}
+              <span class="text-sm font-light text-mygrey3">/ mois</span>
+            </p>
+            <p class="font-bold text-mygrey3 text-lg">
+              {{ property.addressForm.city }}
+            </p>
+
+            <div class="flex flex-row flex-wrap gap-6">
+              <p class="flex flex-col items-center justify-center gap-2">
+                <i class="fa-solid fa-maximize"></i
+                >{{ property.living_space }} m²
+              </p>
+              <p
+                class="flex flex-col items-center justify-center gap-2"
+                *ngIf="property.property_type == 'maison'"
+              >
+                <i class="fa-solid fa-stairs"></i
+                >{{ property.total_floor }} étage(s)
+              </p>
+              <p class="flex flex-col items-center justify-center gap-2">
+                <i class="fa-solid fa-couch"></i>{{ property.room }} pièce(s)
+              </p>
+              <p class="flex flex-col items-center justify-center gap-2">
+                <i class="fa-solid fa-bed"></i>{{ property.bedroom }} chambre(s)
+              </p>
+              <div
+                class="flex flex-col items-center justify-center gap-2"
+                *ngIf="property.advantages.has_elevator"
+              >
+                <i class="fa-solid fa-elevator text-myyellow3"></i>
+                <p
+                  class="bg-myyellow2 p-1 px-2 rounded-md text-myyellow3 font-bold"
+                >
+                  Ascenseurs
+                </p>
+              </div>
+              <div
+                class="flex flex-col items-center justify-center gap-2"
+                *ngIf="property.advantages.has_balcony"
+              >
+                <i class="fa-solid fa-warehouse text-myyellow3"></i>
+                <p
+                  class="bg-myyellow2 p-1 px-2 rounded-md text-myyellow3 font-bold"
+                >
+                  Balcon
+                </p>
+              </div>
+              <div
+                class="flex flex-col items-center justify-center gap-2"
+                *ngIf="property.advantages.has_box"
+              >
+                <i class="fa-solid fa-elevator text-myyellow3"></i>
+                <p
+                  class="bg-myyellow2 p-1 px-2 rounded-md text-myyellow3 font-bold"
+                >
+                  Box
+                </p>
+              </div>
+              <div
+                class="flex flex-col items-center justify-center gap-2"
+                *ngIf="property.advantages.has_cellar"
+              >
+                <i class="fa-solid fa-archive text-myyellow3"></i>
+                <p
+                  class="bg-myyellow2 p-1 px-2 rounded-md text-myyellow3 font-bold"
+                >
+                  Cave
+                </p>
+              </div>
+              <div
+                class="flex flex-col items-center justify-center gap-2"
+                *ngIf="property.advantages.has_parking"
+              >
+                <i class="fa-solid fa-square-parking text-myyellow3"></i>
+                <p
+                  class="bg-myyellow2 p-1 px-2 rounded-md text-myyellow3 font-bold"
+                >
+                  Parking
+                </p>
+              </div>
+              <div
+                class="flex flex-col items-center justify-center gap-2"
+                *ngIf="property.advantages.has_terrace"
+              >
+                <i class="fa-solid fa-sun text-myyellow3"></i>
+                <p
+                  class="bg-myyellow2 p-1 px-2 rounded-md text-myyellow3 font-bold"
+                >
+                  Terrasse
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Description -->
+        <div class="mb-16">
+          <p class="text-xl font-extrabold mb-10">Description</p>
+          <p class="whitespace-pre-line text-justify leading-relaxed">
+            {{ property.description }}
+          </p>
+        </div>
+        <!-- Caractéristiques -->
+        <div class="mb-16">
+          <p class="text-xl font-extrabold mb-10">Caractéristiques</p>
+          <div
+            class="grid md:grid-cols-2 border border-myyellow3 rounded-4xl font-semibold"
+          >
+            <div
+              class="p-4 print:p-2 print:p-2 px-8 flex items-center justify-between md:border-r border-r-myyellow3"
+            >
+              @if(property.transaction_type==='selling'){
+              <p>Prix de mise en vente :</p>
+              <p>
+                {{ sellingPrice | currency : "EUR" : "symbol" : "1.0-0" }}
+              </p>
+              }@else {
+              <p>Prix de location par mois :</p>
+              <p>
+                {{ rentingPrice | currency : "EUR" : "symbol" : "1.0-0" }}
+              </p>
+              }
+            </div>
+            <div
+              class="p-4 print:p-2 px-8 flex items-center justify-between bg-myyellow2 md:bg-transparent"
+            >
+              <p>Type de bien :</p>
+              <p>{{ property.property_type | capitalize }}</p>
+            </div>
+            <div
+              class="p-4 print:p-2 px-8 flex items-center justify-between md:border-r border-r-myyellow3 md:bg-myyellow2"
+            >
+              <p>Surface :</p>
+              <p>{{ property.living_space }} m²</p>
+            </div>
+            <div
+              class="p-4 print:p-2 px-8 flex items-center justify-between bg-myyellow2"
+            >
+              <p>Etage :</p>
+              <p>{{ property.floor }}</p>
+            </div>
+            <div
+              class="p-4 print:p-2 px-8 flex items-center justify-between md:border-r border-r-myyellow3"
+            >
+              <p>Nombre de pièces :</p>
+              <p>{{ property.room }}</p>
+            </div>
+            <div
+              class="p-4 print:p-2 px-8 flex items-center justify-between bg-myyellow2 md:bg-transparent"
+            >
+              <p>Nombre de chambres :</p>
+              <p>{{ property.bedroom }}</p>
+            </div>
+            <div
+              class="p-4 print:p-2 px-8 flex items-center justify-between md:border-r border-r-myyellow3 md:bg-myyellow2 rounded-bl-4xl"
+            >
+              <p>Chauffage :</p>
+              <p>{{ property.heating_format | capitalize }}</p>
+            </div>
+            <div
+              class="p-4 print:p-2 px-8 flex items-center justify-between bg-myyellow2 rounded-bl-4xl md:rounded-bl-none rounded-br-4xl"
+            >
+              <p>Chauffage :</p>
+              <p>{{ property.heating_type | capitalize }}</p>
+            </div>
+          </div>
+        </div>
+        <!-- Performances Énergétique -->
+        <div class="mb-16">
+          <p class="text-xl font-extrabold mb-10">
+            Diagnostic de Performances Énergétique
+          </p>
+          <div
+            class="flex flex-col gap-10 lg:flex-row print:flex-row items-center justify-between"
+          >
+            <div class="flex-1 flex flex-col gap-10">
+              <p class="font-bold text-lg">Consommation Énergétique  (DPE)</p>
+              <div class="flex flex-row items-center justify-start gap-2">
+                <span
+                  class="rounded-lg bg-dpeA px-3 py-1 text-lg font-bold block"
+                  [ngClass]="{
+                    'transform scale-140 mx-2 relative border-2 border-dpeADark':
+                      property.DPE.CEletter === 'a'
+                  }"
+                  >A</span
+                >
+                <span
+                  class="rounded-lg bg-dpeB px-3 py-1 text-lg font-bold block"
+                  [ngClass]="{
+                    'px-5 py-3 mx-1 relative border-2 border-dpeBDark':
+                      property.DPE.CEletter === 'b'
+                  }"
+                  >B</span
+                >
+                <span
+                  class="rounded-lg bg-dpeC px-3 py-1 text-lg font-bold block"
+                  [ngClass]="{
+                    'px-5 py-3 mx-1 relative border-2 border-dpeCDark':
+                      property.DPE.CEletter === 'c'
+                  }"
+                  >C
+                </span>
+                <span
+                  class="rounded-lg bg-dpeD px-3 py-1 text-lg font-bold block"
+                  [ngClass]="{
+                    'px-5 py-3 mx-1 relative border-2 border-dpeDDark':
+                      property.DPE.CEletter === 'd'
+                  }"
+                  >D</span
+                >
+                <span
+                  class="rounded-lg bg-dpeE px-3 py-1 text-lg font-bold block"
+                  [ngClass]="{
+                    'px-5 py-3 mx-1 relative border-2 border-dpeEDark':
+                      property.DPE.CEletter === 'e'
+                  }"
+                  >E</span
+                >
+                <span
+                  class="rounded-lg bg-dpeF px-3 py-1 text-lg font-bold block"
+                  [ngClass]="{
+                    'px-5 py-3 mx-1 relative border-2 border-dpeFDark':
+                      property.DPE.CEletter === 'f'
+                  }"
+                  >F</span
+                >
+                <span
+                  class="rounded-lg bg-dpeG px-3 py-1 text-lg font-bold block"
+                  [ngClass]="{
+                    'px-5 py-3 mx-1 relative border-2 border-dpeGDark':
+                      property.DPE.CEletter === 'g'
+                  }"
+                  >G</span
+                >
+              </div>
+              <div class="pl-5">
+                <p class="font-semibold">{{ property.DPE.CE }}</p>
+                <span class="text-[12px] text-mygrey3 font-light"
+                  >kWh/m2 par an</span
+                >
+              </div>
+            </div>
+
+            <div class="flex-1 flex flex-col gap-10">
+              <p class="font-bold text-lg">
+                Émissions de gaz à effet de serre (GES)
+              </p>
+              <div class="flex flex-row items-center justify-start gap-2">
+                <span
+                  class="rounded-lg bg-gesA px-3 py-1 text-lg font-bold block"
+                  [ngClass]="{
+                    'px-5 py-3 mx-1 relative border-2 border-gesADark':
+                      property.DPE.EGletter === 'a'
+                  }"
+                  >A</span
+                >
+                <span
+                  class="rounded-lg bg-gesB px-3 py-1 text-lg font-bold block"
+                  [ngClass]="{
+                    'px-5 py-3 mx-1 relative border-2 border-gesBDark':
+                      property.DPE.EGletter === 'b'
+                  }"
+                  >B</span
+                >
+                <span
+                  class="rounded-lg bg-gesC px-3 py-1 text-lg font-bold block"
+                  [ngClass]="{
+                    'px-5 py-3 mx-1 relative border-2 border-gesCDark':
+                      property.DPE.EGletter === 'c'
+                  }"
+                  >C
+                </span>
+                <span
+                  class="rounded-lg bg-gesD px-3 py-1 text-lg font-bold block"
+                  [ngClass]="{
+                    'px-5 py-3 mx-1 relative border-2 border-gesDDark':
+                      property.DPE.EGletter === 'd'
+                  }"
+                  >D</span
+                >
+                <span
+                  class="rounded-lg bg-gesE px-3 py-1 text-lg font-bold block"
+                  [ngClass]="{
+                    'px-5 py-3 mx-1 relative border-2 border-gesEDark':
+                      property.DPE.EGletter === 'e'
+                  }"
+                  >E</span
+                >
+                <span
+                  class="rounded-lg bg-gesF px-3 py-1 text-lg font-bold block"
+                  [ngClass]="{
+                    'px-5 py-3 mx-1 relative border-2 border-gesFDark':
+                      property.DPE.EGletter === 'f'
+                  }"
+                  >F</span
+                >
+                <span
+                  class="rounded-lg bg-gesG px-3 py-1 text-lg font-bold block"
+                  [ngClass]="{
+                    'px-5 py-3 mx-1 relative border-2 border-gesGDark':
+                      property.DPE.EGletter === 'g'
+                  }"
+                  >G</span
+                >
+              </div>
+              <div class="pl-5">
+                <p class="font-semibold">{{ property.DPE.EG }}</p>
+                <span class="text-[12px] text-mygrey3 font-light"
+                  >kg CO2/m2 par an</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Localisation -->
+        <div class="mb-10">
+          <p class="text-xl font-extrabold mb-10">Localisation</p>
+
+          @if(property.valuation?.token){
+          <iframe class="w-full h-[500px] print:h-[300px] rounded-lg" [src]="safeUrl"></iframe>
+          }@else{
+          <div class="w-full h-[500px] print:h-[300px] rounded-lg overflow-hidden">
+            <google-map
+              class="rounded-lg"
+              mapId="34ea4efc38af24ec"
+              width="100%"
+              height="100%"
+              [options]="this.mapOptions"
+              [center]="mapCenter"
+              [zoom]="zoom"
+            >
+              <map-marker [position]="mapCenter" />
+              <map-circle
+                [center]="mapCenter"
+                [radius]="200"
+                [options]="{
+                  fillColor: '#FFDE59',
+                  fillOpacity: 0.2,
+                  strokeColor: '#EDBE00',
+                  strokeOpacity: 0.5,
+                  strokeWeight: 1
+                }"
+              ></map-circle>
+            </google-map>
+          </div>
+          }
+        </div>
+      </section>
+    </div>
+    <!-- Ces biens pourraient vous intéresser -->
+    @if(similarProperties.length > 0){
+    <hr class="w-3/4 m-auto my-16 no-print" />
+    <div class="w-full text-center no-print">
+      <h2 class="text-2xl font-bold font-raleway mb-12">
+        Ces biens pourraient vous intéresser
+      </h2>
+      <div class="grid lg:grid-cols-3 max-w-[1200px] m-auto">
+        @for (property of similarProperties; track property) {
+        <app-ad-card
+          [routerLink]="['/annonces/', property.id]"
+          routerLinkActive="router-link-active"
+          class="transform lg:scale-[85%] xl-scale-[100%]"
+          [property]="property"
+        ></app-ad-card>
+        }
+      </div>
+    </div>
+    }
+    <!-- Partagez cette annonce -->
+    <hr class="w-3/4 m-auto my-16 no-print" />
+    <div class="w-full text-center no-print">
+      <h2 class="text-2xl font-bold font-raleway mb-16">
+        Partagez cette annonce
+      </h2>
+      <div class="flex items-center justify-center gap-6">
+        <!-- Print -->
+        <button
+          type="button"
+          (click)="generatePDF()"
+          class="h-14 w-14 rounded-full bg-white shadow-md flex items-center justify-center"
+        >
+          <i class="text-2xl fa-solid fa-print"></i>
+        </button>
+        <!-- Facebook -->
+        <a
+          [href]="
+            'https://www.facebook.com/sharer/sharer.php?u=' + encode(adUrl)
+          "
+          target="_blank"
+          class="h-14 w-14 rounded-full bg-white shadow-md flex items-center justify-center"
+        >
+          <i class="text-2xl fa-brands fa-facebook"></i
+        ></a>
+
+        <!-- Twitter -->
+        <a
+          [href]="
+            'https://twitter.com/intent/tweet?url=' +
+            encode(adUrl) +
+            '&text=' +
+            encode(adTitle)
+          "
+          target="_blank"
+          class="h-14 w-14 rounded-full bg-white shadow-md flex items-center justify-center"
+        >
+          <i class="text-2xl fa-brands fa-twitter"></i>
+        </a>
+
+        <!-- LinkedIn -->
+        <a
+          [href]="
+            'https://www.linkedin.com/sharing/share-offsite/?url=' +
+            encode(adUrl)
+          "
+          target="_blank"
+          class="h-14 w-14 rounded-full bg-white shadow-md flex items-center justify-center"
+        >
+          <i class="text-2xl fa-brands fa-linkedin"></i>
+        </a>
+
+        <!-- WhatsApp -->
+        <a
+          [href]="
+            'https://api.whatsapp.com/send?text=' +
+            encode(adTitle + ' ' + adUrl)
+          "
+          target="_blank"
+          class="h-14 w-14 rounded-full bg-white shadow-md flex items-center justify-center"
+        >
+          <i class="text-2xl fa-brands fa-whatsapp"></i>
+        </a>
+        <!-- Link -->
+        <a
+          (click)="copy()"
+          class="h-14 w-14 rounded-full bg-white shadow-md flex items-center justify-center cursor-pointer"
+        >
+          <i class="text-xl fa-solid fa-link"></i>
+        </a>
+      </div>
+      <p *ngIf="isLinkCopied" class="text-center font-semibold py-5">
+        Lien copié dans le presse-papier !
+      </p>
+    </div>
+    <!-- Plus d'information -->
+    <hr class="w-3/4 m-auto my-16 no-print" />
+    <div
+      class="w-full px-5 md:px-10 rounded-2xl mb-16 font-open text-mygrey1 flex flex-col gap-14 items-center justify-center no-print"
+    >
+      <h2 class="text-2xl font-bold font-raleway text-center">
+        Besoin de plus d'information ?
+      </h2>
+      <p class="text-xl leading-relaxed text-justify lg:w-3/4">
+        Vous êtes professionnels de l’immobilier ? Vous souhaitez déposer vos
+        annonces à l’unité sans abonnement sans engagement sur + de 50
+        plateformes de référence simultanément ?
+      </p>
+      <a
+        href="https://www.app.diffuze.fr"
+        target="_blank"
+        rel="external"
+        class="bg-myyellow1 text-mygrey1 rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-myyellow2 transition-all transition-300 cursor-pointer"
+        >Déposer une annonce
+      </a>
+      <div class="flex items-center justify-center gap-5 w-1/2">
+        <hr class="w-full border-t-1 border-mygrey3" />
+        <p>ou</p>
+        <hr class="w-full border-t-1 border-mygrey3" />
+      </div>
+      <div
+        class="flex flex-col lg:flex-row items-center justify-center gap-10 lg:pl-[150px]"
+      >
+        <a
+          href="https://app.lemcal.com/@diffuze/15min"
+          target="_blank"
+          rel="external"
+          class="bg-mygrey2 text-white rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-mygrey1 transition-all transition-300 cursor-pointer"
+          >Prendre rendez-vous
+        </a>
+        <img src="assets/img/icon/victor.png" class="w-[100px]" alt="" />
+      </div>
+    </div>
+  </div>
+</div>

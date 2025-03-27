@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
 import { PartnersDialogComponent } from '../../shared/components/partners-dialog/partners-dialog.component';
 import { NumberCardComponent } from './components/number-card/number-card.component';
 import reviewsDetails from '../../../../assets/data/reviews.json';
+import { FiltersDialogComponent } from "../annonces/components/filters-dialog/filters-dialog.component";
 
 @Component({
   selector: 'app-home',
@@ -27,7 +28,7 @@ import reviewsDetails from '../../../../assets/data/reviews.json';
     PropertyCardComponent,
     RouterLink,
     PartnersDialogComponent,
-    NumberCardComponent,
+    NumberCardComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -48,8 +49,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   router = inject(Router);
   propertyGateway = inject(PropertyGateway);
   properties$!: Observable<Property[]>;
-  isDialogOpen: boolean = false;
   properties: Property[] = [];
+  isDialogOpen: boolean = false;
   isCarouselStart = true;
   isCarouselEnd = false;
   hasStartedAnimation: boolean = false;

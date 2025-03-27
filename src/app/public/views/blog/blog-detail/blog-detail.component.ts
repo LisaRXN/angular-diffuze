@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PrerenderService } from '../../../../core/services/prerender.service';
 import { Article } from '../../../../core/models/article.models';
 import { combineLatest, switchMap, tap } from 'rxjs';
@@ -17,6 +17,7 @@ import { environment } from '../../../../../environments/environment';
 export class BlogDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private seoService: SeoService,
     private articleGateway: ArticleGateway
   ) {}
@@ -37,6 +38,9 @@ export class BlogDetailComponent implements OnInit {
         )
       ),
     ]).subscribe(([types, article]) => {
+      if (!article) {
+        this.router.navigate(['/']);
+      }
       this.types = types;
       this.article = article;
       this.articleType = types.find((type) => type.id === article.type_article);

@@ -22,6 +22,7 @@ export interface Article {
   page_title?:string;
   type_article?:number;
   html_code?:string;
+  markdown?:string;
   creation_date?: Date;
   update_date?: Date;
   is_active?:number
