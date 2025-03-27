@@ -83,7 +83,7 @@
         </div>
         <div class="flex items-center text-mygrey2 text-sm justify-start gap-2">
           <img src="assets/img/icon/calender.png" class="h-5" alt="" />
-          <p>{{ articles[0].update_date }}</p>
+          {{ articles[0].update_date | date : "longDate" : "" : "fr-FR" }}
           <p>•</p>
           <p>{{ articles[0].reading_time }} min</p>
         </div>

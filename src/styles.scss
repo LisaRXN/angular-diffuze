@@ -31,6 +31,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: red;
     font-size: 0.8em;
   }
+
+  .success {
+    color: green;
+    font-size: 0.8em;
+  }
   
 .pac-container { 
     position: absolute !important;
@@ -61,3 +66,24 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: white !important;
   }
   
+
+  @media print {
+    * {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+  }
+    body {
+        font-size: 12px !important;
+    }
+    .no-print {
+        display: none !important;
+    }
+
+    .print-container {
+        width: 100%;
+        max-width: 21cm;
+        padding: 1cm;
+        margin: 0 auto;
+        box-shadow: none;
+    }
+}

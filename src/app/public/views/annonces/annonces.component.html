@@ -9,13 +9,14 @@
       class="px-5 bg-[url(assets/img/photo/annonces.jpg)] h-[600px] bg-center bg-cover bg-no-repeat w-full flex flex-col items-center justify-center"
     >
       <div class="z-10 transform flex flex-col items-center">
-        <h1 class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-12">
-          Votre futur bien, en toute simplicité.
+        <h1 class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-10">
+          Découvrez les annonces de nos agences partenaires en France
         </h1>
         <p
           class="z-10 text-lg md:text-xl leading-relaxed md:w-3/4 text-center mb-20"
         >
-          Découvrez les annonces exclusives de nos clients.
+          Diffusez sur plus de 50 portails de référence et trouvez votre bonheur
+          !
         </p>
       </div>
 
@@ -263,27 +264,45 @@
         ></app-ad-card>
       </div>
 
-      <google-map
-        (mapClick)="clearSelected()"
-        mapId="34ea4efc38af24ec"
-        class="w-full h-full"
-        width="100%"
-        height="100%"
-        [center]="mapCenter()"
-        [zoom]="zoom()"
-      >
-        <map-marker-clusterer>
-          <map-marker
-            *ngFor="let property of displayedProperties"
-            #marker
-            [position]="getPosition(property)"
-            class="!text-white"
-            [label]="property.transaction_type === 'selling' ? (property.selling_price | mapPrice ) + ' €' : (property.rent_by_month + ' €')"
-            [icon]="iconConfig"
-            (mapClick)="displayOnMap(property)"
-          ></map-marker>
-        </map-marker-clusterer>
-      </google-map>
+      <div class="w-full h-full rounded-lg overflow-hidden">
+        <google-map
+          (mapClick)="clearSelected()"
+          mapId="34ea4efc38af24ec"
+          class="w-full h-full !rounded-lg"
+          width="100%"
+          height="100%"
+          [center]="mapCenter()"
+          [zoom]="zoom()"
+        >
+          <map-marker-clusterer>
+            <map-marker
+              #marker
+              *ngFor="let property of displayedProperties"
+              [position]="getPosition(property)"
+              class="!text-white"
+              [label]="
+                property.transaction_type === 'selling'
+                  ? (property.selling_price | mapPrice) + ' €'
+                  : property.rent_by_month + ' €'
+              "
+              [icon]="iconConfig"
+              (mapClick)="displayOnMap(property)"
+            ></map-marker>
+            <map-circle
+              *ngFor="let property of displayedProperties"
+              [center]="getPosition(property)"
+              [radius]="200"
+              [options]="{
+                fillColor: '#FFDE59',
+                fillOpacity: 0.2,
+                strokeColor: '#EDBE00',
+                strokeOpacity: 0.5,
+                strokeWeight: 1
+              }"
+            ></map-circle>
+          </map-marker-clusterer>
+        </google-map>
+      </div>
     </div>
   </div>
 </div>
@@ -352,7 +371,7 @@
           class="flex flex-col md:flex-row items-center justify-start gap-4 w-full"
         >
           <div class="flex-1 w-full">
-            <label class="whitespace-nowrap block mb-2" for="budgetMin"
+            <label class="whitespace-nowrap block mb-2"
               >Budget Minimum :
             </label>
             <div class="relative flex items-stretch">
@@ -376,7 +395,7 @@
             </div>
           </div>
           <div class="flex-1 w-full">
-            <label class="whitespace-nowrap block mb-2" for="budgetMin"
+            <label class="whitespace-nowrap block mb-2"
               >Budget Maximum :
             </label>
             <div class="relative flex items-stretch">
@@ -408,7 +427,7 @@
           class="flex flex-col md:flex-row items-center justify-start gap-4 w-full"
         >
           <div class="flex-1 w-full">
-            <label class="whitespace-nowrap block mb-2" for="surfaceMin"
+            <label class="whitespace-nowrap block mb-2"
               >Surface Minimum :
             </label>
             <div class="relative flex items-stretch">
@@ -432,7 +451,7 @@
             </div>
           </div>
           <div class="flex-1 w-full">
-            <label class="whitespace-nowrap block mb-2" for="surfaceMax"
+            <label class="whitespace-nowrap block mb-2"
               >Surface Maximum :
             </label>
             <div class="relative flex items-stretch">
@@ -577,7 +596,7 @@
           <label
             [ngClass]="{
               'p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
-              'border-mygrey3': !advantages.has_parking,
+              'border-mygrey3': !others.has_parking,
               'border-2 border-black': advantages.has_parking
             }"
           >
@@ -712,10 +731,25 @@
     </div>
 
     <!-- Localisation -->
-    <form [formGroup]="alertForm" (ngSubmit)="onSubmitAlert()">
-      <div class="p-2 md:p-10 flex flex-col gap-8 mb-10">
+    <div
+    *ngIf="showSuccessNotif"
+    class="flex flex-col items-center justify-center gap-10 px-10 h-full"
+  >
+    <img
+      src="assets/img/icon/sendMessage.png"
+      class="w-24 h-auto"
+      alt=""
+    />
+    <p class="text-mygrey3 text-center font-semibold text-lg">
+      Votre demande d'alerte a bien été envoyée.
+    </p>
+  </div>
+    <form [formGroup]="alertForm" (ngSubmit)="onSubmitAlert()" [ngClass]="showSuccessNotif ? 'hidden' : 'block' ">
+      <div class="p-2 md:p-10 flex flex-col gap-8">
         <section id="filter-localization">
-          <p class="text-xl font-semibold pb-4">Localisation</p>
+          <p class="text-xl font-semibold pb-4">
+            Localisation<span class="required"> *</span>
+          </p>
           <div
             #alertLocationContainer
             class="relative flex flex-col items-start justify-center gap-4 w-full"
@@ -725,7 +759,12 @@
               type="text"
               name="location"
               id="location"
-              class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+              class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:ring-1 focus:ring-myyellow1 focus:outline-none focus:border-none select-none"
+              [ngClass]="
+                submitted && alertForm.get('locations')?.hasError('required')
+                  ? 'border-red-500'
+                  : 'border-none'
+              "
               placeholder="Choisissez la ville"
             />
             <div
@@ -749,22 +788,30 @@
         </section>
         <!-- Budget -->
         <section id="filter-budget">
-          <p class="text-xl font-semibold pb-4">Budget</p>
+          <p class="text-xl font-semibold pb-4">
+            Budget <span class="required">*</span>
+          </p>
           <div
             class="flex flex-col md:flex-row items-center justify-start gap-4 w-full"
           >
             <div class="flex-1 w-full">
-              <label class="whitespace-nowrap block mb-2" for="budgetMin"
+              <label class="whitespace-nowrap block mb-2"
                 >Budget Minimum :
               </label>
 
               <div class="relative flex items-stretch">
                 <input
-                  formControlName="minPrice"
+                  formControlName="budgetMin"
                   type="number"
                   min="0"
                   placeholder="Budget minimum"
-                  class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                  class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                  [ngClass]="
+                    submitted &&
+                    alertForm.get('budgetMin')?.hasError('required')
+                      ? 'border-red-500'
+                      : 'border-none'
+                  "
                 />
                 <span
                   class="absolute text-zinc-600 right-6 top-3 font-semibold text-sm"
@@ -773,16 +820,22 @@
               </div>
             </div>
             <div class="flex-1 w-full">
-              <label class="whitespace-nowrap block mb-2" for="budgetMin"
+              <label class="whitespace-nowrap block mb-2"
                 >Budget Maximum :
               </label>
               <div class="relative flex items-stretch">
                 <input
-                  formControlName="maxPrice"
+                  formControlName="budgetMax"
                   type="number"
                   min="0"
                   placeholder="Budget minimum"
-                  class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                  class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                  [ngClass]="
+                    submitted &&
+                    alertForm.get('budgetMax')?.hasError('required')
+                      ? 'border-red-500'
+                      : 'border-none'
+                  "
                 />
                 <span
                   class="absolute text-zinc-600 right-6 top-3 font-semibold text-sm"
@@ -794,21 +847,29 @@
         </section>
         <!-- Surface -->
         <section id="filter-surface">
-          <p class="text-xl font-semibold pb-4">Surface</p>
+          <p class="text-xl font-semibold pb-4">
+            Surface <span class="required">*</span>
+          </p>
           <div
             class="flex flex-col md:flex-row items-center justify-start gap-4 w-full"
           >
             <div class="flex-1 w-full">
-              <label class="whitespace-nowrap block mb-2" for="surfaceMin"
+              <label class="whitespace-nowrap block mb-2"
                 >Surface Minimum :
               </label>
               <div class="relative flex items-stretch">
                 <input
-                  formControlName="minSurface"
+                  formControlName="surfaceMin"
                   type="number"
                   min="0"
                   placeholder="Surface minimum"
-                  class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                  class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                  [ngClass]="
+                    submitted &&
+                    alertForm.get('surfaceMin')?.hasError('required')
+                      ? 'border-red-500'
+                      : 'border-none'
+                  "
                 />
                 <span
                   class="absolute text-zinc-600 right-6 top-3 font-semibold text-sm"
@@ -817,16 +878,22 @@
               </div>
             </div>
             <div class="flex-1 w-full">
-              <label class="whitespace-nowrap block mb-2" for="surfaceMax"
+              <label class="whitespace-nowrap block mb-2"
                 >Surface Maximum :
               </label>
               <div class="relative flex items-stretch">
                 <input
-                  formControlName="maxSurface"
+                  formControlName="surfaceMax"
                   type="number"
                   min="0"
                   placeholder="Surface maximum"
-                  class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                  class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                  [ngClass]="
+                    submitted &&
+                    alertForm.get('surfaceMax')?.hasError('required')
+                      ? 'border-red-500'
+                      : 'border-none'
+                  "
                 />
                 <span
                   class="absolute text-zinc-600 right-6 top-3 font-semibold text-sm"
@@ -848,20 +915,20 @@
                 <button
                   type="button"
                   (click)="roomsForm(true)"
-                  [disabled]="alertForm.get('room')?.value === 1"
+                  [disabled]="alertForm.get('roomMin')?.value === 1"
                   class="p-2 bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center disabled:opacity-50"
                 >
                   <i class="fa-solid fa-minus"></i>
                 </button>
 
                 <span class="text-lg font-semibold">{{
-                  alertForm.get("room")?.value
+                  alertForm.get("roomMin")?.value
                 }}</span>
 
                 <button
                   type="button"
                   (click)="roomsForm()"
-                  [disabled]="alertForm.get('room')?.value === 5"
+                  [disabled]="alertForm.get('roomMin')?.value === 5"
                   class="p-2 bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center"
                 >
                   <i class="fa-solid fa-plus"></i>
@@ -876,20 +943,20 @@
                 <button
                   type="button"
                   (click)="bedroomsForm(true)"
-                  [disabled]="alertForm.get('bedroom')?.value === 1"
+                  [disabled]="alertForm.get('bedroomMin')?.value === 1"
                   class="p-2 bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center disabled:opacity-50"
                 >
                   <i class="fa-solid fa-minus"></i>
                 </button>
 
                 <span class="text-lg font-semibold">{{
-                  alertForm.get("bedroom")?.value
+                  alertForm.get("bedroomMin")?.value
                 }}</span>
 
                 <button
                   type="button"
                   (click)="bedroomsForm()"
-                  [disabled]="alertForm.get('bedroom')?.value === 5"
+                  [disabled]="alertForm.get('bedroomMin')?.value === 5"
                   class="p-2 bg-gray-200 rounded-full w-8 h-8 flex items-center justify-center"
                 >
                   <i class="fa-solid fa-plus"></i>
@@ -905,7 +972,7 @@
             <label
               class="p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer"
               [ngClass]="
-                alertForm.get('propertyType')?.value === 'maison'
+                alertForm.get('hasHouse')?.value
                   ? 'border-2 border-black'
                   : 'border-mygrey3'
               "
@@ -913,8 +980,8 @@
               <input
                 type="radio"
                 class="hidden"
-                formControlName="propertyType"
-                value="maison"
+                formControlName="hasHouse"
+                [value]="true"
               />
               <i class="fa-solid fa-house"></i> Maison
             </label>
@@ -922,7 +989,7 @@
             <label
               class="p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer"
               [ngClass]="
-                alertForm.get('propertyType')?.value === 'appartement'
+                alertForm.get('hasApartment')?.value
                   ? 'border-2 border-black'
                   : 'border-mygrey3'
               "
@@ -930,27 +997,10 @@
               <input
                 type="radio"
                 class="hidden"
-                formControlName="propertyType"
-                value="appartement"
+                formControlName="hasApartment"
+                [value]="true"
               />
               <i class="fa-solid fa-building"></i> Appartement
-            </label>
-
-            <label
-              class="p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer"
-              [ngClass]="
-                alertForm.get('propertyType')?.value === 'loft'
-                  ? 'border-2 border-black'
-                  : 'border-mygrey3'
-              "
-            >
-              <input
-                type="radio"
-                class="hidden"
-                formControlName="propertyType"
-                value="loft"
-              />
-              <i class="fa-solid fa-warehouse"></i> Loft
             </label>
           </div>
         </section>
@@ -958,24 +1008,20 @@
         <!-- Autre critères -->
         <section id="filter-others">
           <p class="text-xl font-semibold pb-4">Avantages et infrastructures</p>
-          <div
-            formGroupName="advantages"
-            class="flex flex-wrap items-center gap-4"
-          >
+          <div formGroupName="others" class="flex flex-wrap items-center gap-4">
             <label
               [ngClass]="{
                 'p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
-                'border-mygrey3': !this.alertForm.get('advantages.has_parking')
-                  ?.value,
-                'border-2 border-black': this.alertForm.get(
-                  'advantages.has_parking'
-                )?.value
+                'border-mygrey3':
+                  !this.alertForm.get('others.hasParking')?.value,
+                'border-2 border-black':
+                  this.alertForm.get('others.hasParking')?.value
               }"
             >
               <input
                 type="checkbox"
                 class="hidden"
-                formControlName="has_parking"
+                formControlName="hasParking"
               />
               <i class="fa-solid fa-square-parking"></i> Parking
             </label>
@@ -983,17 +1029,16 @@
             <label
               [ngClass]="{
                 'p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
-                'border-mygrey3': !this.alertForm.get('advantages.has_cellar')
-                  ?.value,
-                'border-2 border-black': this.alertForm.get(
-                  'advantages.has_cellar'
-                )?.value
+                'border-mygrey3':
+                  !this.alertForm.get('others.hasBasement')?.value,
+                'border-2 border-black':
+                  this.alertForm.get('others.hasBasement')?.value
               }"
             >
               <input
                 type="checkbox"
                 class="hidden"
-                formControlName="has_cellar"
+                formControlName="hasBasement"
               />
               <i class="fa-solid fa-box-archive"></i>
               Cave
@@ -1002,154 +1047,129 @@
             <label
               [ngClass]="{
                 'p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
-                'border-mygrey3': !this.alertForm.get('advantages.has_elevator')
-                  ?.value,
-                'border-2 border-black': this.alertForm.get(
-                  'advantages.has_elevator'
-                )?.value
+                'border-mygrey3':
+                  !this.alertForm.get('others.hasElevator')?.value,
+                'border-2 border-black':
+                  this.alertForm.get('others.hasElevator')?.value
               }"
             >
               <input
                 type="checkbox"
                 class="hidden"
-                formControlName="has_elevator"
+                formControlName="hasElevator"
               />
               <i class="fa-solid fa-elevator"></i> Ascenseur
             </label>
             <label
               [ngClass]="{
                 'p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
-                'border-mygrey3': !this.alertForm.get('advantages.has_balcony')
-                  ?.value,
-                'border-2 border-black': this.alertForm.get(
-                  'advantages.has_balcony'
-                )?.value
+                'border-mygrey3':
+                  !this.alertForm.get('others.hasBalcony')?.value,
+                'border-2 border-black':
+                  this.alertForm.get('others.hasBalcony')?.value
               }"
             >
               <input
                 type="checkbox"
                 class="hidden"
-                formControlName="has_balcony"
+                formControlName="hasBalcony"
               />
               <i class="fa-solid fa-tree-city"></i> Balcon
             </label>
             <label
               [ngClass]="{
                 'p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
-                'border-mygrey3': !this.alertForm.get('advantages.has_terrace')
-                  ?.value,
-                'border-2 border-black': this.alertForm.get(
-                  'advantages.has_terrace'
-                )?.value
+                'border-mygrey3':
+                  !this.alertForm.get('others.hasTerrace')?.value,
+                'border-2 border-black':
+                  this.alertForm.get('others.hasTerrace')?.value
               }"
             >
               <input
                 type="checkbox"
                 class="hidden"
-                formControlName="has_terrace"
+                formControlName="hasTerrace"
               />
               <i class="fa-solid fa-sun"></i> Terrasse
             </label>
             <label
               [ngClass]="{
                 'p-4 border rounded-2xl hover:border-black hover:border-2 cursor-pointer': true,
-                'border-mygrey3':
-                  !this.alertForm.get('advantages.has_box')?.value,
+                'border-mygrey3': !this.alertForm.get('others.hasBox')?.value,
                 'border-2 border-black':
-                  this.alertForm.get('advantages.has_box')?.value
+                  this.alertForm.get('others.hasBox')?.value
               }"
             >
-              <input formControlName="has_box" type="checkbox" class="hidden" />
+              <input formControlName="hasBox" type="checkbox" class="hidden" />
               <i class="fa-solid fa-warehouse"></i> Box
             </label>
           </div>
         </section>
         <!-- User Information -->
         <section id="information">
-          <p class="text-lg font-semibold mb-4">
-            Vos informations personnelles
+          <p class="text-xl font-semibold mb-4">
+            Vos informations personnelles <span class="required">*</span>
           </p>
           <div class="grid md:grid-cols-2 gap-4 w-full">
             <div class="w-full">
-              <label class="whitespace-nowrap block mb-2"
-                >Nom :<span class="required">*</span>
-              </label>
+              <label class="whitespace-nowrap block mb-2">Nom : </label>
               <input
                 formControlName="lastName"
                 type="text"
                 id="lastName"
-                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                [ngClass]="
+                  submitted && alertForm.get('lastName')?.hasError('required')
+                    ? 'border-red-500'
+                    : 'border-none'
+                "
                 placeholder="Votre nom"
               />
-              <p
-                class="error"
-                *ngIf="
-                  submitted && alertForm.get('lastName')?.hasError('required')
-                "
-              >
-                Le nom est requis.
-              </p>
             </div>
             <div class="w-full">
-              <label class="whitespace-nowrap block mb-2"
-                >Prénom :<span class="required">*</span>
-              </label>
+              <label class="whitespace-nowrap block mb-2">Prénom : </label>
               <input
                 formControlName="firstName"
                 type="text"
                 id="firstName"
-                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                [ngClass]="
+                submitted && alertForm.get('firstName')?.hasError('required')
+                  ? 'border-red-500'
+                  : 'border-none'
+              "
                 placeholder="Votre prénom"
               />
-              <p
-                class="error"
-                *ngIf="
-                  submitted && alertForm.get('lastName')?.hasError('required')
-                "
-              >
-                Le prénom est requis.
-              </p>
             </div>
             <div class="w-full">
-              <label class="whitespace-nowrap block mb-2"
-                >Téléphone : <span class="required">*</span>
-              </label>
+              <label class="whitespace-nowrap block mb-2">Téléphone : </label>
               <input
                 formControlName="phone"
                 type="number"
                 min="0"
-                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                [ngClass]="
+                submitted && alertForm.get('phone')?.hasError('required')
+                  ? 'border-red-500'
+                  : 'border-none'
+              "
                 placeholder="Votre numéro de téléphone"
-                required=""
               />
-              <p
-                class="error"
-                *ngIf="
-                  submitted && alertForm.get('lastName')?.hasError('required')
-                "
-              >
-                Le téléphone est requis.
-              </p>
             </div>
             <div class="w-full">
-              <label class="whitespace-nowrap block mb-2"
-                >Email<span class="required">*</span> :
-              </label>
+              <label class="whitespace-nowrap block mb-2">Email : </label>
               <input
                 formControlName="email"
                 type="email"
                 id="email"
-                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+                [ngClass]="
+                submitted && alertForm.get('email')?.hasError('required')
+                  ? 'border-red-500'
+                  : 'border-none'
+              "
                 placeholder="Votre email"
               />
-              <p
-                class="error"
-                *ngIf="
-                  submitted && alertForm.get('email')?.hasError('required')
-                "
-              >
-                L'email est requis.
-              </p>
               <p
                 class="error"
                 *ngIf="submitted && alertForm.get('email')?.hasError('email')"
@@ -1160,7 +1180,10 @@
           </div>
         </section>
       </div>
-      <div class="flex items-center justify-between w-full">
+      <p class="px-5 w-full text-end mb-10 text-red-500 font-semibold" *ngIf="alertFormError()">
+        {{ alertFormError() }}
+      </p>
+      <div class="px-5 flex items-center justify-between w-full">
         <button
           type="button"
           class="rounded-lg p-4 hover:bg-zinc-100 font-semibold"

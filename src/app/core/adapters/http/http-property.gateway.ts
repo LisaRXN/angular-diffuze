@@ -46,10 +46,8 @@ export class HttpPropertyGateway extends PropertyGateway {
     );
   }
 
-  override sendPropertyInquiry(
-    contactDetails: ContactDetails
-  ): Observable<any> {
+  override sendPropertyInquiry(contactDetails: ContactDetails): Observable<any> {
     console.log('message send', contactDetails);
-    return this.http.post('/', contactDetails);
+    return this.http.post('https://data.barnabe-immo.fr/api/contact-agent/send', contactDetails);
   }
 }

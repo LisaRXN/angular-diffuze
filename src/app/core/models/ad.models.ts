@@ -17,28 +17,6 @@ export interface Filters{
     location: string[];
   };
 
-export interface alertFilters{
-    hasType: string;
-    budgetMin: number | null;
-    budgetMax: number | null;
-    roomMin: number;
-    bedroomMin: number;
-    surfaceMin: number | null;
-    surfaceMax: number | null;
-    others: {
-      hasElevator: boolean;
-      hasBalcony: boolean;
-      hasTerrace: boolean;
-      hasParking: boolean;
-      hasBox: boolean;
-      hasBasement: boolean;
-    };
-    location: string[];
-    lastName:string;
-    firstName:string;
-    email:string;
-    phone:number | null
-  };
 
 interface Photos {
     id:number;

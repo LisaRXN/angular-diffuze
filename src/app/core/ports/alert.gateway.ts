@@ -1,9 +1,9 @@
 import { Observable } from "rxjs";
 import { Property } from "../models/property.model";
-import { Ad, alertFilters } from '../models/ad.models';
+import { alertDetails } from "../models/alert.models";
 
 export abstract class AlertGateway {
 
-    abstract createAlert(filters:alertFilters):Observable<any>
+    abstract createAlert(filters:alertDetails):Observable<any>
 
 }

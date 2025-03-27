@@ -1,8 +1,7 @@
 export interface ContactDetails {
-    lastName: string;
-    firstName: string;
-    email: string;
-    phone: string;
+    clientName: string;
+    clientPhone: string;
+    clientEmail: string;
     message: string;
     propertyId: number;
   };

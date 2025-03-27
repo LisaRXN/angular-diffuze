@@ -19,6 +19,7 @@ export class InMemoryPropertyGateway extends PropertyGateway {
   }
 
   override sendPropertyInquiry(contactDetails: ContactDetails){
+    console.log('Contcat message send', contactDetails)
     return of()
   }
 

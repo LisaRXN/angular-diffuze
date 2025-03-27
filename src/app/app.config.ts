@@ -65,7 +65,7 @@ export const appConfig: ApplicationConfig = {
     ),
     { provide: PropertyGateway, useFactory: () => new HttpPropertyGateway() },
     { provide: ArticleGateway, useFactory: () => new HttpArticleGateway() },
-    { provide: AlertGateway, useFactory: () => new InMemoryAlertGateway() },
+    { provide: AlertGateway, useFactory: () => new HttpAlertGateway() },
     provideAnimationsAsync(),
   ],
 };
