@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -47,6 +47,7 @@ import { alertDetails } from '../../../core/models/alert.models';
     AdCardComponent,
     RouterLink,
     MapPricePipe,
+    NgOptimizedImage,
   ],
   templateUrl: './annonces.component.html',
   styleUrl: './annonces.component.scss',
@@ -126,7 +127,8 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
   );
 
   submitted = false;
-  showSuccessNotif = false
+  showSuccessNotif = false;
+  showErrorNotif = false;
   alertForm: FormGroup = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
@@ -137,7 +139,7 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     hasApartment: new FormControl(false),
     budgetMin: new FormControl(null, [Validators.min(0), Validators.required]),
     budgetMax: new FormControl(null, [Validators.min(0), Validators.required]),
-    roomMin: new FormControl(0,[Validators.min(0)] ),
+    roomMin: new FormControl(0, [Validators.min(0)]),
     bedroomMin: new FormControl(0, [Validators.min(0)]),
     surfaceMin: new FormControl(null, [Validators.min(0), Validators.required]),
     surfaceMax: new FormControl(null, [Validators.min(0), Validators.required]),
@@ -226,16 +228,16 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
   }
 
   getPosition(property: any) {
-    const lat = parseFloat(property.addressForm?.latitude)
-    const lng = parseFloat(property.addressForm?.longitude)
-    if( isNaN(lat) || isNaN(lng)){
-      let pos
-      return pos = {
-        lat : 0,
-        lng : 0
-      }
+    const lat = parseFloat(property.addressForm?.latitude);
+    const lng = parseFloat(property.addressForm?.longitude);
+    if (isNaN(lat) || isNaN(lng)) {
+      let pos;
+      return (pos = {
+        lat: 0,
+        lng: 0,
+      });
     }
-    const noise = 0.3*0.001
+    const noise = 0.3 * 0.001;
     const pos = {
       lat: parseFloat(property.addressForm?.latitude) + noise,
       lng: parseFloat(property.addressForm?.longitude) + noise,
@@ -455,7 +457,7 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
     this.maxSurface.set(null);
 
     localStorage.removeItem('filters');
-    this.clearPlace()
+    this.clearPlace();
   }
 
   onSubmitAlert() {
@@ -468,11 +470,14 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
         .subscribe((data) => {
           console.log(data);
           this.resetForm();
-          if (data.status == 200) this.showSuccessNotif = true;
-          setTimeout(()=> {
-            this.alertCheckboxRef.nativeElement.checked = false;
-          },500)
-          // else this.showErrorNotif();
+          if (data.status == 200) {
+            this.showSuccessNotif = true;
+            setTimeout(() => {
+              this.alertCheckboxRef.nativeElement.checked = false;
+            }, 700);
+          } else {
+            this.showErrorNotif = true;
+          }
         });
     } else {
       return;
@@ -503,8 +508,7 @@ export class AnnoncesComponent implements OnInit, AfterViewInit {
 
   alertFormError() {
     return this.submitted &&
-      (
-        this.alertForm.get('locations')?.hasError('required') ||
+      (this.alertForm.get('locations')?.hasError('required') ||
         this.alertForm.get('budgetMin')?.hasError('required') ||
         this.alertForm.get('budgetMax')?.hasError('required') ||
         this.alertForm.get('surfaceMin')?.hasError('required') ||

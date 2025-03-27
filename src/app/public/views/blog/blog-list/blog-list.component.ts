@@ -1,5 +1,5 @@
 import { Component, Inject, inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser, NgOptimizedImage } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PrerenderService } from '../../../../core/services/prerender.service';
 import { combineLatest, fromEvent, map, Subscription, switchMap } from 'rxjs';
@@ -10,7 +10,7 @@ import { environment } from '../../../../../environments/environment';
 @Component({
   selector: 'app-blog-list',
   standalone: true,
-  imports: [CommonModule, RouterLink, ArticleCardComponent],
+  imports: [CommonModule, RouterLink, ArticleCardComponent, NgOptimizedImage],
   templateUrl: './blog-list.component.html',
   styles: [
     `

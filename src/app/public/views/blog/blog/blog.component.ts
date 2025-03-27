@@ -1,6 +1,6 @@
 import { Component, inject, model, OnInit, signal } from '@angular/core';
 import { PrerenderService } from '../../../../core/services/prerender.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { forkJoin, map, Observable, switchMap, tap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +11,7 @@ import { Article } from '../../../../core/models/article.models';
 
 @Component({
   selector: 'app-blog',
-  imports: [CommonModule, RouterLink, FormsModule, ArticleCardComponent],
+  imports: [CommonModule, RouterLink, FormsModule, ArticleCardComponent, NgOptimizedImage],
   templateUrl: './blog.component.html',
 })
 export class BlogComponent implements OnInit {

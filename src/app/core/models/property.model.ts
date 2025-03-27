@@ -76,6 +76,15 @@ interface DPE {
     options: any[];
     type_id: number;
   }
+
+  interface User {
+    id: number,
+    firstName: string,
+    lastName: string,
+    mail: string,
+    phone: string,
+    society:string
+  }
   
   export interface Property {
     id: number;
@@ -104,6 +113,7 @@ interface DPE {
     advantages: Advantages;
     contact: Contact;
     valuation?:Valuation;
+    user?:User;
     media: Media;
     settings: Settings;
   }
