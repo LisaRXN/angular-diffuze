@@ -78,5 +78,7 @@ export const reqHandler = createNodeRequestHandler(app);
 
 /**
  * Export the Express app for compatibility
+ * Multiple export methods for maximum compatibility
  */
 export { app };
+export default app;
