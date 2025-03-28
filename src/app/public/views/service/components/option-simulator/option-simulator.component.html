@@ -198,8 +198,8 @@
         (click)="activeOption('green-acres')"
         id="green-acres"
         [ngClass]="{
-          'font-semibold border border-white flex-1  p-4 rounded-t-lg pb-4 text-center': true,
-          'md:rounded-br-lg' : !isOpenOption,
+          'font-semibold border border-white rounded-t-lg flex-1 p-4 pb-4 text-center': true,
+          'md:rounded-br-lg rounded-tl-lg' : !isOpenOption,
           'bg-mygrey2 text-myyellow1': optionView.id !='green-acres',
           'bg-myyellow1 text-mygrey2': optionView.id === 'green-acres'
         }"
