@@ -6,11 +6,13 @@
       <!-- Navbar -->
       <app-navbar></app-navbar>
       <!-- Page content here -->
-      <main class="min-h-screen bg-gray-200 lg:pt-[68px]">
+      <main class="min-h-screen bg-gray-200">
         <router-outlet></router-outlet>
       </main>
 
-      <app-footer></app-footer>
+      @if( !isAnnoncesPage()){
+        <app-footer ></app-footer>
+      }
     </div>
     <app-cookie-consent></app-cookie-consent>
   </div>
@@ -26,7 +28,7 @@
     >
       <!-- Coupon -->
       <div
-        class="relative block sm:hidden bg-zinc-200 px-5 p-2 h-[60px] w-[160px] rounded-lg xl:mr-10"
+        class="relative block sm:hidden bg-zinc-200 px-5 p-2 h-[60px] w-[160px] rounded-lg mb-5"
       >
         <span
           class="absolute left-0 transforme -translate-x-[50%] -translate-y-[50%] top-1/2 h-[20px] w-[20px] rounded-full bg-mygrey1"
@@ -45,21 +47,27 @@
 
       <!-- Sidebar content here -->
       <li>
-        <div class="flex items-center"><img src="assets/img/icon/emoji-speaker.png" class="w-[18px]"/>
+        <div class="flex items-center gap-4"><img src="assets/img/icon/nav-offer.png" class="w-[20px]"/>
         <a (click)="closeDrawer()" routerLink="/notre-offre">Notre Offre</a>
         </div>
       </li>
       <li>
-        <div class="flex items-center"><img src="assets/img/icon/emoji-client.png" class="w-[18px]"/>
+        <div class="flex items-center gap-4"><img src="assets/img/icon/nav-partners.png" class="w-[21px]"/>
         <a (click)="closeDrawer()" routerLink="/nos-partenaires">Nos Partenaires</a>
         </div>
       </li>
       <li>
-        <div class="flex items-center"><img src="assets/img/icon/emoji-pencil.png" class="w-[18px]"/>
+        <div class="flex items-center gap-4"><img src="assets/img/icon/nav-blog.png" class="w-[25px]"/>
         <a (click)="closeDrawer()" routerLink="/blog">Le Blog</a>
         </div>
+      </li>
       <li>
-        <div class="flex items-center"><img src="assets/img/icon/emoji-login.png" class="w-[18px]"/>
+        <div class="flex items-center gap-4"><img src="assets/img/icon/nav-property.png" class="w-[25px]"/>
+        <a (click)="closeDrawer()" routerLink="/blog">Les Annonces</a>
+        </div>
+      </li>
+      <li>
+        <div class="flex items-center gap-4"><img src="assets/img/icon/emoji-dashboard.png" class="w-[25px]"/>
         <a href="https://www.app.diffuze.fr" target="_blank" rel="external"
           >Espace personnel</a
         >

@@ -2,24 +2,25 @@
   class="min-h-screen bg-zinc-100 flex flex-col items-center font-open overflow-x-hidden"
 >
   <!-- Hero -->
-  <div class="relative h-[500px] w-full pb-16 text-white md:mb-8">
+  <div class="relative h-[500px] w-full flex items-center justify-center pb-16 text-white md:mb-8">
+    <img
+    ngSrc="assets/img/photo/blog1.jpg"
+    fill
+    priority
+    alt="DiffuZe, diffusion d'annonces immobilières"
+  />
     <div class="bg-black opacity-55 absolute inset-0 w-full h-full"></div>
     <span
-      class="absolute z-10 h-[120px] tranform translate-y-2  w-[120%] -rotate-3 -bottom-10 bg-zinc-100"
+      class="absolute z-10 h-[120px] tranform translate-y-2 w-[120%] -rotate-3 -bottom-10 bg-zinc-100"
     ></span>
-    <div
-      class="px-5 bg-[url(assets/img/photo/blog1.jpg)] h-[500px] bg-center bg-cover bg-no-repeat w-full flex flex-col items-center justify-center"
-    >
-      <div class="z-20 transform -translate-y-10 flex flex-col items-center">
-        <h1 class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-12">
+      <div class="z-10 flex flex-col items-center">
+        <h1 class="text-4xl font-paytone text-center max-w-[600px] mb-12">
           Guide des professionnels de l'immobilier
         </h1>
         <p class="z-10 text-lg md:text-xl leading-relaxed md:w-3/4 text-center">
           Découvrez tous les incontournables de la vente immobilière dans notre
           guide complet.
         </p>
-      </div>
-
     </div>
   </div>
 
@@ -87,7 +88,9 @@
         <div
           class="flex items-center justify-center gap-2 bg-mygrey2 hover:bg-mygrey3 transition duration-300 text-white text-sm px-4 py-2 rounded-full self-end"
         >
-          <a [routerLink]="['/blog/categorie', getSlugCategory(type.id)]" class="whitespace-nowrap"
+          <a
+            [routerLink]="['/blog/categorie', getSlugCategory(type.id)]"
+            class="whitespace-nowrap"
             >Tous les articles</a
           >
           <img

@@ -5,7 +5,7 @@ import questionDetails from '../../../../assets/data/questions.json';
 import { OptionComponent } from '../../shared/components/option/option.component';
 import serviceDetails1 from '../../../../assets/data/service1.json';
 import serviceDetails2 from '../../../../assets/data/service2.json';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { HowCardComponent } from '../../shared/components/how-card/how-card.component';
 import { OptionSimulatorComponent } from './components/option-simulator/option-simulator.component';
 import { ServiceCardComponent } from './components/service-card/service-card.component';
@@ -23,6 +23,7 @@ interface Question {
     HowCardComponent,
     OptionSimulatorComponent,
     ServiceCardComponent,
+    NgOptimizedImage
   ],
   templateUrl: './service.component.html',
   styleUrl: './service.component.scss',
