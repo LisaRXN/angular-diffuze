@@ -17,10 +17,6 @@ const browserDistFolder = resolve(serverDistFolder, '../browser');
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
-// Liste des routes qui sont rendues côté client
-// Ajoutez ici les futures routes en mode client
-const clientSideRoutes = ['/annonces', '/dashboard'];
-
 /**
  * Serve static files from /browser
  */
@@ -31,22 +27,6 @@ app.use(
     redirect: false,
   })
 );
-
-/**
- * Handle client-side rendered routes by serving the index.html
- * This middleware must be before the Angular rendering middleware
- */
-clientSideRoutes.forEach((route) => {
-  // Route exacte (ex: /annonces)
-  app.get(route, (req, res) => {
-    res.sendFile(resolve(browserDistFolder, 'index.html'));
-  });
-
-  // Sous-routes (ex: /annonces/*, /dashboard/*)
-  app.get(`${route}/*`, (req, res) => {
-    res.sendFile(resolve(browserDistFolder, 'index.html'));
-  });
-});
 
 /**
  * Handle all other requests by rendering the Angular application.
@@ -81,4 +61,3 @@ export const reqHandler = createNodeRequestHandler(app);
  * Multiple export methods for maximum compatibility
  */
 export { app };
-export default app;
