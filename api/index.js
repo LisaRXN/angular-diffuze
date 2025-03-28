@@ -1,3 +1,4 @@
-import { app } from "../dist/diffuze/server/server.mjs";
-
-export default app;
+export default async function handler(req, res) {
+  const { app } = await import("../dist/diffuze/server/server.mjs");
+  return app(req, res);
+}
