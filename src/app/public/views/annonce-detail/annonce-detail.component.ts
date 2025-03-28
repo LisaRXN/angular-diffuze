@@ -30,8 +30,6 @@ import {
 } from '@angular/platform-browser';
 import { PhoneNumberPipe } from '../../../pipes/phoneNumber/phone-number.pipe';
 import { SeoService } from '../../../core/services/seo.service';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-annonce-detail',
