@@ -25,10 +25,10 @@ export const serverRoutes: ServerRoute[] = [
     path: 'protection-des-donnees',
     renderMode: RenderMode.Prerender,
   },
-  /* {
+  {
     path: 'annonces',
-    renderMode: RenderMode.Client,
-  }, */
+    renderMode: RenderMode.Prerender,
+  },
   {
     path: 'blog/:slug', // Articles de blog en SSG avec paramètres
     renderMode: RenderMode.Prerender, // SSG avec paramètres dynamiques

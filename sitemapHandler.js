@@ -1,6 +1,6 @@
-const { SitemapStream, streamToPromise } = require("sitemap");
-const fs = require("fs");
-const path = require("path");
+import { SitemapStream, streamToPromise } from "sitemap";
+import fs from "fs";
+import path from "path";
 
 async function fetchUrls() {
   try {

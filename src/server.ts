@@ -1,3 +1,4 @@
+// src/server.ts
 import {
   AngularNodeAppEngine,
   createNodeRequestHandler,
@@ -56,6 +57,7 @@ if (isMainModule(import.meta.url)) {
 export const reqHandler = createNodeRequestHandler(app);
 
 /**
- * Export the Express app for Vercel serverless deployment
+ * Export the Express app for compatibility
+ * Multiple export methods for maximum compatibility
  */
 export { app };
