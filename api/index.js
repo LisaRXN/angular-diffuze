@@ -1,4 +1,6 @@
 export default async function handler(req, res) {
   const { app } = await import("../dist/diffuze/server/server.mjs");
-  return app(req, res);
+
+  // Utilisez la méthode handle de l'application Express
+  return app.handle(req, res);
 }
