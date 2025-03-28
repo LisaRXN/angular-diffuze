@@ -1,34 +1,33 @@
 export default async function handler(req, res) {
   try {
+    // Importer le module
     const serverModule = await import("../dist/diffuze/server/server.mjs");
 
-    // Récupérer le premier export qui semble être une application Express
-    const keys = Object.keys(serverModule);
-    let expressApp = null;
+    // Utiliser AngularAppEngine
+    if (serverModule.AngularAppEngine) {
+      const engine = new serverModule.AngularAppEngine();
 
-    for (const key of keys) {
-      const potentialApp = serverModule[key];
-      // Vérifier si c'est une application Express (a une méthode handle)
-      if (potentialApp && typeof potentialApp.handle === "function") {
-        expressApp = potentialApp;
-        break;
+      // Traiter la requête avec l'engine Angular
+      const response = await engine.handle(req);
+
+      // Si une réponse est retournée, on l'envoie
+      if (response) {
+        // Transférer les en-têtes
+        if (response.headers) {
+          for (const [key, value] of response.headers.entries()) {
+            res.setHeader(key, value);
+          }
+        }
+
+        // Définir le statut et envoyer le corps
+        return res.status(response.status || 200).send(response.body);
       }
     }
 
-    if (expressApp) {
-      return expressApp.handle(req, res);
-    } else {
-      // Aucune application Express trouvée
-      res
-        .status(500)
-        .send(
-          `Exports disponibles: ${JSON.stringify(
-            keys
-          )}, mais aucun n'est une application Express`
-        );
-    }
+    // Si nous arrivons ici, aucune réponse n'a été générée
+    res.status(404).send("Page non trouvée");
   } catch (error) {
-    console.error("Erreur:", error);
-    res.status(500).send(`Erreur: ${error.message}`);
+    console.error("Erreur lors du traitement de la requête:", error);
+    res.status(500).send(`Erreur serveur: ${error.message}`);
   }
 }
