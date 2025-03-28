@@ -17,6 +17,10 @@ const browserDistFolder = resolve(serverDistFolder, '../browser');
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
+// Liste des routes qui sont rendues côté client
+// Ajoutez ici les futures routes en mode client
+const clientSideRoutes = ['/annonces', '/dashboard'];
+
 /**
  * Serve static files from /browser
  */
@@ -27,6 +31,22 @@ app.use(
     redirect: false,
   })
 );
+
+/**
+ * Handle client-side rendered routes by serving the index.html
+ * This middleware must be before the Angular rendering middleware
+ */
+clientSideRoutes.forEach((route) => {
+  // Route exacte (ex: /annonces)
+  app.get(route, (req, res) => {
+    res.sendFile(resolve(browserDistFolder, 'index.html'));
+  });
+
+  // Sous-routes (ex: /annonces/*, /dashboard/*)
+  app.get(`${route}/*`, (req, res) => {
+    res.sendFile(resolve(browserDistFolder, 'index.html'));
+  });
+});
 
 /**
  * Handle all other requests by rendering the Angular application.
@@ -55,13 +75,6 @@ if (isMainModule(import.meta.url)) {
  * The request handler used by the Angular CLI (dev-server and during build).
  */
 export const reqHandler = createNodeRequestHandler(app);
-
-/**
- * Function pour Vercel serverless - à utiliser dans api/index.js
- */
-export function handleVercelRequest(req: any, res: any) {
-  return app(req, res);
-}
 
 /**
  * Export the Express app for compatibility
