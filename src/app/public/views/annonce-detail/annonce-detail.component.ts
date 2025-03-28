@@ -43,7 +43,7 @@ import html2canvas from 'html2canvas';
     RouterLink,
     CapitalizePipe,
     AdCardComponent,
-    PhoneNumberPipe,
+    PhoneNumberPipe
   ],
   templateUrl: './annonce-detail.component.html',
   styleUrl: './annonce-detail.component.scss',
@@ -174,8 +174,6 @@ export class AnnonceDetailComponent {
     if (typeof window !== 'undefined') {
       this.adUrl = window.location.href;
     }
-    const computedStyles = window.getComputedStyle(document.body);
-    console.log('Background color:', computedStyles.backgroundColor);
   }
 
   onSubmitContact() {
@@ -188,8 +186,8 @@ export class AnnonceDetailComponent {
           console.log(data);
           this.resetForm();
           this.submitted = false;
-          if (data.status == 200) this.showSuccessNotif = true;
-          else this.showErrorNotif = true;
+          this.showSuccessNotif = data.success;
+          this.showErrorNotif = !data.success;
         });
     } else {
       return;

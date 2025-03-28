@@ -2,16 +2,19 @@
   class="min-h-screen bg-gray-100 flex flex-col items-center font-open overflow-x-hidden"
 >
   <!-- Hero -->
-  <div class="relative h-[500px] w-full pb-16 text-white md:mb-10">
+  <div class="relative h-[500px] w-full pb-16 text-white  flex flex-col items-center justify-center overflow-x-hidden md:mb-10">
+    <img
+      ngSrc="assets/img/photo/immeuble1.jpg"
+      fill
+      priority
+      alt="DiffuZe, diffusion d'annonces immobilières"
+    />
     <div class="bg-black opacity-55 absolute inset-0 w-full h-full"></div>
     <span
       class="absolute z-10 h-[120px] w-[120%] left-1/2 transform translate-y-4 -translate-x-1/2 -rotate-3 -bottom-10 bg-gray-100"
     ></span>
-    <div
-      class="px-5 bg-[url(assets/img/photo/immeuble1.jpg)] h-[500px] bg-cover bg-center w-full flex flex-col items-center justify-center overflow-x-hidden"
-    >
       <div
-        class="z-20 md:w-3/4 flex flex-col items-center justify-center transform -translate-y-5"
+        class="z-10 md:w-3/4 flex flex-col items-center justify-center transform -translate-y-5"
       >
         <h1
           *ngIf="isUnitService"
@@ -70,7 +73,6 @@
           >
             Paiement au succès
           </p>
-        </div>
       </div>
     </div>
   </div>
@@ -178,9 +180,15 @@
             </p>
             <ul class="bg-myyellow2 list-disc pl-5 rounded-xl p-2">
               <li>8 % de 0 à 10 000 € <span class="text-[11px]">HT</span></li>
-              <li>6 % de 10 001 à 20 000 € <span class="text-[11px]">HT</span></li>
-              <li>4 % de 20 001 à 50 000 € <span class="text-[11px]">HT</span></li>
-              <li>2 % au-delà de 50 001 € <span class="text-[11px]">HT</span></li>
+              <li>
+                6 % de 10 001 à 20 000 € <span class="text-[11px]">HT</span>
+              </li>
+              <li>
+                4 % de 20 001 à 50 000 € <span class="text-[11px]">HT</span>
+              </li>
+              <li>
+                2 % au-delà de 50 001 € <span class="text-[11px]">HT</span>
+              </li>
             </ul>
           </div>
           <div class="">
@@ -189,9 +197,15 @@
             </p>
             <ul class="bg-myyellow2 list-disc pl-5 rounded-xl p-2">
               <li>6 % de 0 à 10 000 € <span class="text-[11px]">HT</span></li>
-              <li>4 % de 10 001 à 20 000 € <span class="text-[11px]">HT</span></li>
-              <li>2 % de 20 001 à 50 000 € <span class="text-[11px]">HT</span></li>
-              <li>1 % au-delà de 50 001 € <span class="text-[11px]">HT</span></li>
+              <li>
+                4 % de 10 001 à 20 000 € <span class="text-[11px]">HT</span>
+              </li>
+              <li>
+                2 % de 20 001 à 50 000 € <span class="text-[11px]">HT</span>
+              </li>
+              <li>
+                1 % au-delà de 50 001 € <span class="text-[11px]">HT</span>
+              </li>
             </ul>
           </div>
         </div>

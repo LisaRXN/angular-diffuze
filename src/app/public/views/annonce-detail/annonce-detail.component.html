@@ -16,10 +16,10 @@
       <div
         class="lg:sticky top-28 w-full lg:w-1/3 order-2 px-5 md:px-10 flex flex-col items-center justify-center lg:pb-60 no-print"
       >
-        <p class="font-bold text-xl mb-2">Ce bien vous intéresse ?</p>
-        <p class="font-semibold mb-4">Demander plus d'information</p>
+        <p class="font-bold text-xl mb-4 text-center">Ce bien vous intéresse ?</p>
+        <p class="font-semibold mb-4 text-center">Demander plus d'information à <span *ngIf="property?.user" class="">{{property.user?.society | capitalize}}</span></p>
         <div
-          *ngIf="showSuccessNotif"
+          *ngIf="showSuccessNotif && !showErrorNotif"
           class="flex flex-col items-center justify-center gap-5 pt-20 px-10"
         >
           <img
@@ -32,7 +32,7 @@
           </p>
         </div>
         <div
-          *ngIf="showErrorNotif"
+          *ngIf="showErrorNotif && !showSuccessNotif"
           class="flex flex-col items-center justify-center gap-5 pt-20 px-10"
         >
           <img
@@ -129,7 +129,7 @@
           </div>
           <button
             type="submit"
-            class="bg-myyellow1 rounded-full px-4 py-3 hover:bg-myyellow3 transition duration-300"
+            class="whitespace-nowrap bg-myyellow1 rounded-full px-4 py-3 hover:bg-myyellow3 transition duration-300"
           >
             <i class="fa-solid fa-envelope mr-2"></i>
             Envoyer mon message
@@ -307,7 +307,7 @@
             class="grid md:grid-cols-2 border border-myyellow3 rounded-4xl font-semibold"
           >
             <div
-              class="p-4 print:p-2 print:p-2 px-8 flex items-center justify-between md:border-r border-r-myyellow3"
+              class="p-4 print:p-2 px-8 flex items-center justify-between md:border-r border-r-myyellow3"
             >
               @if(property.transaction_type==='selling'){
               <p>Prix de mise en vente :</p>
@@ -371,7 +371,7 @@
             Diagnostic de Performances Énergétique
           </p>
           <div
-            class="flex flex-col gap-10 lg:flex-row print:flex-row items-center justify-between"
+            class="flex flex-col gap-10 xl:flex-row print:flex-row items-center justify-between"
           >
             <div class="flex-1 flex flex-col gap-10">
               <p class="font-bold text-lg">Consommation Énergétique  (DPE)</p>

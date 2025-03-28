@@ -2,133 +2,131 @@
   class="min-h-screen h-full bg-zinc-100 flex flex-col items-center font-open overflow-x-hidden text-zinc-950"
 >
   <!-- Hero -->
-  <div class="relative h-[600px] w-full text-white md:mb-5">
-    <div class="bg-black opacity-55 absolute inset-0 w-full h-full"></div>
+  <div
+    class="relative h-[600px] w-full flex flex-col items-center justify-center text-white md:mb-5"
+  >
+    <img
+      ngSrc="assets/img/photo/annonces.jpg"
+      fill
+      priority
+      alt="DiffuZe, diffusion d'annonces immobilières"
+    />
+    <div class="z-10 bg-black opacity-55 absolute inset-0 w-full h-full"></div>
+    <div class="z-10 transform flex flex-col items-center">
+      <h1 class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-10">
+        Découvrez les annonces de nos agences partenaires en France
+      </h1>
+      <p
+        class="z-10 text-lg md:text-xl leading-relaxed md:w-3/4 text-center mb-20"
+      >
+        Diffusez sur plus de 50 portails de référence et trouvez votre bonheur !
+      </p>
+    </div>
 
     <div
-      class="px-5 bg-[url(assets/img/photo/annonces.jpg)] h-[600px] bg-center bg-cover bg-no-repeat w-full flex flex-col items-center justify-center"
+      class="z-10 relative flex items-center justify-center rounded-b-2xl rounded-tr-2xl bg-white text-mygrey1 gap-5 p-5 w-full md:w-4/5"
     >
-      <div class="z-10 transform flex flex-col items-center">
-        <h1 class="z-10 text-4xl font-paytone text-center max-w-[600px] mb-10">
-          Découvrez les annonces de nos agences partenaires en France
-        </h1>
-        <p
-          class="z-10 text-lg md:text-xl leading-relaxed md:w-3/4 text-center mb-20"
-        >
-          Diffusez sur plus de 50 portails de référence et trouvez votre bonheur
-          !
-        </p>
-      </div>
-
       <div
-        class="z-10 relative flex items-center justify-center rounded-b-2xl rounded-tr-2xl bg-white text-mygrey1 gap-5 p-5 w-full md:w-4/5"
+        class="absolute top-0 transform -translate-y-[100%] left-0 bg-myyellow2 flex items-center justify-center gap-4 p-3 rounded-t-xl text-[12px] text-mygrey3"
       >
-        <div
-          class="absolute top-0 transform -translate-y-[100%] left-0 bg-myyellow2 flex items-center justify-center gap-4 p-3 rounded-t-xl text-[12px] text-mygrey3"
+        <label
+          class="cursor-pointer"
+          [ngClass]="{
+            'font-bold text-mygrey2 border-b-2 border-myyellow1 inline-block':
+              transactionType() === 'selling'
+          }"
         >
-          <label
-            class="cursor-pointer"
-            [ngClass]="{
-              'font-bold text-mygrey2 border-b-2 border-myyellow1 inline-block':
-                transactionType() === 'selling'
-            }"
-          >
-            Achat
-            <input
-              [(ngModel)]="transactionType"
-              class="hidden"
-              type="radio"
-              value="selling"
-            />
-          </label>
-          <label
-            class="cursor-pointer"
-            [ngClass]="{
-              'font-bold text-mygrey2 border-b-2 border-myyellow1 inline-block':
-                transactionType() === 'renting'
-            }"
-            >Location
-            <input
-              [(ngModel)]="transactionType"
-              class="hidden"
-              type="radio"
-              value="renting"
-            />
-          </label>
-        </div>
+          Achat
+          <input
+            [(ngModel)]="transactionType"
+            class="hidden"
+            type="radio"
+            value="selling"
+          />
+        </label>
+        <label
+          class="cursor-pointer"
+          [ngClass]="{
+            'font-bold text-mygrey2 border-b-2 border-myyellow1 inline-block':
+              transactionType() === 'renting'
+          }"
+          >Location
+          <input
+            [(ngModel)]="transactionType"
+            class="hidden"
+            type="radio"
+            value="renting"
+          />
+        </label>
+      </div>
+      <div
+        class="flex-1 flex flex-col gap-2 md:gap-5 border-r border-zinc-100 pr-5"
+      >
+        <label for="location">Localisation </label>
         <div
-          class="flex-1 flex flex-col gap-2 md:gap-5 border-r border-zinc-100 pr-5"
+          class="flex-1 relative flex flex-col items-start justify-center gap-4 w-full"
         >
-          <label for="location">Localisation </label>
+          <input
+            #filtertext
+            type="location"
+            name="location"
+            id="location"
+            class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:ring-1 focus:ring-myyellow1 focus:outline-none"
+            placeholder="Choisissez la ville"
+          />
           <div
-            class="flex-1 relative flex flex-col items-start justify-center gap-4 w-full"
+            *ngIf="localization().length > 0"
+            class="flex items-center justify-start gap-2 flex-wrap"
           >
-            <input
-              #filtertext
-              type="location"
-              name="location"
-              id="location"
-              class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:ring-1 focus:ring-myyellow1 focus:outline-none"
-              placeholder="Choisissez la ville"
-            />
             <div
-              *ngIf="localization().length > 0"
-              class="flex items-center justify-start gap-2 flex-wrap"
+              class="p-1 px-2 border border-mygrey3 rounded-lg flex items-center justify-center gap-1 text-[12px]"
+              *ngFor="let location of localization(); let i = index"
             >
-              <div
-                class="p-1 px-2 border border-mygrey3 rounded-lg flex items-center justify-center gap-1 text-[12px]"
-                *ngFor="let location of localization(); let i = index"
-              >
-                <p>{{ location }}</p>
-                <button class="ml-2" (click)="removeLocation(i)">
-                  <i class="fa-solid fa-trash w-2 h-auto"></i>
-                </button>
-              </div>
+              <p>{{ location }}</p>
+              <button class="ml-2" (click)="removeLocation(i)">
+                <i class="fa-solid fa-trash w-2 h-auto"></i>
+              </button>
             </div>
           </div>
         </div>
-        <div
-          class="hidden flex-1 md:flex flex-col gap-5 border-r border-zinc-100 pr-5"
+      </div>
+      <div
+        class="hidden flex-1 md:flex flex-col gap-5 border-r border-zinc-100 pr-5"
+      >
+        <label for="type">Type de bien </label>
+        <select
+          [(ngModel)]="propertyType"
+          name="type"
+          id="type"
+          class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 pr-10 text-start border-none focus:outline-none focus:ring-1 focus:ring-myyellow1"
+          placeholder="Appartement"
+          required=""
         >
-          <label for="type">Type de bien </label>
-          <select
-            [(ngModel)]="propertyType"
-            name="type"
-            id="type"
-            class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 pr-10 text-start border-none focus:outline-none focus:ring-1 focus:ring-myyellow1"
-            placeholder="Appartement"
-            required=""
-          >
-            <option value="">Tous les logements</option>
-            <option value="appartement">Appartement</option>
-            <option value="maison">Maison</option>
-            <option value="loft">Loft</option>
-          </select>
-        </div>
+          <option value="">Tous les logements</option>
+          <option value="appartement">Appartement</option>
+          <option value="maison">Maison</option>
+          <option value="loft">Loft</option>
+        </select>
+      </div>
+      <div
+        class="hidden flex-1 lg:flex flex-col gap-5 border-r border-zinc-100 pr-5"
+      >
+        <label for="budget">Budget</label>
+        <input
+          #budgetInput
+          [(ngModel)]="maxPrice"
+          type="number"
+          min="0"
+          user-select="none"
+          class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
+          placeholder="Votre buget maximum (en €)"
+        />
+      </div>
+      <div class="h-full flex items-center justify-center">
         <div
-          class="hidden flex-1 lg:flex flex-col gap-5 border-r border-zinc-100 pr-5"
+          class="rounded-2xl bg-myyellow1 h-[60px] w-[60px] flex items-center justify-center p-2"
         >
-          <label for="budget">Budget</label>
-          <input
-            #budgetInput
-            [(ngModel)]="maxPrice"
-            type="number"
-            min="0"
-            user-select="none"
-            class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
-            placeholder="Votre buget maximum (en €)"
-          />
-        </div>
-        <div class="h-full flex items-center justify-center">
-          <div
-            class="rounded-2xl bg-myyellow1 h-[60px] w-[60px] flex items-center justify-center p-2"
-          >
-            <img
-              src="assets/img/icon/loupe.png"
-              class="object-contain"
-              alt=""
-            />
-          </div>
+          <img src="assets/img/icon/loupe.png" class="object-contain" alt="" />
         </div>
       </div>
     </div>
@@ -732,19 +730,32 @@
 
     <!-- Localisation -->
     <div
-    *ngIf="showSuccessNotif"
-    class="flex flex-col items-center justify-center gap-10 px-10 h-full"
-  >
-    <img
-      src="assets/img/icon/sendMessage.png"
-      class="w-24 h-auto"
-      alt=""
-    />
-    <p class="text-mygrey3 text-center font-semibold text-lg">
-      Votre demande d'alerte a bien été envoyée.
-    </p>
-  </div>
-    <form [formGroup]="alertForm" (ngSubmit)="onSubmitAlert()" [ngClass]="showSuccessNotif ? 'hidden' : 'block' ">
+      *ngIf="showSuccessNotif && !showErrorNotif"
+      class="flex flex-col items-center justify-center gap-10 px-10 h-full"
+    >
+      <img src="assets/img/icon/sendMessage.png" class="w-24 h-auto" alt="" />
+      <p class="text-mygrey3 text-center font-semibold text-lg">
+        Votre demande d'alerte a bien été envoyée.
+      </p>
+    </div>
+    <div
+      *ngIf="showErrorNotif && !showSuccessNotif"
+      class="flex flex-col items-center justify-center gap-10 px-10 h-full"
+    >
+      <img
+        src="assets/img/icon/sendMessageError.png"
+        class="w-24 h-auto"
+        alt=""
+      />
+      <p class="text-mygrey3 text-center font-semibold text-lg">
+        Oups... Une erreur s'est produite lors de l'envoi de l'alerte.
+      </p>
+    </div>
+    <form
+      [formGroup]="alertForm"
+      (ngSubmit)="onSubmitAlert()"
+      [ngClass]="showSuccessNotif ? 'hidden' : 'block'"
+    >
       <div class="p-2 md:p-10 flex flex-col gap-8">
         <section id="filter-localization">
           <p class="text-xl font-semibold pb-4">
@@ -1134,10 +1145,10 @@
                 id="firstName"
                 class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
                 [ngClass]="
-                submitted && alertForm.get('firstName')?.hasError('required')
-                  ? 'border-red-500'
-                  : 'border-none'
-              "
+                  submitted && alertForm.get('firstName')?.hasError('required')
+                    ? 'border-red-500'
+                    : 'border-none'
+                "
                 placeholder="Votre prénom"
               />
             </div>
@@ -1149,10 +1160,10 @@
                 min="0"
                 class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
                 [ngClass]="
-                submitted && alertForm.get('phone')?.hasError('required')
-                  ? 'border-red-500'
-                  : 'border-none'
-              "
+                  submitted && alertForm.get('phone')?.hasError('required')
+                    ? 'border-red-500'
+                    : 'border-none'
+                "
                 placeholder="Votre numéro de téléphone"
               />
             </div>
@@ -1164,10 +1175,10 @@
                 id="email"
                 class="bg-zinc-100 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 focus:border-none focus:ring-1 focus:ring-myyellow1 focus:outline-none select-none"
                 [ngClass]="
-                submitted && alertForm.get('email')?.hasError('required')
-                  ? 'border-red-500'
-                  : 'border-none'
-              "
+                  submitted && alertForm.get('email')?.hasError('required')
+                    ? 'border-red-500'
+                    : 'border-none'
+                "
                 placeholder="Votre email"
               />
               <p
@@ -1180,7 +1191,10 @@
           </div>
         </section>
       </div>
-      <p class="px-5 w-full text-end mb-10 text-red-500 font-semibold" *ngIf="alertFormError()">
+      <p
+        class="px-5 w-full text-end mb-10 text-red-500 font-semibold"
+        *ngIf="alertFormError()"
+      >
         {{ alertFormError() }}
       </p>
       <div class="px-5 flex items-center justify-between w-full">

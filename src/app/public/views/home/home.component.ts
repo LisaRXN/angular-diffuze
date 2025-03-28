@@ -15,7 +15,7 @@ import { Router, RouterLink } from '@angular/router';
 import { PropertyGateway } from '../../../core/ports/property.gateway';
 import { Property } from '../../../core/models/property.model';
 import { Observable } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { PartnersDialogComponent } from '../../shared/components/partners-dialog/partners-dialog.component';
 import { NumberCardComponent } from './components/number-card/number-card.component';
 import reviewsDetails from '../../../../assets/data/reviews.json';
@@ -28,7 +28,8 @@ import { FiltersDialogComponent } from "../annonces/components/filters-dialog/fi
     PropertyCardComponent,
     RouterLink,
     PartnersDialogComponent,
-    NumberCardComponent
+    NumberCardComponent,
+    NgOptimizedImage
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
