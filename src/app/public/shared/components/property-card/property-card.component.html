@@ -78,11 +78,11 @@
     <div class="flex items-center justify-start gap-2">
       <p>{{ property.living_space }} m²</p>
       <p>{{ property.room }} pièces</p>
-      <p>
+      <!-- <p>
         {{
-          property.floor !== 0 ? property.floor + "e étage" : "Rez de chaussée"
+          property.floor !== null ? property.floor + "e étage" : ""
         }}
-      </p>
+      </p> -->
     </div>
   </div>
   <div
