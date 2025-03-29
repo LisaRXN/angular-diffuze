@@ -27,7 +27,7 @@ export const serverRoutes: ServerRoute[] = [
   },
   {
     path: 'annonces',
-    renderMode: RenderMode.Prerender,
+    renderMode: RenderMode.Server,
   },
   {
     path: 'blog/:slug', // Articles de blog en SSG avec paramètres
