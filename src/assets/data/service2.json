@@ -34,6 +34,6 @@
     ,
     "description" : [
     {"text":"Paiement au succès, si la vente se fait via un site partenaire."},    
-    {"text": "Paiement basé sur un partage de commission, selon le barème dégressif ci-dessous."}    ]
+    {"text": "Paiement basé sur un partage de commission, selon le type de mandat (simple ou exclusif)."}    ]
   }
 ]

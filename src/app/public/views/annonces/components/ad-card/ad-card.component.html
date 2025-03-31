@@ -76,9 +76,14 @@
     <div class="flex items-center justify-start gap-2">
       <p>{{ property.living_space }} m²</p>
       <p>{{ property.room }} pièces</p>
-      <p *ngIf="property.floor">
+      <p *ngIf="property.floor && property.floor !== 0 ">
         {{
           property.floor + "e étage" 
+        }}
+      </p>
+      <p *ngIf="property.property_type !== 'maison' && property.floor == 0 ">
+        {{
+          "Rez-de-chaussée" 
         }}
       </p>
     </div>
