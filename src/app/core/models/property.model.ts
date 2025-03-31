@@ -53,6 +53,7 @@ interface DPE {
   interface Valuation {
       id: number;
       token: string;
+      cityscan_id_address: string;
       low: number;
       mid: number;
       high: number;

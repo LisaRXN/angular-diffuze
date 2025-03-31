@@ -62,4 +62,10 @@ export class HttpArticleGateway extends ArticleGateway {
     );
     return category ? parseInt(category[0]) : 1;
   }
+
+  override getFilteredArticles(search: string): Observable<Article[]> {
+    const cleanedSearch = encodeURIComponent(search.trim().toLowerCase());
+    return this.http
+    .get<Article[]>(`https://data.barnabe-immo.fr/api/articles/search?search=${cleanedSearch}&for=pro`)
+  }
 }
