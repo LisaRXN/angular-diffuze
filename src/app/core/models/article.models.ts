@@ -20,7 +20,7 @@ export interface Article {
   previous_article?:string;
   meta_description?:string;
   page_title?:string;
-  type_article?:number;
+  type_article:number;
   html_code?:string;
   markdown?:string;
   creation_date?: Date;

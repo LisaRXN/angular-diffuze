@@ -77,10 +77,7 @@ export class AnnonceDetailComponent {
 
   cityScanToken!: string;
   cityScanApiKey = environment.cityScanApiKey;
-  url = `https://location-insight.cityscan.fr/${this.cityScanApiKey}/${this.cityScanToken}`;
-  safeUrl: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-    this.url
-  );
+  safeUrl!: SafeResourceUrl
 
   mapCenter = { lat: 48.8566, lng: 2.3522 };
   zoom: number = 12;
@@ -123,12 +120,17 @@ export class AnnonceDetailComponent {
   }
 
   ngOnInit() {
+    console.log('Composant chargé');
+
     this.route.params
       .pipe(
         switchMap((params) =>
           this.propertyGateway.fetchPropertyById(params['id'])
         ),
-        switchMap((property: Property) => {
+        switchMap((property: Property | null) => {
+          if (!property) {
+            throw new Error('Propriété introuvable');
+          }
           this.loading = false;
           this.property = property;
           if (
@@ -136,7 +138,10 @@ export class AnnonceDetailComponent {
             property.valuation &&
             property.valuation.token !== undefined
           ) {
-            this.cityScanToken = property.valuation.token;
+            this.cityScanToken = property.valuation.cityscan_id_address;
+            this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+              `https://location-insight.cityscan.fr/${this.cityScanApiKey}/${this.cityScanToken}`
+            );
           }
           this.mapCenter = {
             lat: parseFloat(property.addressForm.latitude) + 0.3 * 0.001,
@@ -147,6 +152,7 @@ export class AnnonceDetailComponent {
           this.filters.localization.push(property.addressForm.city);
           this.filters.transactionType = property.transaction_type;
 
+          this.adUrl = typeof window !== 'undefined' ? window.location.href : '';
           this.seoService.updateDynamicSeoTags({
             title: `Annonce immobilière - ${property.addressForm.city}`,
             description: this.stripHtml(property.description).substring(0, 160),
@@ -168,10 +174,6 @@ export class AnnonceDetailComponent {
             .filter((property) => property.id != this.property.id)
             .slice(0, 3))
       );
-
-    if (typeof window !== 'undefined') {
-      this.adUrl = window.location.href;
-    }
   }
 
   onSubmitContact() {
@@ -235,11 +237,12 @@ export class AnnonceDetailComponent {
   }
 
   get sellingPrice(): number {
-    return Number(this.property.selling_price.replace(/\s/g, ''));
+    return this.property?.selling_price ? Number(this.property.selling_price.replace(/\s/g, '')) : 0;
   }
   get rentingPrice(): number {
-    return Number(this.property.rent_by_month.replace(/\s/g, ''));
+    return this.property?.rent_by_month ? Number(this.property.rent_by_month.replace(/\s/g, '')) : 0;
   }
+  
 
   copy() {
     navigator.clipboard.writeText(this.adUrl).then(() => {

@@ -29,4 +29,6 @@ export abstract class ArticleGateway {
   abstract getSlugCategory(id: number): string;
 
   abstract getIdCategory(slug: string): number;
+
+  abstract getFilteredArticles(search: string): Observable<Article[]>;
 }
