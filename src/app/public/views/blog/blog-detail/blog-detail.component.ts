@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PrerenderService } from '../../../../core/services/prerender.service';
 import { Article } from '../../../../core/models/article.models';
-import { combineLatest, switchMap, tap } from 'rxjs';
+import { combineLatest, filter, map, Observable, switchMap, tap } from 'rxjs';
 import { ArticleGateway } from '../../../../core/ports/article.gateway';
 import { SeoService } from '../../../../core/services/seo.service';
 import { environment } from '../../../../../environments/environment';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { ArticleCardComponent } from '../components/article-card/article-card.component';
 
 @Component({
   selector: 'app-blog-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, ArticleCardComponent],
   templateUrl: './blog-detail.component.html',
 })
 export class BlogDetailComponent implements OnInit {
@@ -21,13 +23,13 @@ export class BlogDetailComponent implements OnInit {
     private seoService: SeoService,
     private articleGateway: ArticleGateway
   ) {}
-
-  article!: Article;
+  env = environment;
+  article!: Article
+  similarArticles: Article[] = []
   types: any[] = [];
   articleType: any;
   otherTypes: any[] = [];
-
-  env = environment;
+  
 
   ngOnInit() {
     combineLatest([
@@ -40,13 +42,19 @@ export class BlogDetailComponent implements OnInit {
     ]).subscribe(([types, article]) => {
       if (!article) {
         this.router.navigate(['/']);
+        return;
       }
       this.types = types;
-      this.article = article;
+      this.article = article
       this.articleType = types.find((type) => type.id === article.type_article);
       this.otherTypes = types.filter(
         (type) => type.id !== this.articleType?.id
       );
+
+      this.articleGateway.getArticlesByType(article.type_article).subscribe((articles) => {
+        this.similarArticles =  articles.filter((a) => a.url !== article.url).slice(0, 3);
+      });
+
       this.seoService.updateDynamicSeoTags({
         title: `${article.article_title} - DiffuZe Blog`,
         description: this.stripHtml(article.article_description).substring(
@@ -96,5 +104,9 @@ export class BlogDetailComponent implements OnInit {
 
     // Éviter l'utilisation de document qui n'est pas disponible côté serveur
     return html.replace(/<[^>]*>/g, '');
+  }
+
+  getSlugCategory(id: number): string | undefined {
+    return this.articleGateway.getSlugCategory(id);
   }
 }

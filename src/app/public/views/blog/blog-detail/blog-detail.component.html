@@ -5,7 +5,9 @@
     class="z-10 absolute top-8 left-8 md:top-14 md:left-14 flex items-center justify-center gap-2 border border-mygrey2 hover:bg-mygrey4 transition duration-300 text-mygrey1 text-sm px-4 py-2 rounded-full"
   >
     <img src="assets/img/icon/arrow-black.png" class="w-5" alt="" />
-    <a [routerLink]="['/blog/type', articleType.id]" class="whitespace-nowrap"
+    <a
+      [routerLink]="['/blog/categorie', getSlugCategory(articleType?.id)]"
+      class="whitespace-nowrap"
       >Retour aux articles</a
     >
   </div>
@@ -51,7 +53,8 @@
 
   <!-- Article -->
   <div
-    class="mb-24 pt-32 px-8 text-mygrey1 w-full grid md:grid-cols-[1fr_4fr_1fr] space-y-10 md:space-y-0 md:space-x-12 justify-start"
+    *ngIf="article"
+    class="mb-10 md:mb-24 pt-32 px-4 md:px-8 text-mygrey1 w-full grid lg:grid-cols-[1fr_4fr_1fr] space-y-10 md:space-y-0 md:space-x-12 justify-start"
   >
     <!-- sidebar left -->
     <div class="text-[12px] flex flex-col gap-2 py-14">
@@ -81,7 +84,7 @@
     <!-- Article Body -->
     <!-- markdown -->
     <div
-      class="flex flex-col items-center justify-center border border-mygrey4 shadow-md bg-white py-20"
+      class="px-5 md:px-10 flex flex-col items-center justify-center border border-mygrey4 shadow-md bg-white py-20"
     >
       <div class="h-auto w-full px-8 flex flex-col items-center justify-center">
         <div
@@ -102,10 +105,10 @@
 
         <span
           class="bg-myyellow2 px-5 py-3 font-bold text-yellow-500 rounded-xl"
-          >{{ articleType.type }}</span
+          >{{ articleType?.type }}</span
         >
       </div>
-      <div class="w-4/5 h-[400px] my-3">
+      <div class="w-4/5 h-[200px] md:h-[400px] my-3">
         <img
           [src]="env.publicURL + article.article_preview"
           class="h-full w-auto m-auto rounded-4xl"
@@ -166,18 +169,26 @@
 
   <hr class="w-3/4 m-auto mb-16" />
 
-  <!-- V2 -->
 
   <!-- Ces articles pourraient vous intéresser -->
-  <!-- <div class="lg:w-4/5 p-5 md:p-10 rounded-2xl font-open text-mygrey1">
+  @if(similarArticles.length ){
+  <div
+    class="lg:w-4/5 p-5 md:p-10 rounded-2xl font-open text-mygrey1"
+  >
     <h2 class="text-2xl font-bold font-raleway text-center mb-24">
       Ces articles pourraient vous intéresser
     </h2>
+    <div class="h-auto grid lg:grid-cols-3 gap-10 gap-x-10 max-w-[1200px] m-auto">
+      <app-article-card
+        *ngFor="let article of similarArticles"
+        [article]="article"
+        bg="white"
+      ></app-article-card>
+    </div>
   </div>
+  <hr class="w-3/4 m-auto mb-16" />
+}
 
-  <hr class="w-3/4 m-auto mb-16" /> -->
-
-  <!-- V2 -->
 
   <!-- Besoin de plus d'information ? -->
   <div class="lg:w-4/5 p-5 md:p-10 rounded-2xl mb-12 font-open text-mygrey1">

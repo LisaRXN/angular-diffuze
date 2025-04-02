@@ -516,9 +516,9 @@
         <div class="mb-10">
           <p class="text-xl font-extrabold mb-10">Localisation</p>
 
-          <!-- @if(property.valuation?.token){
+           @if(property.valuation?.cityscan_id_address){
           <iframe class="w-full h-[500px] print:h-[300px] rounded-lg" [src]="safeUrl"></iframe>
-          }@else{ -->
+          }@else{ 
           <div class="w-full h-[500px] print:h-[300px] rounded-lg overflow-hidden">
             <google-map
               class="rounded-lg"
@@ -543,7 +543,7 @@
               ></map-circle>
             </google-map>
           </div>
-          <!-- } -->
+          }
         </div>
       </section>
     </div>
