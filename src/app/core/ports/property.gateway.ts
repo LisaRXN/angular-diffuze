@@ -24,7 +24,7 @@ export abstract class PropertyGateway {
 
     abstract fetchFilteredProperties(filters:any):Observable<FetchAdResponse>
 
-    abstract fetchPropertyById(propertyId:string):Observable<Property>
+    abstract fetchPropertyById(propertyId:string):Observable<Property | null>
 
     abstract sendPropertyInquiry(contactDetails: ContactDetails):Observable<any>
 }

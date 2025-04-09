@@ -1,4 +1,4 @@
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { Property } from '../../models/property.model';
 import {
   FetchAdResponse,
@@ -40,10 +40,16 @@ export class HttpPropertyGateway extends PropertyGateway {
     );
   }
 
-  override fetchPropertyById(propertyId: string): Observable<Property> {
+  override fetchPropertyById(propertyId: string): Observable<Property | null> {
+    console.log('fetchPropertyById called with:', propertyId);
     return this.http.get<Property>(
       `https://data.barnabe-immo.fr/api/properties/id/${propertyId}`
-    );
+    ).pipe(
+      catchError(err => {
+        console.error('Erreur API:', err);
+        return of(null); 
+      })
+    )
   }
 
   override sendPropertyInquiry(contactDetails: ContactDetails): Observable<any> {
