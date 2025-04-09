@@ -17,10 +17,6 @@ const browserDistFolder = resolve(serverDistFolder, '../browser');
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
-app.get('/testredirection', (req, res) => {
-  res.redirect(301, '/redirection301');
-});
-
 /**
  * Serve static files from /browser
  */
