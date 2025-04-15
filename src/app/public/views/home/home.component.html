@@ -143,7 +143,7 @@
 
   <!-- Découvrez nos offres-->
   <div
-    class="bg-mygray4 w-full mb-16 font-open text-mygrey1 px-5 flex flex-col items-center justify-center overflow-x-hidden"
+    class="bg-mygray4 w-full mb-16 font-open text-mygrey1 px-5 flex flex-col items-center justify-center overflow-x-hidden md:max-w-screen-2xl"
   >
     <h2 class="text-3xl font-bold font-raleway text-center mb-12 z-10">
       Découvrez le Pack Visibilité
@@ -256,7 +256,7 @@
   <div
     class="bg-mygray4 px-8 text-mygrey1 mb-16 flex flex-col items-center justify-center"
   >
-    <h2 class="text-3xl font-bold font-raleway text-center mb-24">
+    <h2 class="text-3xl font-bold font-raleway text-center mb-20">
       Comparez les offres
     </h2>
 
@@ -419,11 +419,11 @@
   <div
     class="bg-mygray4 w-full pb-32 mt-16 text-mygrey1 px-10 flex flex-col items-center justify-center overflow-x-hidden"
   >
-    <h2 class="text-3xl font-bold font-raleway text-center mb-12 z-10">
+    <h2 class="text-3xl font-bold font-raleway text-center mb-20 z-10">
       Découvrez les biens à vendre
     </h2>
 
-    <div class="relative z-10 w-[350px] md:w-full lg:max-w-[1160px]">
+    <div class="relative z-10 w-[350px] md:w-full mb-16 md:max-w-screen-2xl">
       <div #carousel class="grid lg:grid-cols-3 lg:gap-5 m-auto">
         @for (property of properties; track property) {
         <app-property-card
@@ -437,21 +437,13 @@
     <div
       class="relative w-full h-[300px] flex flex-col items-center justify-start"
     >
-      <p class="text-lg font-open text-center py-10 z-10">
-        + de <span class="text-2xl font-bold">120 biens</span> à vendre
-      </p>
-      <!-- <a
-        routerLink=""
-        class="z-10 bg-mygrey2 text-white rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-mygrey3 transition-all transition-300 cursor-pointer"
-        >Voir tous les biens
-      </a> -->
       <a
         routerLink="/annonces"
         class="z-10 bg-mygrey2 text-white rounded-full px-10 py-4 font-semibold transform hover:translate-y-[-2px] hover:bg-mygrey3 transition-all transition-300 cursor-pointer"
         >Voir toutes les annonces
       </a>
       <div
-        class="absolute -bottom-10 left-1/2 w-[140%] h-[500px] bg-myyellow2 transform -translate-x-1/2 -rotate-3"
+        class="absolute bottom-20 left-1/2 w-[140%] h-[400px] bg-myyellow2 transform -translate-x-1/2 -rotate-3"
       ></div>
     </div>
   </div>
@@ -490,8 +482,9 @@
       <p>convaincues par nos services !</p>
     </div>
 
+    <div class="bg-mygrey2 w-full">
     <div
-      class="lg:h-[500px] h-auto pb-10 lg:pb-10 bg-mygrey2 grid w-full lg:grid-cols-[1fr_1.5fr]"
+      class="lg:h-[500px] h-auto pb-10 lg:pb-10 bg-mygrey2 grid w-full lg:grid-cols-[1fr_1fr] md:max-w-screen-2xl m-auto"
     >
       <div
         class="relative p-5 py-20 md:p-20 lg:p-10 xl:p-24 flex flex-col items-start justify-center gap-10"
@@ -572,13 +565,14 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
 
-  <div class="lg:w-4/5 p-5 md:p-10 rounded-2xl mb-12 font-open text-mygrey1">
+  <div class="lg:w-4/5 p-5 md:p-10 rounded-2xl mb-12 font-open text-mygrey1 md:max-w-screen-2xl">
     <h2 class="text-3xl font-bold font-raleway text-center mb-12 z-10">
       Besoin de plus d'information ?
     </h2>
-    <p class="text-xl leading-relaxed text-justify">
+    <p class="text-xl leading-relaxed text-justify xl:text-center">
       Besoin de conseils personnalisés ? Réservez un rendez-vous avec un
       conseiller : il répondra à toutes vos questions !
     </p>
