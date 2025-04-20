@@ -25,7 +25,7 @@
     </div>
 
     <div
-      class="z-10 relative flex items-center justify-center rounded-b-2xl rounded-tr-2xl bg-white text-mygrey1 gap-5 p-5 w-full md:w-4/5"
+      class="z-10 relative flex items-center justify-center rounded-b-2xl rounded-tr-2xl bg-white text-mygrey1 gap-5 p-5 w-full md:w-4/5 md:max-w-screen-xl"
     >
       <div
         class="absolute top-0 transform -translate-y-[100%] left-0 bg-myyellow2 flex items-center justify-center gap-4 p-3 rounded-t-xl text-[12px] text-mygrey3"
@@ -138,11 +138,12 @@
     id="filters-section"
     class="relative mb-5 px-8 py-5 md:py-0 bg-mygray4 text-mygrey1 w-full flex flex-col md:flex-row items-center gap-5 justify-between"
   >
-    <p class="flex-1">
+    <p *ngIf="totalItems !==0" class="flex-1">
       Découvrez
       <span class="font-bold text-lg">{{ totalItems }} biens</span>
       correspondant à vos critères
     </p>
+    <p *ngIf="totalItems==0">Aucun bien ne correspond à vos critères</p>
     <div
       class="flex flex-1 flex-col w-full lg:flex-row items-center justify-center gap-2 lg:gap-6"
     >
@@ -222,7 +223,7 @@
         }
       </div>
 
-      <div class="flex items-center justify-center gap-4 pb-10 w-full">
+      <div *ngIf="totalItems !== 0" class="flex items-center justify-center gap-4 pb-10 w-full">
         <button
           (click)="previousPage()"
           class="p-3 border border-mygrey2 rounded-full cursor-pointer hover:bg-zinc-300"
