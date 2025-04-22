@@ -14,7 +14,7 @@ export const SEO_CONFIG: RouteSeoConfig = {
     ogTitle: 'Diffuze - Maîtrisez vos coûts de diffusion immobilière​',
     ogDescription:
       'Découvrez Diffuze, votre partenaire pour booster la visibilité de vos annonces immobilières sur plus de 50 plateformes, sans abonnement ni engagement.​',
-    ogImage: 'https://data.barnabe-immo.fr/img/google/paiement-immediat.jpeg',
+    ogImage: 'https://data.barnabe-immo.fr/img/google/diffuze-offres.jpeg',
     structuredData: {
       '@context': 'https://schema.org',
       '@graph': [
@@ -158,7 +158,7 @@ export const SEO_CONFIG: RouteSeoConfig = {
       '@context': 'http://schema.org',
       '@type': 'Product',
       name: "Diffusion d'annonces immobilières - DiffuZe",
-      image: 'https://data.barnabe-immo.fr/img/google/paiement-immediat.jpeg',
+      image: 'https://data.barnabe-immo.fr/img/google/diffuze-offres.jpeg',
       description:
         'Un prestataire unique pour prendre en charge la diffusion de votre annonce sur les plus grands portails immobiliers, sans abonnement',
       offers: {
@@ -229,7 +229,7 @@ export const SEO_CONFIG: RouteSeoConfig = {
             name: 'Paiement au succès',
             description:
               'Diffusion prioritaire avec photos professionnelles et visibilité accrue',
-            price: '149',
+            price: '0',
             priceCurrency: 'EUR',
             availability: 'https://schema.org/InStock',
             priceValidUntil: '2030-01-01',
@@ -582,7 +582,7 @@ export const SEO_CONFIG: RouteSeoConfig = {
         },
       ],
     },
-    ogImage: 'https://data.barnabe-immo.fr/img/google/paiement-immediat.jpeg',
+    ogImage: 'https://data.barnabe-immo.fr/img/google/diffuze-offres.jpeg',
   },
   '/nos-partenaires': {
     title:
